@@ -174,10 +174,10 @@ const Index = () => {
               {/* Floating Stats */}
               <div className="absolute -bottom-4 -left-4 bg-white rounded-lg shadow-lg p-4 hidden md:block">
                 <div className="flex items-center gap-2">
-                  <Users className="w-8 h-8 text-primary" />
+                  <FileText className="w-8 h-8 text-primary" />
                   <div>
-                    <div className="font-bold text-lg">5,000+</div>
-                    <div className="text-sm text-muted-foreground">Familias Protegidas</div>
+                    <div className="font-bold text-lg">+100</div>
+                    <div className="text-sm text-muted-foreground">Tipos de carta de poder legales en USA</div>
                   </div>
                 </div>
               </div>
