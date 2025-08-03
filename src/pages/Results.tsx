@@ -51,11 +51,8 @@ const Results = () => {
 
       setProducts(productsData || []);
       
-      // Simple recommendation logic - recommend products for the user's state
-      const userState = findUserState(responsesData || []);
-      const recommended = (productsData || []).filter(product => 
-        product.state === userState
-      );
+      // Use improved recommendation logic
+      const recommended = getRecommendedProducts(productsData || [], responsesData || []);
       
       setRecommendedProducts(recommended);
     } catch (error) {
@@ -71,23 +68,52 @@ const Results = () => {
   };
 
   const findUserState = (responses: any[]) => {
-    // Look for state-related responses
+    // Look for state-related responses (state codes like "CA", "TX", etc.)
     const stateResponse = responses.find(response => 
-      typeof response.answer === 'string' && 
-      ['california', 'texas', 'florida', 'new york'].some(state => 
-        response.answer.toLowerCase().includes(state)
-      )
+      typeof response.answer === 'string' && response.answer.length === 2
     );
     
     if (stateResponse) {
-      const answer = stateResponse.answer.toLowerCase();
-      if (answer.includes('california')) return 'california';
-      if (answer.includes('texas')) return 'texas';
-      if (answer.includes('florida')) return 'florida';
-      if (answer.includes('new york')) return 'new_york';
+      const stateCode = stateResponse.answer.toUpperCase();
+      // Map common state codes to full names
+      const stateMap: Record<string, string> = {
+        'CA': 'california',
+        'TX': 'texas', 
+        'FL': 'florida',
+        'NY': 'new_york',
+        'CT': 'connecticut',
+        'NV': 'nevada',
+        'AZ': 'arizona'
+      };
+      return stateMap[stateCode] || 'california';
     }
     
     return 'california'; // Default state
+  };
+
+  const getRecommendedProducts = (products: Product[], responses: any[]) => {
+    const userState = findUserState(responses);
+    
+    // Filter products that match user's state or are available for ALL states
+    const stateMatchedProducts = products.filter(product => 
+      product.state === userState || product.state === 'ALL'
+    );
+    
+    // If we have recommendation criteria, use it for smarter matching
+    const productsWithCriteria = stateMatchedProducts.filter(product => {
+      if (!product.recommendation_criteria) return true;
+      
+      try {
+        const criteria = product.recommendation_criteria;
+        // Simple criteria matching - can be expanded based on actual criteria structure
+        return true; // For now, include all products that pass state filter
+      } catch (error) {
+        console.error('Error parsing recommendation criteria:', error);
+        return true; // Include product if criteria parsing fails
+      }
+    });
+    
+    return productsWithCriteria;
   };
 
   const handlePurchase = (productId: string) => {
