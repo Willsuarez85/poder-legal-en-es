@@ -14,7 +14,134 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      orders: {
+        Row: {
+          created_at: string | null
+          customer_email: string
+          customer_name: string | null
+          customer_phone: string | null
+          ghl_webhook_sent: boolean | null
+          id: string
+          product_ids: string[] | null
+          stripe_session_id: string | null
+          total_amount: number | null
+        }
+        Insert: {
+          created_at?: string | null
+          customer_email: string
+          customer_name?: string | null
+          customer_phone?: string | null
+          ghl_webhook_sent?: boolean | null
+          id?: string
+          product_ids?: string[] | null
+          stripe_session_id?: string | null
+          total_amount?: number | null
+        }
+        Update: {
+          created_at?: string | null
+          customer_email?: string
+          customer_name?: string | null
+          customer_phone?: string | null
+          ghl_webhook_sent?: boolean | null
+          id?: string
+          product_ids?: string[] | null
+          stripe_session_id?: string | null
+          total_amount?: number | null
+        }
+        Relationships: []
+      }
+      products: {
+        Row: {
+          created_at: string | null
+          description: Json | null
+          id: string
+          name: Json
+          price: number | null
+          recommendation_criteria: Json | null
+          state: string
+          template_file_url: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description?: Json | null
+          id?: string
+          name: Json
+          price?: number | null
+          recommendation_criteria?: Json | null
+          state: string
+          template_file_url?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: Json | null
+          id?: string
+          name?: Json
+          price?: number | null
+          recommendation_criteria?: Json | null
+          state?: string
+          template_file_url?: string | null
+        }
+        Relationships: []
+      }
+      questions: {
+        Row: {
+          created_at: string | null
+          id: string
+          options: Json | null
+          order_number: number | null
+          question_text: Json
+          question_type: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          options?: Json | null
+          order_number?: number | null
+          question_text: Json
+          question_type: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          options?: Json | null
+          order_number?: number | null
+          question_text?: Json
+          question_type?: string
+        }
+        Relationships: []
+      }
+      quiz_responses: {
+        Row: {
+          answer: Json | null
+          created_at: string | null
+          id: string
+          question_id: string | null
+          session_id: string | null
+        }
+        Insert: {
+          answer?: Json | null
+          created_at?: string | null
+          id?: string
+          question_id?: string | null
+          session_id?: string | null
+        }
+        Update: {
+          answer?: Json | null
+          created_at?: string | null
+          id?: string
+          question_id?: string | null
+          session_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "quiz_responses_question_id_fkey"
+            columns: ["question_id"]
+            isOneToOne: false
+            referencedRelation: "questions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
