@@ -134,9 +134,9 @@ const Products = () => {
                 ? product.name.es || product.name.en || "Producto"
                 : product.name;
               
-              const productDescription = typeof product.description === 'object'
-                ? product.description.es || product.description.en || ""
-                : product.description || "";
+              const productDescription = typeof product.description === 'object' && product.description !== null
+                ? (product.description.es || product.description.en || "")
+                : (product.description && typeof product.description === 'string' ? product.description : "");
 
               return (
                 <Card key={product.id} className="flex flex-col hover:shadow-lg transition-shadow">
