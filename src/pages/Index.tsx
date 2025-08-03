@@ -424,8 +424,8 @@ const Index = () => {
             <div className="relative">
               <div className="relative rounded-2xl overflow-hidden shadow-lg">
                 <img 
-                  src="/lovable-uploads/54e7cda7-5b27-4d99-887a-6d9aca41ccc3.png" 
-                  alt="Familia hispana feliz revisando documentos legales en casa" 
+                  src="/lovable-uploads/a4b92e2b-dc57-406d-aeec-97ce0580bb34.png" 
+                  alt="Documentos de Poder Notarial legales en Estados Unidos" 
                   className="w-full h-[500px] object-cover"
                 />
               </div>
