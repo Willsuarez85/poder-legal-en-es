@@ -102,7 +102,7 @@ const Index = () => {
           <img 
             src="/lovable-uploads/1e870570-7e2a-436f-95b4-d50755c085a0.png" 
             alt="Poder LegalUSA.com" 
-            className="h-12 md:h-16 lg:h-20 w-auto"
+            className="h-12 md:h-16 lg:h-36 w-auto"
           />
           <Badge variant="secondary" className="text-sm font-medium flex items-center gap-2">
             <span className="text-2xl">🇺🇸</span>
