@@ -555,6 +555,64 @@ const Index = () => {
         </div>
       </section>
 
+      {/* FAQ Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Preguntas Frecuentes
+            </h2>
+          </div>
+
+          <div className="max-w-4xl mx-auto space-y-6">
+            <Card>
+              <CardContent className="p-6">
+                <h3 className="text-xl font-bold mb-3">¿Esto es legal?</h3>
+                <p className="text-muted-foreground">
+                  Sí. Todos los documentos están actualizados y cumplen con las leyes del estado correspondiente.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent className="p-6">
+                <h3 className="text-xl font-bold mb-3">¿Reemplaza a un abogado?</h3>
+                <p className="text-muted-foreground">
+                  No. Es un recurso válido, útil y económico, pero no sustituye asesoría legal personalizada.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent className="p-6">
+                <h3 className="text-xl font-bold mb-3">¿Incluye notarización?</h3>
+                <p className="text-muted-foreground">
+                  No. Debes llevar el documento a notarizar. Estamos trabajando en ofrecer este servicio próximamente.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent className="p-6">
+                <h3 className="text-xl font-bold mb-3">¿Me pueden ayudar a llenarlo?</h3>
+                <p className="text-muted-foreground">
+                  Sí. Por $59 extra, podemos llenarlo por ti y enviártelo por WhatsApp.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent className="p-6">
+                <h3 className="text-xl font-bold mb-3">¿El proceso es en español?</h3>
+                <p className="text-muted-foreground">
+                  Sí. Todo está en español, desde el quiz hasta las instrucciones.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       {/* Final CTA Section */}
       <section className="py-16 bg-blue-900 text-white">
         <div className="container mx-auto px-4 text-center">
