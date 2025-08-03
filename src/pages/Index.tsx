@@ -286,59 +286,63 @@ const Index = () => {
       </section>
 
       {/* Warning Section */}
-      <section className="py-16 bg-gradient-to-r from-red-50 to-orange-50 border-y border-red-100">
+      <section className="py-16 bg-blue-900 text-white">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-red-800">
-              ¿Te has preguntado qué pasaría si algo te pasa?
-            </h2>
-            
-            <p className="text-lg text-red-700 mb-8">
-              Si sufres una deportación, accidente o enfermedad, tu familia:
-            </p>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Content Column */}
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                ¿Te has preguntado qué pasaría si algo te pasa?
+              </h2>
+              
+              <p className="text-lg mb-8 opacity-90">
+                Si sufres una deportación, accidente o enfermedad, tu familia:
+              </p>
 
-            <div className="grid md:grid-cols-2 gap-6 mb-8">
-              <Card className="bg-white/80 border-red-200">
-                <CardContent className="p-6 space-y-4">
-                  <div className="flex items-start gap-3">
-                    <Lock className="w-6 h-6 text-red-600 mt-1 flex-shrink-0" />
-                    <span className="text-red-700">No podrá acceder a tus cuentas ni pagar tus gastos</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <FileText className="w-6 h-6 text-red-600 mt-1 flex-shrink-0" />
-                    <span className="text-red-700">No podrá tomar decisiones médicas urgentes</span>
-                  </div>
-                </CardContent>
-              </Card>
+              <div className="space-y-4 mb-8">
+                <div className="flex items-start gap-3">
+                  <Lock className="w-6 h-6 text-red-400 mt-1 flex-shrink-0" />
+                  <span>No podrá acceder a tus cuentas ni pagar tus gastos</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <FileText className="w-6 h-6 text-red-400 mt-1 flex-shrink-0" />
+                  <span>No podrá tomar decisiones médicas urgentes</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Users className="w-6 h-6 text-red-400 mt-1 flex-shrink-0" />
+                  <span>No podrá cuidar legalmente de tus hijos</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Clock className="w-6 h-6 text-red-400 mt-1 flex-shrink-0" />
+                  <span>Tendrá que gastar miles de dólares y esperar meses en la corte</span>
+                </div>
+              </div>
 
-              <Card className="bg-white/80 border-red-200">
-                <CardContent className="p-6 space-y-4">
-                  <div className="flex items-start gap-3">
-                    <Users className="w-6 h-6 text-red-600 mt-1 flex-shrink-0" />
-                    <span className="text-red-700">No podrá cuidar legalmente de tus hijos</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <Clock className="w-6 h-6 text-red-600 mt-1 flex-shrink-0" />
-                    <span className="text-red-700">Tendrá que gastar miles de dólares y esperar meses en la corte</span>
-                  </div>
-                </CardContent>
-              </Card>
+              <div className="bg-white/10 backdrop-blur border border-white/20 rounded-lg p-6 mb-8">
+                <h3 className="text-2xl font-bold mb-2">
+                  Con un Poder Notarial, decides tú, no un juez.
+                </h3>
+              </div>
+
+              <Button 
+                size="lg"
+                className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-lg px-8 py-6"
+                onClick={() => navigate("/quiz")}
+              >
+                Proteger a Mi Familia Ahora
+                <Shield className="ml-2 w-5 h-5" />
+              </Button>
             </div>
 
-            <div className="bg-green-100 border border-green-300 rounded-lg p-6 mb-8">
-              <h3 className="text-2xl font-bold text-green-800 mb-2">
-                Con un Poder Notarial, decides tú, no un juez.
-              </h3>
+            {/* Image Column - Space reserved for photo */}
+            <div className="relative">
+              <div className="w-full h-[400px] lg:h-[500px] bg-white/10 backdrop-blur border-2 border-dashed border-white/30 rounded-2xl flex items-center justify-center">
+                <div className="text-center text-white/60">
+                  <div className="text-lg font-medium mb-2">Espacio reservado para imagen</div>
+                  <div className="text-sm">400x500px recomendado</div>
+                </div>
+              </div>
             </div>
-
-            <Button 
-              size="lg"
-              className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-lg px-8 py-6"
-              onClick={() => navigate("/quiz")}
-            >
-              Proteger a Mi Familia Ahora
-              <Shield className="ml-2 w-5 h-5" />
-            </Button>
           </div>
         </div>
       </section>
