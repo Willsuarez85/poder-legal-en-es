@@ -230,11 +230,10 @@ const Index = () => {
           <div className="text-center mt-12">
             <Button 
               size="lg"
-              variant="outline"
-              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+              className="bg-destructive hover:bg-destructive/90 text-destructive-foreground border-destructive"
               onClick={() => navigate("/quiz")}
             >
-              Comenzar Mi Diagnóstico Gratis
+              Comenzar ahora
             </Button>
           </div>
         </div>
