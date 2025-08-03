@@ -165,7 +165,7 @@ const Index = () => {
             <div className="relative">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <img 
-                  src={heroImage} 
+                  src="/lovable-uploads/45832ed1-efe6-4dba-af5e-9d99059823cb.png" 
                   alt="Familia hispana protegida legalmente" 
                   className="w-full h-[400px] lg:h-[500px] object-cover"
                 />
