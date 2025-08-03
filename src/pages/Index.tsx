@@ -102,7 +102,7 @@ const Index = () => {
           />
           <Badge variant="secondary" className="text-sm font-medium flex items-center gap-2">
             <span className="text-2xl">🇺🇸</span>
-            <span>Válido en todos los Estados Unidos</span>
+            <span>Válidos 50 estados</span>
             <div className="flex">
               <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
               <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
