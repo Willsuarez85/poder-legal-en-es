@@ -277,8 +277,8 @@ const Index = () => {
 
             <div className="relative">
               <img 
-                src={legalProtectionIcon} 
-                alt="Protección legal documentos" 
+                src="/lovable-uploads/289f805a-877a-4077-b799-3a7da6fbab44.png" 
+                alt="Aplicación móvil de documentos legales Power of Attorney" 
                 className="w-full max-w-md mx-auto rounded-2xl shadow-lg"
               />
             </div>
