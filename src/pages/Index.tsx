@@ -184,8 +184,8 @@ const Index = () => {
 
               <div className="absolute -top-4 -right-4 bg-destructive text-destructive-foreground rounded-lg shadow-lg p-4 hidden md:block">
                 <div className="text-center">
-                  <div className="font-bold text-lg">$19.99</div>
-                  <div className="text-sm opacity-90">Solo</div>
+                  <div className="font-bold text-lg">100% Legal</div>
+                  <div className="text-sm opacity-90">Garantizado</div>
                 </div>
               </div>
             </div>
