@@ -70,11 +70,15 @@ export default {
 				'section-accent': 'hsl(var(--section-accent))'
 			},
 			boxShadow: {
+				'soft': 'var(--shadow-soft)',
 				'card': 'var(--shadow-card)',
-				'card-hover': 'var(--shadow-card-hover)'
+				'card-hover': 'var(--shadow-card-hover)',
+				'purple': 'var(--shadow-purple)'
 			},
 			backgroundImage: {
-				'hero-gradient': 'var(--hero-gradient)'
+				'hero-gradient': 'var(--hero-gradient)',
+				'card-gradient': 'var(--card-gradient)',
+				'feature-gradient': 'var(--feature-gradient)'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

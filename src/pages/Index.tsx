@@ -28,7 +28,13 @@ import {
   Lock,
   FileText,
   Quote,
-  Star
+  Star,
+  TrendingUp,
+  Award,
+  Smartphone,
+  ChevronDown,
+  Plus,
+  Minus
 } from "lucide-react";
 import heroFamily from "@/assets/hero-family.jpg";
 import legalProtectionIcon from "@/assets/legal-protection-icon.jpg";
@@ -38,68 +44,43 @@ import { useState } from "react";
 const Index = () => {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
-  const steps = [
+  const features = [
     {
-      number: "1",
-      title: "Responde el Quiz Rápido",
-      description: "Encuentra la Carta de Poder que necesitas en 2 minutos",
       icon: FileCheck,
+      title: "Documentos Inteligentes",
+      description: "Cartas de poder personalizadas para tu situación específica",
+      color: "from-blue-500 to-purple-600"
     },
     {
-      number: "2", 
-      title: "Descarga tu documento PDF",
-      description: "A tu teléfono o email en minutos",
-      icon: Download,
+      icon: TrendingUp,
+      title: "Análisis en Tiempo Real",
+      description: "Evaluación inmediata de tus necesidades legales",
+      color: "from-purple-500 to-pink-600"
     },
     {
-      number: "3",
-      title: "Recibe instrucciones paso a paso",
-      description: "En español para llenar y firmar con confianza",
-      icon: CheckCircle,
-    },
-  ];
-
-  const benefits = [
-    {
-      icon: Users,
-      title: "Protege a tus hijos",
-      description: "Asegura que alguien de confianza pueda cuidar de ellos si algo te pasa"
-    },
-    {
-      icon: Banknote,
-      title: "Acceso a cuentas",
-      description: "Permite que tu familia acceda a tus cuentas bancarias en emergencias"
-    },
-    {
-      icon: Building,
-      title: "Vende tu casa",
-      description: "Autoriza la venta de propiedades cuando no puedas hacerlo tú mismo"
-    },
-    {
-      icon: Stethoscope,
-      title: "Decisiones médicas",
-      description: "Permite que tomen decisiones médicas importantes por ti"
-    },
-    {
-      icon: Scale,
-      title: "Representación legal",
-      description: "Te representan legalmente en emergencias sin trabas burocráticas"
-    },
-    {
-      icon: Shield,
-      title: "Seguridad total",
-      description: "Protección legal completa para tu familia y bienes"
+      icon: Award,
+      title: "Soporte 24/7",
+      description: "Asistencia especializada en español cuando la necesites",
+      color: "from-green-500 to-blue-600"
     }
   ];
 
-  const protections = [
-    "Deportación inesperada",
-    "Accidente o enfermedad",
-    "Viaje de emergencia",
-    "Incapacidad temporal",
-    "Hospitalización",
-    "Problemas legales"
+  const stats = [
+    { number: "160k+", label: "Documentos", icon: FileText },
+    { number: "100k+", label: "Familias Protegidas", icon: Users },
+    { number: "99%", label: "Satisfacción", icon: Heart },
+    { number: "50", label: "Estados", icon: MapPin }
+  ];
+
+  const benefits = [
+    "Protege a tus hijos",
+    "Acceso a cuentas bancarias", 
+    "Venta de propiedades",
+    "Decisiones médicas",
+    "Representación legal",
+    "Seguridad total"
   ];
 
   const testimonials = [
@@ -120,23 +101,45 @@ const Index = () => {
     }
   ];
 
-  const features = [
+  const plans = [
     {
-      title: "Cartas de poder para proteger a tus hijos, pareja, cuentas bancarias, propiedades, negocio, salud y más",
-      included: true
+      name: "Documento Básico",
+      price: "$19.99",
+      description: "Perfecto para empezar",
+      features: [
+        "Carta de poder personalizada",
+        "Instrucciones en español",
+        "Válido en todos los estados",
+        "Descarga inmediata",
+        "Soporte por email"
+      ],
+      popular: false
     },
     {
-      title: "Documentos legales válidos en todos los estados de USA",
-      included: true
+      name: "Plan Pro",
+      price: "$59.99",
+      description: "Perfecto para familias",
+      features: [
+        "Todo en Plan Básico",
+        "Asistencia personalizada por WhatsApp",
+        "Revisión de documentos",
+        "Notarización guiada",
+        "Actualizaciones gratuitas"
+      ],
+      popular: true
     },
     {
-      title: "Instrucciones claras, paso a paso, en español para llenar y notarizar sin errores",
-      included: true
-    },
-    {
-      title: "Opción de asistencia personalizada para el llenado por WhatsApp",
-      included: true,
-      note: "desde $59"
+      name: "Plan Familiar",
+      price: "$149.99",
+      description: "Para protección completa",
+      features: [
+        "Todo en Plan Pro",
+        "Documentos para toda la familia",
+        "Consulta legal telefónica",
+        "Testamento básico incluido",
+        "Soporte prioritario 24/7"
+      ],
+      popular: false
     }
   ];
 
@@ -164,16 +167,16 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50">
       {/* Navigation Header */}
-      <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md">
+      <header className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-xl border-b border-white/20 shadow-soft">
         <div className="container mx-auto px-4">
           <div className="flex h-20 items-center justify-between">
             <div className="flex items-center space-x-4">
               <img 
                 src={logo} 
                 alt="Poder Legal USA" 
-                className="h-16 w-auto md:h-20"
+                className="h-12 w-auto md:h-16"
               />
             </div>
             
@@ -185,18 +188,17 @@ const Index = () => {
               <a href="#proceso" className="text-foreground hover:text-primary transition-colors font-medium">
                 Proceso
               </a>
-              <a href="#testimonios" className="text-foreground hover:text-primary transition-colors font-medium">
-                Testimonios
+              <a href="#precios" className="text-foreground hover:text-primary transition-colors font-medium">
+                Precios
               </a>
               <a href="#preguntas" className="text-foreground hover:text-primary transition-colors font-medium">
                 Preguntas
               </a>
               <Button 
                 onClick={() => navigate("/quiz")}
-                size="sm"
-                className="ml-4"
+                className="bg-black text-white hover:bg-gray-800 rounded-full px-6"
               >
-                Empezar Quiz
+                Empezar Gratis
               </Button>
             </nav>
 
@@ -211,7 +213,7 @@ const Index = () => {
 
           {/* Mobile Navigation */}
           {isMenuOpen && (
-            <div className="md:hidden border-t bg-background/95 backdrop-blur-md">
+            <div className="md:hidden border-t bg-white/95 backdrop-blur-md">
               <nav className="flex flex-col space-y-4 p-4">
                 <a href="#servicios" className="text-foreground hover:text-primary transition-colors font-medium">
                   Servicios
@@ -219,18 +221,17 @@ const Index = () => {
                 <a href="#proceso" className="text-foreground hover:text-primary transition-colors font-medium">
                   Proceso
                 </a>
-                <a href="#testimonios" className="text-foreground hover:text-primary transition-colors font-medium">
-                  Testimonios
+                <a href="#precios" className="text-foreground hover:text-primary transition-colors font-medium">
+                  Precios
                 </a>
                 <a href="#preguntas" className="text-foreground hover:text-primary transition-colors font-medium">
                   Preguntas
                 </a>
                 <Button 
                   onClick={() => navigate("/quiz")}
-                  size="sm"
-                  className="w-full mt-4"
+                  className="w-full mt-4 bg-black text-white hover:bg-gray-800 rounded-full"
                 >
-                  Empezar Quiz
+                  Empezar Gratis
                 </Button>
               </nav>
             </div>
@@ -239,88 +240,119 @@ const Index = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-hero-gradient text-white">
-        <div className="container mx-auto px-4 py-16 md:py-24">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
-              <div className="space-y-6">
-                <Badge variant="secondary" className="bg-white/20 text-white border-white/30">
-                  🇺🇸 Legal en todos los estados de USA
-                </Badge>
-                <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold leading-tight">
-                  Protege legalmente a tu familia, tu negocio y tus bienes en Estados Unidos
-                  <span className="text-yellow-300"> en minutos</span>
-                </h1>
-                <p className="text-xl md:text-2xl text-blue-100 leading-relaxed">
-                  Descarga una <strong>Carta de Poder PDF</strong> válida en tu estado, con instrucciones en español, lista para firmar y notarizar.
-                </p>
-                <p className="text-lg text-blue-200">
-                  Sin abogados caros, ni trámites confusos. Todo en tu celular.
-                </p>
-              </div>
+      <section className="relative overflow-hidden bg-hero-gradient text-white min-h-[90vh] flex items-center">
+        <div className="container mx-auto px-4 py-20">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center space-y-8 mb-16">
+              <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-sm">
+                🇺🇸 Legal en todos los estados de USA
+              </Badge>
               
-              <div className="flex flex-col sm:flex-row gap-4">
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight">
+                Protege legalmente a tu familia
+                <span className="block text-yellow-300">en minutos</span>
+              </h1>
+              
+              <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
+                Descarga una <strong>Carta de Poder PDF</strong> válida en tu estado, con instrucciones en español, lista para firmar y notarizar.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Button 
                   onClick={() => navigate("/quiz")}
                   size="xl"
-                  className="w-full sm:w-auto font-bold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-200"
+                  className="bg-white text-black hover:bg-gray-100 rounded-full px-8 py-4 text-lg font-semibold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
                 >
-                  Encuentra la Carta que necesitas en 2 minutos
+                  Empezar Gratis
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
-              </div>
-              
-              <div className="flex items-center space-x-4 text-blue-100">
-                <CheckCircle className="h-5 w-5 text-green-400" />
-                <span>Solo $19.99 • Descarga inmediata • Instrucciones en español</span>
+                <button className="flex items-center text-white/90 hover:text-white transition-colors">
+                  <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mr-3 backdrop-blur-sm">
+                    <div className="w-0 h-0 border-l-[6px] border-l-white border-y-[4px] border-y-transparent ml-1"></div>
+                  </div>
+                  Ver Demo
+                </button>
               </div>
             </div>
-            
-            <div className="relative">
-              <img 
-                src={heroFamily} 
-                alt="Familia latina protegida legalmente" 
-                className="rounded-2xl shadow-2xl w-full h-auto"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
+
+            {/* Dashboard Preview */}
+            <div className="relative max-w-4xl mx-auto">
+              <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 shadow-2xl">
+                <img 
+                  src={heroFamily} 
+                  alt="Familia latina protegida legalmente" 
+                  className="rounded-2xl w-full h-auto shadow-xl"
+                />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Steps Section */}
-      <section id="proceso" className="py-16 md:py-24 bg-section-light">
+      {/* Stats Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <p className="text-primary font-semibold">Confiado por más de <span className="text-2xl">1000+</span> familias</p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+            {stats.map((stat, index) => {
+              const Icon = stat.icon;
+              return (
+                <div key={index} className="text-center">
+                  <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-purple">
+                    <Icon className="h-8 w-8 text-white" />
+                  </div>
+                  <div className="text-3xl font-bold text-foreground">{stat.number}</div>
+                  <div className="text-muted-foreground">{stat.label}</div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section id="servicios" className="py-20 bg-gradient-to-br from-slate-50 to-blue-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Protege lo que amas en 3 pasos:
+            <Badge className="bg-primary/10 text-primary mb-4">
+              Características Poderosas
+            </Badge>
+            <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
+              Protección Legal para el Negocio Moderno
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Un proceso simple y rápido diseñado para que puedas proteger a tu familia sin complicaciones
+              Toma control de tu futuro legal con nuestras herramientas avanzadas
             </p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {steps.map((step, index) => {
-              const Icon = step.icon;
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {features.map((feature, index) => {
+              const Icon = feature.icon;
+              const isCenter = index === 1;
               return (
-                <Card key={index} className="relative overflow-hidden group hover:shadow-card-hover transition-all duration-300 border-0 shadow-card">
+                <Card key={index} className={`relative overflow-hidden border-0 ${isCenter ? 'md:scale-110 bg-feature-gradient text-white shadow-purple' : 'bg-white shadow-card'} hover:shadow-card-hover transition-all duration-300`}>
                   <CardHeader className="text-center pb-4">
-                    <div className="mx-auto w-16 h-16 bg-destructive text-destructive-foreground rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                      <span className="text-2xl font-bold">{step.number}</span>
+                    <div className={`mx-auto w-16 h-16 ${isCenter ? 'bg-white/20' : 'bg-gradient-to-br from-blue-500 to-purple-600'} rounded-2xl flex items-center justify-center mb-4 shadow-soft`}>
+                      <Icon className={`h-8 w-8 ${isCenter ? 'text-white' : 'text-white'}`} />
                     </div>
-                    <CardTitle className="text-xl font-bold text-foreground">{step.title}</CardTitle>
+                    <CardTitle className={`text-xl font-bold ${isCenter ? 'text-white' : 'text-foreground'}`}>
+                      {feature.title}
+                    </CardTitle>
                   </CardHeader>
                   <CardContent className="text-center">
-                    <CardDescription className="text-muted-foreground text-base leading-relaxed">
-                      {step.description}
+                    <CardDescription className={`text-base leading-relaxed ${isCenter ? 'text-white/90' : 'text-muted-foreground'}`}>
+                      {feature.description}
                     </CardDescription>
+                    <Button 
+                      variant={isCenter ? "outline" : "ghost"}
+                      className={`mt-4 rounded-full ${isCenter ? 'border-white text-white hover:bg-white hover:text-purple-600' : 'text-primary hover:bg-primary/10'}`}
+                    >
+                      Saber más
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
                   </CardContent>
-                  {index < steps.length - 1 && (
-                    <div className="hidden md:block absolute -right-4 top-1/2 transform -translate-y-1/2 z-10">
-                      <ArrowRight className="h-8 w-8 text-primary" />
-                    </div>
-                  )}
                 </Card>
               );
             })}
@@ -328,235 +360,209 @@ const Index = () => {
         </div>
       </section>
 
-      {/* What is Power of Attorney */}
-      <section className="py-16 md:py-24 bg-background">
+      {/* Benefits Section */}
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
             <div className="space-y-8">
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-                ¿Qué es una Carta de Poder?
-              </h2>
-              <div className="space-y-6">
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  Una <strong>carta de poder</strong> (también llamada poder notarial) es un <strong>documento legal</strong> que te protege si tú no puedes actuar por ti mismo.
-                </p>
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  Este documento le da <strong>acceso y autoridad legal</strong> a una persona de tu confianza para actuar en tu nombre:
-                </p>
-                <div className="grid sm:grid-cols-2 gap-4">
-                  {benefits.map((benefit, index) => {
-                    const Icon = benefit.icon;
-                    return (
-                      <div key={index} className="flex items-start space-x-3 p-4 rounded-lg bg-section-light">
-                        <Icon className="h-6 w-6 text-destructive mt-1 flex-shrink-0" />
-                        <div>
-                          <h4 className="font-semibold text-foreground">{benefit.title}</h4>
-                          <p className="text-sm text-muted-foreground">{benefit.description}</p>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  Ya sea por un viaje, una enfermedad, un accidente o una deportación, tener una carta de poder garantiza que alguien de tu confianza pueda ayudarte sin trabas legales.
+              <div>
+                <Badge className="bg-primary/10 text-primary mb-4">
+                  CASO DE USO
+                </Badge>
+                <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
+                  Protección Legal para el Negocio Moderno
+                </h2>
+                <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+                  Toma control del futuro financiero de tu empresa con nuestras soluciones. 
+                  Toma control del futuro financiero de tu empresa con nuestras soluciones.
                 </p>
               </div>
+
+              <div className="space-y-4">
+                {benefits.map((benefit, index) => (
+                  <div key={index} className="flex items-center space-x-3">
+                    <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                      <CheckCircle className="h-4 w-4 text-white" />
+                    </div>
+                    <span className="text-foreground font-medium">{benefit}</span>
+                  </div>
+                ))}
+              </div>
+
+              <Button 
+                onClick={() => navigate("/quiz")}
+                className="bg-black text-white hover:bg-gray-800 rounded-full px-8 py-3"
+              >
+                Empezar Gratis
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
             </div>
+            
             <div className="relative">
-              <img 
-                src={legalProtectionIcon} 
-                alt="Protección legal familiar" 
-                className="rounded-2xl shadow-xl w-full h-auto"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent rounded-2xl"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Warning Section */}
-      <section className="py-16 md:py-24 bg-gradient-to-r from-orange-50 to-red-50 border-l-4 border-destructive">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center space-y-8">
-            <div className="flex justify-center">
-              <AlertTriangle className="h-16 w-16 text-destructive" />
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-              ¿Te has preguntado qué pasaría si algo te pasa?
-            </h2>
-            <div className="bg-white rounded-2xl p-8 shadow-xl">
-              <p className="text-xl text-foreground mb-6 font-semibold">
-                Si sufres una deportación, accidente o enfermedad, tu familia:
-              </p>
-              <div className="grid md:grid-cols-2 gap-6 text-left">
-                <div className="space-y-4">
-                  <div className="flex items-start space-x-3">
-                    <X className="h-5 w-5 text-destructive mt-1 flex-shrink-0" />
-                    <span className="text-muted-foreground">No podrá acceder a tus cuentas ni pagar tus gastos</span>
-                  </div>
-                  <div className="flex items-start space-x-3">
-                    <X className="h-5 w-5 text-destructive mt-1 flex-shrink-0" />
-                    <span className="text-muted-foreground">No podrá tomar decisiones médicas urgentes</span>
-                  </div>
-                  <div className="flex items-start space-x-3">
-                    <X className="h-5 w-5 text-destructive mt-1 flex-shrink-0" />
-                    <span className="text-muted-foreground">No podrá cuidar legalmente de tus hijos</span>
-                  </div>
-                </div>
-                <div className="space-y-4">
-                  <div className="flex items-start space-x-3">
-                    <X className="h-5 w-5 text-destructive mt-1 flex-shrink-0" />
-                    <span className="text-muted-foreground">Tendrá que gastar miles de dólares y esperar meses en la corte</span>
-                  </div>
-                  <div className="flex items-start space-x-3">
-                    <X className="h-5 w-5 text-destructive mt-1 flex-shrink-0" />
-                    <span className="text-muted-foreground">Sin acceso a propiedades o bienes importantes</span>
-                  </div>
-                  <div className="flex items-start space-x-3">
-                    <X className="h-5 w-5 text-destructive mt-1 flex-shrink-0" />
-                    <span className="text-muted-foreground">Imposibilidad de manejar asuntos legales urgentes</span>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-8 p-6 bg-section-accent rounded-xl">
-                <p className="text-lg font-bold text-primary">
-                  Con un Poder Notarial, decides tú, no un juez.
-                </p>
+              <div className="bg-gradient-to-br from-slate-100 to-slate-200 rounded-3xl p-8 shadow-xl">
+                <img 
+                  src={legalProtectionIcon} 
+                  alt="Protección legal familiar" 
+                  className="rounded-2xl w-full h-auto shadow-lg"
+                />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section id="servicios" className="py-16 md:py-24 bg-section-light">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                El documento legal que necesitas, sin complicaciones
-              </h2>
-              <p className="text-xl text-muted-foreground leading-relaxed">
-                Accede al <strong>template que necesitas</strong>, legalmente válido en tu estado, con:
-              </p>
-            </div>
-            
-            <Card className="shadow-xl border-0 overflow-hidden">
-              <CardContent className="p-8">
-                <div className="space-y-6">
-                  {features.map((feature, index) => (
-                    <div key={index} className="flex items-start space-x-4">
-                      <CheckCircle className="h-6 w-6 text-green-500 mt-1 flex-shrink-0" />
-                      <div>
-                        <p className="text-lg text-foreground leading-relaxed">
-                          {feature.title}
-                        </p>
-                        {feature.note && (
-                          <p className="text-sm text-muted-foreground mt-1">
-                            {feature.note}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                
-                <div className="mt-8 p-6 bg-hero-gradient text-white rounded-xl text-center">
-                  <p className="text-2xl font-bold mb-2">
-                    Por solo $19.99
-                  </p>
-                  <p className="text-lg mb-6">
-                    Toma el quiz y en 2 minutos sabrás cuáles son las <strong>cartas de poder exactas y legales</strong> que necesitas para proteger <strong>todo lo que amas</strong>.
-                  </p>
-                  <Button 
-                    onClick={() => navigate("/quiz")}
-                    size="lg"
-                    className="font-bold"
-                  >
-                    Comienza el Quiz ahora
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Legal Section */}
-      <section className="py-16 md:py-24 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto space-y-8">
-            <div className="text-center">
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-                ¿Esto es legal?
-              </h2>
-            </div>
-            
-            <Card className="shadow-xl border-0">
-              <CardContent className="p-8 space-y-6">
-                <p className="text-xl font-bold text-primary text-center">
-                  Sí. Las cartas de poder que ofrecemos son legales y válidas en todo Estados Unidos.
-                </p>
-                
-                <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
-                  <p>No necesitas pagar abogados caros ni pasar por procesos complicados.</p>
-                  
-                  <p className="font-semibold text-foreground">Lo que realmente necesitas es:</p>
-                  
-                  <div className="space-y-3 ml-4">
-                    <div className="flex items-start space-x-3">
-                      <CheckCircle className="h-5 w-5 text-green-500 mt-1" />
-                      <span>El <strong>template correcto</strong>, adaptado a las leyes de tu estado</span>
-                    </div>
-                    <div className="flex items-start space-x-3">
-                      <CheckCircle className="h-5 w-5 text-green-500 mt-1" />
-                      <span>Una <strong>guía clara y en español</strong> para llenarlo correctamente</span>
-                    </div>
-                    <div className="flex items-start space-x-3">
-                      <CheckCircle className="h-5 w-5 text-green-500 mt-1" />
-                      <span>Llevarlo a notarizar, como exige la ley en la mayoría de los estados</span>
-                    </div>
-                  </div>
-                  
-                  <p>Con eso es suficiente para protegerte legalmente.</p>
-                  
-                  <div className="bg-section-accent p-6 rounded-xl">
-                    <p><strong>Nuestros documentos están organizados y verificados por estado.</strong></p>
-                    <p className="mt-2">No reemplazan asesoría legal personalizada, pero sí te permiten actuar con confianza y tomar el control hoy mismo, sin gastar cientos o miles de dólares.</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section id="testimonios" className="py-16 md:py-24 bg-section-light">
+      {/* Pricing Section */}
+      <section id="precios" className="py-20 bg-gradient-to-br from-slate-50 to-purple-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Testimonios
+            <Badge className="bg-primary/10 text-primary mb-4">
+              Plan de Precios
+            </Badge>
+            <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
+              Explora nuestros planes de precios
             </h2>
-            <p className="text-xl text-muted-foreground">
-              Lo que dicen nuestros clientes
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
+              Te ayudamos a mantener el control de tus gastos e ingresos. Muestra el flujo de registros
+              durante un período específico de tiempo.
+            </p>
+            
+            <div className="flex items-center justify-center space-x-4">
+              <button className="px-6 py-2 bg-black text-white rounded-full">Mensual</button>
+              <button className="px-6 py-2 bg-gray-100 text-gray-600 rounded-full">Anual</button>
+              <Badge className="bg-green-100 text-green-700">20% OFF</Badge>
+            </div>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {plans.map((plan, index) => {
+              const isPopular = plan.popular;
+              return (
+                <Card key={index} className={`relative overflow-hidden border-0 ${isPopular ? 'bg-feature-gradient text-white shadow-purple scale-105' : 'bg-white shadow-card'} hover:shadow-card-hover transition-all duration-300`}>
+                  {isPopular && (
+                    <div className="absolute top-4 left-1/2 transform -translate-x-1/2">
+                      <Badge className="bg-white/20 text-white border-white/30">
+                        Perfecto para familias
+                      </Badge>
+                    </div>
+                  )}
+                  <CardHeader className="text-center pb-4 pt-12">
+                    <CardTitle className={`text-xl font-bold ${isPopular ? 'text-white' : 'text-foreground'} mb-2`}>
+                      {plan.name}
+                    </CardTitle>
+                    <CardDescription className={`${isPopular ? 'text-white/90' : 'text-muted-foreground'} mb-4`}>
+                      {plan.description}
+                    </CardDescription>
+                    <div className="text-4xl font-bold mb-2">
+                      <span className={isPopular ? 'text-white' : 'text-foreground'}>{plan.price}</span>
+                    </div>
+                    <p className={isPopular ? 'text-white/90' : 'text-muted-foreground'}>Pago único</p>
+                  </CardHeader>
+                  <CardContent className="space-y-6">
+                    <Button 
+                      variant={isPopular ? "outline" : "default"}
+                      className={`w-full rounded-full ${isPopular ? 'border-white text-white hover:bg-white hover:text-purple-600' : 'bg-black text-white hover:bg-gray-800'}`}
+                      onClick={() => navigate("/quiz")}
+                    >
+                      Empezar
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                    
+                    <div className="space-y-3">
+                      <p className={`font-semibold ${isPopular ? 'text-white' : 'text-foreground'}`}>Incluye</p>
+                      {plan.features.map((feature, featureIndex) => (
+                        <div key={featureIndex} className="flex items-center space-x-3">
+                          <CheckCircle className={`h-5 w-5 ${isPopular ? 'text-white' : 'text-primary'} flex-shrink-0`} />
+                          <span className={`text-sm ${isPopular ? 'text-white/90' : 'text-muted-foreground'}`}>
+                            {feature}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                    
+                    <p className={`text-sm ${isPopular ? 'text-white/70' : 'text-muted-foreground'}`}>
+                      Puedes cancelar fácilmente en cualquier momento
+                    </p>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section id="preguntas" className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <Badge className="bg-primary/10 text-primary mb-4">
+              FAQ
+            </Badge>
+            <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
+              Preguntas Frecuentes
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Te ayudamos a mantener el control de tus gastos e ingresos. Muestra el flujo de registros
+              durante un período específico de tiempo.
             </p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="max-w-3xl mx-auto">
+            {faqs.map((faq, index) => (
+              <div key={index} className="border-b border-gray-200 last:border-b-0">
+                <button
+                  className="flex justify-between items-center w-full py-6 text-left"
+                  onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                >
+                  <span className="text-lg font-semibold text-foreground pr-4">{faq.question}</span>
+                  {openFaq === index ? (
+                    <Minus className="h-5 w-5 text-primary flex-shrink-0" />
+                  ) : (
+                    <Plus className="h-5 w-5 text-primary flex-shrink-0" />
+                  )}
+                </button>
+                {openFaq === index && (
+                  <div className="pb-6">
+                    <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+          
+          <div className="text-center mt-16">
+            <div className="bg-gradient-to-br from-slate-50 to-blue-50 rounded-3xl p-8 max-w-2xl mx-auto">
+              <h3 className="text-2xl font-bold text-foreground mb-4">¿Tienes otras preguntas?</h3>
+              <p className="text-muted-foreground mb-6">
+                Nuestro equipo responderá todas tus preguntas. Aseguramos una respuesta rápida.
+              </p>
+              <Button className="bg-black text-white hover:bg-gray-800 rounded-full px-8">
+                Contáctanos
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-20 bg-gradient-to-br from-slate-50 to-purple-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Lo que dicen nuestros clientes
+            </h2>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {testimonials.map((testimonial, index) => (
-              <Card key={index} className="shadow-card hover:shadow-card-hover transition-all duration-300 border-0">
-                <CardContent className="p-6">
-                  <div className="space-y-4">
-                    <Quote className="h-8 w-8 text-primary/30" />
-                    <p className="text-muted-foreground italic leading-relaxed">
-                      "{testimonial.text}"
-                    </p>
-                    <div className="border-t pt-4">
-                      <p className="font-semibold text-foreground">{testimonial.author}</p>
-                      <p className="text-sm text-muted-foreground">{testimonial.location}</p>
-                    </div>
+              <Card key={index} className="bg-white border-0 shadow-card hover:shadow-card-hover transition-all duration-300">
+                <CardContent className="p-8">
+                  <Quote className="h-8 w-8 text-primary mb-4" />
+                  <p className="text-muted-foreground mb-6 leading-relaxed">
+                    "{testimonial.text}"
+                  </p>
+                  <div>
+                    <p className="font-semibold text-foreground">{testimonial.author}</p>
+                    <p className="text-sm text-muted-foreground">{testimonial.location}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -565,128 +571,62 @@ const Index = () => {
         </div>
       </section>
 
-      {/* About Section */}
-      <section className="py-16 md:py-24 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center space-y-8">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-              ¿Quiénes Somos?
-            </h2>
-            <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
-              <p>
-                Poder Legal USA es una iniciativa comunitaria que ayuda a las familias latinas a obtener <strong>documentos legales válidos y simples</strong>, sin necesidad de websites y trámites confusos.
-              </p>
-              <p>
-                Organizamos una base de datos con <strong>cartas de poder por estado</strong>, actualizadas y fáciles de usar.
-              </p>
-              <p className="text-primary font-semibold">
-                No damos asesoría legal. Si tienes dudas específicas, recomendamos acudir a un abogado. Nosotros te ayudamos a <strong>dar el primer paso legal sin complicaciones</strong>.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section id="preguntas" className="py-16 md:py-24 bg-section-light">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Preguntas Frecuentes
-              </h2>
-            </div>
-            
-            <div className="space-y-6">
-              {faqs.map((faq, index) => (
-                <Card key={index} className="shadow-card border-0">
-                  <CardContent className="p-6">
-                    <h3 className="text-xl font-bold text-foreground mb-3">
-                      {faq.question}
-                    </h3>
-                    <p className="text-muted-foreground leading-relaxed">
-                      {faq.answer}
-                    </p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Final CTA */}
-      <section className="py-16 md:py-24 bg-hero-gradient text-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center space-y-8">
-            <h2 className="text-3xl md:text-4xl font-bold">
-              Toma el control hoy
-            </h2>
-            <p className="text-xl text-blue-100 leading-relaxed">
-              Una sola firma puede hacer la diferencia entre proteger a tu familia o dejar todo en manos del sistema.
-            </p>
-            <Button 
-              onClick={() => navigate("/quiz")}
-              size="xl"
-              className="font-bold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-200"
-            >
-              Haz el Quiz y encuentra tu carta de poder ahora
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-            <div className="flex items-center justify-center space-x-4 text-blue-100">
-              <CheckCircle className="h-5 w-5 text-green-400" />
-              <span>Proceso 100% en español • Descarga inmediata • $19.99</span>
-            </div>
-          </div>
+      {/* CTA Section */}
+      <section className="py-20 bg-black text-white">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl md:text-5xl font-bold mb-6">
+            Protege a tu familia hoy mismo
+          </h2>
+          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+            No esperes a que sea demasiado tarde. Descarga tu carta de poder en minutos.
+          </p>
+          <Button 
+            onClick={() => navigate("/quiz")}
+            size="xl"
+            className="bg-white text-black hover:bg-gray-100 rounded-full px-8 py-4 text-lg font-semibold"
+          >
+            Empezar Quiz Gratis
+            <ArrowRight className="ml-2 h-5 w-5" />
+          </Button>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-footer text-footer-foreground">
-        <div className="container mx-auto px-4 py-16">
+      <footer className="bg-footer text-footer-foreground py-16">
+        <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8">
-            <div className="space-y-4">
+            <div className="md:col-span-2">
               <img 
                 src={logo} 
                 alt="Poder Legal USA" 
-                className="h-12 w-auto brightness-0 invert"
+                className="h-12 w-auto mb-4 brightness-0 invert"
               />
-              <p className="text-sm text-blue-200 leading-relaxed">
-                Protegiendo a las familias latinas con documentos legales simples y válidos en todos los estados de USA.
+              <p className="text-blue-200 mb-6">
+                Protegemos a las familias latinas en Estados Unidos con documentos legales accesibles y confiables.
               </p>
               <div className="flex space-x-4">
-                <Facebook className="h-5 w-5 text-blue-200 hover:text-white cursor-pointer transition-colors" />
-                <Twitter className="h-5 w-5 text-blue-200 hover:text-white cursor-pointer transition-colors" />
-                <Instagram className="h-5 w-5 text-blue-200 hover:text-white cursor-pointer transition-colors" />
+                <Facebook className="h-6 w-6 text-blue-200 hover:text-white cursor-pointer" />
+                <Twitter className="h-6 w-6 text-blue-200 hover:text-white cursor-pointer" />
+                <Instagram className="h-6 w-6 text-blue-200 hover:text-white cursor-pointer" />
               </div>
             </div>
             
             <div>
               <h4 className="font-semibold text-white mb-4">Servicios</h4>
-              <ul className="space-y-2 text-sm text-blue-200">
-                <li><a href="#" className="hover:text-white transition-colors">Cartas de Poder</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Protección Familiar</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Documentos por Estado</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Asistencia en Español</a></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold text-white mb-4">Soporte</h4>
-              <ul className="space-y-2 text-sm text-blue-200">
-                <li><a href="#preguntas" className="hover:text-white transition-colors">Preguntas Frecuentes</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Términos y Condiciones</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Política de Privacidad</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Contacto</a></li>
+              <ul className="space-y-2 text-blue-200">
+                <li><a href="#" className="hover:text-white transition-colors">Carta de Poder</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Testamento</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Custodia</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Propiedades</a></li>
               </ul>
             </div>
             
             <div>
               <h4 className="font-semibold text-white mb-4">Contacto</h4>
-              <div className="space-y-3 text-sm text-blue-200">
+              <div className="space-y-3 text-blue-200">
                 <div className="flex items-center space-x-2">
                   <Phone className="h-4 w-4" />
-                  <span>+1 (555) 123-4567</span>
+                  <span>(555) 123-4567</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Mail className="h-4 w-4" />
@@ -700,11 +640,8 @@ const Index = () => {
             </div>
           </div>
           
-          <div className="border-t border-blue-700 mt-12 pt-8 text-center text-sm text-blue-200">
+          <div className="border-t border-blue-400/20 mt-12 pt-8 text-center text-blue-200">
             <p>&copy; 2024 Poder Legal USA. Todos los derechos reservados.</p>
-            <p className="mt-2">
-              Este sitio no proporciona asesoría legal. Los documentos están diseñados para uso general y no sustituyen el consejo de un abogado.
-            </p>
           </div>
         </div>
       </footer>
