@@ -418,34 +418,151 @@ const Index = () => {
       {/* Testimonials Section */}
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
+          <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Lo que dicen nuestros clientes
+              Comprobado por Personas que lo Usan
             </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Miles de familias hispanas que confían en nosotros para proteger 
+              sus documentos legales cada día
+            </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {testimonials.map((testimonial, index) => (
-              <Card key={index} className="relative">
-                <CardContent className="p-6">
-                  <Quote className="w-8 h-8 text-primary/20 mb-4" />
-                  <p className="text-muted-foreground italic mb-4">
-                    "{testimonial.text}"
-                  </p>
-                  <div className="flex items-center gap-2">
-                    <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
-                      <span className="text-primary font-bold text-sm">
-                        {testimonial.author.charAt(0)}
-                      </span>
+          <div className="relative max-w-7xl mx-auto">
+            {/* Central Image/Video Area */}
+            <div className="flex justify-center mb-8">
+              <div className="relative">
+                <div className="w-80 h-80 bg-gradient-to-br from-primary/10 to-muted/20 rounded-2xl border-2 border-dashed border-muted-foreground/20 flex items-center justify-center">
+                  <div className="text-center">
+                    <div className="w-16 h-16 bg-muted-foreground/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <svg className="w-8 h-8 text-muted-foreground/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
                     </div>
-                    <div>
-                      <p className="font-semibold">{testimonial.author}</p>
-                      <p className="text-sm text-muted-foreground">{testimonial.location}</p>
-                    </div>
+                    <p className="text-muted-foreground text-sm">Espacio para foto o video de testimonio</p>
                   </div>
-                </CardContent>
-              </Card>
-            ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Testimonials Grid Around Central Area */}
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
+              {/* Left Column Testimonials */}
+              <div className="space-y-8">
+                <Card className="relative bg-background/80 backdrop-blur border shadow-lg">
+                  <CardContent className="p-6">
+                    <div className="flex mb-3">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                      ))}
+                    </div>
+                    <p className="text-muted-foreground mb-4 leading-relaxed">
+                      "{testimonials[0].text}"
+                    </p>
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 bg-gradient-to-br from-primary/10 to-muted/20 rounded-full border-2 border-dashed border-muted-foreground/20 flex items-center justify-center">
+                        <span className="text-primary font-bold text-sm">
+                          {testimonials[0].author.charAt(0)}
+                        </span>
+                      </div>
+                      <div>
+                        <p className="font-semibold">{testimonials[0].author}</p>
+                        <p className="text-sm text-muted-foreground">{testimonials[0].location}</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="relative bg-background/80 backdrop-blur border shadow-lg lg:ml-8">
+                  <CardContent className="p-6">
+                    <div className="flex mb-3">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                      ))}
+                    </div>
+                    <p className="text-muted-foreground mb-4 leading-relaxed">
+                      "Después de 3 años viviendo sin documentos, finalmente encontré una solución simple y legal. El proceso fue increíblemente fácil."
+                    </p>
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 bg-gradient-to-br from-primary/10 to-muted/20 rounded-full border-2 border-dashed border-muted-foreground/20 flex items-center justify-center">
+                        <span className="text-primary font-bold text-sm">L</span>
+                      </div>
+                      <div>
+                        <p className="font-semibold">Luis M.</p>
+                        <p className="text-sm text-muted-foreground">Phoenix, AZ</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Right Column Testimonials */}
+              <div className="space-y-8">
+                <Card className="relative bg-background/80 backdrop-blur border shadow-lg lg:mr-8">
+                  <CardContent className="p-6">
+                    <div className="flex mb-3">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                      ))}
+                    </div>
+                    <p className="text-muted-foreground mb-4 leading-relaxed">
+                      "{testimonials[1].text}"
+                    </p>
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 bg-gradient-to-br from-primary/10 to-muted/20 rounded-full border-2 border-dashed border-muted-foreground/20 flex items-center justify-center">
+                        <span className="text-primary font-bold text-sm">
+                          {testimonials[1].author.charAt(0)}
+                        </span>
+                      </div>
+                      <div>
+                        <p className="font-semibold">{testimonials[1].author}</p>
+                        <p className="text-sm text-muted-foreground">{testimonials[1].location}</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="relative bg-background/80 backdrop-blur border shadow-lg">
+                  <CardContent className="p-6">
+                    <div className="flex mb-3">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                      ))}
+                    </div>
+                    <p className="text-muted-foreground mb-4 leading-relaxed">
+                      "Mi familia ahora está protegida. El documento llegó en minutos y las instrucciones estaban súper claras en español."
+                    </p>
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 bg-gradient-to-br from-primary/10 to-muted/20 rounded-full border-2 border-dashed border-muted-foreground/20 flex items-center justify-center">
+                        <span className="text-primary font-bold text-sm">A</span>
+                      </div>
+                      <div>
+                        <p className="font-semibold">Ana R.</p>
+                        <p className="text-sm text-muted-foreground">Miami, FL</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+
+            {/* Bottom Stats */}
+            <div className="mt-12 text-center">
+              <div className="flex items-center justify-center gap-8 text-sm text-muted-foreground">
+                <div className="flex items-center gap-2">
+                  <Users className="w-4 h-4" />
+                  <span>+5,000 familias protegidas</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Shield className="w-4 h-4" />
+                  <span>100% documentos legales</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                  <span>4.9/5 estrellas</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
