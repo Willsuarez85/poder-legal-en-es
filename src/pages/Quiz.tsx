@@ -86,19 +86,19 @@ const Quiz = () => {
     setCurrentScreen('questions');
   };
 
-  const saveAnswer = async (questionId: string, answer: any) => {
+  const saveCompleteSession = async (allAnswers: Record<string, any>, contactData?: { name: string; phone: string }) => {
     try {
-      const { error } = await supabase
-        .from("quiz_responses")
-        .insert({
-          session_id: sessionId,
-          question_id: questionId,
-          answer: answer
-        });
+      const { data, error } = await supabase.rpc('save_quiz_session', {
+        p_session_id: sessionId,
+        p_answers: allAnswers,
+        p_contact_data: contactData || null
+      });
 
       if (error) throw error;
+      return data;
     } catch (error) {
-      console.error("Error saving answer:", error);
+      console.error("Error saving complete session:", error);
+      throw error;
     }
   };
 
@@ -120,12 +120,24 @@ const Quiz = () => {
       return;
     }
 
-    await saveAnswer(currentQuestion.id, answer);
+    // Actualizar respuestas localmente
+    const updatedAnswers = { ...answers, [currentQuestion.id]: answer };
+    setAnswers(updatedAnswers);
 
     if (currentQuestionIndex < QUIZ_QUESTIONS.length - 1) {
       setCurrentQuestionIndex(prev => prev + 1);
     } else {
-      setCurrentScreen('contact');
+      // Guardar todas las respuestas antes de ir a contacto
+      try {
+        await saveCompleteSession(updatedAnswers);
+        setCurrentScreen('contact');
+      } catch (error) {
+        toast({
+          title: "Error",
+          description: "No se pudieron guardar las respuestas",
+          variant: "destructive",
+        });
+      }
     }
   };
 
@@ -139,23 +151,36 @@ const Quiz = () => {
 
   const handleContactComplete = async (contactData: { name: string; phone: string }) => {
     try {
-      // Save contact data
-      const { error: contactError } = await supabase
-        .from("quiz_responses")
-        .insert({
-          session_id: sessionId,
-          question_id: "contact_data",
-          answer: contactData
-        });
+      // Guardar respuestas completas con datos de contacto
+      await saveCompleteSession(answers, contactData);
 
-      if (contactError) throw contactError;
+      toast({
+        title: "¡Perfecto!",
+        description: "Tus respuestas han sido guardadas exitosamente",
+        variant: "default",
+      });
 
-      navigate("/results", { state: { sessionId, contactData } });
+      // Navegar a resultados con toda la información
+      navigate("/results", { 
+        state: { 
+          sessionId, 
+          answers, 
+          contactData,
+          // Incluir resumen para facilitar recomendaciones
+          summary: {
+            state: answers.state,
+            protectionAreas: Array.isArray(answers.protection) ? answers.protection : [answers.protection],
+            authorizationType: answers.authorization_type,
+            activationType: answers.activation,
+            contactData
+          }
+        } 
+      });
     } catch (error) {
       console.error("Error saving contact data:", error);
       toast({
         title: "Error",
-        description: "No se pudieron guardar los datos",
+        description: "No se pudieron guardar los datos. Intenta de nuevo.",
         variant: "destructive",
       });
     }
