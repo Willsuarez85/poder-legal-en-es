@@ -289,7 +289,7 @@ const Index = () => {
       <section className="py-16 bg-blue-900 text-white">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Content Column */}
+            {/* Content Column - Left */}
             <div>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 ¿Te has preguntado qué pasaría si algo te pasa?
@@ -334,13 +334,15 @@ const Index = () => {
               </Button>
             </div>
 
-            {/* Image Column - Space reserved for photo */}
+            {/* Image Column - Right */}
             <div className="relative">
-              <div className="w-full h-[400px] lg:h-[500px] bg-white/10 backdrop-blur border-2 border-dashed border-white/30 rounded-2xl flex items-center justify-center">
-                <div className="text-center text-white/60">
-                  <div className="text-lg font-medium mb-2">Espacio reservado para imagen</div>
-                  <div className="text-sm">400x500px recomendado</div>
-                </div>
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                <img 
+                  src="/lovable-uploads/c8ade22f-e97a-4fda-b451-c35b0ef646cb.png" 
+                  alt="Abogada profesional brindando asesoría legal" 
+                  className="w-full h-[400px] lg:h-[500px] object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-l from-transparent to-blue-900/20"></div>
               </div>
             </div>
           </div>
