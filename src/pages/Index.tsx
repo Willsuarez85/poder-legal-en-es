@@ -286,11 +286,11 @@ const Index = () => {
       </section>
 
       {/* Warning Section */}
-      <section className="py-16 bg-blue-900 text-white">
+      <section className="py-16 bg-gradient-to-r from-blue-900 to-background">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Content Column - Left */}
-            <div>
+            <div className="text-white">
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 ¿Te has preguntado qué pasaría si algo te pasa?
               </h2>
@@ -334,15 +334,33 @@ const Index = () => {
               </Button>
             </div>
 
-            {/* Image Column - Right */}
-            <div className="relative">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                <img 
-                  src="/lovable-uploads/c8ade22f-e97a-4fda-b451-c35b0ef646cb.png" 
-                  alt="Abogada profesional brindando asesoría legal" 
-                  className="w-full h-[400px] lg:h-[500px] object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-l from-transparent to-blue-900/20"></div>
+            {/* Upload Container - Right */}
+            <div className="bg-white rounded-2xl p-8 shadow-2xl">
+              <div className="text-center">
+                <h3 className="text-2xl font-bold text-foreground mb-4">
+                  Sube tu documento
+                </h3>
+                <p className="text-muted-foreground mb-6">
+                  Arrastra tu archivo aquí o haz clic para seleccionar
+                </p>
+                
+                <div className="border-2 border-dashed border-muted-foreground/30 rounded-xl p-12 hover:border-primary/50 transition-colors cursor-pointer">
+                  <div className="flex flex-col items-center gap-4">
+                    <FileText className="w-16 h-16 text-muted-foreground/50" />
+                    <div className="text-center">
+                      <p className="text-lg font-medium text-foreground mb-2">
+                        Seleccionar archivo
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        PDF, DOC, DOCX hasta 10MB
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                
+                <Button className="mt-6 w-full" size="lg">
+                  Subir documento
+                </Button>
               </div>
             </div>
           </div>
