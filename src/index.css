@@ -41,6 +41,10 @@ All colors MUST be HSL.
 
     --radius: 0.75rem;
 
+    /* Footer - Dark Blue */
+    --footer-background: 212 76% 25%; /* Dark blue for footer */
+    --footer-foreground: 0 0% 100%; /* White text on dark blue */
+    
     /* Sidebar (if needed) */
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;

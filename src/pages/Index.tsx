@@ -20,6 +20,7 @@ import {
 import heroImage from "@/assets/hero-family.jpg";
 import legalProtectionIcon from "@/assets/legal-protection-icon.jpg";
 import threeStepsImage from "@/assets/three-steps.jpg";
+import poderLegalLogo from "@/assets/poder-legal-logo.png";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -91,38 +92,51 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-primary/5 via-background to-muted/30 py-12 md:py-20">
+      {/* Header with Logo */}
+      <header className="bg-background border-b border-border py-4">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          <div className="flex justify-center">
+            <img 
+              src={poderLegalLogo} 
+              alt="PoderLegalUSA.com" 
+              className="h-12 md:h-16 w-auto"
+            />
+          </div>
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <section className="relative bg-gradient-to-br from-primary/5 via-background to-muted/30 py-8 md:py-16">
+        <div className="container mx-auto px-4 w-full">
+          <div className="grid lg:grid-cols-2 gap-6 lg:gap-12 items-center w-full">
             {/* Hero Content */}
-            <div className="text-center lg:text-left space-y-6">
+            <div className="text-center lg:text-left space-y-4 md:space-y-6 w-full">
               <Badge variant="secondary" className="text-sm font-medium">
                 🇺🇸 Legal en todos los estados de USA
               </Badge>
               
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
+              <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight px-2 md:px-0">
                 Protege legalmente a tu familia, tu negocio y tus bienes en 
                 <span className="text-primary"> Estados Unidos</span> en minutos
               </h1>
               
-              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+              <p className="text-base md:text-lg lg:text-xl text-muted-foreground leading-relaxed px-2 md:px-0">
                 Descarga una <strong>Carta de Poder PDF</strong> válida en tu estado, 
                 con instrucciones en español, lista para firmar y notarizar.
               </p>
               
-              <p className="text-base text-muted-foreground">
+              <p className="text-sm md:text-base text-muted-foreground px-2 md:px-0">
                 Sin abogados caros, ni trámites confusos. Todo en tu celular.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <div className="flex flex-col gap-4 justify-center lg:justify-start px-4 md:px-0 w-full">
                 <Button 
                   size="lg" 
-                  className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-lg px-8 py-6 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all"
+                  className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-base md:text-lg px-6 md:px-8 py-4 md:py-6 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all w-full sm:w-auto"
                   onClick={() => navigate("/quiz")}
                 >
                   Encuentra la Carta que necesitas en 2 minutos
-                  <ArrowRight className="ml-2 w-5 h-5" />
+                  <ArrowRight className="ml-2 w-4 h-4 md:w-5 md:h-5" />
                 </Button>
               </div>
 
@@ -415,25 +429,27 @@ const Index = () => {
       {/* Final CTA Section */}
       <section className="py-16 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 px-2">
             Toma el control hoy
           </h2>
-          <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl mb-8 opacity-90 max-w-2xl mx-auto px-2">
             Una sola firma puede hacer la diferencia entre proteger a tu familia 
             o dejar todo en manos del sistema.
           </p>
           
-          <Button 
-            size="lg"
-            variant="secondary"
-            className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-xl px-12 py-6 shadow-lg hover:shadow-xl transition-all"
-            onClick={() => navigate("/quiz")}
-          >
-            Haz el Quiz y encuentra tu carta de poder ahora
-            <ArrowRight className="ml-2 w-6 h-6" />
-          </Button>
+          <div className="px-4">
+            <Button 
+              size="lg"
+              variant="secondary"
+              className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-lg md:text-xl px-8 md:px-12 py-4 md:py-6 shadow-lg hover:shadow-xl transition-all w-full sm:w-auto"
+              onClick={() => navigate("/quiz")}
+            >
+              Haz el Quiz y encuentra tu carta de poder ahora
+              <ArrowRight className="ml-2 w-5 h-5 md:w-6 md:h-6" />
+            </Button>
+          </div>
 
-          <div className="mt-8 flex items-center justify-center gap-6 text-sm opacity-80">
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-sm opacity-80 px-2">
             <div className="flex items-center gap-2">
               <Star className="w-4 h-4 fill-current" />
               <span>Más de 5,000 familias protegidas</span>
@@ -445,6 +461,22 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Footer */}
+      <footer className="bg-[hsl(var(--footer-background))] text-[hsl(var(--footer-foreground))] py-8">
+        <div className="container mx-auto px-4 text-center">
+          <div className="mb-4">
+            <img 
+              src={poderLegalLogo} 
+              alt="PoderLegalUSA.com" 
+              className="h-8 md:h-10 w-auto mx-auto opacity-90"
+            />
+          </div>
+          <p className="text-sm opacity-80">
+            © 2024 PoderLegalUSA.com - Todos los derechos reservados
+          </p>
+        </div>
+      </footer>
     </div>
   );
 };
