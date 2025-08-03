@@ -96,7 +96,7 @@ const Index = () => {
         <img 
           src="/lovable-uploads/1e870570-7e2a-436f-95b4-d50755c085a0.png" 
           alt="Poder LegalUSA.com" 
-          className="h-12 md:h-16 w-auto"
+          className="h-18 md:h-24 w-auto"
         />
       </div>
 
