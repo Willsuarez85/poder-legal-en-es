@@ -277,7 +277,7 @@ const Index = () => {
 
             <div className="relative h-full flex items-center justify-center">
               <img 
-                src="/lovable-uploads/d11b7bbb-a07e-40ec-9c4d-0e3ad2a0caec.png" 
+                src="/lovable-uploads/eada516d-b5cc-4db8-87be-f593105d8612.png" 
                 alt="Aplicación móvil de documentos legales Power of Attorney" 
                 className="h-full w-3/4 object-contain"
               />
