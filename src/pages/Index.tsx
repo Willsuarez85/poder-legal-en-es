@@ -91,8 +91,17 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Logo Header */}
+      <div className="container mx-auto px-4 pt-6">
+        <img 
+          src="/lovable-uploads/1e870570-7e2a-436f-95b4-d50755c085a0.png" 
+          alt="Poder LegalUSA.com" 
+          className="h-12 md:h-16 w-auto"
+        />
+      </div>
+
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-primary/5 via-background to-muted/30 py-12 md:py-20">
+      <section className="relative bg-gradient-to-br from-primary/5 via-background to-muted/30 py-8 md:py-16">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Hero Content */}
