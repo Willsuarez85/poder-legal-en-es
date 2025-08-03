@@ -93,11 +93,24 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       {/* Logo Header */}
       <div className="container mx-auto px-4 pt-6">
-        <img 
-          src="/lovable-uploads/1e870570-7e2a-436f-95b4-d50755c085a0.png" 
-          alt="Poder LegalUSA.com" 
-          className="h-18 md:h-24 w-auto"
-        />
+        <div className="flex items-center justify-between">
+          <img 
+            src="/lovable-uploads/1e870570-7e2a-436f-95b4-d50755c085a0.png" 
+            alt="Poder LegalUSA.com" 
+            className="h-18 md:h-24 w-auto"
+          />
+          <Badge variant="secondary" className="text-sm font-medium flex items-center gap-2">
+            <span className="text-2xl">🇺🇸</span>
+            <span>Válido en todos los Estados Unidos</span>
+            <div className="flex">
+              <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+              <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+              <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+              <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+              <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+            </div>
+          </Badge>
+        </div>
       </div>
 
       {/* Hero Section */}
@@ -106,10 +119,6 @@ const Index = () => {
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Hero Content */}
             <div className="text-center lg:text-left space-y-6">
-              <Badge variant="secondary" className="text-sm font-medium">
-                🇺🇸 Legal en todos los estados de USA
-              </Badge>
-              
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
                 Protege legalmente a tu familia, tu negocio y tus bienes en 
                 <span className="text-primary"> Estados Unidos</span> en minutos
