@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { 
   Shield, 
   FileText, 
@@ -564,51 +565,63 @@ const Index = () => {
             </h2>
           </div>
 
-          <div className="max-w-4xl mx-auto space-y-6">
-            <Card>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-bold mb-3">¿Esto es legal?</h3>
-                <p className="text-muted-foreground">
-                  Sí. Todos los documentos están actualizados y cumplen con las leyes del estado correspondiente.
-                </p>
-              </CardContent>
-            </Card>
+          <div className="max-w-4xl mx-auto">
+            <Accordion type="single" collapsible className="space-y-4">
+              <AccordionItem value="item-1" className="border border-border rounded-lg">
+                <AccordionTrigger className="px-6 py-4 text-left hover:no-underline">
+                  <span className="text-xl font-bold">¿Esto es legal?</span>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-4">
+                  <p className="text-muted-foreground leading-relaxed">
+                    Sí. Todos los documentos están actualizados y cumplen con las leyes del estado correspondiente.
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
 
-            <Card>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-bold mb-3">¿Reemplaza a un abogado?</h3>
-                <p className="text-muted-foreground">
-                  No. Es un recurso válido, útil y económico, pero no sustituye asesoría legal personalizada.
-                </p>
-              </CardContent>
-            </Card>
+              <AccordionItem value="item-2" className="border border-border rounded-lg">
+                <AccordionTrigger className="px-6 py-4 text-left hover:no-underline">
+                  <span className="text-xl font-bold">¿Reemplaza a un abogado?</span>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-4">
+                  <p className="text-muted-foreground leading-relaxed">
+                    No. Es un recurso válido, útil y económico, pero no sustituye asesoría legal personalizada.
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
 
-            <Card>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-bold mb-3">¿Incluye notarización?</h3>
-                <p className="text-muted-foreground">
-                  No. Debes llevar el documento a notarizar. Estamos trabajando en ofrecer este servicio próximamente.
-                </p>
-              </CardContent>
-            </Card>
+              <AccordionItem value="item-3" className="border border-border rounded-lg">
+                <AccordionTrigger className="px-6 py-4 text-left hover:no-underline">
+                  <span className="text-xl font-bold">¿Incluye notarización?</span>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-4">
+                  <p className="text-muted-foreground leading-relaxed">
+                    No. Debes llevar el documento a notarizar. Estamos trabajando en ofrecer este servicio próximamente.
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
 
-            <Card>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-bold mb-3">¿Me pueden ayudar a llenarlo?</h3>
-                <p className="text-muted-foreground">
-                  Sí. Por $59 extra, podemos llenarlo por ti y enviártelo por WhatsApp.
-                </p>
-              </CardContent>
-            </Card>
+              <AccordionItem value="item-4" className="border border-border rounded-lg">
+                <AccordionTrigger className="px-6 py-4 text-left hover:no-underline">
+                  <span className="text-xl font-bold">¿Me pueden ayudar a llenarlo?</span>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-4">
+                  <p className="text-muted-foreground leading-relaxed">
+                    Sí. Por $59 extra, podemos llenarlo por ti y enviártelo por WhatsApp.
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
 
-            <Card>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-bold mb-3">¿El proceso es en español?</h3>
-                <p className="text-muted-foreground">
-                  Sí. Todo está en español, desde el quiz hasta las instrucciones.
-                </p>
-              </CardContent>
-            </Card>
+              <AccordionItem value="item-5" className="border border-border rounded-lg">
+                <AccordionTrigger className="px-6 py-4 text-left hover:no-underline">
+                  <span className="text-xl font-bold">¿El proceso es en español?</span>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-4">
+                  <p className="text-muted-foreground leading-relaxed">
+                    Sí. Todo está en español, desde el quiz hasta las instrucciones.
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           </div>
         </div>
       </section>
