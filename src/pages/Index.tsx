@@ -279,7 +279,7 @@ const Index = () => {
               <img 
                 src="/lovable-uploads/d11b7bbb-a07e-40ec-9c4d-0e3ad2a0caec.png" 
                 alt="Aplicación móvil de documentos legales Power of Attorney" 
-                className="h-full w-1/2 object-contain"
+                className="h-full w-3/4 object-contain"
               />
             </div>
           </div>
