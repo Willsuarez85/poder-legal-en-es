@@ -352,50 +352,65 @@ const Index = () => {
       {/* Features Section */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              El documento legal que necesitas, sin complicaciones
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Accede al <strong>template que necesitas</strong>, legalmente válido en tu estado
-            </p>
-          </div>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Content Column - Left */}
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                El documento legal que necesitas, sin complicaciones
+              </h2>
+              <p className="text-lg text-muted-foreground mb-8">
+                Accede al <strong>template que necesitas</strong>, legalmente válido en tu estado
+              </p>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            {benefits.map((benefit, index) => {
-              const IconComponent = benefit.icon;
-              return (
-                <Card key={index} className="text-center hover:shadow-lg transition-shadow border-2 hover:border-primary/20">
-                  <CardHeader>
-                    <div className="mx-auto w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-                      <IconComponent className="w-6 h-6 text-primary" />
+              <div className="grid md:grid-cols-2 gap-6 mb-8">
+                {benefits.map((benefit, index) => {
+                  const IconComponent = benefit.icon;
+                  return (
+                    <div key={index} className="flex items-start gap-4 p-4 rounded-lg border hover:border-primary/20 transition-colors">
+                      <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <IconComponent className="w-5 h-5 text-primary" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-sm mb-1">{benefit.title}</h3>
+                        <p className="text-muted-foreground text-xs">{benefit.description}</p>
+                      </div>
                     </div>
-                    <CardTitle className="text-lg">{benefit.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground text-sm">{benefit.description}</p>
-                  </CardContent>
-                </Card>
-              );
-            })}
-          </div>
+                  );
+                })}
+              </div>
 
-          <div className="bg-gradient-to-r from-primary/5 to-destructive/5 rounded-2xl p-8 text-center">
-            <p className="text-lg mb-4">
-              Por solo <span className="text-3xl font-bold text-destructive">$19.99</span>, 
-              toma el quiz y en 2 minutos sabrás cuáles son las 
-              <strong> cartas de poder exactas y legales</strong> que necesitas para proteger 
-              <strong> todo lo que amas</strong>.
-            </p>
+              <div className="bg-gradient-to-r from-primary/5 to-destructive/5 rounded-2xl p-6">
+                <p className="text-lg mb-4">
+                  Por solo <span className="text-3xl font-bold text-destructive">$19.99</span>, 
+                  toma el quiz y en 2 minutos sabrás cuáles son las 
+                  <strong> cartas de poder exactas y legales</strong> que necesitas para proteger 
+                  <strong> todo lo que amas</strong>.
+                </p>
 
-            <Button 
-              size="lg"
-              className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-xl px-12 py-6 shadow-lg hover:shadow-xl transition-all"
-              onClick={() => navigate("/quiz")}
-            >
-              Comienza el Quiz ahora
-              <ArrowRight className="ml-2 w-6 h-6" />
-            </Button>
+                <Button 
+                  size="lg"
+                  className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-xl px-8 py-4 shadow-lg hover:shadow-xl transition-all w-full sm:w-auto"
+                  onClick={() => navigate("/quiz")}
+                >
+                  Comienza el Quiz ahora
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+              </div>
+            </div>
+
+            {/* Image Placeholder Column - Right */}
+            <div className="relative">
+              <div className="bg-muted/20 border-2 border-dashed border-muted-foreground/20 rounded-2xl h-[500px] flex items-center justify-center">
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-muted-foreground/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg className="w-8 h-8 text-muted-foreground/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  <p className="text-muted-foreground text-sm">Espacio reservado para imagen</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
