@@ -429,23 +429,7 @@ const Index = () => {
           </div>
 
           <div className="relative max-w-7xl mx-auto">
-            {/* Central Image/Video Area */}
-            <div className="flex justify-center mb-8">
-              <div className="relative">
-                <div className="w-80 h-80 bg-gradient-to-br from-primary/10 to-muted/20 rounded-2xl border-2 border-dashed border-muted-foreground/20 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="w-16 h-16 bg-muted-foreground/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <svg className="w-8 h-8 text-muted-foreground/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                      </svg>
-                    </div>
-                    <p className="text-muted-foreground text-sm">Espacio para foto o video de testimonio</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Testimonials Grid Around Central Area */}
+            {/* Testimonials Grid */}
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
               {/* Left Column Testimonials */}
               <div className="space-y-8">
@@ -461,9 +445,9 @@ const Index = () => {
                     </p>
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 bg-gradient-to-br from-primary/10 to-muted/20 rounded-full border-2 border-dashed border-muted-foreground/20 flex items-center justify-center">
-                        <span className="text-primary font-bold text-sm">
-                          {testimonials[0].author.charAt(0)}
-                        </span>
+                        <svg className="w-6 h-6 text-muted-foreground/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
                       </div>
                       <div>
                         <p className="font-semibold">{testimonials[0].author}</p>
@@ -485,7 +469,9 @@ const Index = () => {
                     </p>
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 bg-gradient-to-br from-primary/10 to-muted/20 rounded-full border-2 border-dashed border-muted-foreground/20 flex items-center justify-center">
-                        <span className="text-primary font-bold text-sm">L</span>
+                        <svg className="w-6 h-6 text-muted-foreground/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
                       </div>
                       <div>
                         <p className="font-semibold">Luis M.</p>
@@ -510,9 +496,9 @@ const Index = () => {
                     </p>
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 bg-gradient-to-br from-primary/10 to-muted/20 rounded-full border-2 border-dashed border-muted-foreground/20 flex items-center justify-center">
-                        <span className="text-primary font-bold text-sm">
-                          {testimonials[1].author.charAt(0)}
-                        </span>
+                        <svg className="w-6 h-6 text-muted-foreground/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
                       </div>
                       <div>
                         <p className="font-semibold">{testimonials[1].author}</p>
@@ -534,7 +520,9 @@ const Index = () => {
                     </p>
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 bg-gradient-to-br from-primary/10 to-muted/20 rounded-full border-2 border-dashed border-muted-foreground/20 flex items-center justify-center">
-                        <span className="text-primary font-bold text-sm">A</span>
+                        <svg className="w-6 h-6 text-muted-foreground/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
                       </div>
                       <div>
                         <p className="font-semibold">Ana R.</p>
