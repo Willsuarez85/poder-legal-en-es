@@ -21,6 +21,10 @@ import {
 import heroImage from "@/assets/hero-family.jpg";
 import legalProtectionIcon from "@/assets/legal-protection-icon.jpg";
 import threeStepsImage from "@/assets/three-steps.jpg";
+import testimonialMartha from "@/assets/testimonial-martha.jpg";
+import testimonialCarlos from "@/assets/testimonial-carlos.jpg";
+import testimonialLuis from "@/assets/testimonial-luis.jpg";
+import testimonialAna from "@/assets/testimonial-ana.jpg";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -442,10 +446,12 @@ const Index = () => {
                       "{testimonials[0].text}"
                     </p>
                     <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 bg-gradient-to-br from-primary/10 to-muted/20 rounded-full border-2 border-dashed border-muted-foreground/20 flex items-center justify-center">
-                        <svg className="w-6 h-6 text-muted-foreground/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
+                      <div className="w-12 h-12 rounded-full overflow-hidden">
+                        <img 
+                          src={testimonialMartha} 
+                          alt="Martha R." 
+                          className="w-full h-full object-cover"
+                        />
                       </div>
                       <div>
                         <p className="font-semibold">{testimonials[0].author}</p>
@@ -466,10 +472,12 @@ const Index = () => {
                       "Después de 3 años viviendo sin documentos, finalmente encontré una solución simple y legal. El proceso fue increíblemente fácil."
                     </p>
                     <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 bg-gradient-to-br from-primary/10 to-muted/20 rounded-full border-2 border-dashed border-muted-foreground/20 flex items-center justify-center">
-                        <svg className="w-6 h-6 text-muted-foreground/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
+                      <div className="w-12 h-12 rounded-full overflow-hidden">
+                        <img 
+                          src={testimonialLuis} 
+                          alt="Luis M." 
+                          className="w-full h-full object-cover"
+                        />
                       </div>
                       <div>
                         <p className="font-semibold">Luis M.</p>
@@ -493,10 +501,12 @@ const Index = () => {
                       "{testimonials[1].text}"
                     </p>
                     <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 bg-gradient-to-br from-primary/10 to-muted/20 rounded-full border-2 border-dashed border-muted-foreground/20 flex items-center justify-center">
-                        <svg className="w-6 h-6 text-muted-foreground/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
+                      <div className="w-12 h-12 rounded-full overflow-hidden">
+                        <img 
+                          src={testimonialCarlos} 
+                          alt="Carlos H." 
+                          className="w-full h-full object-cover"
+                        />
                       </div>
                       <div>
                         <p className="font-semibold">{testimonials[1].author}</p>
@@ -517,10 +527,12 @@ const Index = () => {
                       "Mi familia ahora está protegida. El documento llegó en minutos y las instrucciones estaban súper claras en español."
                     </p>
                     <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 bg-gradient-to-br from-primary/10 to-muted/20 rounded-full border-2 border-dashed border-muted-foreground/20 flex items-center justify-center">
-                        <svg className="w-6 h-6 text-muted-foreground/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
+                      <div className="w-12 h-12 rounded-full overflow-hidden">
+                        <img 
+                          src={testimonialAna} 
+                          alt="Ana R." 
+                          className="w-full h-full object-cover"
+                        />
                       </div>
                       <div>
                         <p className="font-semibold">Ana R.</p>
