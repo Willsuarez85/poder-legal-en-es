@@ -102,7 +102,7 @@ const Index = () => {
           <img 
             src="/lovable-uploads/1e870570-7e2a-436f-95b4-d50755c085a0.png" 
             alt="Poder LegalUSA.com" 
-            className="h-18 md:h-24 w-auto"
+            className="h-12 md:h-16 lg:h-20 w-auto"
           />
           <Badge variant="secondary" className="text-sm font-medium flex items-center gap-2">
             <span className="text-2xl">🇺🇸</span>
@@ -141,11 +141,12 @@ const Index = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <Button 
                   size="lg" 
-                  className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-lg px-8 py-6 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all"
+                  className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all min-h-[48px] touch-manipulation"
                   onClick={() => navigate("/quiz")}
                 >
-                  Encuentra la Carta que necesitas en 2 minutos
-                  <ArrowRight className="ml-2 w-5 h-5" />
+                  <span className="hidden sm:inline">Encuentra la Carta que necesitas en 2 minutos</span>
+                  <span className="sm:hidden">Encuentra tu Carta en 2 min</span>
+                  <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
                 </Button>
               </div>
 
@@ -171,26 +172,41 @@ const Index = () => {
                 <img 
                   src="/lovable-uploads/45832ed1-efe6-4dba-af5e-9d99059823cb.png" 
                   alt="Familia hispana protegida legalmente" 
-                  className="w-full h-[400px] lg:h-[500px] object-cover"
+                  className="w-full aspect-[4/3] sm:aspect-[3/2] lg:aspect-[4/3] object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
               </div>
               
-              {/* Floating Stats */}
-              <div className="absolute -bottom-4 -left-4 bg-white rounded-lg shadow-lg p-4 hidden md:block">
+              {/* Floating Stats - Hidden on mobile, positioned better */}
+              <div className="absolute -bottom-4 -left-4 bg-white rounded-lg shadow-lg p-3 lg:p-4 hidden lg:block">
                 <div className="flex items-center gap-2">
-                  <FileText className="w-8 h-8 text-primary" />
+                  <FileText className="w-6 h-6 lg:w-8 lg:h-8 text-primary" />
                   <div>
-                    <div className="font-bold text-lg">+100</div>
-                    <div className="text-sm text-muted-foreground">Tipos de carta de poder legales en USA</div>
+                    <div className="font-bold text-base lg:text-lg">+100</div>
+                    <div className="text-xs lg:text-sm text-muted-foreground max-w-[120px]">Tipos de carta de poder legales en USA</div>
                   </div>
                 </div>
               </div>
 
-              <div className="absolute -top-4 -right-4 bg-destructive text-destructive-foreground rounded-lg shadow-lg p-4 hidden md:block">
+              <div className="absolute -top-4 -right-4 bg-destructive text-destructive-foreground rounded-lg shadow-lg p-3 lg:p-4 hidden lg:block">
                 <div className="text-center">
+                  <div className="font-bold text-base lg:text-lg">100% Legal</div>
+                  <div className="text-xs lg:text-sm opacity-90">Garantizado</div>
+                </div>
+              </div>
+
+              {/* Mobile Stats - Visible below image on small screens */}
+              <div className="lg:hidden mt-6 grid grid-cols-2 gap-4">
+                <div className="bg-white rounded-lg shadow-md p-4 text-center">
+                  <div className="flex items-center justify-center mb-2">
+                    <FileText className="w-6 h-6 text-primary" />
+                  </div>
+                  <div className="font-bold text-lg">+100</div>
+                  <div className="text-xs text-muted-foreground">Tipos de documentos legales</div>
+                </div>
+                <div className="bg-destructive text-destructive-foreground rounded-lg shadow-md p-4 text-center">
                   <div className="font-bold text-lg">100% Legal</div>
-                  <div className="text-sm opacity-90">Garantizado</div>
+                  <div className="text-xs opacity-90">Garantizado</div>
                 </div>
               </div>
             </div>
@@ -235,7 +251,7 @@ const Index = () => {
           <div className="text-center mt-12">
             <Button 
               size="lg"
-              className="bg-destructive hover:bg-destructive/90 text-destructive-foreground border-destructive"
+              className="bg-destructive hover:bg-destructive/90 text-destructive-foreground border-destructive min-h-[48px] px-8 touch-manipulation"
               onClick={() => navigate("/quiz")}
             >
               Comenzar ahora
@@ -343,11 +359,12 @@ const Index = () => {
 
               <Button 
                 size="lg"
-                className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-lg px-8 py-6"
+                className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 min-h-[48px] touch-manipulation"
                 onClick={() => navigate("/quiz")}
               >
-                Proteger a Mi Familia Ahora
-                <Shield className="ml-2 w-5 h-5" />
+                <span className="hidden sm:inline">Proteger a Mi Familia Ahora</span>
+                <span className="sm:hidden">Proteger Mi Familia</span>
+                <Shield className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
               </Button>
             </div>
           </div>
@@ -394,11 +411,11 @@ const Index = () => {
 
                 <Button 
                   size="lg"
-                  className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-xl px-8 py-4 shadow-lg hover:shadow-xl transition-all w-full sm:w-auto"
+                  className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-lg sm:text-xl px-6 sm:px-8 py-4 shadow-lg hover:shadow-xl transition-all w-full sm:w-auto min-h-[48px] touch-manipulation"
                   onClick={() => navigate("/quiz")}
                 >
                   Comienza el Quiz ahora
-                  <ArrowRight className="ml-2 w-5 h-5" />
+                  <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
                 </Button>
               </div>
             </div>
