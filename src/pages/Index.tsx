@@ -422,7 +422,7 @@ const Index = () => {
 
             {/* Image Placeholder Column - Right */}
             <div className="relative">
-              <div className="relative rounded-2xl overflow-hidden shadow-lg">
+              <div className="relative overflow-hidden">
                 <img 
                   src="/lovable-uploads/a4b92e2b-dc57-406d-aeec-97ce0580bb34.png" 
                   alt="Documentos de Poder Notarial legales en Estados Unidos" 
