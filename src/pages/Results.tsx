@@ -5,7 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-
+import CartSummary from "@/components/cart/CartSummary";
+import { useCart } from "@/context/CartContext";
 interface Product {
   id: string;
   name: any;
@@ -22,6 +23,7 @@ const Results = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { addItem } = useCart();
   const sessionId = location.state?.sessionId;
 
   useEffect(() => {
@@ -91,34 +93,34 @@ const Results = () => {
     return 'california'; // Default state
   };
 
-  const getRecommendedProducts = (products: Product[], responses: any[]) => {
-    const userState = findUserState(responses);
-    
-    // Filter products that match user's state or are available for ALL states
-    const stateMatchedProducts = products.filter(product => 
-      product.state === userState || product.state === 'ALL'
-    );
-    
-    // If we have recommendation criteria, use it for smarter matching
-    const productsWithCriteria = stateMatchedProducts.filter(product => {
-      if (!product.recommendation_criteria) return true;
-      
-      try {
-        const criteria = product.recommendation_criteria;
-        // Simple criteria matching - can be expanded based on actual criteria structure
-        return true; // For now, include all products that pass state filter
-      } catch (error) {
-        console.error('Error parsing recommendation criteria:', error);
-        return true; // Include product if criteria parsing fails
-      }
-    });
-    
-    return productsWithCriteria;
-  };
+const getRecommendedProducts = (products: Product[], responses: any[]) => {
+  const userState = findUserState(responses);
 
-  const handlePurchase = (productId: string) => {
-    navigate("/checkout", { state: { productId, sessionId } });
+  const isPoaProduct = (product: Product) => {
+    const nameValue = typeof product.name === 'object' ? (product.name.es || product.name.en || '') : product.name || '';
+    const normalized = String(nameValue).toLowerCase();
+    return (
+      normalized.includes('poa') ||
+      normalized.includes('poder notarial') ||
+      normalized.includes('poder de representación') ||
+      normalized.includes('power of attorney')
+    );
   };
+  
+  const stateMatchedProducts = products.filter(product => 
+    product.state === userState || product.state === 'ALL'
+  );
+
+  const poaProducts = stateMatchedProducts.filter(isPoaProduct);
+  const others = stateMatchedProducts.filter(p => !isPoaProduct(p));
+  const combined = [...poaProducts, ...others];
+
+  return combined.slice(0, 4);
+};
+
+const handlePurchase = (productId: string) => {
+  navigate("/checkout", { state: { productId, sessionId } });
+};
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('es-US', {
@@ -183,12 +185,21 @@ const Results = () => {
                         </span>
                       </div>
                       
-                      <Button 
-                        className="w-full" 
-                        onClick={() => handlePurchase(product.id)}
-                      >
-                        Obtener Documento
-                      </Button>
+<Button 
+  className="w-full" 
+  onClick={() => {
+    addItem({
+      productId: product.id,
+      name: productName,
+      price: Number(product.price) || 0,
+      quantity: 1,
+      state: product.state
+    });
+    toast({ title: "Añadido al carrito", description: `${productName} agregado (1 unidad).` });
+  }}
+>
+  Agregar al carrito
+</Button>
                     </div>
                   </CardContent>
                 </Card>
