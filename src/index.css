@@ -99,4 +99,18 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground;
   }
+
+  html, body {
+    @apply overflow-x-hidden;
+  }
+
+  img {
+    @apply max-w-full h-auto;
+  }
+}
+
+@layer utilities {
+  .touch-manipulation {
+    touch-action: manipulation;
+  }
 }

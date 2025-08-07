@@ -18,9 +18,6 @@ import {
   ArrowRight,
   Quote
 } from "lucide-react";
-import heroImage from "@/assets/hero-family.jpg";
-import legalProtectionIcon from "@/assets/legal-protection-icon.jpg";
-import threeStepsImage from "@/assets/three-steps.jpg";
 import testimonialMartha from "@/assets/testimonial-martha.jpg";
 import testimonialCarlos from "@/assets/testimonial-carlos.jpg";
 import testimonialLuis from "@/assets/testimonial-luis.jpg";
@@ -103,23 +100,24 @@ const Index = () => {
             src="/lovable-uploads/1e870570-7e2a-436f-95b4-d50755c085a0.png" 
             alt="Poder LegalUSA.com" 
             className="h-12 md:h-16 lg:h-36 w-auto"
+            decoding="async" loading="lazy" sizes="(max-width: 768px) 120px, (max-width: 1024px) 160px, 200px"
           />
           <Badge variant="secondary" className="text-sm font-medium flex items-center gap-2">
             <span className="text-2xl">🇺🇸</span>
             <span>Válidos 50 estados</span>
             <div className="flex">
-              <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-              <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-              <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-              <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-              <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+              <Star className="w-4 h-4 text-accent" />
+              <Star className="w-4 h-4 text-accent" />
+              <Star className="w-4 h-4 text-accent" />
+              <Star className="w-4 h-4 text-accent" />
+              <Star className="w-4 h-4 text-accent" />
             </div>
           </Badge>
         </div>
       </div>
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-primary/5 via-background to-muted/30 py-8 md:py-16">
+      <section className="relative bg-gradient-to-br from-primary/5 via-background to-muted/30 py-8 md:py-16 overflow-x-hidden">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Hero Content */}
@@ -152,15 +150,15 @@ const Index = () => {
 
               <div className="flex items-center justify-center lg:justify-start gap-4 text-sm text-muted-foreground">
                 <div className="flex items-center gap-1">
-                  <CheckCircle className="w-4 h-4 text-green-600" />
+                  <CheckCircle className="w-4 h-4 text-primary" />
                   <span>100% Legal</span>
                 </div>
                 <div className="flex items-center gap-1">
-                  <CheckCircle className="w-4 h-4 text-green-600" />
+                  <CheckCircle className="w-4 h-4 text-primary" />
                   <span>En Español</span>
                 </div>
                 <div className="flex items-center gap-1">
-                  <CheckCircle className="w-4 h-4 text-green-600" />
+                  <CheckCircle className="w-4 h-4 text-primary" />
                   <span>Descarga Inmediata</span>
                 </div>
               </div>
@@ -173,12 +171,13 @@ const Index = () => {
                   src="/lovable-uploads/45832ed1-efe6-4dba-af5e-9d99059823cb.png" 
                   alt="Familia hispana protegida legalmente" 
                   className="w-full aspect-[4/3] sm:aspect-[3/2] lg:aspect-[4/3] object-cover"
+                  loading="eager" decoding="async" sizes="(min-width: 1024px) 50vw, 100vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
               </div>
               
               {/* Floating Stats - Hidden on mobile, positioned better */}
-              <div className="absolute -bottom-4 -left-4 bg-white rounded-lg shadow-lg p-3 lg:p-4 hidden lg:block">
+              <div className="absolute -bottom-4 -left-4 bg-card text-card-foreground rounded-lg shadow-lg p-3 lg:p-4 hidden lg:block">
                 <div className="flex items-center gap-2">
                   <FileText className="w-6 h-6 lg:w-8 lg:h-8 text-primary" />
                   <div>
@@ -197,7 +196,7 @@ const Index = () => {
 
               {/* Mobile Stats - Visible below image on small screens */}
               <div className="lg:hidden mt-6 grid grid-cols-2 gap-4">
-                <div className="bg-white rounded-lg shadow-md p-4 text-center">
+                <div className="bg-card text-card-foreground rounded-lg shadow-md p-4 text-center">
                   <div className="flex items-center justify-center mb-2">
                     <FileText className="w-6 h-6 text-primary" />
                   </div>
@@ -282,7 +281,7 @@ const Index = () => {
               <div className="space-y-3 mb-8">
                 {protections.map((protection, index) => (
                   <div key={index} className="flex items-center gap-3">
-                    <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
+                    <CheckCircle className="w-5 h-5 text-primary flex-shrink-0" />
                     <span className="text-muted-foreground">{protection}</span>
                   </div>
                 ))}
@@ -295,11 +294,12 @@ const Index = () => {
               </p>
             </div>
 
-            <div className="relative h-full flex items-center justify-center">
+            <div className="relative h-full flex items-center justify-center px-4">
               <img 
                 src="/lovable-uploads/eada516d-b5cc-4db8-87be-f593105d8612.png" 
                 alt="Aplicación móvil de documentos legales Power of Attorney" 
-                className="h-full w-3/4 object-contain"
+                className="w-full max-w-md mx-auto h-auto object-contain"
+                loading="lazy" decoding="async"
               />
             </div>
           </div>
@@ -307,7 +307,7 @@ const Index = () => {
       </section>
 
       {/* Warning Section */}
-      <section className="py-16 bg-blue-900 text-white">
+      <section className="py-16 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Image Column - Left */}
@@ -317,8 +317,9 @@ const Index = () => {
                   src="/lovable-uploads/b5323911-7320-4399-ab20-e69e6e5fa1ac.png" 
                   alt="Pareja hispana firmando documentos legales en casa" 
                   className="w-full h-[400px] lg:h-[500px] object-cover"
+                  loading="lazy" decoding="async"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-blue-900/20"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-primary/20"></div>
               </div>
             </div>
 
@@ -334,19 +335,19 @@ const Index = () => {
 
               <div className="space-y-4 mb-8">
                 <div className="flex items-start gap-3">
-                  <Lock className="w-6 h-6 text-red-400 mt-1 flex-shrink-0" />
+                  <Lock className="w-6 h-6 text-destructive mt-1 flex-shrink-0" />
                   <span>No podrá acceder a tus cuentas ni pagar tus gastos</span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <FileText className="w-6 h-6 text-red-400 mt-1 flex-shrink-0" />
+                  <FileText className="w-6 h-6 text-destructive mt-1 flex-shrink-0" />
                   <span>No podrá tomar decisiones médicas urgentes</span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <Users className="w-6 h-6 text-red-400 mt-1 flex-shrink-0" />
+                  <Users className="w-6 h-6 text-destructive mt-1 flex-shrink-0" />
                   <span>No podrá cuidar legalmente de tus hijos</span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <Clock className="w-6 h-6 text-red-400 mt-1 flex-shrink-0" />
+                  <Clock className="w-6 h-6 text-destructive mt-1 flex-shrink-0" />
                   <span>Tendrá que gastar miles de dólares y esperar meses en la corte</span>
                 </div>
               </div>
@@ -427,6 +428,7 @@ const Index = () => {
                   src="/lovable-uploads/a4b92e2b-dc57-406d-aeec-97ce0580bb34.png" 
                   alt="Documentos de Poder Notarial legales en Estados Unidos" 
                   className="w-full h-[500px] object-cover"
+                  loading="lazy" decoding="async"
                 />
               </div>
             </div>
@@ -456,7 +458,7 @@ const Index = () => {
                   <CardContent className="p-6">
                     <div className="flex mb-3">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                        <Star key={i} className="w-4 h-4 text-accent" />
                       ))}
                     </div>
                     <p className="text-muted-foreground mb-4 leading-relaxed">
@@ -482,7 +484,7 @@ const Index = () => {
                   <CardContent className="p-6">
                     <div className="flex mb-3">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                        <Star key={i} className="w-4 h-4 text-accent" />
                       ))}
                     </div>
                     <p className="text-muted-foreground mb-4 leading-relaxed">
@@ -511,7 +513,7 @@ const Index = () => {
                   <CardContent className="p-6">
                     <div className="flex mb-3">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                         <Star key={i} className="w-4 h-4 text-accent" />
                       ))}
                     </div>
                     <p className="text-muted-foreground mb-4 leading-relaxed">
@@ -537,7 +539,7 @@ const Index = () => {
                   <CardContent className="p-6">
                     <div className="flex mb-3">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                        <Star key={i} className="w-4 h-4 text-accent" />
                       ))}
                     </div>
                     <p className="text-muted-foreground mb-4 leading-relaxed">
@@ -573,7 +575,7 @@ const Index = () => {
                   <span>100% documentos legales</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-4 h-4 text-accent" />
                   <span>4.9/5 estrellas</span>
                 </div>
               </div>
@@ -653,7 +655,7 @@ const Index = () => {
       </section>
 
       {/* Final CTA Section */}
-      <section className="py-16 bg-blue-900 text-white">
+      <section className="py-16 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Toma el control hoy
