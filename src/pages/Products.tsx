@@ -89,6 +89,24 @@ const Products = () => {
     return stateMap[state] || state.toUpperCase();
   };
 
+  // Safely coerce potential JSON/text fields from Supabase into strings
+  const safeText = (value: any): string => {
+    if (value == null) return "";
+    if (typeof value === "string") return value;
+    if (typeof value === "number") return String(value);
+    if (Array.isArray(value)) return value.map(safeText).filter(Boolean).join(", ");
+    if (typeof value === "object") {
+      const v: any = value;
+      // Common multilingual or structured fields
+      if (typeof v.es === "string" || typeof v.en === "string") return v.es || v.en;
+      if (v.purpose) return safeText(v.purpose);
+      if (v.title) return safeText(v.title);
+      // Fallback: join stringified values
+      return Object.values(v).map(safeText).filter(Boolean).join(". ");
+    }
+    return "";
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -130,13 +148,8 @@ const Products = () => {
         {filteredProducts.length > 0 ? (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {filteredProducts.map((product) => {
-              const productName = typeof product.name === 'object' 
-                ? product.name.es || product.name.en || "Producto"
-                : product.name;
-              
-              const productDescription = typeof product.description === 'object' && product.description !== null
-                ? (product.description.es || product.description.en || "")
-                : (product.description && typeof product.description === 'string' ? product.description : "");
+              const productName = safeText(product.name) || "Producto";
+              const productDescription = safeText(product.description);
 
               return (
                 <Card key={product.id} className="flex flex-col hover:shadow-lg transition-shadow">
