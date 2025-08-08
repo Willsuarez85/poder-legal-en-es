@@ -79,14 +79,15 @@ const Products = () => {
     }).format(price);
   };
 
-  const getStateName = (state: string) => {
+  const getStateName = (state: any) => {
     const stateMap: Record<string, string> = {
       california: "California",
       texas: "Texas", 
       florida: "Florida",
       new_york: "Nueva York"
     };
-    return stateMap[state] || state.toUpperCase();
+    if (typeof state === "string") return stateMap[state] || state.toUpperCase();
+    return safeText(state) || "";
   };
 
   // Safely coerce potential JSON/text fields from Supabase into strings
@@ -150,6 +151,10 @@ const Products = () => {
             {filteredProducts.map((product) => {
               const productName = safeText(product.name) || "Producto";
               const productDescription = safeText(product.description);
+              const stateLabel = typeof product.state === "string" 
+                ? getStateName(product.state) 
+                : safeText(product.state) || "";
+              const priceDisplay = Number.isFinite(product.price) ? formatPrice(product.price) : "";
 
               return (
                 <Card key={product.id} className="flex flex-col hover:shadow-lg transition-shadow">
@@ -157,7 +162,7 @@ const Products = () => {
                     <div className="flex justify-between items-start">
                       <CardTitle className="text-xl flex-1">{productName}</CardTitle>
                       <Badge variant="secondary" className="ml-2">
-                        {getStateName(product.state)}
+                        {stateLabel}
                       </Badge>
                     </div>
                   </CardHeader>
@@ -171,7 +176,7 @@ const Products = () => {
                     <div className="space-y-4">
                       <div className="flex justify-between items-center">
                         <span className="text-2xl font-bold text-primary">
-                          {formatPrice(product.price)}
+                          {priceDisplay}
                         </span>
                       </div>
                       
