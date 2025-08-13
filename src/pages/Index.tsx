@@ -8,6 +8,7 @@ import testimonialMartha from "@/assets/testimonial-martha.jpg";
 import testimonialCarlos from "@/assets/testimonial-carlos.jpg";
 import testimonialLuis from "@/assets/testimonial-luis.jpg";
 import testimonialAna from "@/assets/testimonial-ana.jpg";
+
 const Index = () => {
   const navigate = useNavigate();
   const steps = [{
@@ -248,6 +249,8 @@ const Index = () => {
               
               <p className="text-lg mb-8 opacity-90">Si sufres una deportación, accidente o enfermedad y no dejaste un Power of Attorney legal, firmado y notarizado para tu estado, tu familia y tus bienes personales podrían quedar completamente desprotegidos.</p>
 
+              <h3 className="text-2xl font-bold mb-6">Sin una Carta de Poder Legal:</h3>
+
               <div className="space-y-4 mb-8">
                 <div className="flex items-start gap-3">
                   <Lock className="w-6 h-6 text-destructive mt-1 flex-shrink-0" />
@@ -265,10 +268,6 @@ const Index = () => {
                   <Clock className="w-6 h-6 text-destructive mt-1 flex-shrink-0" />
                   <span>Tendrá que gastar miles de dólares y esperar meses en la corte</span>
                 </div>
-              </div>
-
-              <div className="bg-white/10 backdrop-blur border border-white/20 rounded-lg p-6 mb-8">
-                <h3 className="text-2xl font-bold mb-2">Sin una Carta de Poder Legal: </h3>
               </div>
 
               <Button size="lg" className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 min-h-[48px] touch-manipulation" onClick={() => navigate("/quiz")}>
@@ -558,4 +557,5 @@ const Index = () => {
       </section>
     </div>;
 };
+
 export default Index;
