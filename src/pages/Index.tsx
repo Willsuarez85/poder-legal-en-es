@@ -8,6 +8,7 @@ import testimonialMartha from "@/assets/testimonial-martha.jpg";
 import testimonialCarlos from "@/assets/testimonial-carlos.jpg";
 import testimonialLuis from "@/assets/testimonial-luis.jpg";
 import testimonialAna from "@/assets/testimonial-ana.jpg";
+
 const Index = () => {
   const navigate = useNavigate();
   const steps = [{
@@ -16,7 +17,7 @@ const Index = () => {
     description: "Encuentra la Carta de Poder que necesitas en 2 minutos",
     icon: Phone
   }, {
-    number: "2",
+    number: "2", 
     title: "Descarga tu documento PDF",
     description: "A tu teléfono o email en minutos",
     icon: Download
@@ -271,7 +272,7 @@ const Index = () => {
 
               <div className="bg-white/10 backdrop-blur border border-white/20 rounded-lg p-6 mb-8">
                 <h3 className="text-2xl font-bold mb-2">
-                  Con un Poder Notarial, decides tú, no un juez.
+                  Soporte en español via Whatsapp
                 </h3>
               </div>
 
