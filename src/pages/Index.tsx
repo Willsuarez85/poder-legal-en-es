@@ -246,7 +246,7 @@ const Index = () => {
                 ¿Te has preguntado qué pasaría si algo te pasa?
               </h2>
               
-              <p className="text-lg mb-8 opacity-90">Si sufres una deportación, accidente o enfermedad y no dejaste un Power of Attorney claro, tu familia y bienes personales  podrían quedar completamente desprotegidos.</p>
+              <p className="text-lg mb-8 opacity-90">Si sufres una deportación, accidente o enfermedad y no dejaste un Power of Attorney Legal para tu estado  firmado y notarizado, tu familia y bienes personales  podrían quedar completamente desprotegidos.</p>
 
               <div className="space-y-4 mb-8">
                 <div className="flex items-start gap-3">
