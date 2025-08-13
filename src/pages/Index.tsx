@@ -246,7 +246,7 @@ const Index = () => {
                 ¿Te has preguntado qué pasaría si algo te pasa?
               </h2>
               
-              <p className="text-lg mb-8 opacity-90">Si sufres una deportación, accidente o enfermedad y no dejaste un Power of Attorney Legal para tu estado  firmado y notarizado, tu familia y bienes personales  podrían quedar completamente desprotegidos.</p>
+              <p className="text-lg mb-8 opacity-90">Si sufres una deportación, accidente o enfermedad y no dejaste un Power of Attorney legal, firmado y notarizado para tu estado, tu familia y tus bienes personales podrían quedar completamente desprotegidos.</p>
 
               <div className="space-y-4 mb-8">
                 <div className="flex items-start gap-3">
@@ -268,9 +268,7 @@ const Index = () => {
               </div>
 
               <div className="bg-white/10 backdrop-blur border border-white/20 rounded-lg p-6 mb-8">
-                <h3 className="text-2xl font-bold mb-2">
-                  Soporte en español via Whatsapp
-                </h3>
+                <h3 className="text-2xl font-bold mb-2">Sin una Carta de Poder Legal: </h3>
               </div>
 
               <Button size="lg" className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 min-h-[48px] touch-manipulation" onClick={() => navigate("/quiz")}>
