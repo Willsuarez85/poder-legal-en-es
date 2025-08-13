@@ -16,7 +16,8 @@ import {
   Download,
   Edit,
   ArrowRight,
-  Quote
+  Quote,
+  MessageCircle
 } from "lucide-react";
 import testimonialMartha from "@/assets/testimonial-martha.jpg";
 import testimonialCarlos from "@/assets/testimonial-carlos.jpg";
@@ -108,8 +109,8 @@ const Index = () => {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-colors text-sm font-medium shadow-md"
           >
-            <span className="text-lg">📞</span>
-            <span>Atención en 🇪🇸</span>
+            <MessageCircle className="w-4 h-4" />
+            <span>Atención al cliente 🇪🇸</span>
           </a>
         </div>
       </div>
