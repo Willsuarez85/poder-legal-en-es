@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { safeText, getProductName, getProductDescription } from "@/lib/safeText";
+import { ObjectRenderErrorBoundary, SafeText } from "@/components/ui/ObjectRenderErrorBoundary";
 
 interface Product {
   id: string;
@@ -57,6 +58,12 @@ const Checkout = () => {
         .single();
 
       if (error) throw error;
+      
+      // Debug logging to catch any objects
+      console.log('Checkout - Raw product data:', data);
+      console.log('Checkout - Product name:', data?.name);
+      console.log('Checkout - Product description:', data?.description);
+      
       setProduct(data);
     } catch (error) {
       console.error("Error fetching product:", error);
@@ -191,124 +198,128 @@ const Checkout = () => {
   const productDescription = getProductDescription(product.description);
 
   return (
-    <div className="min-h-screen bg-background py-8 px-4">
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold mb-4">Finalizar Compra</h1>
-          <p className="text-muted-foreground">
-            Completa tu información para recibir tu documento legal.
-          </p>
-        </div>
+    <ObjectRenderErrorBoundary>
+      <div className="min-h-screen bg-background py-8 px-4">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-8">
+            <h1 className="text-3xl font-bold mb-4">Finalizar Compra</h1>
+            <p className="text-muted-foreground">
+              Completa tu información para recibir tu documento legal.
+            </p>
+          </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {/* Order Summary */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Resumen de tu Orden</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex justify-between items-start">
-                <div className="flex-1">
-                  <h3 className="font-semibold text-lg">{productName}</h3>
-                  <Badge variant="secondary" className="mt-2">
-                    {getStateName(product.state)}
-                  </Badge>
-                  {productDescription && (
-                    <p className="text-sm text-muted-foreground mt-2">
-                      {productDescription}
-                    </p>
-                  )}
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Order Summary */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Resumen de tu Orden</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex justify-between items-start">
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-lg">
+                      <SafeText value={productName} fallback="Producto" />
+                    </h3>
+                    <Badge variant="secondary" className="mt-2">
+                      {getStateName(product.state)}
+                    </Badge>
+                    {productDescription && (
+                      <p className="text-sm text-muted-foreground mt-2">
+                        <SafeText value={productDescription} />
+                      </p>
+                    )}
+                  </div>
                 </div>
-              </div>
-              
-              <Separator />
-              
-              <div className="flex justify-between items-center">
-                <span className="font-medium">Subtotal:</span>
-                <span>{formatPrice(product.price)}</span>
-              </div>
-              
-              <div className="flex justify-between items-center text-lg font-bold">
-                <span>Total:</span>
-                <span className="text-primary">{formatPrice(product.price)}</span>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Customer Information Form */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Información del Cliente</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="name">Nombre Completo *</Label>
-                  <Input
-                    id="name"
-                    value={customerForm.name}
-                    onChange={(e) => handleInputChange("name", e.target.value)}
-                    placeholder="Tu nombre completo"
-                    required
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email *</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    value={customerForm.email}
-                    onChange={(e) => handleInputChange("email", e.target.value)}
-                    placeholder="tu@email.com"
-                    required
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="phone">Teléfono (Opcional)</Label>
-                  <Input
-                    id="phone"
-                    type="tel"
-                    value={customerForm.phone}
-                    onChange={(e) => handleInputChange("phone", e.target.value)}
-                    placeholder="+1 (555) 123-4567"
-                  />
-                </div>
-
+                
                 <Separator />
-
-                <div className="space-y-4">
-                  <Button 
-                    type="submit" 
-                    className="w-full" 
-                    size="lg"
-                    disabled={submitting}
-                  >
-                    {submitting ? "Procesando..." : `Pagar ${formatPrice(product.price)}`}
-                  </Button>
-                  
-                  <Button 
-                    type="button" 
-                    variant="outline" 
-                    className="w-full"
-                    onClick={() => navigate("/products")}
-                    disabled={submitting}
-                  >
-                    Volver a Productos
-                  </Button>
+                
+                <div className="flex justify-between items-center">
+                  <span className="font-medium">Subtotal:</span>
+                  <span>{formatPrice(product.price)}</span>
                 </div>
+                
+                <div className="flex justify-between items-center text-lg font-bold">
+                  <span>Total:</span>
+                  <span className="text-primary">{formatPrice(product.price)}</span>
+                </div>
+              </CardContent>
+            </Card>
 
-                <p className="text-xs text-muted-foreground text-center">
-                  Al completar esta compra, recibirás tu documento por email.
-                  Todos los documentos están verificados por abogados licenciados.
-                </p>
-              </form>
-            </CardContent>
-          </Card>
+            {/* Customer Information Form */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Información del Cliente</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="name">Nombre Completo *</Label>
+                    <Input
+                      id="name"
+                      value={customerForm.name}
+                      onChange={(e) => handleInputChange("name", e.target.value)}
+                      placeholder="Tu nombre completo"
+                      required
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="email">Email *</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      value={customerForm.email}
+                      onChange={(e) => handleInputChange("email", e.target.value)}
+                      placeholder="tu@email.com"
+                      required
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="phone">Teléfono (Opcional)</Label>
+                    <Input
+                      id="phone"
+                      type="tel"
+                      value={customerForm.phone}
+                      onChange={(e) => handleInputChange("phone", e.target.value)}
+                      placeholder="+1 (555) 123-4567"
+                    />
+                  </div>
+
+                  <Separator />
+
+                  <div className="space-y-4">
+                    <Button 
+                      type="submit" 
+                      className="w-full" 
+                      size="lg"
+                      disabled={submitting}
+                    >
+                      {submitting ? "Procesando..." : `Pagar ${formatPrice(product.price)}`}
+                    </Button>
+                    
+                    <Button 
+                      type="button" 
+                      variant="outline" 
+                      className="w-full"
+                      onClick={() => navigate("/products")}
+                      disabled={submitting}
+                    >
+                      Volver a Productos
+                    </Button>
+                  </div>
+
+                  <p className="text-xs text-muted-foreground text-center">
+                    Al completar esta compra, recibirás tu documento por email.
+                    Todos los documentos están verificados por abogados licenciados.
+                  </p>
+                </form>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
-    </div>
+    </ObjectRenderErrorBoundary>
   );
 };
 
