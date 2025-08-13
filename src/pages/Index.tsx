@@ -102,17 +102,15 @@ const Index = () => {
             className="h-12 md:h-16 lg:h-36 w-auto"
             decoding="async" loading="lazy" sizes="(max-width: 768px) 120px, (max-width: 1024px) 160px, 200px"
           />
-          <Badge variant="secondary" className="text-sm font-medium flex items-center gap-2">
-            <span className="text-2xl">🇺🇸</span>
-            <span>Válidos 50 estados</span>
-            <div className="flex">
-              <Star className="w-4 h-4 text-accent" />
-              <Star className="w-4 h-4 text-accent" />
-              <Star className="w-4 h-4 text-accent" />
-              <Star className="w-4 h-4 text-accent" />
-              <Star className="w-4 h-4 text-accent" />
-            </div>
-          </Badge>
+          <a 
+            href="https://wa.me/17042645084" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-sm font-medium flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-colors"
+          >
+            <span className="text-lg">📞</span>
+            <span>Atención en Español</span>
+          </a>
         </div>
       </div>
 
