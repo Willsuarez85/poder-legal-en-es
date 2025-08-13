@@ -1,4 +1,3 @@
-
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,24 +8,27 @@ import testimonialMartha from "@/assets/testimonial-martha.jpg";
 import testimonialCarlos from "@/assets/testimonial-carlos.jpg";
 import testimonialLuis from "@/assets/testimonial-luis.jpg";
 import testimonialAna from "@/assets/testimonial-ana.jpg";
+
 const Index = () => {
   const navigate = useNavigate();
+
   const steps = [{
     number: "1",
     title: "Responde el Quiz Rápido",
     description: "Encuentra la Carta de Poder que necesitas en 2 minutos",
     icon: Phone
   }, {
-    number: "2",
+    number: "2", 
     title: "Descarga tu documento PDF",
     description: "A tu teléfono o email en minutos",
     icon: Download
   }, {
     number: "3",
-    title: "Recibe instrucciones en español",
+    title: "Recibe instrucciones en español", 
     description: "Paso a paso para llenar y firmar con confianza",
     icon: Edit
   }];
+
   const benefits = [{
     icon: Shield,
     title: "PDF listo para firmar y notarizar",
@@ -44,16 +46,19 @@ const Index = () => {
     title: "En Español",
     description: "Instrucciones claras en tu idioma"
   }];
+
   const protections = ["Cuidar a tus hijos", "Acceder a tus cuentas", "Vender tu casa", "Tomar decisiones médicas", "Representarte legalmente en emergencias"];
+
   const testimonials = [{
     text: "Cuando deportaron a mi esposo, no tenía acceso a nuestras cuentas. Si hubiéramos tenido una carta de poder, todo habría sido diferente.",
     author: "Martha R.",
     location: "Charlotte, NC"
   }, {
     text: "Descargué mi documento en el celular y lo firmé el mismo día con mi esposa. Rápido y claro.",
-    author: "Carlos H.",
+    author: "Carlos H.", 
     location: "Houston, TX"
   }];
+
   return <div className="min-h-screen bg-background">
       {/* Logo Header */}
       <div className="container mx-auto px-4 pt-6">
@@ -96,11 +101,11 @@ const Index = () => {
               <div className="flex items-center justify-center lg:justify-start gap-4 text-sm text-muted-foreground">
                 <div className="flex items-center gap-1">
                   <CheckCircle className="w-4 h-4 text-primary" />
-                  <span>Documentos Válidos en los 50 Estados 🇺🇸  </span>
+                  <span>Documentos Válidos en los 50 Estados 🇺🇸  </span>
                 </div>
                 <div className="flex items-center gap-1">
                   <CheckCircle className="w-4 h-4 text-primary" />
-                  <span>Incluye instrucciones en En Español 🇪🇸 </span>
+                  <span>Incluye instrucciones en En Español 🇪🇸 </span>
                 </div>
                 <div className="flex items-center gap-1">
                   
@@ -145,7 +150,7 @@ const Index = () => {
                 </div>
                 <div className="bg-destructive text-destructive-foreground rounded-lg shadow-md p-4 text-center">
                   <div className="font-bold text-lg">PDF Válidos 🇺🇸</div>
-                  <div className="text-xs opacity-90">Garantizado</div>
+                  <div className="text-xs opacity-90">Incluye instrucciones para firmar y notarizar</div>
                 </div>
               </div>
             </div>
@@ -567,4 +572,5 @@ const Index = () => {
       </section>
     </div>;
 };
+
 export default Index;
