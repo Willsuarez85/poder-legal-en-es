@@ -8,7 +8,6 @@ import testimonialMartha from "@/assets/testimonial-martha.jpg";
 import testimonialCarlos from "@/assets/testimonial-carlos.jpg";
 import testimonialLuis from "@/assets/testimonial-luis.jpg";
 import testimonialAna from "@/assets/testimonial-ana.jpg";
-
 const Index = () => {
   const navigate = useNavigate();
   const steps = [{
@@ -17,7 +16,7 @@ const Index = () => {
     description: "Encuentra la Carta de Poder que necesitas en 2 minutos",
     icon: Phone
   }, {
-    number: "2", 
+    number: "2",
     title: "Descarga tu documento PDF",
     description: "A tu teléfono o email en minutos",
     icon: Download
@@ -247,9 +246,7 @@ const Index = () => {
                 ¿Te has preguntado qué pasaría si algo te pasa?
               </h2>
               
-              <p className="text-lg mb-8 opacity-90">
-                Si sufres una deportación, accidente o enfermedad, tu familia:
-              </p>
+              <p className="text-lg mb-8 opacity-90">Si sufres una deportación, accidente o enfermedad y no dejaste un Power of Attorney claro, tu familia y bienes personales  podrían quedar completamente desprotegidos.</p>
 
               <div className="space-y-4 mb-8">
                 <div className="flex items-start gap-3">
