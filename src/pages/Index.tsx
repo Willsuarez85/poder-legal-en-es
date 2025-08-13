@@ -8,7 +8,6 @@ import testimonialMartha from "@/assets/testimonial-martha.jpg";
 import testimonialCarlos from "@/assets/testimonial-carlos.jpg";
 import testimonialLuis from "@/assets/testimonial-luis.jpg";
 import testimonialAna from "@/assets/testimonial-ana.jpg";
-
 const Index = () => {
   const navigate = useNavigate();
   const steps = [{
@@ -17,7 +16,7 @@ const Index = () => {
     description: "Encuentra la Carta de Poder que necesitas en 2 minutos",
     icon: Phone
   }, {
-    number: "2", 
+    number: "2",
     title: "Descarga tu documento PDF",
     description: "A tu teléfono o email en minutos",
     icon: Download
@@ -157,12 +156,8 @@ const Index = () => {
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Encuentra y descarga la carta de poder Exacta y Válida que necesitas en 3 simples pasos
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Proceso simple y rápido para obtener tu protección legal
-            </p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Encuentra la carta de poder  legal que necesitas en 3 simples pasos</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Proceso simple y rápido: llena el quiz completamente en español y descarga, por solo $19.99, el formato exacto de carta de poder que necesitas para proteger tus bienes y tu familia.</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
