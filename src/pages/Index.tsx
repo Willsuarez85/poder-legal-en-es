@@ -127,9 +127,9 @@ const Index = () => {
                 <span className="text-primary"> Estados Unidos</span> en minutos
               </h1>
               
-              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-                Encuentra la carta de poder que necesitas, lista para descargar en PDF y llenar fácilmente con instrucciones en español.
-              </p>
+            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+              Encuentra la carta de poder (<strong>Power of Attorney</strong>) exacta que necesitas para proteger lo que más amas. Documentos Válidos en los 50 Estados lista para descargar en PDF y llenar fácilmente con instrucciones en español.
+            </p>
               
               <p className="text-base text-muted-foreground">
                 Sin abogados caros, ni trámites confusos. Todo en tu celular.
