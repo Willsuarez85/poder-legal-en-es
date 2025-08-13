@@ -8,6 +8,7 @@ import testimonialMartha from "@/assets/testimonial-martha.jpg";
 import testimonialCarlos from "@/assets/testimonial-carlos.jpg";
 import testimonialLuis from "@/assets/testimonial-luis.jpg";
 import testimonialAna from "@/assets/testimonial-ana.jpg";
+
 const Index = () => {
   const navigate = useNavigate();
   const steps = [{
@@ -16,7 +17,7 @@ const Index = () => {
     description: "Encuentra la Carta de Poder que necesitas en 2 minutos",
     icon: Phone
   }, {
-    number: "2",
+    number: "2", 
     title: "Descarga tu documento PDF",
     description: "A tu teléfono o email en minutos",
     icon: Download
@@ -157,7 +158,7 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Protege lo que amas en 3 pasos:
+              Encuentra la carta de poder que necesitas en 2 minutos
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Proceso simple y rápido para obtener tu protección legal
@@ -203,7 +204,7 @@ const Index = () => {
               
               <p className="text-lg text-muted-foreground mb-6">
                 Una <strong>carta de poder</strong> (también llamada poder notarial) es un 
-                <strong> documento legal</strong> que te protege si tú no puedes actuar por ti mismo.
+               <strong> documento legal</strong> que te protege si tú no puedes actuar por ti mismo.
               </p>
 
               <p className="text-lg text-muted-foreground mb-8">
