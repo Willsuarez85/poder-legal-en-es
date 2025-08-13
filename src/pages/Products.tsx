@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { useCart } from "@/context/CartContext";
 import { safeText, getProductName, getProductDescription } from "@/lib/safeText";
 
 interface Product {
@@ -19,40 +21,43 @@ interface Product {
 
 const Products = () => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
-  const [selectedState, setSelectedState] = useState<string>("all");
+  const [selectedProducts, setSelectedProducts] = useState<Record<string, number>>({});
   const [loading, setLoading] = useState(true);
+  const { state: urlState } = useParams();
+  const location = useLocation();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { addItem, items, totalAmount } = useCart();
 
-  const states = [
-    { value: "all", label: "Todos los Estados" },
-    { value: "california", label: "California" },
-    { value: "texas", label: "Texas" },
-    { value: "florida", label: "Florida" },
-    { value: "new_york", label: "Nueva York" },
-  ];
+  // Get state from URL parameter or default to california
+  const currentState = urlState || 'california';
+  
+  const stateDisplayNames: Record<string, string> = {
+    california: "California",
+    texas: "Texas",
+    florida: "Florida", 
+    new_york: "Nueva York"
+  };
+
+  const quizData = location.state?.quizData;
 
   useEffect(() => {
     fetchProducts();
-  }, []);
-
-  useEffect(() => {
-    filterProducts();
-  }, [products, selectedState]);
+  }, [currentState]);
 
   const fetchProducts = async () => {
     try {
       const { data, error } = await supabase
         .from("products")
-        .select("id, name, description, price, state, recommendation_criteria");
+        .select("id, name, description, price, state, recommendation_criteria")
+        .or(`state.eq.${currentState},state.eq.ALL`);
 
       if (error) throw error;
       setProducts(data || []);
     } catch (error) {
       console.error("Error fetching products:", error);
       toast({
-        title: "Error",
+        title: "Error", 
         description: "No se pudieron cargar los productos",
         variant: "destructive",
       });
@@ -61,16 +66,79 @@ const Products = () => {
     }
   };
 
-  const filterProducts = () => {
-    if (selectedState === "all") {
-      setFilteredProducts(products);
+  const handleQuantityChange = (productId: string, quantity: number) => {
+    if (quantity <= 0) {
+      const newSelected = { ...selectedProducts };
+      delete newSelected[productId];
+      setSelectedProducts(newSelected);
     } else {
-      setFilteredProducts(products.filter(product => product.state === selectedState));
+      setSelectedProducts(prev => ({ ...prev, [productId]: quantity }));
     }
   };
 
-  const handlePurchase = (productId: string) => {
-    navigate("/checkout", { state: { productId } });
+  const handleProductToggle = (productId: string, checked: boolean) => {
+    if (checked) {
+      setSelectedProducts(prev => ({ ...prev, [productId]: 1 }));
+    } else {
+      const newSelected = { ...selectedProducts };
+      delete newSelected[productId];
+      setSelectedProducts(newSelected);
+    }
+  };
+
+  const handleCheckout = async () => {
+    if (Object.keys(selectedProducts).length === 0) {
+      toast({
+        title: "Selecciona productos",
+        description: "Debes seleccionar al menos un producto para continuar",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Add all selected products to cart
+    for (const [productId, quantity] of Object.entries(selectedProducts)) {
+      const product = products.find(p => p.id === productId);
+      if (product) {
+        for (let i = 0; i < quantity; i++) {
+          addItem({
+            productId: product.id,
+            name: getProductName(product.name),
+            price: product.price,
+            quantity: 1,
+            state: product.state
+          });
+        }
+      }
+    }
+
+    // Call existing cart checkout
+    try {
+      const cartItems = Object.entries(selectedProducts).map(([productId, quantity]) => ({
+        productId,
+        quantity
+      }));
+
+      const { data, error } = await supabase.functions.invoke('create-payment', {
+        body: { 
+          items: cartItems,
+          origin: window.location.origin
+        }
+      });
+
+      if (error) throw error;
+
+      if (data?.url) {
+        window.location.href = data.url;
+      }
+    } catch (error) {
+      console.error('Error creating payment:', error);
+      toast({
+        title: "Error",
+        description: "No se pudo procesar el pago. Intenta de nuevo.",
+        variant: "destructive",
+      });
+    }
   };
 
   const formatPrice = (price: number) => {
@@ -107,75 +175,124 @@ const Products = () => {
     <div className="min-h-screen bg-background py-8 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold mb-4">Documentos Legales Disponibles</h1>
-          <p className="text-muted-foreground text-lg mb-6">
-            Explora nuestra colección completa de documentos legales por estado.
+          <h1 className="text-3xl font-bold mb-4">
+            Todos los documentos para proteger lo que más amas en {stateDisplayNames[currentState]}
+          </h1>
+          <p className="text-muted-foreground text-lg mb-2">
+            Protege tu familia, propiedades y futuro con nuestros documentos legales especializados.
+          </p>
+          <p className="text-primary font-semibold mb-6">
+            ✓ Documentos válidos en {stateDisplayNames[currentState]} ✓ Llenado automático ✓ Entrega inmediata
           </p>
           
-          <div className="flex justify-center">
-            <div className="w-64">
-              <Select value={selectedState} onValueChange={setSelectedState}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Filtrar por estado" />
-                </SelectTrigger>
-                <SelectContent>
-                  {states.map((state) => (
-                    <SelectItem key={state.value} value={state.value}>
-                      {state.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+          {Object.keys(selectedProducts).length > 0 && (
+            <div className="bg-primary/10 border border-primary/20 rounded-lg p-4 mb-6">
+              <p className="font-medium">
+                {Object.values(selectedProducts).reduce((a, b) => a + b, 0)} productos seleccionados
+              </p>
+              <p className="text-2xl font-bold text-primary">
+                Total: {formatPrice(
+                  Object.entries(selectedProducts).reduce((total, [productId, quantity]) => {
+                    const product = products.find(p => p.id === productId);
+                    return total + (product ? product.price * quantity : 0);
+                  }, 0)
+                )}
+              </p>
             </div>
-          </div>
+          )}
         </div>
 
-        {filteredProducts.length > 0 ? (
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {filteredProducts.map((product) => {
-              const productName = getProductName(product.name);
-              const productDescription = getProductDescription(product.description);
-              const stateLabel = typeof product.state === "string" 
-                ? getStateName(product.state) 
-                : safeText(product.state) || "";
-              const priceDisplay = Number.isFinite(product.price) ? formatPrice(product.price) : "";
+        {products.length > 0 ? (
+          <>
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mb-8">
+              {products.map((product) => {
+                const productName = getProductName(product.name);
+                const productDescription = getProductDescription(product.description);
+                const priceDisplay = Number.isFinite(product.price) ? formatPrice(product.price) : "";
+                const isSelected = selectedProducts[product.id] > 0;
+                const quantity = selectedProducts[product.id] || 0;
 
-              return (
-                <Card key={product.id} className="flex flex-col hover:shadow-lg transition-shadow">
-                  <CardHeader>
-                    <div className="flex justify-between items-start">
-                      <CardTitle className="text-xl flex-1">{productName}</CardTitle>
-                      <Badge variant="secondary" className="ml-2">
-                        {stateLabel}
-                      </Badge>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="flex-1 flex flex-col">
-                    {productDescription && (
-                      <p className="text-muted-foreground mb-4 flex-1">
-                        {productDescription}
-                      </p>
-                    )}
-                    
-                    <div className="space-y-4">
-                      <div className="flex justify-between items-center">
-                        <span className="text-2xl font-bold text-primary">
-                          {priceDisplay}
-                        </span>
+                return (
+                  <Card key={product.id} className={`transition-all duration-200 ${isSelected ? 'ring-2 ring-primary shadow-lg' : 'hover:shadow-md'}`}>
+                    <CardHeader className="pb-3">
+                      <div className="flex items-start space-x-3">
+                        <Checkbox
+                          checked={isSelected}
+                          onCheckedChange={(checked) => handleProductToggle(product.id, checked as boolean)}
+                          className="mt-1"
+                        />
+                        <div className="flex-1">
+                          <CardTitle className="text-lg leading-tight">{productName}</CardTitle>
+                          <Badge variant="secondary" className="mt-2">
+                            {stateDisplayNames[currentState]}
+                          </Badge>
+                        </div>
                       </div>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      {productDescription && (
+                        <p className="text-muted-foreground text-sm mb-4">
+                          {productDescription}
+                        </p>
+                      )}
                       
-                      <Button 
-                        className="w-full" 
-                        onClick={() => handlePurchase(product.id)}
-                      >
-                        Obtener Documento
-                      </Button>
+                      <div className="space-y-3">
+                        <div className="flex justify-between items-center">
+                          <span className="text-xl font-bold text-primary">
+                            {priceDisplay}
+                          </span>
+                        </div>
+                        
+                        {isSelected && (
+                          <div className="flex items-center space-x-2">
+                            <label className="text-sm font-medium">Cantidad:</label>
+                            <Input
+                              type="number"
+                              min="1"
+                              max="10"
+                              value={quantity}
+                              onChange={(e) => handleQuantityChange(product.id, parseInt(e.target.value) || 0)}
+                              className="w-20"
+                            />
+                          </div>
+                        )}
+                      </div>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
+
+            {Object.keys(selectedProducts).length > 0 && (
+              <div className="sticky bottom-0 bg-background border-t border-border p-6 shadow-lg">
+                <div className="max-w-6xl mx-auto">
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <p className="text-lg font-semibold">
+                        Total: {formatPrice(
+                          Object.entries(selectedProducts).reduce((total, [productId, quantity]) => {
+                            const product = products.find(p => p.id === productId);
+                            return total + (product ? product.price * quantity : 0);
+                          }, 0)
+                        )}
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        {Object.values(selectedProducts).reduce((a, b) => a + b, 0)} productos seleccionados
+                      </p>
                     </div>
-                  </CardContent>
-                </Card>
-              );
-            })}
-          </div>
+                    <Button 
+                      onClick={handleCheckout}
+                      size="lg"
+                      className="min-w-[200px]"
+                    >
+                      Proceder al Pago
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            )}
+          </>
+          
         ) : (
           <Card className="text-center py-12">
             <CardContent>
@@ -183,10 +300,10 @@ const Products = () => {
                 No se encontraron productos
               </h3>
               <p className="text-muted-foreground mb-6">
-                No hay productos disponibles para el estado seleccionado.
+                No hay productos disponibles para {stateDisplayNames[currentState]}.
               </p>
-              <Button variant="outline" onClick={() => setSelectedState("all")}>
-                Ver Todos los Productos
+              <Button variant="outline" onClick={() => navigate("/products/california")}>
+                Ver Productos de California
               </Button>
             </CardContent>
           </Card>
@@ -194,12 +311,15 @@ const Products = () => {
 
         <div className="mt-12 text-center">
           <div className="bg-muted/50 rounded-lg p-8">
-            <h2 className="text-2xl font-bold mb-4">¿No estás seguro qué documento necesitas?</h2>
-            <p className="text-muted-foreground mb-6">
-              Nuestro cuestionario inteligente te ayudará a encontrar exactamente lo que necesitas.
+            <h2 className="text-2xl font-bold mb-4">🛡️ Protección Legal Completa</h2>
+            <p className="text-muted-foreground mb-4">
+              Nuestros documentos están diseñados específicamente para las leyes de {stateDisplayNames[currentState]}.
             </p>
-            <Button onClick={() => navigate("/quiz")}>
-              Hacer Cuestionario
+            <p className="text-sm font-medium text-primary mb-6">
+              ✓ Válidos legalmente ✓ Fácil de completar ✓ Entrega inmediata por email
+            </p>
+            <Button variant="outline" onClick={() => navigate("/quiz")}>
+              ¿Necesitas ayuda para elegir? Haz nuestro quiz
             </Button>
           </div>
         </div>

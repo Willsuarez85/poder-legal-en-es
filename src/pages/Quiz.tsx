@@ -160,15 +160,25 @@ const Quiz = () => {
         variant: "default",
       });
 
-      // Navegar a resultados con toda la información
-      navigate("/results", { 
+      // Mapear estado seleccionado a ruta de productos
+      const stateMapping: Record<string, string> = {
+        'CA': 'california',
+        'TX': 'texas',
+        'FL': 'florida',
+        'NY': 'new_york'
+      };
+
+      const selectedState = answers.state;
+      const stateRoute = stateMapping[selectedState] || 'california';
+
+      // Navegar directamente a productos con el estado filtrado
+      navigate(`/products/${stateRoute}`, { 
         state: { 
           sessionId, 
           answers, 
           contactData,
-          // Incluir resumen para facilitar recomendaciones
-          summary: {
-            state: answers.state,
+          quizData: {
+            state: selectedState,
             protectionAreas: Array.isArray(answers.protection) ? answers.protection : [answers.protection],
             authorizationType: answers.authorization_type,
             activationType: answers.activation,

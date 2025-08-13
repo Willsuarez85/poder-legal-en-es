@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { CheckCircle, Mail, Download } from "lucide-react";
+import { CheckCircle, Mail, Download, MessageCircle } from "lucide-react";
 
 const Success = () => {
   const location = useLocation();
@@ -40,32 +40,50 @@ const Success = () => {
           <CardContent className="space-y-6">
             <div className="space-y-2">
               <p className="text-lg font-medium">
-                Gracias por tu compra de: <span className="text-primary">{productName}</span>
+                ¡Pago exitoso!
               </p>
               <p className="text-sm text-muted-foreground">
-                Número de Orden: <span className="font-mono">{orderId}</span>
+                Número de Orden: <span className="font-mono font-bold">#{orderId}</span>
               </p>
             </div>
 
-            <div className="bg-muted/50 rounded-lg p-6 space-y-4">
-              <div className="flex items-center justify-center gap-3 text-muted-foreground">
+            <div className="bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 rounded-lg p-6 space-y-4">
+              <div className="flex items-center justify-center gap-3 text-blue-800 dark:text-blue-200">
                 <Mail className="w-5 h-5" />
-                <span>Tu documento será enviado por email</span>
+                <span className="font-medium">Estamos preparando tu orden</span>
               </div>
               
-              <div className="flex items-center justify-center gap-3 text-muted-foreground">
-                <Download className="w-5 h-5" />
-                <span>Descarga disponible por 30 días</span>
-              </div>
+              <p className="text-blue-700 dark:text-blue-300 text-sm text-center">
+                Tu orden será enviada por email en unos minutos. Si no la encuentras o no tienes acceso,
+              </p>
+              
+              <p className="text-blue-800 dark:text-blue-200 text-sm font-medium text-center">
+                ¿Deseas que te la enviemos por WhatsApp?
+              </p>
+
+              <Button 
+                className="w-full bg-green-600 hover:bg-green-700 text-white"
+                onClick={() => window.open(`https://wa.me/1234567890?text=Hola, necesito ayuda con mi orden #${orderId}`, '_blank')}
+              >
+                <MessageCircle className="w-4 h-4 mr-2" />
+                Conectar con nuestro equipo por WhatsApp
+              </Button>
+            </div>
+
+            <div className="bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 rounded-lg p-4">
+              <p className="text-amber-800 dark:text-amber-200 text-sm text-center">
+                <strong>Importante:</strong> Proporciona tu número de orden <span className="font-mono font-bold">#{orderId}</span> a nuestro equipo 
+                y en unas horas te enviaremos todo por WhatsApp.
+              </p>
             </div>
 
             <div className="space-y-3">
-              <h3 className="font-semibold">¿Qué sigue?</h3>
+              <h3 className="font-semibold">⏰ Qué esperar:</h3>
               <ul className="text-sm text-muted-foreground space-y-2 text-left max-w-md mx-auto">
-                <li>• Recibirás un email de confirmación en los próximos minutos</li>
-                <li>• Tu documento personalizado será enviado dentro de 24 horas</li>
-                <li>• El documento estará firmado y listo para usar</li>
-                <li>• Guarda una copia para tus registros</li>
+                <li>• Email con documentos: 5-15 minutos</li>
+                <li>• WhatsApp alternativo: 1-3 horas</li>
+                <li>• Documentos listos para completar</li>
+                <li>• Instrucciones de llenado incluidas</li>
               </ul>
             </div>
 
