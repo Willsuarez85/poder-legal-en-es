@@ -17,7 +17,7 @@ const Index = () => {
     description: "Encuentra la Carta de Poder que necesitas en 2 minutos",
     icon: Phone
   }, {
-    number: "2",
+    number: "2", 
     title: "Descarga tu documento PDF",
     description: "A tu teléfono o email en minutos",
     icon: Download
@@ -266,7 +266,7 @@ const Index = () => {
                 </div>
                 <div className="flex items-start gap-3">
                   <Clock className="w-6 h-6 text-destructive mt-1 flex-shrink-0" />
-                  <span>Tendrá que gastar miles de dólares y esperar meses en la corte</span>
+                  <span>Tu familia tendrá que gastar miles de dólares y esperar meses en la corte solo para poder acceder a tus bienes.</span>
                 </div>
               </div>
 
