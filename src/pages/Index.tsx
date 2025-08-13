@@ -1,115 +1,64 @@
-
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { 
-  Shield, 
-  FileText, 
-  Clock, 
-  CheckCircle, 
-  Star,
-  Users,
-  Heart,
-  Lock,
-  Phone,
-  Download,
-  Edit,
-  ArrowRight,
-  Quote,
-  MessageCircle
-} from "lucide-react";
+import { Shield, FileText, Clock, CheckCircle, Star, Users, Heart, Lock, Phone, Download, Edit, ArrowRight, Quote, MessageCircle } from "lucide-react";
 import testimonialMartha from "@/assets/testimonial-martha.jpg";
 import testimonialCarlos from "@/assets/testimonial-carlos.jpg";
 import testimonialLuis from "@/assets/testimonial-luis.jpg";
 import testimonialAna from "@/assets/testimonial-ana.jpg";
-
 const Index = () => {
   const navigate = useNavigate();
-
-  const steps = [
-    {
-      number: "1",
-      title: "Responde el Quiz Rápido",
-      description: "Encuentra la Carta de Poder que necesitas en 2 minutos",
-      icon: Phone
-    },
-    {
-      number: "2", 
-      title: "Descarga tu documento PDF",
-      description: "A tu teléfono o email en minutos",
-      icon: Download
-    },
-    {
-      number: "3",
-      title: "Recibe instrucciones en español",
-      description: "Paso a paso para llenar y firmar con confianza",
-      icon: Edit
-    }
-  ];
-
-  const benefits = [
-    {
-      icon: Shield,
-      title: "PDF listo para firmar y notarizar",
-      description: "Documentos válidos en todos los estados de USA"
-    },
-    {
-      icon: Clock,
-      title: "En Minutos, No Meses",
-      description: "Sin abogados caros, ni trámites confusos"
-    },
-    {
-      icon: Phone,
-      title: "Todo en tu Celular",
-      description: "Proceso 100% digital y móvil"
-    },
-    {
-      icon: Heart,
-      title: "En Español",
-      description: "Instrucciones claras en tu idioma"
-    }
-  ];
-
-  const protections = [
-    "Cuidar a tus hijos",
-    "Acceder a tus cuentas", 
-    "Vender tu casa",
-    "Tomar decisiones médicas",
-    "Representarte legalmente en emergencias"
-  ];
-
-  const testimonials = [
-    {
-      text: "Cuando deportaron a mi esposo, no tenía acceso a nuestras cuentas. Si hubiéramos tenido una carta de poder, todo habría sido diferente.",
-      author: "Martha R.",
-      location: "Charlotte, NC"
-    },
-    {
-      text: "Descargué mi documento en el celular y lo firmé el mismo día con mi esposa. Rápido y claro.",
-      author: "Carlos H.", 
-      location: "Houston, TX"
-    }
-  ];
-
-  return (
-    <div className="min-h-screen bg-background">
+  const steps = [{
+    number: "1",
+    title: "Responde el Quiz Rápido",
+    description: "Encuentra la Carta de Poder que necesitas en 2 minutos",
+    icon: Phone
+  }, {
+    number: "2",
+    title: "Descarga tu documento PDF",
+    description: "A tu teléfono o email en minutos",
+    icon: Download
+  }, {
+    number: "3",
+    title: "Recibe instrucciones en español",
+    description: "Paso a paso para llenar y firmar con confianza",
+    icon: Edit
+  }];
+  const benefits = [{
+    icon: Shield,
+    title: "PDF listo para firmar y notarizar",
+    description: "Documentos válidos en todos los estados de USA"
+  }, {
+    icon: Clock,
+    title: "En Minutos, No Meses",
+    description: "Sin abogados caros, ni trámites confusos"
+  }, {
+    icon: Phone,
+    title: "Todo en tu Celular",
+    description: "Proceso 100% digital y móvil"
+  }, {
+    icon: Heart,
+    title: "En Español",
+    description: "Instrucciones claras en tu idioma"
+  }];
+  const protections = ["Cuidar a tus hijos", "Acceder a tus cuentas", "Vender tu casa", "Tomar decisiones médicas", "Representarte legalmente en emergencias"];
+  const testimonials = [{
+    text: "Cuando deportaron a mi esposo, no tenía acceso a nuestras cuentas. Si hubiéramos tenido una carta de poder, todo habría sido diferente.",
+    author: "Martha R.",
+    location: "Charlotte, NC"
+  }, {
+    text: "Descargué mi documento en el celular y lo firmé el mismo día con mi esposa. Rápido y claro.",
+    author: "Carlos H.",
+    location: "Houston, TX"
+  }];
+  return <div className="min-h-screen bg-background">
       {/* Logo Header */}
       <div className="container mx-auto px-4 pt-6">
         <div className="flex items-center justify-between">
-          <img 
-            src="/lovable-uploads/1e870570-7e2a-436f-95b4-d50755c085a0.png" 
-            alt="Poder LegalUSA.com" 
-            className="h-12 md:h-16 lg:h-36 w-auto"
-            decoding="async" loading="lazy" sizes="(max-width: 768px) 120px, (max-width: 1024px) 160px, 200px"
-          />
-          <a 
-            href="https://wa.me/17042645084" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-colors text-sm font-medium shadow-md"
-          >
+          <img src="/lovable-uploads/1e870570-7e2a-436f-95b4-d50755c085a0.png" alt="Poder LegalUSA.com" className="h-12 md:h-16 lg:h-36 w-auto" decoding="async" loading="lazy" sizes="(max-width: 768px) 120px, (max-width: 1024px) 160px, 200px" />
+          <a href="https://wa.me/17042645084" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-colors text-sm font-medium shadow-md">
             <MessageCircle className="w-4 h-4" />
             <span>Atención al cliente 🇪🇸</span>
           </a>
@@ -136,11 +85,7 @@ const Index = () => {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <Button 
-                  size="lg" 
-                  className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all min-h-[48px] touch-manipulation"
-                  onClick={() => navigate("/quiz")}
-                >
+                <Button size="lg" className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all min-h-[48px] touch-manipulation" onClick={() => navigate("/quiz")}>
                   <span className="hidden sm:inline">Encuentra la Carta que necesitas en 2 minutos</span>
                   <span className="sm:hidden">Encuentra tu Carta en 2 min</span>
                   <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
@@ -150,15 +95,15 @@ const Index = () => {
               <div className="flex items-center justify-center lg:justify-start gap-4 text-sm text-muted-foreground">
                 <div className="flex items-center gap-1">
                   <CheckCircle className="w-4 h-4 text-primary" />
-                  <span>Documentos Válidos en los 50 Estados</span>
+                  <span>Documentos Válidos en los 50 Estados 🇺🇸  </span>
                 </div>
                 <div className="flex items-center gap-1">
                   <CheckCircle className="w-4 h-4 text-primary" />
-                  <span>En Español</span>
+                  <span>Incluye instrucciones en En Español 🇪🇸 </span>
                 </div>
                 <div className="flex items-center gap-1">
-                  <CheckCircle className="w-4 h-4 text-primary" />
-                  <span>Descarga Inmediata</span>
+                  
+                  
                 </div>
               </div>
             </div>
@@ -166,12 +111,7 @@ const Index = () => {
             {/* Hero Image */}
             <div className="relative">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                <img 
-                  src="/lovable-uploads/45832ed1-efe6-4dba-af5e-9d99059823cb.png" 
-                  alt="Familia hispana protegida legalmente" 
-                  className="w-full aspect-[4/3] sm:aspect-[3/2] lg:aspect-[4/3] object-cover"
-                  loading="eager" decoding="async" sizes="(min-width: 1024px) 50vw, 100vw"
-                />
+                <img src="/lovable-uploads/45832ed1-efe6-4dba-af5e-9d99059823cb.png" alt="Familia hispana protegida legalmente" className="w-full aspect-[4/3] sm:aspect-[3/2] lg:aspect-[4/3] object-cover" loading="eager" decoding="async" sizes="(min-width: 1024px) 50vw, 100vw" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
               </div>
               
@@ -199,7 +139,7 @@ const Index = () => {
                   <div className="flex items-center justify-center mb-2">
                     <FileText className="w-6 h-6 text-primary" />
                   </div>
-                  <div className="font-bold text-lg">+100</div>
+                  <div className="font-bold text-lg">+120</div>
                   <div className="text-xs text-muted-foreground">Tipos de documentos legales</div>
                 </div>
                 <div className="bg-destructive text-destructive-foreground rounded-lg shadow-md p-4 text-center">
@@ -226,9 +166,8 @@ const Index = () => {
 
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {steps.map((step, index) => {
-              const IconComponent = step.icon;
-              return (
-                <Card key={index} className="text-center border-2 hover:border-primary/20 transition-all hover:shadow-lg">
+            const IconComponent = step.icon;
+            return <Card key={index} className="text-center border-2 hover:border-primary/20 transition-all hover:shadow-lg">
                   <CardHeader className="pb-4">
                     <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4 relative">
                       <IconComponent className="w-8 h-8 text-primary" />
@@ -241,17 +180,12 @@ const Index = () => {
                   <CardContent>
                     <p className="text-muted-foreground">{step.description}</p>
                   </CardContent>
-                </Card>
-              );
-            })}
+                </Card>;
+          })}
           </div>
 
           <div className="text-center mt-12">
-            <Button 
-              size="lg"
-              className="bg-destructive hover:bg-destructive/90 text-destructive-foreground border-destructive min-h-[48px] px-8 touch-manipulation"
-              onClick={() => navigate("/quiz")}
-            >
+            <Button size="lg" className="bg-destructive hover:bg-destructive/90 text-destructive-foreground border-destructive min-h-[48px] px-8 touch-manipulation" onClick={() => navigate("/quiz")}>
               Comenzar ahora
             </Button>
           </div>
@@ -278,12 +212,10 @@ const Index = () => {
               </p>
 
               <div className="space-y-3 mb-8">
-                {protections.map((protection, index) => (
-                  <div key={index} className="flex items-center gap-3">
+                {protections.map((protection, index) => <div key={index} className="flex items-center gap-3">
                     <CheckCircle className="w-5 h-5 text-primary flex-shrink-0" />
                     <span className="text-muted-foreground">{protection}</span>
-                  </div>
-                ))}
+                  </div>)}
               </div>
 
               <p className="text-muted-foreground">
@@ -294,12 +226,7 @@ const Index = () => {
             </div>
 
             <div className="relative h-full flex items-center justify-center px-4">
-              <img 
-                src="/lovable-uploads/eada516d-b5cc-4db8-87be-f593105d8612.png" 
-                alt="Aplicación móvil de documentos legales Power of Attorney" 
-                className="w-full max-w-md mx-auto h-auto object-contain"
-                loading="lazy" decoding="async"
-              />
+              <img src="/lovable-uploads/eada516d-b5cc-4db8-87be-f593105d8612.png" alt="Aplicación móvil de documentos legales Power of Attorney" className="w-full max-w-md mx-auto h-auto object-contain" loading="lazy" decoding="async" />
             </div>
           </div>
         </div>
@@ -312,12 +239,7 @@ const Index = () => {
             {/* Image Column - Left */}
             <div className="relative">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                <img 
-                  src="/lovable-uploads/b5323911-7320-4399-ab20-e69e6e5fa1ac.png" 
-                  alt="Pareja hispana firmando documentos legales en casa" 
-                  className="w-full h-[400px] lg:h-[500px] object-cover"
-                  loading="lazy" decoding="async"
-                />
+                <img src="/lovable-uploads/b5323911-7320-4399-ab20-e69e6e5fa1ac.png" alt="Pareja hispana firmando documentos legales en casa" className="w-full h-[400px] lg:h-[500px] object-cover" loading="lazy" decoding="async" />
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent to-primary/20"></div>
               </div>
             </div>
@@ -357,11 +279,7 @@ const Index = () => {
                 </h3>
               </div>
 
-              <Button 
-                size="lg"
-                className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 min-h-[48px] touch-manipulation"
-                onClick={() => navigate("/quiz")}
-              >
+              <Button size="lg" className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 min-h-[48px] touch-manipulation" onClick={() => navigate("/quiz")}>
                 <span className="hidden sm:inline">Proteger a Mi Familia Ahora</span>
                 <span className="sm:hidden">Proteger Mi Familia</span>
                 <Shield className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
@@ -386,9 +304,8 @@ const Index = () => {
 
               <div className="grid md:grid-cols-2 gap-6 mb-8">
                 {benefits.map((benefit, index) => {
-                  const IconComponent = benefit.icon;
-                  return (
-                    <div key={index} className="flex items-start gap-4 p-4 rounded-lg border hover:border-primary/20 transition-colors">
+                const IconComponent = benefit.icon;
+                return <div key={index} className="flex items-start gap-4 p-4 rounded-lg border hover:border-primary/20 transition-colors">
                       <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
                         <IconComponent className="w-5 h-5 text-primary" />
                       </div>
@@ -396,9 +313,8 @@ const Index = () => {
                         <h3 className="font-semibold text-sm mb-1">{benefit.title}</h3>
                         <p className="text-muted-foreground text-xs">en todos los Estados Unidos</p>
                       </div>
-                    </div>
-                  );
-                })}
+                    </div>;
+              })}
               </div>
 
               <div className="bg-gradient-to-r from-primary/5 to-destructive/5 rounded-2xl p-6">
@@ -409,11 +325,7 @@ const Index = () => {
                   <strong> todo lo que amas</strong>.
                 </p>
 
-                <Button 
-                  size="lg"
-                  className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-lg sm:text-xl px-6 sm:px-8 py-4 shadow-lg hover:shadow-xl transition-all w-full sm:w-auto min-h-[48px] touch-manipulation"
-                  onClick={() => navigate("/quiz")}
-                >
+                <Button size="lg" className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-lg sm:text-xl px-6 sm:px-8 py-4 shadow-lg hover:shadow-xl transition-all w-full sm:w-auto min-h-[48px] touch-manipulation" onClick={() => navigate("/quiz")}>
                   Comienza el Quiz ahora
                   <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
                 </Button>
@@ -423,12 +335,7 @@ const Index = () => {
             {/* Image Placeholder Column - Right */}
             <div className="relative">
               <div className="relative overflow-hidden">
-                <img 
-                  src="/lovable-uploads/a4b92e2b-dc57-406d-aeec-97ce0580bb34.png" 
-                  alt="Documentos de Poder Notarial legales en Estados Unidos" 
-                  className="w-full h-[500px] object-cover"
-                  loading="lazy" decoding="async"
-                />
+                <img src="/lovable-uploads/a4b92e2b-dc57-406d-aeec-97ce0580bb34.png" alt="Documentos de Poder Notarial legales en Estados Unidos" className="w-full h-[500px] object-cover" loading="lazy" decoding="async" />
               </div>
             </div>
           </div>
@@ -456,20 +363,14 @@ const Index = () => {
                 <Card className="relative bg-background/80 backdrop-blur border shadow-lg">
                   <CardContent className="p-6">
                     <div className="flex mb-3">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 text-accent" />
-                      ))}
+                      {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-accent" />)}
                     </div>
                     <p className="text-muted-foreground mb-4 leading-relaxed">
                       "{testimonials[0].text}"
                     </p>
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 rounded-full overflow-hidden">
-                        <img 
-                          src={testimonialMartha} 
-                          alt="Martha R." 
-                          className="w-full h-full object-cover"
-                        />
+                        <img src={testimonialMartha} alt="Martha R." className="w-full h-full object-cover" />
                       </div>
                       <div>
                         <p className="font-semibold">{testimonials[0].author}</p>
@@ -482,20 +383,14 @@ const Index = () => {
                 <Card className="relative bg-background/80 backdrop-blur border shadow-lg lg:ml-8">
                   <CardContent className="p-6">
                     <div className="flex mb-3">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 text-accent" />
-                      ))}
+                      {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-accent" />)}
                     </div>
                     <p className="text-muted-foreground mb-4 leading-relaxed">
                       "Después de 3 años viviendo sin documentos, finalmente encontré una solución simple y legal. El proceso fue increíblemente fácil."
                     </p>
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 rounded-full overflow-hidden">
-                        <img 
-                          src={testimonialLuis} 
-                          alt="Luis M." 
-                          className="w-full h-full object-cover"
-                        />
+                        <img src={testimonialLuis} alt="Luis M." className="w-full h-full object-cover" />
                       </div>
                       <div>
                         <p className="font-semibold">Luis M.</p>
@@ -511,20 +406,14 @@ const Index = () => {
                 <Card className="relative bg-background/80 backdrop-blur border shadow-lg lg:mr-8">
                   <CardContent className="p-6">
                     <div className="flex mb-3">
-                      {[...Array(5)].map((_, i) => (
-                         <Star key={i} className="w-4 h-4 text-accent" />
-                      ))}
+                      {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-accent" />)}
                     </div>
                     <p className="text-muted-foreground mb-4 leading-relaxed">
                       "{testimonials[1].text}"
                     </p>
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 rounded-full overflow-hidden">
-                        <img 
-                          src={testimonialCarlos} 
-                          alt="Carlos H." 
-                          className="w-full h-full object-cover"
-                        />
+                        <img src={testimonialCarlos} alt="Carlos H." className="w-full h-full object-cover" />
                       </div>
                       <div>
                         <p className="font-semibold">{testimonials[1].author}</p>
@@ -537,20 +426,14 @@ const Index = () => {
                 <Card className="relative bg-background/80 backdrop-blur border shadow-lg">
                   <CardContent className="p-6">
                     <div className="flex mb-3">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 text-accent" />
-                      ))}
+                      {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-accent" />)}
                     </div>
                     <p className="text-muted-foreground mb-4 leading-relaxed">
                       "Mi familia ahora está protegida. El documento llegó en minutos y las instrucciones estaban súper claras en español."
                     </p>
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 rounded-full overflow-hidden">
-                        <img 
-                          src={testimonialAna} 
-                          alt="Ana R." 
-                          className="w-full h-full object-cover"
-                        />
+                        <img src={testimonialAna} alt="Ana R." className="w-full h-full object-cover" />
                       </div>
                       <div>
                         <p className="font-semibold">Ana R.</p>
@@ -664,12 +547,7 @@ const Index = () => {
             o dejar todo en manos del sistema.
           </p>
           
-          <Button 
-            size="lg"
-            variant="secondary"
-            className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-xl px-12 py-6 shadow-lg hover:shadow-xl transition-all"
-            onClick={() => navigate("/quiz")}
-          >
+          <Button size="lg" variant="secondary" className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-xl px-12 py-6 shadow-lg hover:shadow-xl transition-all" onClick={() => navigate("/quiz")}>
             Haz el Quiz y encuentra tu carta de poder ahora
             <ArrowRight className="ml-2 w-6 h-6" />
           </Button>
@@ -686,8 +564,6 @@ const Index = () => {
           </div>
         </div>
       </section>
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
