@@ -8,6 +8,7 @@ import testimonialMartha from "@/assets/testimonial-martha.jpg";
 import testimonialCarlos from "@/assets/testimonial-carlos.jpg";
 import testimonialLuis from "@/assets/testimonial-luis.jpg";
 import testimonialAna from "@/assets/testimonial-ana.jpg";
+
 const Index = () => {
   const navigate = useNavigate();
   const steps = [{
@@ -189,7 +190,7 @@ const Index = () => {
       </section>
 
       {/* What is Power of Attorney Section */}
-      <section className="py-16">
+      <section className="py-16 bg-blue-900 text-white">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -560,4 +561,5 @@ const Index = () => {
       </section>
     </div>;
 };
+
 export default Index;
