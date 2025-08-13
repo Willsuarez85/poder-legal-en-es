@@ -230,14 +230,14 @@ const Index = () => {
       </section>
 
       {/* Warning Section */}
-      <section className="py-16 bg-primary text-primary-foreground">
+      <section className="py-16 bg-blue-900 text-white">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Image Column - Left */}
             <div className="relative">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <img src="/lovable-uploads/b5323911-7320-4399-ab20-e69e6e5fa1ac.png" alt="Pareja hispana firmando documentos legales en casa" className="w-full h-[400px] lg:h-[500px] object-cover" loading="lazy" decoding="async" />
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-primary/20"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-blue-900/20"></div>
               </div>
             </div>
 
