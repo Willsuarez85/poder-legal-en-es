@@ -128,8 +128,7 @@ const Index = () => {
               </h1>
               
               <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-                Descarga una <strong>Carta de Poder PDF</strong> válida en tu estado, 
-                con instrucciones en español, lista para firmar y notarizar.
+                Encuentra y descarga el formato PDF exacto que necesitas en tu caso y válido en tu estado, con instrucciones para llenar en español la carta de poder.
               </p>
               
               <p className="text-base text-muted-foreground">
