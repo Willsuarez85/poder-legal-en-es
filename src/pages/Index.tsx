@@ -50,7 +50,7 @@ const Index = () => {
   const benefits = [
     {
       icon: Shield,
-      title: "Protección Legal Inmediata",
+      title: "PDF listo para firmar y notarizar",
       description: "Documentos válidos en todos los estados de USA"
     },
     {
