@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -14,6 +15,14 @@ All colors MUST be HSL.
     
     --destructive: 4 82% 46%; /* #d31b14 - Brand Red for CTAs */
     --destructive-foreground: 0 0% 100%; /* White text on red */
+    
+    /* Success/Green colors for WhatsApp button */
+    --success: 142 76% 36%; /* Green for success actions */
+    --success-foreground: 0 0% 100%; /* White text on green */
+    
+    /* Warning/Dark blue colors for warning sections */
+    --warning: 213 90% 20%; /* Dark blue for warning sections */
+    --warning-foreground: 0 0% 100%; /* White text on dark blue */
     
     /* Text Colors */
     --foreground: 0 0% 10%; /* #191919 - Main text */
@@ -76,6 +85,12 @@ All colors MUST be HSL.
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
+
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 213 90% 20%;
+    --warning-foreground: 0 0% 100%;
 
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;

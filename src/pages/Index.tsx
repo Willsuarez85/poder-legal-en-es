@@ -60,7 +60,7 @@ const Index = () => {
       <div className="container mx-auto px-4 pt-6">
         <div className="flex items-center justify-between">
           <img src="/lovable-uploads/1e870570-7e2a-436f-95b4-d50755c085a0.png" alt="Poder LegalUSA.com" className="h-12 md:h-16 lg:h-36 w-auto" decoding="async" loading="lazy" sizes="(max-width: 768px) 120px, (max-width: 1024px) 160px, 200px" />
-          <a href="https://wa.me/17042645084" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-colors text-sm font-medium shadow-md">
+          <a href="https://wa.me/17042645084" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-success hover:bg-success/90 text-success-foreground px-4 py-2 rounded-lg transition-colors text-sm font-medium shadow-md">
             <MessageCircle className="w-4 h-4" />
             <span>Atención al cliente 🇪🇸</span>
           </a>
@@ -231,14 +231,14 @@ const Index = () => {
       </section>
 
       {/* Warning Section */}
-      <section className="py-16 bg-blue-900 text-white">
+      <section className="py-16 bg-warning text-warning-foreground">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Image Column - Left */}
             <div className="relative">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <img src="/lovable-uploads/b5323911-7320-4399-ab20-e69e6e5fa1ac.png" alt="Pareja hispana firmando documentos legales en casa" className="w-full h-[400px] lg:h-[500px] object-cover" loading="lazy" decoding="async" />
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-blue-900/20"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-warning/20"></div>
               </div>
             </div>
 
@@ -535,7 +535,7 @@ const Index = () => {
       </section>
 
       {/* Final CTA Section */}
-      <section className="py-16 bg-blue-900 text-white">
+      <section className="py-16 bg-warning text-warning-foreground">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Toma el control hoy
