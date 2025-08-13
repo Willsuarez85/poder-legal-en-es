@@ -31,7 +31,7 @@ const QUIZ_QUESTIONS = [
     id: "state",
     emoji: "🗺️",
     title: "¿En qué estado de EE.UU. vas a usar tu Carta de Poder?",
-    subtitle: "Es importante porque las leyes cambian de estado a estado",
+    subtitle: "📌 Las leyes son diferentes en cada estado.\nElegir el estado correcto asegura que tu documento sea 100% válido y legal donde lo necesitas.",
     type: "dropdown" as const,
     options: US_STATES.map(state => ({ value: state.value, label: state.label, icon: "🏛️" })),
     tooltip: "Cada estado tiene leyes diferentes para los documentos legales. Es crucial seleccionar el correcto."
