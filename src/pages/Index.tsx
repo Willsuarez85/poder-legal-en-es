@@ -394,7 +394,7 @@ const Index = () => {
                       </div>
                       <div>
                         <h3 className="font-semibold text-sm mb-1">{benefit.title}</h3>
-                        <p className="text-muted-foreground text-xs">{benefit.description}</p>
+                        <p className="text-muted-foreground text-xs">en todos los Estados Unidos</p>
                       </div>
                     </div>
                   );
