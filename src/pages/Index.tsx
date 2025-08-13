@@ -8,6 +8,7 @@ import testimonialMartha from "@/assets/testimonial-martha.jpg";
 import testimonialCarlos from "@/assets/testimonial-carlos.jpg";
 import testimonialLuis from "@/assets/testimonial-luis.jpg";
 import testimonialAna from "@/assets/testimonial-ana.jpg";
+
 const Index = () => {
   const navigate = useNavigate();
   const steps = [{
@@ -16,7 +17,7 @@ const Index = () => {
     description: "Encuentra la Carta de Poder que necesitas en 2 minutos",
     icon: Phone
   }, {
-    number: "2",
+    number: "2", 
     title: "Descarga tu documento PDF",
     description: "A tu teléfono o email en minutos",
     icon: Download
@@ -53,6 +54,7 @@ const Index = () => {
     author: "Carlos H.",
     location: "Houston, TX"
   }];
+
   return <div className="min-h-screen bg-background">
       {/* Logo Header */}
       <div className="container mx-auto px-4 pt-6">
@@ -156,7 +158,7 @@ const Index = () => {
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Encuentra la carta de poder  legal que necesitas en 3 simples pasos</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Encuentra la carta de poder  legal que necesitas en 3 simples pasos</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Proceso simple y rápido: llena el quiz completamente en español y descarga, por solo $19.99, el formato exacto de carta de poder que necesitas para proteger tus bienes y tu familia.</p>
           </div>
 
@@ -248,6 +250,10 @@ const Index = () => {
               
               <p className="text-lg mb-8 opacity-90">Si sufres una deportación, accidente o enfermedad y no dejaste un Power of Attorney legal, firmado y notarizado para tu estado, tu familia y tus bienes personales podrían quedar completamente desprotegidos.</p>
 
+              <div className="bg-white/10 backdrop-blur border border-white/20 rounded-lg p-6 mb-8 px-[12px] py-px">
+                <h3 className="text-2xl font-bold mb-2">Sin una Carta de Poder Legal: </h3>
+              </div>
+
               <div className="space-y-4 mb-8">
                 <div className="flex items-start gap-3">
                   <Lock className="w-6 h-6 text-destructive mt-1 flex-shrink-0" />
@@ -263,12 +269,12 @@ const Index = () => {
                 </div>
                 <div className="flex items-start gap-3">
                   <Clock className="w-6 h-6 text-destructive mt-1 flex-shrink-0" />
-                  <span>Tendrá que gastar miles de dólares y esperar meses en la corte</span>
+                  <span>Tu familia tendrá que gastar miles de dólares y esperar meses en la corte solo para poder acceder a tus bienes.</span>
                 </div>
-              </div>
-
-              <div className="bg-white/10 backdrop-blur border border-white/20 rounded-lg p-6 mb-8 px-[12px] py-px">
-                <h3 className="text-2xl font-bold mb-2">Sin una Carta de Poder Legal: </h3>
+                <div className="flex items-start gap-3">
+                  <Heart className="w-6 h-6 text-destructive mt-1 flex-shrink-0" />
+                  <span>Tus hijos menores podrían quedar en manos del sistema.</span>
+                </div>
               </div>
 
               <Button size="lg" className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 min-h-[48px] touch-manipulation" onClick={() => navigate("/quiz")}>
@@ -288,7 +294,7 @@ const Index = () => {
             {/* Content Column - Left */}
             <div>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                El documento legal que necesitas, sin complicaciones
+                Encuentra las Carta de poder que necesitas, sin complicaciones
               </h2>
               <p className="text-lg text-muted-foreground mb-8">
                 Accede al <strong>template que necesitas</strong>, legalmente válido en tu estado
@@ -558,4 +564,5 @@ const Index = () => {
       </section>
     </div>;
 };
+
 export default Index;
