@@ -128,7 +128,7 @@ const Index = () => {
               </h1>
               
               <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-                Encuentra y descarga el formato PDF exacto que necesitas en tu caso y válido en tu estado, con instrucciones para llenar en español la carta de poder.
+                Encuentra la carta de poder que necesitas, lista para descargar en PDF y llenar fácilmente con instrucciones en español.
               </p>
               
               <p className="text-base text-muted-foreground">
