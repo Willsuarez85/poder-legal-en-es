@@ -30,7 +30,7 @@ const QUIZ_QUESTIONS = [
   {
     id: "state",
     emoji: "🗺️",
-    title: "¿En qué estado de USA necesitas usar el documento?",
+    title: "¿En qué estado de EE.UU. vas a usar tu Carta de Poder?",
     subtitle: "Es importante porque las leyes cambian de estado a estado",
     type: "dropdown" as const,
     options: US_STATES.map(state => ({ value: state.value, label: state.label, icon: "🏛️" })),
