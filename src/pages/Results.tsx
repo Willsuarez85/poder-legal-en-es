@@ -16,6 +16,34 @@ interface Product {
   recommendation_criteria: any;
 }
 
+// Helper function to safely convert any value to a string
+const safeText = (value: any): string => {
+  if (typeof value === 'string') {
+    return value;
+  }
+  if (typeof value === 'number') {
+    return String(value);
+  }
+  if (Array.isArray(value)) {
+    return value.map(item => safeText(item)).join(', ');
+  }
+  if (typeof value === 'object' && value !== null) {
+    // Handle specific object structures
+    if (value.hasOwnProperty('not_for') && value.hasOwnProperty('purpose')) {
+      const notFor = safeText(value.not_for);
+      const purpose = safeText(value.purpose);
+      return `${purpose}${notFor ? ` (No para: ${notFor})` : ''}`;
+    }
+    // Handle translation objects
+    if (value.es || value.en) {
+      return value.es || value.en || '';
+    }
+    // For other objects, try to extract meaningful text
+    return Object.values(value).map(v => safeText(v)).filter(Boolean).join(' - ') || '';
+  }
+  return ''; // Return empty string for null, undefined, or other types
+};
+
 const Results = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [recommendedProducts, setRecommendedProducts] = useState<Product[]>([]);
@@ -97,8 +125,8 @@ const getRecommendedProducts = (products: Product[], responses: any[]) => {
   const userState = findUserState(responses);
 
   const isPoaProduct = (product: Product) => {
-    const nameValue = typeof product.name === 'object' ? (product.name.es || product.name.en || '') : product.name || '';
-    const normalized = String(nameValue).toLowerCase();
+    const nameValue = safeText(product.name);
+    const normalized = nameValue.toLowerCase();
     return (
       normalized.includes('poa') ||
       normalized.includes('poder notarial') ||
@@ -153,13 +181,8 @@ const handlePurchase = (productId: string) => {
         {recommendedProducts.length > 0 ? (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {recommendedProducts.map((product) => {
-              const productName = typeof product.name === 'object' 
-                ? product.name.es || product.name.en || "Producto"
-                : product.name;
-              
-              const productDescription = typeof product.description === 'object'
-                ? product.description.es || product.description.en || ""
-                : product.description || "";
+              const productName = safeText(product.name) || "Producto";
+              const productDescription = safeText(product.description);
 
               return (
                 <Card key={product.id} className="flex flex-col">
