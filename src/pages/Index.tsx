@@ -1,3 +1,4 @@
+
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -262,7 +263,7 @@ const Index = () => {
                 </div>
                 <div className="flex items-start gap-3">
                   <Users className="w-6 h-6 text-destructive mt-1 flex-shrink-0" />
-                  <span>No podrá cuidar legalmente de tus hijos</span>
+                  <span>Tus hijos menores podrían quedar en manos del sistema</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <Clock className="w-6 h-6 text-destructive mt-1 flex-shrink-0" />
