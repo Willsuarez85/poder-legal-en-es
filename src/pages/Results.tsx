@@ -17,31 +17,77 @@ interface Product {
 }
 
 // Helper function to safely convert any value to a string
-const safeText = (value: any): string => {
+const safeText = (value: any, depth: number = 0): string => {
+  // Prevent infinite recursion
+  if (depth > 5) {
+    return '[Complex Object]';
+  }
+  
+  if (value === null || value === undefined) {
+    return '';
+  }
+  
   if (typeof value === 'string') {
     return value;
   }
-  if (typeof value === 'number') {
+  
+  if (typeof value === 'number' || typeof value === 'boolean') {
     return String(value);
   }
+  
   if (Array.isArray(value)) {
-    return value.map(item => safeText(item)).join(', ');
+    if (value.length === 0) return '';
+    return value.map(item => safeText(item, depth + 1)).join(', ');
   }
-  if (typeof value === 'object' && value !== null) {
-    // Handle specific object structures
-    if (value.hasOwnProperty('not_for') && value.hasOwnProperty('purpose')) {
-      const notFor = safeText(value.not_for);
-      const purpose = safeText(value.purpose);
-      return `${purpose}${notFor ? ` (No para: ${notFor})` : ''}`;
+  
+  if (typeof value === 'object') {
+    try {
+      // Handle specific object structures that we know about
+      if (value.hasOwnProperty('not_for') && value.hasOwnProperty('purpose')) {
+        console.log('Found not_for/purpose object:', value);
+        const purpose = safeText(value.purpose, depth + 1);
+        const notFor = safeText(value.not_for, depth + 1);
+        const result = purpose || notFor || '[Purpose/Not For Object]';
+        console.log('Converted not_for/purpose to:', result);
+        return result;
+      }
+      
+      // Handle translation objects
+      if (value.es || value.en) {
+        return safeText(value.es || value.en, depth + 1);
+      }
+      
+      // Handle objects with a 'text' or 'name' property
+      if (value.text) {
+        return safeText(value.text, depth + 1);
+      }
+      
+      if (value.name) {
+        return safeText(value.name, depth + 1);
+      }
+      
+      // For other objects, try to extract meaningful text from values
+      const values = Object.values(value).filter(v => v != null);
+      if (values.length === 0) return '';
+      
+      const textValues = values
+        .map(v => safeText(v, depth + 1))
+        .filter(text => text && text.trim() !== '')
+        .slice(0, 3); // Limit to first 3 meaningful values
+      
+      return textValues.join(' - ') || JSON.stringify(value).substring(0, 50) + '...';
+    } catch (error) {
+      console.error('Error processing object in safeText:', error, value);
+      // Last resort: try to stringify the object
+      try {
+        return JSON.stringify(value).substring(0, 50) + '...';
+      } catch (stringifyError) {
+        return '[Unparseable Object]';
+      }
     }
-    // Handle translation objects
-    if (value.es || value.en) {
-      return value.es || value.en || '';
-    }
-    // For other objects, try to extract meaningful text
-    return Object.values(value).map(v => safeText(v)).filter(Boolean).join(' - ') || '';
   }
-  return ''; // Return empty string for null, undefined, or other types
+  
+  return String(value);
 };
 
 const Results = () => {
@@ -181,8 +227,17 @@ const handlePurchase = (productId: string) => {
         {recommendedProducts.length > 0 ? (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {recommendedProducts.map((product) => {
+              // Debug logging to identify the problematic data
+              console.log('Product data:', product);
+              console.log('Product name:', product.name);
+              console.log('Product description:', product.description);
+              console.log('Product recommendation_criteria:', product.recommendation_criteria);
+              
               const productName = safeText(product.name) || "Producto";
               const productDescription = safeText(product.description);
+              
+              console.log('Processed name:', productName);
+              console.log('Processed description:', productDescription);
 
               return (
                 <Card key={product.id} className="flex flex-col">
@@ -211,14 +266,31 @@ const handlePurchase = (productId: string) => {
 <Button 
   className="w-full" 
   onClick={() => {
-    addItem({
-      productId: product.id,
-      name: productName,
-      price: Number(product.price) || 0,
-      quantity: 1,
-      state: product.state
-    });
-    toast({ title: "Añadido al carrito", description: `${productName} agregado (1 unidad).` });
+    try {
+      // Ensure all values are properly converted to strings
+      const safeProductName = safeText(productName);
+      console.log('Adding to cart with name:', safeProductName);
+      
+      addItem({
+        productId: product.id,
+        name: safeProductName,
+        price: Number(product.price) || 0,
+        quantity: 1,
+        state: product.state
+      });
+      
+      toast({ 
+        title: "Añadido al carrito", 
+        description: `${safeProductName} agregado (1 unidad).` 
+      });
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      toast({ 
+        title: "Error", 
+        description: "No se pudo agregar al carrito",
+        variant: "destructive"
+      });
+    }
   }}
 >
   Agregar al carrito
