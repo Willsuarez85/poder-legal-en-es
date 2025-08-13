@@ -7,6 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import CartSummary from "@/components/cart/CartSummary";
 import { useCart } from "@/context/CartContext";
+import { safeText, getProductName, getProductDescription } from "@/lib/safeText";
 interface Product {
   id: string;
   name: any;
@@ -15,80 +16,6 @@ interface Product {
   state: string;
   recommendation_criteria: any;
 }
-
-// Helper function to safely convert any value to a string
-const safeText = (value: any, depth: number = 0): string => {
-  // Prevent infinite recursion
-  if (depth > 5) {
-    return '[Complex Object]';
-  }
-  
-  if (value === null || value === undefined) {
-    return '';
-  }
-  
-  if (typeof value === 'string') {
-    return value;
-  }
-  
-  if (typeof value === 'number' || typeof value === 'boolean') {
-    return String(value);
-  }
-  
-  if (Array.isArray(value)) {
-    if (value.length === 0) return '';
-    return value.map(item => safeText(item, depth + 1)).join(', ');
-  }
-  
-  if (typeof value === 'object') {
-    try {
-      // Handle specific object structures that we know about
-      if (value.hasOwnProperty('not_for') && value.hasOwnProperty('purpose')) {
-        console.log('Found not_for/purpose object:', value);
-        const purpose = safeText(value.purpose, depth + 1);
-        const notFor = safeText(value.not_for, depth + 1);
-        const result = purpose || notFor || '[Purpose/Not For Object]';
-        console.log('Converted not_for/purpose to:', result);
-        return result;
-      }
-      
-      // Handle translation objects
-      if (value.es || value.en) {
-        return safeText(value.es || value.en, depth + 1);
-      }
-      
-      // Handle objects with a 'text' or 'name' property
-      if (value.text) {
-        return safeText(value.text, depth + 1);
-      }
-      
-      if (value.name) {
-        return safeText(value.name, depth + 1);
-      }
-      
-      // For other objects, try to extract meaningful text from values
-      const values = Object.values(value).filter(v => v != null);
-      if (values.length === 0) return '';
-      
-      const textValues = values
-        .map(v => safeText(v, depth + 1))
-        .filter(text => text && text.trim() !== '')
-        .slice(0, 3); // Limit to first 3 meaningful values
-      
-      return textValues.join(' - ') || JSON.stringify(value).substring(0, 50) + '...';
-    } catch (error) {
-      console.error('Error processing object in safeText:', error, value);
-      // Last resort: try to stringify the object
-      try {
-        return JSON.stringify(value).substring(0, 50) + '...';
-      } catch (stringifyError) {
-        return '[Unparseable Object]';
-      }
-    }
-  }
-  
-  return String(value);
-};
 
 const Results = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -233,8 +160,8 @@ const handlePurchase = (productId: string) => {
               console.log('Product description:', product.description);
               console.log('Product recommendation_criteria:', product.recommendation_criteria);
               
-              const productName = safeText(product.name) || "Producto";
-              const productDescription = safeText(product.description);
+              const productName = getProductName(product.name);
+              const productDescription = getProductDescription(product.description);
               
               console.log('Processed name:', productName);
               console.log('Processed description:', productDescription);

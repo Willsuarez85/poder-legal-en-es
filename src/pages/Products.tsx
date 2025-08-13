@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { safeText, getProductName, getProductDescription } from "@/lib/safeText";
 
 interface Product {
   id: string;
@@ -90,23 +91,6 @@ const Products = () => {
     return safeText(state) || "";
   };
 
-  // Safely coerce potential JSON/text fields from Supabase into strings
-  const safeText = (value: any): string => {
-    if (value == null) return "";
-    if (typeof value === "string") return value;
-    if (typeof value === "number") return String(value);
-    if (Array.isArray(value)) return value.map(safeText).filter(Boolean).join(", ");
-    if (typeof value === "object") {
-      const v: any = value;
-      // Common multilingual or structured fields
-      if (typeof v.es === "string" || typeof v.en === "string") return v.es || v.en;
-      if (v.purpose) return safeText(v.purpose);
-      if (v.title) return safeText(v.title);
-      // Fallback: join stringified values
-      return Object.values(v).map(safeText).filter(Boolean).join(". ");
-    }
-    return "";
-  };
 
   if (loading) {
     return (
@@ -149,8 +133,8 @@ const Products = () => {
         {filteredProducts.length > 0 ? (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {filteredProducts.map((product) => {
-              const productName = safeText(product.name) || "Producto";
-              const productDescription = safeText(product.description);
+              const productName = getProductName(product.name);
+              const productDescription = getProductDescription(product.description);
               const stateLabel = typeof product.state === "string" 
                 ? getStateName(product.state) 
                 : safeText(product.state) || "";

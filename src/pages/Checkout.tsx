@@ -8,6 +8,7 @@ import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { safeText, getProductName, getProductDescription } from "@/lib/safeText";
 
 interface Product {
   id: string;
@@ -127,9 +128,7 @@ const Checkout = () => {
       navigate("/success", { 
         state: { 
           orderId: data.id,
-          productName: typeof product.name === 'object' 
-            ? product.name.es || product.name.en 
-            : product.name
+          productName: getProductName(product.name)
         } 
       });
 
@@ -188,13 +187,8 @@ const Checkout = () => {
     );
   }
 
-  const productName = typeof product.name === 'object' 
-    ? product.name.es || product.name.en || "Producto"
-    : product.name;
-  
-  const productDescription = typeof product.description === 'object'
-    ? product.description.es || product.description.en || ""
-    : product.description || "";
+  const productName = getProductName(product.name);
+  const productDescription = getProductDescription(product.description);
 
   return (
     <div className="min-h-screen bg-background py-8 px-4">
