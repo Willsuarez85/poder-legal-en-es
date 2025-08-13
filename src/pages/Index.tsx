@@ -1,3 +1,4 @@
+
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -187,7 +188,7 @@ const Index = () => {
 
               <div className="absolute -top-4 -right-4 bg-destructive text-destructive-foreground rounded-lg shadow-lg p-3 lg:p-4 hidden lg:block">
                 <div className="text-center">
-                  <div className="font-bold text-base lg:text-lg">100% Legal</div>
+                  <div className="font-bold text-base lg:text-lg">PDF Válidos 🇺🇸</div>
                   <div className="text-xs lg:text-sm opacity-90">Garantizado</div>
                 </div>
               </div>
@@ -202,7 +203,7 @@ const Index = () => {
                   <div className="text-xs text-muted-foreground">Tipos de documentos legales</div>
                 </div>
                 <div className="bg-destructive text-destructive-foreground rounded-lg shadow-md p-4 text-center">
-                  <div className="font-bold text-lg">100% Legal</div>
+                  <div className="font-bold text-lg">PDF Válidos 🇺🇸</div>
                   <div className="text-xs opacity-90">Garantizado</div>
                 </div>
               </div>
