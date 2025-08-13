@@ -149,7 +149,7 @@ const Index = () => {
               <div className="flex items-center justify-center lg:justify-start gap-4 text-sm text-muted-foreground">
                 <div className="flex items-center gap-1">
                   <CheckCircle className="w-4 h-4 text-primary" />
-                  <span>100% Legal</span>
+                  <span>Documentos Válidos en los 50 Estados</span>
                 </div>
                 <div className="flex items-center gap-1">
                   <CheckCircle className="w-4 h-4 text-primary" />
