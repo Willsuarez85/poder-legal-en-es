@@ -1,3 +1,4 @@
+
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -140,7 +141,7 @@ const Index = () => {
                     <FileText className="w-6 h-6 text-primary" />
                   </div>
                   <div className="font-bold text-lg">+120</div>
-                  <div className="text-xs text-muted-foreground">Tipos de documentos legales</div>
+                  <div className="text-xs text-muted-foreground">Tipos de Carta de poder listos para firmar y notarizar</div>
                 </div>
                 <div className="bg-destructive text-destructive-foreground rounded-lg shadow-md p-4 text-center">
                   <div className="font-bold text-lg">PDF Válidos 🇺🇸</div>
