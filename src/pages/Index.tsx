@@ -8,7 +8,6 @@ import testimonialMartha from "@/assets/testimonial-martha.jpg";
 import testimonialCarlos from "@/assets/testimonial-carlos.jpg";
 import testimonialLuis from "@/assets/testimonial-luis.jpg";
 import testimonialAna from "@/assets/testimonial-ana.jpg";
-
 const Index = () => {
   const navigate = useNavigate();
   const steps = [{
@@ -17,7 +16,7 @@ const Index = () => {
     description: "Encuentra la Carta de Poder que necesitas en 2 minutos",
     icon: Phone
   }, {
-    number: "2", 
+    number: "2",
     title: "Descarga tu documento PDF",
     description: "A tu teléfono o email en minutos",
     icon: Download
@@ -54,7 +53,6 @@ const Index = () => {
     author: "Carlos H.",
     location: "Houston, TX"
   }];
-
   return <div className="min-h-screen bg-background">
       {/* Logo Header */}
       <div className="container mx-auto px-4 pt-6">
@@ -142,7 +140,7 @@ const Index = () => {
                     <FileText className="w-6 h-6 text-primary" />
                   </div>
                   <div className="font-bold text-lg">+120</div>
-                  <div className="text-xs text-muted-foreground">Tipos de Carta de poder y documentos  legales verificados.</div>
+                  <div className="text-xs text-muted-foreground">Tipos de Carta de poder y documentos  legales verificados.</div>
                 </div>
                 <div className="bg-destructive text-destructive-foreground rounded-lg shadow-md p-4 text-center">
                   <div className="font-bold text-lg">PDF
@@ -309,8 +307,8 @@ Válidos 🇺🇸</div>
                         <IconComponent className="w-5 h-5 text-primary" />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-sm mb-1">PDF 100% Legal y Válido en tu Estado</h3>
-                        <p className="text-muted-foreground text-xs">Formato listo para firmar y notarizar</p>
+                        <h3 className="font-semibold text-sm mb-1">{benefit.title}</h3>
+                        <p className="text-muted-foreground text-xs">en todos los Estados Unidos</p>
                       </div>
                     </div>;
               })}
