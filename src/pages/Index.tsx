@@ -367,7 +367,7 @@ Válidos 🇺🇸</div>
                       {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-accent" />)}
                     </div>
                     <p className="text-muted-foreground mb-4 leading-relaxed">
-                      "Siempre pensé que necesitaba un abogado para hacer un Power of Attorney, así que nunca lo hice. Cuando encontré esta página en Instagram, descargué el formato, lo llené, lo notaricé en mi banco y lo aceptaron sin problema."
+                      "Siempre pensé que solo un abogado podía redactar esto y que sería costoso. En pocos minutos tuve mi Carta de Poder lista, 100% legal, y la notarizamos aquí en Charlotte sin ningún problema."
                     </p>
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 rounded-full overflow-hidden">
