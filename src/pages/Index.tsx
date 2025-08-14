@@ -549,7 +549,7 @@ Válidos 🇺🇸</div>
           </p>
           
           <Button size="lg" variant="secondary" className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-base sm:text-lg md:text-xl px-6 sm:px-8 md:px-12 py-4 sm:py-5 md:py-6 shadow-lg hover:shadow-xl transition-all w-full sm:w-auto max-w-full" onClick={() => navigate("/quiz")}>
-            <span className="text-center leading-tight">Haz el Quiz y encuentra tu carta de poder ahora</span>
+            <span className="text-center leading-tight">Comienza el Quiz Ahora</span>
             <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 flex-shrink-0" />
           </Button>
 
