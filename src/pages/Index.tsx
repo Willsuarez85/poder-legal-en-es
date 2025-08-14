@@ -410,7 +410,7 @@ Válidos 🇺🇸</div>
                       {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-accent" />)}
                     </div>
                     <p className="text-muted-foreground mb-4 leading-relaxed">
-                      "{testimonials[1].text}"
+                      "Descargué mi documento PDF en el celular y ese mismo día lo firmé con mi esposa. Las instrucciones fueron rápidas, claras y fáciles de seguir."
                     </p>
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 rounded-full overflow-hidden">
