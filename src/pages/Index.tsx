@@ -54,6 +54,7 @@ const Index = () => {
     author: "Carlos H.",
     location: "Houston, TX"
   }];
+
   return <div className="min-h-screen bg-background">
       {/* Logo Header */}
       <div className="container mx-auto px-4 pt-6">
@@ -141,7 +142,7 @@ const Index = () => {
                     <FileText className="w-6 h-6 text-primary" />
                   </div>
                   <div className="font-bold text-lg">+120</div>
-                  <div className="text-xs text-muted-foreground">Tipos de Carta de poder y documentos  legales verificados.</div>
+                  <div className="text-xs text-muted-foreground">Tipos de Carta de poder y documentos  legales verificados.</div>
                 </div>
                 <div className="bg-destructive text-destructive-foreground rounded-lg shadow-md p-4 text-center">
                   <div className="font-bold text-lg">PDF
@@ -309,7 +310,7 @@ Válidos 🇺🇸</div>
                       </div>
                       <div>
                         <h3 className="font-semibold text-sm mb-1">PDF 100% Legal y Válido en tu Estado</h3>
-                        <p className="text-muted-foreground text-xs">en todos los Estados Unidos</p>
+                        <p className="text-muted-foreground text-xs">Formato listo para firmar y notarizar</p>
                       </div>
                     </div>;
               })}
