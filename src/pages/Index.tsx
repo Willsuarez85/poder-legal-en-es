@@ -459,7 +459,7 @@ Válidos 🇺🇸</div>
                 </div>
                 <div className="flex items-center gap-2">
                   <Star className="w-4 h-4 text-accent" />
-                  <span>4.9/5 estrellas</span>
+                  <span>Aceptados por bancos e instituciones</span>
                 </div>
               </div>
             </div>
