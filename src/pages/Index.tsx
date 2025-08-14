@@ -367,7 +367,7 @@ Válidos 🇺🇸</div>
                       {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-accent" />)}
                     </div>
                     <p className="text-muted-foreground mb-4 leading-relaxed">
-                      "Siempre pensé que solo un abogado podía redactar esto y que sería costoso. En pocos minutos tuve mi Carta de Poder lista, 100% legal, y la notarizamos aquí en Charlotte sin ningún problema."
+                      "Siempre pensé que solo un abogado podía redactar esto y que sería costoso. En pocos minutos tuve mi Carta de Poder lista, 100% legal, y la notaricé aquí en Charlotte sin ningún problema."
                     </p>
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 rounded-full overflow-hidden">
@@ -455,7 +455,7 @@ Válidos 🇺🇸</div>
                 </div>
                 <div className="flex items-center gap-2">
                   <Shield className="w-4 h-4" />
-                  <span>100% documentos legales</span>
+                  <span>Documentos 100% legales y válidos en tu estado</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Star className="w-4 h-4 text-accent" />
