@@ -430,7 +430,7 @@ Válidos 🇺🇸</div>
                       {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-accent" />)}
                     </div>
                     <p className="text-muted-foreground mb-4 leading-relaxed">
-                      "Mi familia ahora está protegida. El documento llegó en minutos y las instrucciones estaban súper claras en español."
+                      "No sabíamos llenarlo porque estaba en inglés. Lo compramos y, con ayuda por WhatsApp, nos lo enviaron listo. Ese mismo día lo firmamos y todo fue rápido y claro."
                     </p>
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 rounded-full overflow-hidden">
