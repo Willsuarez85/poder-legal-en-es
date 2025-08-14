@@ -8,15 +8,17 @@ import testimonialMartha from "@/assets/testimonial-martha.jpg";
 import testimonialCarlos from "@/assets/testimonial-carlos.jpg";
 import testimonialLuis from "@/assets/testimonial-luis.jpg";
 import testimonialAna from "@/assets/testimonial-ana.jpg";
+
 const Index = () => {
   const navigate = useNavigate();
+  
   const steps = [{
     number: "1",
     title: "Responde el Quiz Rápido",
     description: "Encuentra la Carta de Poder que necesitas en 2 minutos",
     icon: Phone
   }, {
-    number: "2",
+    number: "2", 
     title: "Descarga tu documento PDF",
     description: "A tu teléfono o email en minutos",
     icon: Download
@@ -26,23 +28,25 @@ const Index = () => {
     description: "Paso a paso para llenar y firmar con confianza",
     icon: Edit
   }];
+
   const benefits = [{
     icon: Shield,
-    title: "PDF listo para firmar y notarizar",
-    description: "Documentos válidos en todos los estados de USA"
+    title: "📄 PDF 100% Legal y Válido en tu Estado",
+    description: "Cartas de poder listas para firmar y notarizar, aceptadas por instituciones."
   }, {
     icon: Clock,
-    title: "En Minutos, No Meses",
-    description: "Sin abogados caros, ni trámites confusos"
+    title: "⚡ Encuentra la Carta de Poder que Necesitas en Minutos",
+    description: "Sin citas, sin esperas y sin pagar cientos de dólares a abogados. Descárgala hoy mismo."
   }, {
     icon: Phone,
-    title: "Todo en tu Celular",
-    description: "Proceso 100% digital y móvil"
+    title: "📱 Todo Desde tu Celular, Fácil y Seguro",
+    description: "Evita trámites complicados. Obtén tu documento de forma privada y rápida."
   }, {
     icon: Heart,
-    title: "En Español",
-    description: "Instrucciones claras en tu idioma"
+    title: "🇪🇸 Soporte 100% en Español",
+    description: "Si tienes dudas, te guiamos paso a paso para llenarla correctamente."
   }];
+
   const protections = ["Cuidar a tus hijos", "Acceder a tus cuentas", "Vender tu casa", "Tomar decisiones médicas", "Representarte legalmente en emergencias"];
   const testimonials = [{
     text: "Cuando deportaron a mi esposo, no tenía acceso a nuestras cuentas. Si hubiéramos tenido una carta de poder, todo habría sido diferente.",
@@ -53,6 +57,7 @@ const Index = () => {
     author: "Carlos H.",
     location: "Houston, TX"
   }];
+
   return <div className="min-h-screen bg-background">
       {/* Logo Header */}
       <div className="container mx-auto px-4 pt-6">
@@ -140,7 +145,7 @@ const Index = () => {
                     <FileText className="w-6 h-6 text-primary" />
                   </div>
                   <div className="font-bold text-lg">+120</div>
-                  <div className="text-xs text-muted-foreground">Tipos de Carta de poder y documentos  legales verificados.</div>
+                  <div className="text-xs text-muted-foreground">Tipos de Carta de poder y documentos  legales verificados.</div>
                 </div>
                 <div className="bg-destructive text-destructive-foreground rounded-lg shadow-md p-4 text-center">
                   <div className="font-bold text-lg">PDF
@@ -308,7 +313,7 @@ Válidos 🇺🇸</div>
                       </div>
                       <div>
                         <h3 className="font-semibold text-sm mb-1">{benefit.title}</h3>
-                        <p className="text-muted-foreground text-xs">en todos los Estados Unidos</p>
+                        <p className="text-muted-foreground text-xs">{benefit.description}</p>
                       </div>
                     </div>;
               })}
@@ -563,4 +568,5 @@ Válidos 🇺🇸</div>
       </section>
     </div>;
 };
+
 export default Index;
