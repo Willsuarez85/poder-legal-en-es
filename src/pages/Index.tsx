@@ -352,8 +352,7 @@ Válidos 🇺🇸</div>
               Confianza de Nuestra Comunidad nos Respalda
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Miles de familias hispanas que confían en nosotros para proteger 
-              sus documentos legales cada día
+              Historias reales de familias hispanas que usan nuestras Cartas de Poder para cuidar su futuro.
             </p>
           </div>
 
