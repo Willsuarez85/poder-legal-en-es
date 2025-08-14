@@ -8,6 +8,7 @@ import testimonialMartha from "@/assets/testimonial-martha.jpg";
 import testimonialCarlos from "@/assets/testimonial-carlos.jpg";
 import testimonialLuis from "@/assets/testimonial-luis.jpg";
 import testimonialAna from "@/assets/testimonial-ana.jpg";
+
 const Index = () => {
   const navigate = useNavigate();
   const steps = [{
@@ -16,7 +17,7 @@ const Index = () => {
     description: "Encuentra la Carta de Poder que necesitas en 2 minutos",
     icon: Phone
   }, {
-    number: "2",
+    number: "2", 
     title: "Descarga tu documento PDF",
     description: "A tu teléfono o email en minutos",
     icon: Download
@@ -307,7 +308,7 @@ Válidos 🇺🇸</div>
                         <IconComponent className="w-5 h-5 text-primary" />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-sm mb-1">{benefit.title}</h3>
+                        <h3 className="font-semibold text-sm mb-1">PDF 100% Legal y Válido en tu Estado</h3>
                         <p className="text-muted-foreground text-xs">en todos los Estados Unidos</p>
                       </div>
                     </div>;
