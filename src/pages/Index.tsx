@@ -78,7 +78,7 @@ const Index = () => {
               </h1>
               
               <p className="text-base md:text-lg lg:text-xl text-muted-foreground leading-relaxed">
-                Más de 120 formatos de <strong>Cartas de Poder PDF legales</strong> disponibles para todos los estados de EE.UU., listos para que lo puedas descargar, llenar y firmar en minutos con instrucciones claras en español. 📲 Solo contesta un quiz rápido y descarga tu documento legal correcto, hecho para tu estado y situación.
+                Más de 120 formatos de <strong>Cartas de Poder PDF legales</strong> disponibles para todos los estados de EE.UU., listos para que lo puedas descargar, llenar y firmar en minutos con instrucciones claras en español.<br />📲 Solo contesta un quiz rápido y descarga tu documento legal correcto, hecho para tu estado y situación.
               </p>
               
               <p className="text-sm md:text-base text-muted-foreground">
