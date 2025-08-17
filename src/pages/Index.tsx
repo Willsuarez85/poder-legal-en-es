@@ -1,4 +1,3 @@
-
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,17 +8,15 @@ import testimonialMartha from "@/assets/testimonial-martha.jpg";
 import testimonialCarlos from "@/assets/testimonial-carlos.jpg";
 import testimonialLuis from "@/assets/testimonial-luis.jpg";
 import testimonialAna from "@/assets/testimonial-ana.jpg";
-
 const Index = () => {
   const navigate = useNavigate();
-  
   const steps = [{
     number: "1",
     title: "Responde el Quiz Rápido",
     description: "Encuentra la Carta de Poder que necesitas en 2 minutos",
     icon: Phone
   }, {
-    number: "2", 
+    number: "2",
     title: "Descarga tu documento PDF",
     description: "A tu teléfono o email en minutos",
     icon: Download
@@ -29,7 +26,6 @@ const Index = () => {
     description: "Paso a paso para llenar y firmar con confianza",
     icon: Edit
   }];
-
   const benefits = [{
     icon: Shield,
     title: "📄 PDF 100% Legal y Válido en tu Estado",
@@ -47,7 +43,6 @@ const Index = () => {
     title: "🇪🇸 Soporte 100% en Español",
     description: "Si tienes dudas, te guiamos paso a paso para llenarla correctamente."
   }];
-
   const protections = ["Cuidar a tus hijos", "Acceder a tus cuentas", "Vender tu casa", "Tomar decisiones médicas", "Representarte legalmente en emergencias"];
   const testimonials = [{
     text: "Cuando deportaron a mi esposo, no tenía acceso a nuestras cuentas. Si hubiéramos tenido una carta de poder, todo habría sido diferente.",
@@ -58,7 +53,6 @@ const Index = () => {
     author: "Carlos H.",
     location: "Houston, TX"
   }];
-
   return <div className="min-h-screen bg-background">
       {/* Logo Header */}
       <div className="container mx-auto px-4 pt-6">
@@ -158,8 +152,8 @@ const Index = () => {
       <section className="py-12 md:py-16 lg:py-20 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12 lg:mb-16">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 lg:mb-6">Encuentra la carta de poder legal que necesitas en 3 simples pasos</h2>
-            <p className="text-base lg:text-lg text-muted-foreground max-w-3xl mx-auto">Proceso simple y rápido: llena el quiz completamente en español y descarga, por solo $19.99, el formato exacto de carta de poder que necesitas para proteger tus bienes y tu familia.</p>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 lg:mb-6">✅ Haz tu Power of Attorney sin complicaciones </h2>
+            <p className="text-base lg:text-lg text-muted-foreground max-w-3xl mx-auto">Contesta un quiz en español, fácil y rápido, y descarga el formato legal correcto válido en tu estado. 📄 Viene con instrucciones claras en español, listo para firmar y notarizar. Sin abogados, sin estrés.</p>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto">
@@ -562,5 +556,4 @@ const Index = () => {
       </section>
     </div>;
 };
-
 export default Index;
