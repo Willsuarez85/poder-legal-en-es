@@ -140,7 +140,7 @@ const Index = () => {
                 </div>
                 <div className="bg-destructive text-destructive-foreground rounded-lg shadow-md p-4 text-center">
                   <div className="font-bold text-lg">PDF Válidos 🇺🇸</div>
-                  <div className="text-xs opacity-90">Documentos listos para firmar</div>
+                  <div className="text-xs opacity-90">Documentos listos para descargar, llenar y firmar</div>
                 </div>
               </div>
             </div>
