@@ -82,7 +82,7 @@ const Index = () => {
               </p>
               
               <p className="text-sm md:text-base text-muted-foreground">
-                Documentos listos para Firmar y notarizar. Sin abogados caros ni trámites confusos.
+                Sin abogados caros ni trámites confusos.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
