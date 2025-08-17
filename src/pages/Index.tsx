@@ -78,7 +78,7 @@ const Index = () => {
               </h1>
               
               <p className="text-base md:text-lg lg:text-xl text-muted-foreground leading-relaxed">
-                Encuentra la carta de poder (<strong>Power of Attorney</strong>) exacta que necesitas para proteger lo que más amas. Documentos Válidos en los 50 Estados listos para descargar en PDF y llenar fácilmente con instrucciones en español.
+                Más de 120 formatos legales disponibles para todos los estados de EE.UU., listos para firmar y notarizar con instrucciones claras en tu idioma. 📲 Solo contesta un quiz rápido y descarga tu documento legal correcto, hecho para tu estado y situación.
               </p>
               
               <p className="text-sm md:text-base text-muted-foreground">
