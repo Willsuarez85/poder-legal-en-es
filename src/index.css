@@ -20,6 +20,10 @@ All colors MUST be HSL.
     --success: 142 76% 36%; /* Green for success actions */
     --success-foreground: 0 0% 100%; /* White text on green */
     
+    /* Yellow for ratings/stars */
+    --yellow: 45 93% 47%; /* #eab308 - Yellow for stars */
+    --yellow-foreground: 0 0% 10%; /* Dark text on yellow */
+    
     /* Warning/Dark blue colors for warning sections */
     --warning: 213 90% 20%; /* Dark blue for warning sections */
     --warning-foreground: 0 0% 100%; /* White text on dark blue */

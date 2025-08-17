@@ -406,7 +406,7 @@ const Index = () => {
                 <Card className="relative bg-background/80 backdrop-blur border shadow-lg">
                   <CardContent className="p-6 lg:p-8">
                     <div className="flex mb-3">
-                      {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-accent" />)}
+                      {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-yellow fill-yellow" />)}
                     </div>
                     <p className="text-muted-foreground mb-4 leading-relaxed text-sm lg:text-base">
                       "Siempre pensé que solo un abogado podía redactar esto y que sería costoso. En pocos minutos tuve mi Carta de Poder lista, 100% legal, y la notaricé aquí en Charlotte sin ningún problema."
@@ -426,7 +426,7 @@ const Index = () => {
                 <Card className="relative bg-background/80 backdrop-blur border shadow-lg lg:ml-8">
                   <CardContent className="p-6 lg:p-8">
                     <div className="flex mb-3">
-                      {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-accent" />)}
+                      {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-yellow fill-yellow" />)}
                     </div>
                     <p className="text-muted-foreground mb-4 leading-relaxed text-sm lg:text-base">
                       "No confiaba en documentos online, pero después de 3 años sin documentos encontré esta opción. La notaricé en mi banco y la aceptaron sin problema."
@@ -449,7 +449,7 @@ const Index = () => {
                 <Card className="relative bg-background/80 backdrop-blur border shadow-lg lg:mr-8">
                   <CardContent className="p-6 lg:p-8">
                     <div className="flex mb-3">
-                      {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-accent" />)}
+                      {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-yellow fill-yellow" />)}
                     </div>
                     <p className="text-muted-foreground mb-4 leading-relaxed text-sm lg:text-base">
                       "Descargué mi documento PDF en el celular y ese mismo día lo firmé con mi esposa. Las instrucciones fueron rápidas, claras y fáciles de seguir."
@@ -469,7 +469,7 @@ const Index = () => {
                 <Card className="relative bg-background/80 backdrop-blur border shadow-lg">
                   <CardContent className="p-6 lg:p-8">
                     <div className="flex mb-3">
-                      {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-accent" />)}
+                      {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-yellow fill-yellow" />)}
                     </div>
                     <p className="text-muted-foreground mb-4 leading-relaxed text-sm lg:text-base">
                       "No sabíamos llenarlo porque estaba en inglés. Lo compramos y, con ayuda por WhatsApp, nos lo enviaron listo. Ese mismo día lo firmamos y todo fue rápido y claro."
@@ -500,7 +500,7 @@ const Index = () => {
                   <span>Documentos 100% legales y válidos en tu estado</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Star className="w-4 h-4 text-accent" />
+                  <Star className="w-4 h-4 text-yellow fill-yellow" />
                   <span>Aceptados por bancos e instituciones</span>
                 </div>
               </div>
