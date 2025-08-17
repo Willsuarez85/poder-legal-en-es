@@ -197,7 +197,7 @@ const Index = () => {
       <section className="py-12 md:py-16 lg:py-20 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12 lg:mb-16">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 lg:mb-6">✅ Haz tu Power of Attorney sin complicaciones </h2>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 lg:mb-6">✅ <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 lg:mb-6">Con Poder Legal USA, hacer tu Carta Poder es fácil, rápido y en tu idioma.</h2> </h2>
             <p className="text-base lg:text-lg text-muted-foreground max-w-3xl mx-auto">Contesta un quiz en español, fácil y rápido, y descarga el formato legal correcto válido en tu estado. 📄 Viene con instrucciones claras en español, listo para firmar y notarizar. Sin abogados, sin estrés.</p>
           </div>
 
