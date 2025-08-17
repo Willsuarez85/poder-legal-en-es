@@ -78,11 +78,11 @@ const Index = () => {
               </h1>
               
               <p className="text-base md:text-lg lg:text-xl text-muted-foreground leading-relaxed">
-                Más de 120 formatos de <strong>Cartas de Poder PDF legales</strong> disponibles para todos los estados de EE.UU., listos para que lo puedas descargar, llenar y firmar en minutos con instrucciones claras en español.<br />📲 Solo contesta un quiz rápido y descarga tu documento legal correcto, hecho para tu estado y situación.
+                Encuentra la carta de poder (<strong>Power of Attorney</strong>) exacta que necesitas para proteger lo que más amas. Documentos Válidos en los 50 Estados listos para descargar en PDF y llenar fácilmente con instrucciones en español.
               </p>
               
               <p className="text-sm md:text-base text-muted-foreground">
-                Sin abogados caros ni trámites confusos.
+                Documentos listos para Firmar y notarizar. Sin abogados caros ni trámites confusos.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
@@ -140,64 +140,9 @@ const Index = () => {
                 </div>
                 <div className="bg-destructive text-destructive-foreground rounded-lg shadow-md p-4 text-center">
                   <div className="font-bold text-lg">PDF Válidos 🇺🇸</div>
-                  <div className="text-xs opacity-90">Documentos listos para descargar, llenar y firmar</div>
+                  <div className="text-xs opacity-90">Documentos listos para firmar</div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Problem Agitation Section */}
-      <section className="py-12 md:py-16 lg:py-20 bg-muted/20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 lg:mb-8">
-              ¿Necesitas una Carta Poder pero no sabes por dónde empezar?
-            </h2>
-            
-            <p className="text-base lg:text-lg text-muted-foreground mb-8 lg:mb-10">
-              Muchos latinos en EE.UU. saben que deben tener una Carta Poder para proteger a sus hijos, su casa o su negocio...<br />
-              <strong>pero no saben cómo hacerlo bien.</strong>
-            </p>
-
-            <div className="grid md:grid-cols-3 gap-6 lg:gap-8 mb-8 lg:mb-10">
-              <div className="flex items-start gap-3 p-4 lg:p-6 bg-background rounded-lg border">
-                <div className="w-8 h-8 bg-destructive/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                  <span className="text-destructive font-bold">🔸</span>
-                </div>
-                <p className="text-sm lg:text-base text-muted-foreground text-left">
-                  Algunos piensan que <strong>solo un abogado caro</strong> puede hacerlo.
-                </p>
-              </div>
-              
-              <div className="flex items-start gap-3 p-4 lg:p-6 bg-background rounded-lg border">
-                <div className="w-8 h-8 bg-destructive/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                  <span className="text-destructive font-bold">🔸</span>
-                </div>
-                <p className="text-sm lg:text-base text-muted-foreground text-left">
-                  Otros descargan <strong>plantillas gratis que no son válidas</strong> en su estado.
-                </p>
-              </div>
-              
-              <div className="flex items-start gap-3 p-4 lg:p-6 bg-background rounded-lg border">
-                <div className="w-8 h-8 bg-destructive/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                  <span className="text-destructive font-bold">🔸</span>
-                </div>
-                <p className="text-sm lg:text-base text-muted-foreground text-left">
-                  Y muchos terminan confiando en <strong>"notarios" o personas que prometen ayudar</strong> y solo entregan papeles inválidos.
-                </p>
-              </div>
-            </div>
-
-            <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-6 lg:p-8">
-              <div className="flex items-center justify-center gap-3 mb-4">
-                <span className="text-2xl">💥</span>
-                <h3 className="text-xl lg:text-2xl font-bold text-destructive">El resultado:</h3>
-              </div>
-              <p className="text-base lg:text-lg font-semibold text-destructive-foreground">
-                documentos mal hechos que no sirven cuando realmente los necesitas.
-              </p>
             </div>
           </div>
         </div>
@@ -242,9 +187,9 @@ const Index = () => {
       {/* What is Power of Attorney Section */}
       <section className="py-12 md:py-16 lg:py-20">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center text-gray-800">
             <div>
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 lg:mb-8">
+              <h2 className="md:text-3xl lg:text-4xl font-bold mb-6 lg:mb-8 text-red-600 text-lg">
                 ¿Qué es una Carta de Poder?
               </h2>
               
