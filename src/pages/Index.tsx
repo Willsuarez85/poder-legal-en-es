@@ -58,7 +58,7 @@ const Index = () => {
       {/* Logo Header */}
       <div className="container mx-auto px-4 pt-6">
         <div className="flex items-center justify-between">
-          <img src="/lovable-uploads/1e870570-7e2a-436f-95b4-d50755c085a0.png" alt="Poder LegalUSA.com" className="h-10 md:h-14 lg:h-20 xl:h-24 w-auto" decoding="async" loading="lazy" sizes="(max-width: 768px) 120px, (max-width: 1024px) 160px, (max-width: 1280px) 200px, 240px" />
+          <img src="/lovable-uploads/1e870570-7e2a-436f-95b4-d50755c085a0.png" alt="Poder LegalUSA.com" className="h-16 md:h-20 lg:h-32 xl:h-36 w-auto" decoding="async" loading="lazy" sizes="(max-width: 768px) 180px, (max-width: 1024px) 240px, (max-width: 1280px) 320px, 360px" />
           <a href="https://wa.me/17042645084" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-success hover:bg-success/90 text-success-foreground px-3 md:px-4 py-2 rounded-lg transition-colors text-sm font-medium shadow-md">
             <MessageCircle className="w-4 h-4" />
             <span className="hidden sm:inline">Atención al cliente 🇪🇸</span>
