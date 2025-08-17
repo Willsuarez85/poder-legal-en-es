@@ -492,7 +492,7 @@ const Index = () => {
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-xs sm:text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <Users className="w-4 h-4" />
-                  <span>+5,000 familias protegidas</span>
+                  <span>Sin abogados ni costos ocultos</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Shield className="w-4 h-4" />
