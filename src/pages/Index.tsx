@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Shield, FileText, Clock, CheckCircle, Star, Users, Heart, Lock, Phone, Download, Edit, ArrowRight, Quote, MessageCircle } from "lucide-react";
+import { Shield, FileText, Clock, CheckCircle, Star, Users, Heart, Lock, Phone, Download, Edit, ArrowRight, Quote, MessageCircle, AlertTriangle, XCircle, Ban } from "lucide-react";
 import testimonialMartha from "@/assets/testimonial-martha.jpg";
 import testimonialCarlos from "@/assets/testimonial-carlos.jpg";
 import testimonialLuis from "@/assets/testimonial-luis.jpg";
@@ -148,11 +148,63 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Problem Agitation Section */}
+      <section className="py-12 md:py-16 lg:py-20 bg-muted/20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 lg:mb-8">
+              ¿Necesitas una Carta Poder pero no sabes por dónde empezar?
+            </h2>
+            
+            <p className="text-base lg:text-lg text-muted-foreground mb-10 lg:mb-12 leading-relaxed">
+              Muchos latinos en EE.UU. saben que deben tener una Carta Poder para proteger a sus hijos, su casa o su negocio...
+              <br />
+              <strong>pero no saben cómo hacerlo bien.</strong>
+            </p>
+
+            <div className="grid md:grid-cols-3 gap-6 lg:gap-8 mb-10 lg:mb-12">
+              <div className="bg-background/80 backdrop-blur rounded-xl p-6 lg:p-8 border shadow-sm">
+                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <Ban className="w-6 h-6 text-primary" />
+                </div>
+                <p className="text-sm lg:text-base text-muted-foreground">
+                  🔸 Algunos piensan que solo un abogado caro puede hacerlo.
+                </p>
+              </div>
+
+              <div className="bg-background/80 backdrop-blur rounded-xl p-6 lg:p-8 border shadow-sm">
+                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <XCircle className="w-6 h-6 text-primary" />
+                </div>
+                <p className="text-sm lg:text-base text-muted-foreground">
+                  🔸 Otros descargan plantillas gratis que no son válidas en su estado.
+                </p>
+              </div>
+
+              <div className="bg-background/80 backdrop-blur rounded-xl p-6 lg:p-8 border shadow-sm">
+                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <AlertTriangle className="w-6 h-6 text-primary" />
+                </div>
+                <p className="text-sm lg:text-base text-muted-foreground">
+                  🔸 Y muchos terminan confiando en "notarios" o personas que prometen ayudar y solo entregan papeles inválidos.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-destructive/10 border border-destructive/20 rounded-xl p-6 lg:p-8">
+              <p className="text-base lg:text-lg font-semibold text-destructive">
+                💥 El resultado: documentos mal hechos que no sirven cuando realmente los necesitas.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Steps Section */}
       <section className="py-12 md:py-16 lg:py-20 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12 lg:mb-16">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 lg:mb-6">✅ Haz tu Power of Attorney sin complicaciones </h2>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 lg:mb-6">Con Poder Legal USA, hacer tu Carta Poder es fácil, rápido y Seguro</h2>
             <p className="text-base lg:text-lg text-muted-foreground max-w-3xl mx-auto">Contesta un quiz en español, fácil y rápido, y descarga el formato legal correcto válido en tu estado. 📄 Viene con instrucciones claras en español, listo para firmar y notarizar. Sin abogados, sin estrés.</p>
           </div>
 
