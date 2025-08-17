@@ -159,7 +159,7 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12 lg:mb-16">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 lg:mb-6">Encuentra la carta de poder legal que necesitas en 3 simples pasos</h2>
-            <p className="text-base lg:text-lg text-muted-foreground max-w-3xl mx-auto">Proceso simple y rápido: llena el quiz completamente en español y descarga, por solo $19.99, el formato exacto de carta de poder que necesitas para proteger tus bienes y tu familia.</p>
+            <p className="text-base lg:text-lg text-muted-foreground max-w-3xl mx-auto">La plantilla legal correcta de Power of Attorney valida en tu estado</p>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto">
