@@ -9,6 +9,7 @@ import Results from "./pages/Results";
 import Products from "./pages/Products";
 import Checkout from "./pages/Checkout";
 import Success from "./pages/Success";
+import TermsAndConditions from "./pages/TermsAndConditions";
 import NotFound from "./pages/NotFound";
 import { CartProvider } from "./context/CartContext";
 
@@ -29,6 +30,7 @@ const App = () => (
             <Route path="/products/:state" element={<Products />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/success" element={<Success />} />
+            <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
