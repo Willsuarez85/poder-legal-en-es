@@ -28,7 +28,7 @@ const Index = () => {
     {
       number: "3",
       title: "Recibe instrucciones en español",
-      description: "Paso a paso para llenar y firmar con confianza",
+      description: "Paso a paso, para que puedas llenarlo y firmarlo con total confianza",
       icon: Edit
     }
   ];
