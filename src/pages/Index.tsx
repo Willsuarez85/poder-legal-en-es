@@ -148,6 +148,51 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Problem Agitation Section */}
+      <section className="py-12 md:py-16 lg:py-20 bg-muted/50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 lg:mb-8 text-foreground">
+              ¿Necesitas una Carta Poder pero no sabes por dónde empezar?
+            </h2>
+            
+            <p className="text-base lg:text-lg text-muted-foreground mb-8 lg:mb-10">
+              Muchos latinos en EE.UU. saben que deben tener una Carta Poder para proteger a sus hijos, su casa o su negocio...
+              <br />
+              <strong>pero no saben cómo hacerlo bien.</strong>
+            </p>
+
+            <div className="space-y-4 lg:space-y-6 mb-8 lg:mb-10 text-left max-w-3xl mx-auto">
+              <div className="flex items-start gap-3">
+                <span className="text-lg">🔸</span>
+                <p className="text-base lg:text-lg text-muted-foreground">
+                  Algunos piensan que solo un abogado caro puede hacerlo.
+                </p>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-lg">🔸</span>
+                <p className="text-base lg:text-lg text-muted-foreground">
+                  Otros descargan plantillas gratis que no son válidas en su estado.
+                </p>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-lg">🔸</span>
+                <p className="text-base lg:text-lg text-muted-foreground">
+                  Y muchos terminan confiando en "notarios" o personas que prometen ayudar y solo entregan papeles inválidos.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-destructive/10 border-l-4 border-destructive rounded-lg p-6 lg:p-8">
+              <p className="text-lg lg:text-xl font-semibold text-destructive flex items-center justify-center gap-2">
+                <span>💥</span>
+                El resultado: documentos mal hechos que no sirven cuando realmente los necesitas.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Steps Section */}
       <section className="py-12 md:py-16 lg:py-20 bg-muted/30">
         <div className="container mx-auto px-4">
