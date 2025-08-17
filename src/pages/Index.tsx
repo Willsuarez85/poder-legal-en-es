@@ -22,7 +22,7 @@ const Index = () => {
     {
       number: "2",
       title: "Descarga tu documento PDF",
-      description: "A tu teléfono o email en minutos",
+      description: "A tu teléfono o correo en minutos, listo para imprimir, llenar y firmar",
       icon: Download
     },
     {
