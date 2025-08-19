@@ -1,11 +1,16 @@
-// deno-lint-ignore-file no-explicit-any
-import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import Stripe from "https://esm.sh/stripe@14.21.0?target=deno";
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
+import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import Stripe from "https://esm.sh/stripe@14.21.0";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.38.0";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+};
+
+// Helper logging function
+const logStep = (step: string, details?: any) => {
+  const detailsStr = details ? ` - ${JSON.stringify(details)}` : '';
+  console.log(`[CREATE-PAYMENT] ${step}${detailsStr}`);
 };
 
 serve(async (req) => {
@@ -14,9 +19,13 @@ serve(async (req) => {
   }
 
   try {
+    logStep("Function started");
+    
     const { origin, items } = await req.json();
+    logStep("Request received", { origin, itemsCount: items?.length });
 
     if (!Array.isArray(items) || items.length === 0) {
+      logStep("ERROR: No items in cart");
       return new Response(JSON.stringify({ error: "No hay items en el carrito" }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
         status: 400,
@@ -25,22 +34,40 @@ serve(async (req) => {
 
     const supabaseUrl = Deno.env.get("SUPABASE_URL") ?? "";
     const supabaseAnonKey = Deno.env.get("SUPABASE_ANON_KEY") ?? "";
-    const supabase = createClient(supabaseUrl, supabaseAnonKey, { auth: { persistSession: false } });
+    
+    if (!supabaseUrl || !supabaseAnonKey) {
+      logStep("ERROR: Missing Supabase credentials");
+      throw new Error("Missing Supabase credentials");
+    }
+    
+    const supabase = createClient(supabaseUrl, supabaseAnonKey, { 
+      auth: { persistSession: false } 
+    });
+    logStep("Supabase client created");
 
     const productIds = items.map((i: any) => i.productId);
+    logStep("Fetching products", { productIds });
+    
     const { data: products, error } = await supabase
       .from("products")
       .select("id, name, price")
       .in("id", productIds);
 
-    if (error) throw error;
+    if (error) {
+      logStep("ERROR: Database query failed", { error });
+      throw error;
+    }
+    
+    logStep("Products fetched", { productsCount: products?.length });
 
     const line_items = items.map((i: any) => {
       const product = products?.find((p: any) => p.id === i.productId);
       const nameObj = product?.name || {};
-      const productName =
-        typeof nameObj === "object" ? nameObj.es || nameObj.en || "Documento Legal" : String(nameObj);
+      const productName = typeof nameObj === "object" 
+        ? nameObj.es || nameObj.en || "Documento Legal" 
+        : String(nameObj);
       const price = Number(product?.price) || 0;
+      
       return {
         price_data: {
           currency: "usd",
@@ -48,17 +75,30 @@ serve(async (req) => {
           unit_amount: Math.max(0, Math.round(price * 100)),
         },
         quantity: Math.max(1, Number(i.quantity) || 1),
-      } as Stripe.Checkout.SessionCreateParams.LineItem;
+      };
     });
+    
+    logStep("Line items prepared", { lineItemsCount: line_items.length });
 
     const stripeKey = Deno.env.get("STRIPE_SECRET_KEY") || "";
-    if (!stripeKey) throw new Error("Falta STRIPE_SECRET_KEY en Secrets");
+    if (!stripeKey) {
+      logStep("ERROR: Missing Stripe secret key");
+      throw new Error("Falta STRIPE_SECRET_KEY en Secrets");
+    }
+    
+    logStep("Stripe key found", { keyPrefix: stripeKey.substring(0, 8) });
 
-    const stripe = new Stripe(stripeKey, { apiVersion: "2023-10-16" });
+    const stripe = new Stripe(stripeKey, { 
+      apiVersion: "2023-10-16",
+      httpClient: Stripe.createFetchHttpClient()
+    });
+    logStep("Stripe client created");
 
     const baseUrl = typeof origin === "string" && origin.startsWith("http")
       ? origin
       : (req.headers.get("origin") || "https://mszfhlkkszsojlzxgvou.supabase.co");
+    
+    logStep("Creating Stripe session", { baseUrl });
 
     const session = await stripe.checkout.sessions.create({
       line_items,
@@ -67,11 +107,14 @@ serve(async (req) => {
       cancel_url: `${baseUrl}/results`,
     });
 
+    logStep("Stripe session created", { sessionId: session.id, url: session.url });
+
     return new Response(JSON.stringify({ url: session.url }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 200,
     });
   } catch (err: any) {
+    logStep("ERROR in create-payment", { message: err?.message, stack: err?.stack });
     return new Response(JSON.stringify({ error: err?.message || "Unknown error" }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 500,
