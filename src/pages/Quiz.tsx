@@ -5,6 +5,7 @@ import { useToast } from "@/hooks/use-toast";
 import { WelcomeScreen } from "@/components/quiz/WelcomeScreen";
 import { QuestionCard } from "@/components/quiz/QuestionCard";
 import { ContactDataScreen } from "@/components/quiz/ContactDataScreen";
+import { generateUUID } from "@/lib/uuid";
 
 const US_STATES = [
   { value: "AL", label: "Alabama" }, { value: "AK", label: "Alaska" }, { value: "AZ", label: "Arizona" },
@@ -78,7 +79,7 @@ const Quiz = () => {
   const [currentScreen, setCurrentScreen] = useState<'welcome' | 'questions' | 'contact'>('welcome');
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, any>>({});
-  const [sessionId] = useState(() => crypto.randomUUID());
+  const [sessionId] = useState(() => generateUUID());
   const navigate = useNavigate();
   const { toast } = useToast();
 
