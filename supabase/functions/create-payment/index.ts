@@ -22,7 +22,7 @@ serve(async (req) => {
     logStep("Function started");
     
     const { origin, items, customerData } = await req.json();
-    logStep("Request received", { origin, itemsCount: items?.length, hasCustomerData: !!customerData });
+    logStep("Request received", { origin, itemsCount: items?.length, customerData });
 
     if (!Array.isArray(items) || items.length === 0) {
       logStep("ERROR: No items in cart");
@@ -146,6 +146,15 @@ serve(async (req) => {
         customer_phone: customerData?.phone || "",
         customer_email: customerData?.email || "",
       },
+    });
+
+    logStep("Stripe session metadata", { 
+      metadata: {
+        order_id: orderId,
+        customer_name: customerData?.name || "",
+        customer_phone: customerData?.phone || "",
+        customer_email: customerData?.email || "",
+      }
     });
 
     // Update order with Stripe session ID
