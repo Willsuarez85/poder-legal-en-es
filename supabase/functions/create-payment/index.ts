@@ -117,7 +117,7 @@ serve(async (req) => {
       .from("orders")
       .insert({
         customer_name: customerData?.name || "Cliente de prueba",
-        customer_email: customerData?.email || "guest@example.com",
+        customer_email: customerData?.email || `guest-${Date.now()}@poder-legal.com`,
         customer_phone: customerData?.phone || null,
         product_ids: productIds,
         total_amount: totalAmount,

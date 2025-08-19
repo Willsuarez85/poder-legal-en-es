@@ -50,7 +50,7 @@ const Products = () => {
       setCustomerData({
         name: contactData.name,
         phone: contactData.phone,
-        email: contactData.email || `${contactData.phone}@example.com` // Default email if not provided
+        email: contactData.email // Don't create fake emails
       });
     }
   }, [currentState, location.state]);
@@ -136,7 +136,7 @@ const Products = () => {
           customerData: location.state?.contactData ? {
             name: location.state.contactData.name,
             phone: location.state.contactData.phone,
-            email: location.state.contactData.email || `${location.state.contactData.phone}@example.com`
+            email: location.state.contactData.email // Don't create fake emails
           } : null
         }
       });
