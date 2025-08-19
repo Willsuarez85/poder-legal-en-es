@@ -27,7 +27,7 @@ const Products = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { addItem, items, totalAmount } = useCart();
+  const { addItem, items, totalAmount, setCustomerData } = useCart();
 
   // Get state from URL parameter or default to california
   const currentState = urlState || 'california';
@@ -43,7 +43,17 @@ const Products = () => {
 
   useEffect(() => {
     fetchProducts();
-  }, [currentState]);
+    
+    // If we have contact data from the quiz, save it to the cart context
+    const contactData = location.state?.contactData;
+    if (contactData) {
+      setCustomerData({
+        name: contactData.name,
+        phone: contactData.phone,
+        email: contactData.email || `${contactData.phone}@example.com` // Default email if not provided
+      });
+    }
+  }, [currentState, location.state]);
 
   const fetchProducts = async () => {
     try {
@@ -122,7 +132,12 @@ const Products = () => {
       const { data, error } = await supabase.functions.invoke('create-payment', {
         body: { 
           items: cartItems,
-          origin: window.location.origin
+          origin: window.location.origin,
+          customerData: location.state?.contactData ? {
+            name: location.state.contactData.name,
+            phone: location.state.contactData.phone,
+            email: location.state.contactData.email || `${location.state.contactData.phone}@example.com`
+          } : null
         }
       });
 

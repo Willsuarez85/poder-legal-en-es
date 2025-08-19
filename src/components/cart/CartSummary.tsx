@@ -10,7 +10,7 @@ const formatPrice = (price: number) =>
   new Intl.NumberFormat("es-US", { style: "currency", currency: "USD" }).format(price);
 
 const CartSummary = () => {
-  const { items, updateQuantity, removeItem, clear, totalAmount } = useCart();
+  const { items, updateQuantity, removeItem, clear, totalAmount, customerData } = useCart();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
 
@@ -22,6 +22,7 @@ const CartSummary = () => {
         body: {
           origin: window.location.origin,
           items: items.map((i) => ({ productId: i.productId, quantity: i.quantity })),
+          customerData: customerData,
         },
       });
       if (error) throw error;

@@ -21,8 +21,8 @@ serve(async (req) => {
   try {
     logStep("Function started");
     
-    const { origin, items } = await req.json();
-    logStep("Request received", { origin, itemsCount: items?.length });
+    const { origin, items, customerData } = await req.json();
+    logStep("Request received", { origin, itemsCount: items?.length, hasCustomerData: !!customerData });
 
     if (!Array.isArray(items) || items.length === 0) {
       logStep("ERROR: No items in cart");
@@ -116,8 +116,9 @@ serve(async (req) => {
     const { data: orderData, error: orderError } = await supabaseService
       .from("orders")
       .insert({
-        customer_name: "Cliente de prueba", // Will be updated later if needed
-        customer_email: "guest@example.com", // Default for guest checkout
+        customer_name: customerData?.name || "Cliente de prueba",
+        customer_email: customerData?.email || "guest@example.com",
+        customer_phone: customerData?.phone || null,
         product_ids: productIds,
         total_amount: totalAmount,
         stripe_session_id: null, // Will be updated after session creation
@@ -138,8 +139,12 @@ serve(async (req) => {
       mode: "payment",
       success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}&order_id=${orderId}`,
       cancel_url: `${baseUrl}/results`,
+      customer_email: customerData?.email || undefined,
       metadata: {
         order_id: orderId,
+        customer_name: customerData?.name || "",
+        customer_phone: customerData?.phone || "",
+        customer_email: customerData?.email || "",
       },
     });
 
