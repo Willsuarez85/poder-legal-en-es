@@ -2,12 +2,23 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle, Mail, Download, MessageCircle } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const Success = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [orderId, setOrderId] = useState<string | null>(null);
   
-  const orderId = location.state?.orderId;
+  useEffect(() => {
+    // Get order ID from URL params or location state
+    const urlParams = new URLSearchParams(location.search);
+    const orderIdFromUrl = urlParams.get('order_id');
+    const orderIdFromState = location.state?.orderId;
+    
+    const finalOrderId = orderIdFromUrl || orderIdFromState;
+    setOrderId(finalOrderId);
+  }, [location]);
+
   const productName = location.state?.productName;
 
   if (!orderId) {

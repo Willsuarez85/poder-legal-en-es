@@ -100,14 +100,56 @@ serve(async (req) => {
     
     logStep("Creating Stripe session", { baseUrl });
 
+    // Create order in database before creating Stripe session
+    const supabaseService = createClient(
+      Deno.env.get("SUPABASE_URL") ?? "",
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
+      { auth: { persistSession: false } }
+    );
+
+    // Calculate total amount
+    const totalAmount = line_items.reduce((sum, item) => {
+      return sum + (item.price_data.unit_amount * item.quantity);
+    }, 0) / 100; // Convert from cents to dollars
+
+    // Create order record
+    const { data: orderData, error: orderError } = await supabaseService
+      .from("orders")
+      .insert({
+        customer_name: "Cliente de prueba", // Will be updated later if needed
+        customer_email: "guest@example.com", // Default for guest checkout
+        product_ids: productIds,
+        total_amount: totalAmount,
+        stripe_session_id: null, // Will be updated after session creation
+      })
+      .select('id')
+      .single();
+
+    if (orderError) {
+      logStep("ERROR: Failed to create order", { orderError });
+      throw new Error("Failed to create order");
+    }
+
+    const orderId = orderData.id;
+    logStep("Order created", { orderId });
+
     const session = await stripe.checkout.sessions.create({
       line_items,
       mode: "payment",
-      success_url: `${baseUrl}/success`,
+      success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}&order_id=${orderId}`,
       cancel_url: `${baseUrl}/results`,
+      metadata: {
+        order_id: orderId,
+      },
     });
 
-    logStep("Stripe session created", { sessionId: session.id, url: session.url });
+    // Update order with Stripe session ID
+    await supabaseService
+      .from("orders")
+      .update({ stripe_session_id: session.id })
+      .eq('id', orderId);
+
+    logStep("Stripe session created", { sessionId: session.id, url: session.url, orderId });
 
     return new Response(JSON.stringify({ url: session.url }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
