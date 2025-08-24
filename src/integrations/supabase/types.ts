@@ -50,6 +50,36 @@ export type Database = {
         }
         Relationships: []
       }
+      orders_access_log: {
+        Row: {
+          action: string
+          attempted_at: string | null
+          id: string
+          ip_address: unknown | null
+          success: boolean | null
+          user_agent: string | null
+          user_id: string | null
+        }
+        Insert: {
+          action: string
+          attempted_at?: string | null
+          id?: string
+          ip_address?: unknown | null
+          success?: boolean | null
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          action?: string
+          attempted_at?: string | null
+          id?: string
+          ip_address?: unknown | null
+          success?: boolean | null
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       products: {
         Row: {
           created_at: string | null
@@ -147,6 +177,14 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      anonymize_test_orders: {
+        Args: Record<PropertyKey, never>
+        Returns: number
+      }
+      is_service_role_request: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
       save_quiz_session: {
         Args: { p_answers: Json; p_contact_data?: Json; p_session_id: string }
         Returns: string
