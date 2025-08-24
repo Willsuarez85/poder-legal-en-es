@@ -20,7 +20,7 @@ const TIME_OPTIONS = [
     value: 'specific_circumstance',
     label: 'Cuando ocurra una circunstancia específica',
     emoji: '⏳',
-    description: 'El poder se activa solo bajo condiciones específicas'
+    description: 'El poder se activa solo en circunstancias específicas. Ejemplo: en caso de fallecimiento o deportación.'
   }
 ];
 
