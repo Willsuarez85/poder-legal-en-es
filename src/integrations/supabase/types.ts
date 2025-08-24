@@ -7,7 +7,7 @@ export type Json =
   | Json[]
 
 export type Database = {
-  // Allows to automatically instanciate createClient with right options
+  // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
     PostgrestVersion: "12.2.12 (cd3cf9e)"
@@ -148,7 +148,7 @@ export type Database = {
     }
     Functions: {
       save_quiz_session: {
-        Args: { p_session_id: string; p_answers: Json; p_contact_data?: Json }
+        Args: { p_answers: Json; p_contact_data?: Json; p_session_id: string }
         Returns: string
       }
     }

@@ -1,0 +1,109 @@
+import { useState } from "react";
+import { StateSelectionStep } from "@/components/quiz2025/StateSelectionStep";
+import { IdentificationStep } from "@/components/quiz2025/IdentificationStep";
+import { EffectiveTimeStep } from "@/components/quiz2025/EffectiveTimeStep";
+import { ProductSelectionStep } from "@/components/quiz2025/ProductSelectionStep";
+import { CheckoutStep } from "@/components/quiz2025/CheckoutStep";
+import { Quiz2025Navbar } from "@/components/quiz2025/Quiz2025Navbar";
+import { ProgressBar } from "@/components/quiz2025/ProgressBar";
+
+export type QuizAnswers = {
+  state: string;
+  grantor_id: string;
+  grantee_id: string;
+  same_id: boolean;
+  effective_time: string;
+  selected_products: string[];
+};
+
+const Quiz2025 = () => {
+  const [currentStep, setCurrentStep] = useState(1);
+  const [answers, setAnswers] = useState<QuizAnswers>({
+    state: "",
+    grantor_id: "",
+    grantee_id: "",
+    same_id: false,
+    effective_time: "",
+    selected_products: [],
+  });
+
+  const updateAnswers = (newAnswers: Partial<QuizAnswers>) => {
+    setAnswers(prev => ({ ...prev, ...newAnswers }));
+    // Save to localStorage
+    localStorage.setItem('quiz2025_answers', JSON.stringify({ ...answers, ...newAnswers }));
+  };
+
+  const nextStep = () => {
+    if (currentStep < 5) {
+      setCurrentStep(currentStep + 1);
+    }
+  };
+
+  const prevStep = () => {
+    if (currentStep > 1) {
+      setCurrentStep(currentStep - 1);
+    }
+  };
+
+  const renderStep = () => {
+    switch (currentStep) {
+      case 1:
+        return (
+          <StateSelectionStep
+            selectedState={answers.state}
+            onStateSelect={(state) => updateAnswers({ state })}
+            onNext={nextStep}
+          />
+        );
+      case 2:
+        return (
+          <IdentificationStep
+            answers={answers}
+            onAnswersUpdate={updateAnswers}
+            onNext={nextStep}
+            onPrev={prevStep}
+          />
+        );
+      case 3:
+        return (
+          <EffectiveTimeStep
+            selectedTime={answers.effective_time}
+            onTimeSelect={(effective_time) => updateAnswers({ effective_time })}
+            onNext={nextStep}
+            onPrev={prevStep}
+          />
+        );
+      case 4:
+        return (
+          <ProductSelectionStep
+            selectedState={answers.state}
+            selectedProducts={answers.selected_products}
+            onProductsSelect={(selected_products) => updateAnswers({ selected_products })}
+            onNext={nextStep}
+            onPrev={prevStep}
+          />
+        );
+      case 5:
+        return (
+          <CheckoutStep
+            answers={answers}
+            onPrev={prevStep}
+          />
+        );
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-background">
+      <Quiz2025Navbar />
+      <ProgressBar currentStep={currentStep} totalSteps={5} />
+      <div className="container mx-auto px-4 py-8">
+        {renderStep()}
+      </div>
+    </div>
+  );
+};
+
+export default Quiz2025;
