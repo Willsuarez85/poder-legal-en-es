@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { ChevronDown } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 interface Product {
@@ -116,7 +114,6 @@ const PRODUCT_DETAILS = {
 export const ProductSelectionStep = ({ selectedState, selectedProducts, onProductsSelect, onNext, onPrev }: ProductSelectionStepProps) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
-  const [expandedProducts, setExpandedProducts] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -143,16 +140,6 @@ export const ProductSelectionStep = ({ selectedState, selectedProducts, onProduc
     } else {
       onProductsSelect([...selectedProducts, productId]);
     }
-  };
-
-  const toggleExpanded = (productId: string) => {
-    const newExpanded = new Set(expandedProducts);
-    if (newExpanded.has(productId)) {
-      newExpanded.delete(productId);
-    } else {
-      newExpanded.add(productId);
-    }
-    setExpandedProducts(newExpanded);
   };
 
   const getProductType = (criteria: any): string => {
@@ -183,7 +170,6 @@ export const ProductSelectionStep = ({ selectedState, selectedProducts, onProduc
         {products.map((product) => {
           const productType = getProductType(product.recommendation_criteria);
           const details = PRODUCT_DETAILS[productType as keyof typeof PRODUCT_DETAILS];
-          const isExpanded = expandedProducts.has(product.id);
           const isSelected = selectedProducts.includes(product.id);
           
           return (
@@ -211,48 +197,37 @@ export const ProductSelectionStep = ({ selectedState, selectedProducts, onProduc
                 </div>
               </CardHeader>
               
-              <CardContent>
-                <Collapsible open={isExpanded} onOpenChange={() => toggleExpanded(product.id)}>
-                  <CollapsibleTrigger asChild>
-                    <Button variant="ghost" className="w-full justify-between p-0">
-                      <span>Ver detalles</span>
-                      <ChevronDown className={`h-4 w-4 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
-                    </Button>
-                  </CollapsibleTrigger>
-                  
-                  <CollapsibleContent className="space-y-4 mt-4">
-                    {details && (
-                      <>
-                        <div>
-                          <h4 className="font-semibold text-green-600 mb-2">Sirve para:</h4>
-                          <ul className="list-disc list-inside space-y-1 text-sm">
-                            {details.fullDescription.es.serves.map((item, index) => (
-                              <li key={index}>{item}</li>
-                            ))}
-                          </ul>
-                        </div>
-                        
-                        <div>
-                          <h4 className="font-semibold text-red-600 mb-2">No sirve para:</h4>
-                          <ul className="list-disc list-inside space-y-1 text-sm">
-                            {details.fullDescription.es.notServes.map((item, index) => (
-                              <li key={index}>{item}</li>
-                            ))}
-                          </ul>
-                        </div>
-                        
-                        <div>
-                          <h4 className="font-semibold mb-2">Incluye:</h4>
-                          <ul className="space-y-1 text-sm">
-                            {details.fullDescription.es.includes.map((item, index) => (
-                              <li key={index}>{item}</li>
-                            ))}
-                          </ul>
-                        </div>
-                      </>
-                    )}
-                  </CollapsibleContent>
-                </Collapsible>
+              <CardContent className="space-y-4">
+                {details && (
+                  <>
+                    <div>
+                      <h4 className="font-semibold text-green-600 mb-2">Sirve para:</h4>
+                      <ul className="list-disc list-inside space-y-1 text-sm">
+                        {details.fullDescription.es.serves.map((item, index) => (
+                          <li key={index}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    
+                    <div>
+                      <h4 className="font-semibold text-red-600 mb-2">No sirve para:</h4>
+                      <ul className="list-disc list-inside space-y-1 text-sm">
+                        {details.fullDescription.es.notServes.map((item, index) => (
+                          <li key={index}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    
+                    <div>
+                      <h4 className="font-semibold mb-2">Incluye:</h4>
+                      <ul className="space-y-1 text-sm">
+                        {details.fullDescription.es.includes.map((item, index) => (
+                          <li key={index}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </>
+                )}
               </CardContent>
             </Card>
           );
