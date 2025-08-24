@@ -74,7 +74,7 @@ export const IdentificationStep = ({ answers, onAnswersUpdate, onNext, onPrev }:
             <Card>
               <CardHeader>
                 <CardTitle className="text-lg">Apoderado</CardTitle>
-                <p className="text-sm text-muted-foreground">Persona de confianza que actúa por ti</p>
+                <p className="text-sm text-muted-foreground">La persona de confianza que recibe el permiso</p>
               </CardHeader>
               <CardContent>
                 <div className="grid gap-3">
