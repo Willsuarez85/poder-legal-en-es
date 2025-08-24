@@ -46,7 +46,7 @@ export const IdentificationStep = ({ answers, onAnswersUpdate, onNext, onPrev }:
             <Card>
               <CardHeader>
                 <CardTitle className="text-lg">Otorgante</CardTitle>
-                <p className="text-sm text-muted-foreground">Quien da el poder (tú)</p>
+                <p className="text-sm text-muted-foreground">La persona que da el permiso y entrega el poder</p>
               </CardHeader>
               <CardContent>
                 <div className="grid gap-3">
