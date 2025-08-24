@@ -62,7 +62,7 @@ export const StateSelectionStep = ({ selectedState, onStateSelect, onNext }: Sta
             </Select>
             
             <p className="text-sm text-muted-foreground">
-              More states coming soon
+              Más Estados Proximamente
             </p>
           </div>
 
