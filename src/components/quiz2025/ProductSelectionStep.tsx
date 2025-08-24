@@ -155,7 +155,7 @@ export const ProductSelectionStep = ({ selectedState, selectedProducts, onProduc
     <div className="max-w-4xl mx-auto space-y-6">
       <div className="text-center space-y-4">
         <h2 className="text-2xl font-bold">
-          ✅ Hemos encontrado 4 formatos de Cartas de poder 100% legales, verificadas por estado
+          ✅ Hemos encontrado 4 formatos de Cartas de poder 100% legales, verificadas en tu estado
         </h2>
         <p className="text-muted-foreground">
           Descarga inmediata con guía en español paso a paso
