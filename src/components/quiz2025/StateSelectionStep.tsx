@@ -16,9 +16,18 @@ export const StateSelectionStep = ({ selectedState, onStateSelect, onNext }: Sta
     { value: 'florida', label: 'Florida' }
   ];
 
+  const handleStateSelect = (state: string) => {
+    console.log('State selected:', state);
+    onStateSelect(state);
+  };
+
   const handleNext = () => {
+    console.log('Next button clicked, selectedState:', selectedState);
     if (selectedState) {
+      console.log('Calling onNext');
       onNext();
+    } else {
+      console.log('selectedState is empty, not proceeding');
     }
   };
 
@@ -39,7 +48,7 @@ export const StateSelectionStep = ({ selectedState, onStateSelect, onNext }: Sta
           </p>
           
           <div className="space-y-4">
-            <Select value={selectedState} onValueChange={onStateSelect}>
+            <Select value={selectedState} onValueChange={handleStateSelect}>
               <SelectTrigger className="w-full text-lg py-6">
                 <SelectValue placeholder="Selecciona tu estado" />
               </SelectTrigger>
