@@ -36,7 +36,7 @@ export const EffectiveTimeStep = ({ selectedTime, onTimeSelect, onNext, onPrev }
       <Card>
         <CardHeader className="text-center">
           <CardTitle className="text-2xl font-bold">
-            ¿Cuándo quiere que entre en vigencia?
+            ¿Desde cuándo quieres que la persona pueda actuar por ti?
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
