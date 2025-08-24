@@ -1,7 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label";
 import { TipBox } from "./TipBox";
 import { QuizAnswers } from "@/pages/Quiz2025";
 
@@ -21,20 +19,8 @@ const ID_OPTIONS = [
 ];
 
 export const IdentificationStep = ({ answers, onAnswersUpdate, onNext, onPrev }: IdentificationStepProps) => {
-  const handleSameIdToggle = (checked: boolean) => {
-    const updates: Partial<QuizAnswers> = { same_id: checked };
-    if (checked && answers.grantor_id) {
-      updates.grantee_id = answers.grantor_id;
-    }
-    onAnswersUpdate(updates);
-  };
-
   const handleGrantorIdSelect = (id: string) => {
-    const updates: Partial<QuizAnswers> = { grantor_id: id };
-    if (answers.same_id) {
-      updates.grantee_id = id;
-    }
-    onAnswersUpdate(updates);
+    onAnswersUpdate({ grantor_id: id });
   };
 
   const handleGranteeIdSelect = (id: string) => {
@@ -55,17 +41,6 @@ export const IdentificationStep = ({ answers, onAnswersUpdate, onNext, onPrev }:
           </p>
         </CardHeader>
         <CardContent className="space-y-6">
-          <div className="flex items-center space-x-2 justify-center">
-            <Switch
-              id="same-id"
-              checked={answers.same_id}
-              onCheckedChange={handleSameIdToggle}
-            />
-            <Label htmlFor="same-id" className="text-sm">
-              ☑️ Usamos la misma identificación los dos
-            </Label>
-          </div>
-
           <div className="grid md:grid-cols-2 gap-6">
             {/* Otorgante */}
             <Card>
@@ -107,13 +82,10 @@ export const IdentificationStep = ({ answers, onAnswersUpdate, onNext, onPrev }:
                     <button
                       key={option.value}
                       onClick={() => handleGranteeIdSelect(option.value)}
-                      disabled={answers.same_id}
                       className={`p-4 border rounded-lg text-left transition-colors ${
-                        answers.same_id 
-                          ? 'opacity-50 cursor-not-allowed' 
-                          : answers.grantee_id === option.value
-                            ? 'border-primary bg-primary/5'
-                            : 'border-border hover:bg-muted/50'
+                        answers.grantee_id === option.value
+                          ? 'border-primary bg-primary/5'
+                          : 'border-border hover:bg-muted/50'
                       }`}
                     >
                       <div className="flex items-center space-x-3">
