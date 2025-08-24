@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { FileText, Download } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 interface Product {
@@ -153,97 +155,132 @@ export const ProductSelectionStep = ({ selectedState, selectedProducts, onProduc
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
-      <div className="text-center space-y-4">
-        <h2 className="text-2xl font-bold">
+      <div className="text-center">
+        <h1 className="text-2xl font-bold mb-6">
           ✅ Hemos encontrado 4 formatos de Cartas de poder 100% legales, verificadas en tu estado
-        </h2>
-        <p className="text-muted-foreground">
-          Descarga inmediata con guía en español paso a paso
-        </p>
-        <p className="text-lg">
-          Hemos encontrado 4 cartas de poder legal válidas en tu estado que podrían ayudarte a proteger lo que más amas. 
-          Lee atentamente y selecciona el o los formatos que necesites.
-        </p>
+        </h1>
       </div>
 
-      <div className="grid gap-6">
-        {products.map((product) => {
+      <Accordion type="multiple" className="space-y-4">
+        {products.map((product, index) => {
           const productType = getProductType(product.recommendation_criteria);
           const details = PRODUCT_DETAILS[productType as keyof typeof PRODUCT_DETAILS];
           const isSelected = selectedProducts.includes(product.id);
           
           return (
-            <Card key={product.id} className={`transition-all ${isSelected ? 'ring-2 ring-primary' : ''}`}>
-              <CardHeader>
-                <div className="flex items-start justify-between">
-                  <div className="flex-1">
-                    <CardTitle className="text-xl">
-                      {typeof product.name === 'object' ? product.name.es : product.name}
-                    </CardTitle>
-                    <p className="text-muted-foreground mt-2">
-                      {typeof product.description === 'object' ? product.description.es : product.description}
-                    </p>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-2xl font-bold">${product.price}</div>
-                    <div className="flex items-center space-x-2 mt-2">
-                      <span>📄 PDF</span>
-                      <Checkbox
-                        checked={isSelected}
-                        onCheckedChange={() => handleProductToggle(product.id)}
-                      />
+            <AccordionItem 
+              key={product.id} 
+              value={product.id}
+              className={`border rounded-lg transition-all ${isSelected ? 'ring-2 ring-primary bg-primary/5' : 'border-border'}`}
+            >
+              <AccordionTrigger className="px-6 py-4 hover:no-underline">
+                <div className="flex items-center justify-between w-full mr-4">
+                  <div className="flex items-center space-x-4">
+                    <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold">
+                      {index + 1}
                     </div>
+                    <div className="text-left flex-1">
+                      <h3 className="text-lg font-semibold">
+                        {typeof product.name === 'object' ? product.name.es : product.name}
+                      </h3>
+                      <p className="text-muted-foreground text-sm mt-1">
+                        {typeof product.description === 'object' ? product.description.es : product.description}
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center space-x-4">
+                    <FileText className="h-8 w-8 text-red-600" />
+                    <Checkbox
+                      checked={isSelected}
+                      onCheckedChange={() => handleProductToggle(product.id)}
+                      onClick={(e) => e.stopPropagation()}
+                      className="scale-125"
+                    />
                   </div>
                 </div>
-              </CardHeader>
+              </AccordionTrigger>
               
-              <CardContent className="space-y-4">
-                {details && (
-                  <>
-                    <div>
-                      <h4 className="font-semibold text-green-600 mb-2">Sirve para:</h4>
-                      <ul className="list-disc list-inside space-y-1 text-sm">
-                        {details.fullDescription.es.serves.map((item, index) => (
-                          <li key={index}>{item}</li>
-                        ))}
-                      </ul>
-                    </div>
-                    
-                    <div>
-                      <h4 className="font-semibold text-red-600 mb-2">No sirve para:</h4>
-                      <ul className="list-disc list-inside space-y-1 text-sm">
-                        {details.fullDescription.es.notServes.map((item, index) => (
-                          <li key={index}>{item}</li>
-                        ))}
-                      </ul>
-                    </div>
-                    
-                    <div>
-                      <h4 className="font-semibold mb-2">Incluye:</h4>
-                      <ul className="space-y-1 text-sm">
-                        {details.fullDescription.es.includes.map((item, index) => (
-                          <li key={index}>{item}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  </>
-                )}
-              </CardContent>
-            </Card>
+              <AccordionContent className="px-6 pb-6">
+                <div className="space-y-6 pt-4">
+                  <div className="flex justify-between items-center">
+                    <div className="text-2xl font-bold text-primary">$19 USD</div>
+                    <div className="text-sm text-muted-foreground">Descarga inmediata</div>
+                  </div>
+                  
+                  {details && (
+                    <>
+                      <div>
+                        <h4 className="font-semibold text-green-600 mb-3 flex items-center">
+                          ✅ Sirve para:
+                        </h4>
+                        <ul className="list-disc list-inside space-y-2 text-sm bg-green-50 p-4 rounded-lg">
+                          {details.fullDescription.es.serves.map((item, idx) => (
+                            <li key={idx}>{item}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      
+                      <div>
+                        <h4 className="font-semibold text-red-600 mb-3 flex items-center">
+                          ❌ No sirve para:
+                        </h4>
+                        <ul className="list-disc list-inside space-y-2 text-sm bg-red-50 p-4 rounded-lg">
+                          {details.fullDescription.es.notServes.map((item, idx) => (
+                            <li key={idx}>{item}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      
+                      <div>
+                        <h4 className="font-semibold mb-3 flex items-center">
+                          📋 Incluye:
+                        </h4>
+                        <ul className="space-y-2 text-sm bg-blue-50 p-4 rounded-lg">
+                          {details.fullDescription.es.includes.map((item, idx) => (
+                            <li key={idx}>{item}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      
+                      <div className="pt-4 border-t">
+                        <Button
+                          onClick={() => handleProductToggle(product.id)}
+                          variant={isSelected ? "default" : "outline"}
+                          className="w-full"
+                        >
+                          {isSelected ? "✅ Agregado al carrito" : "➕ Añadir al carrito"}
+                        </Button>
+                      </div>
+                    </>
+                  )}
+                </div>
+              </AccordionContent>
+            </AccordionItem>
           );
         })}
-      </div>
+      </Accordion>
 
       <div className="sticky bottom-0 bg-background border-t p-4">
-        <div className="flex justify-between items-center max-w-4xl mx-auto">
+        <div className="flex justify-between items-center max-w-4xl mx-auto gap-4">
           <Button variant="outline" onClick={onPrev}>
             ⬅️ Anterior
           </Button>
           
-          <div className="text-center">
+          <div className="flex-1 text-center space-y-2">
             <p className="text-sm text-muted-foreground">
               {selectedProducts.length} producto(s) seleccionado(s)
             </p>
+            {selectedProducts.length > 0 && (
+              <Button
+                variant="outline"
+                size="sm"
+                className="text-sm"
+              >
+                <Download className="h-4 w-4 mr-2" />
+                Descargar carrito
+              </Button>
+            )}
           </div>
           
           <Button
