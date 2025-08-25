@@ -87,7 +87,7 @@ const Index = () => {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <Button size="lg" className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-sm sm:text-base lg:text-lg px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-6 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all touch-manipulation w-full sm:w-auto" onClick={() => navigate("/quiz")}>
+                <Button size="lg" className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-sm sm:text-base lg:text-lg px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-6 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all touch-manipulation w-full sm:w-auto" onClick={() => navigate("/quiz-2025")}>
                   <span className="text-center leading-tight">Encuentra la Carta que necesitas en 2 minutos</span>
                   <ArrowRight className="ml-2 w-4 h-4 lg:w-5 lg:h-5 flex-shrink-0" />
                 </Button>
@@ -230,7 +230,7 @@ const Index = () => {
           </div>
 
           <div className="text-center mt-12 lg:mt-16">
-            <Button size="lg" className="bg-destructive hover:bg-destructive/90 text-destructive-foreground px-8 lg:px-10 py-4 lg:py-6 text-base lg:text-lg font-semibold touch-manipulation" onClick={() => navigate("/quiz")}>
+            <Button size="lg" className="bg-destructive hover:bg-destructive/90 text-destructive-foreground px-8 lg:px-10 py-4 lg:py-6 text-base lg:text-lg font-semibold touch-manipulation" onClick={() => navigate("/quiz-2025")}>
               Comenzar ahora
             </Button>
           </div>
@@ -324,7 +324,7 @@ const Index = () => {
                 </div>
               </div>
 
-              <Button size="lg" className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-sm sm:text-base lg:text-lg px-6 sm:px-8 lg:px-10 py-4 lg:py-6 touch-manipulation w-full sm:w-auto" onClick={() => navigate("/quiz")}>
+              <Button size="lg" className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-sm sm:text-base lg:text-lg px-6 sm:px-8 lg:px-10 py-4 lg:py-6 touch-manipulation w-full sm:w-auto" onClick={() => navigate("/quiz-2025")}>
                 <span>Proteger a Mi Familia Ahora</span>
                 <Shield className="ml-2 w-4 h-4 lg:w-5 lg:h-5 flex-shrink-0" />
               </Button>
@@ -369,7 +369,7 @@ const Index = () => {
                   <strong> todo lo que amas</strong>.
                 </p>
 
-                <Button size="lg" className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-base lg:text-lg px-6 lg:px-8 py-4 lg:py-6 shadow-lg hover:shadow-xl transition-all w-full sm:w-auto touch-manipulation" onClick={() => navigate("/quiz")}>
+                <Button size="lg" className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-base lg:text-lg px-6 lg:px-8 py-4 lg:py-6 shadow-lg hover:shadow-xl transition-all w-full sm:w-auto touch-manipulation" onClick={() => navigate("/quiz-2025")}>
                   Comienza el Quiz ahora
                   <ArrowRight className="ml-2 w-4 h-4 lg:w-5 lg:h-5 flex-shrink-0" />
                 </Button>
@@ -590,7 +590,7 @@ const Index = () => {
             o dejar todo en manos del sistema.
           </p>
           
-          <Button size="lg" variant="secondary" className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-base sm:text-lg lg:text-xl px-6 sm:px-8 lg:px-12 py-4 sm:py-5 lg:py-6 shadow-lg hover:shadow-xl transition-all w-full sm:w-auto touch-manipulation" onClick={() => navigate("/quiz")}>
+          <Button size="lg" variant="secondary" className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-base sm:text-lg lg:text-xl px-6 sm:px-8 lg:px-12 py-4 sm:py-5 lg:py-6 shadow-lg hover:shadow-xl transition-all w-full sm:w-auto touch-manipulation" onClick={() => navigate("/quiz-2025")}>
             <span className="text-center leading-tight">Comienza el Quiz Ahora</span>
             <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 flex-shrink-0" />
           </Button>
