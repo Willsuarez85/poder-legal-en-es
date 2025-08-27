@@ -17,6 +17,15 @@ export const PhoneInput = React.forwardRef<HTMLInputElement, PhoneInputProps>(
     const [displayValue, setDisplayValue] = React.useState("");
     const [countryCode, setCountryCode] = React.useState("1");
 
+    // Phone number lengths by country
+    const getPhoneLength = (country: string) => {
+      switch (country) {
+        case "1": return 10; // USA
+        case "57": return 10; // Colombia
+        default: return 10;
+      }
+    };
+
     // Format phone number to (xxx)xxx-xxxx
     const formatPhoneNumber = (input: string) => {
       // Remove all non-digits
@@ -35,9 +44,16 @@ export const PhoneInput = React.forwardRef<HTMLInputElement, PhoneInputProps>(
     // Update display value when value prop changes
     React.useEffect(() => {
       if (value) {
-        // Remove country code if present
-        const cleanNumber = value.replace(/^\+?1/, '');
-        setDisplayValue(formatPhoneNumber(cleanNumber));
+        // Detect country code and clean number
+        if (value.startsWith("57")) {
+          setCountryCode("57");
+          const cleanNumber = value.replace(/^57/, '');
+          setDisplayValue(formatPhoneNumber(cleanNumber));
+        } else if (value.startsWith("1")) {
+          setCountryCode("1");
+          const cleanNumber = value.replace(/^1/, '');
+          setDisplayValue(formatPhoneNumber(cleanNumber));
+        }
       }
     }, [value]);
 
@@ -45,8 +61,9 @@ export const PhoneInput = React.forwardRef<HTMLInputElement, PhoneInputProps>(
       const input = e.target.value;
       const digits = input.replace(/\D/g, '');
       
-      // Limit to 10 digits
-      const limitedDigits = digits.slice(0, 10);
+      // Limit digits based on country
+      const maxLength = getPhoneLength(countryCode);
+      const limitedDigits = digits.slice(0, maxLength);
       
       // Update display
       const formatted = formatPhoneNumber(limitedDigits);
@@ -68,6 +85,7 @@ export const PhoneInput = React.forwardRef<HTMLInputElement, PhoneInputProps>(
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="1">🇺🇸 +1</SelectItem>
+            <SelectItem value="57">🇨🇴 +57</SelectItem>
           </SelectContent>
         </Select>
         <Input

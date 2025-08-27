@@ -63,6 +63,22 @@ export const CheckoutStep = ({ answers, onPrev }: CheckoutStepProps) => {
 
   const totalAmount = selectedProductsData.reduce((sum, product) => sum + product.price, 0);
 
+  const validatePhone = (phone: string) => {
+    if (!phone.trim()) return false;
+    
+    // Check for USA phone number (1 + 10 digits)
+    if (phone.startsWith("1") && phone.length === 11) {
+      return true;
+    }
+    
+    // Check for Colombia phone number (57 + 10 digits)
+    if (phone.startsWith("57") && phone.length === 12) {
+      return true;
+    }
+    
+    return false;
+  };
+
   const validateForm = () => {
     if (!customerData.name.trim()) {
       toast({
@@ -82,10 +98,10 @@ export const CheckoutStep = ({ answers, onPrev }: CheckoutStepProps) => {
       return false;
     }
 
-    if (!customerData.phone.trim()) {
+    if (!validatePhone(customerData.phone)) {
       toast({
-        title: "Campo requerido",
-        description: "Por favor ingresa tu número de teléfono",
+        title: "Teléfono inválido",
+        description: "Por favor ingresa un número de teléfono válido (USA o Colombia)",
         variant: "destructive",
       });
       return false;
