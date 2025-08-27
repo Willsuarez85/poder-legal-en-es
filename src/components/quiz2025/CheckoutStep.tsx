@@ -143,6 +143,13 @@ export const CheckoutStep = ({ answers, onPrev }: CheckoutStepProps) => {
             name: customerData.name,
             phone: customerData.phone,
             email: customerData.email
+          },
+          quizData: {
+            state: answers.state,
+            selected_products: answers.selected_products,
+            grantor_id: answers.grantor_id,
+            grantee_id: answers.grantee_id,
+            effective_time: answers.effective_time
           }
         }
       });

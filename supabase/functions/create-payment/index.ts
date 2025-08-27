@@ -21,8 +21,8 @@ serve(async (req) => {
   try {
     logStep("Function started");
     
-    const { origin, items, customerData } = await req.json();
-    logStep("Request received", { origin, itemsCount: items?.length, customerData });
+    const { origin, items, customerData, quizData } = await req.json();
+    logStep("Request received", { origin, itemsCount: items?.length, customerData, quizData });
 
     if (!Array.isArray(items) || items.length === 0) {
       logStep("ERROR: No items in cart");
@@ -142,18 +142,22 @@ serve(async (req) => {
       customer_email: customerData?.email || undefined,
       metadata: {
         order_id: orderId,
-        customer_name: customerData?.name || "",
-        customer_phone: customerData?.phone || "",
-        customer_email: customerData?.email || "",
+        estado: quizData?.state || "",
+        arreglo_productos: JSON.stringify(productIds),
+        nombre: customerData?.name || "",
+        email: customerData?.email || "",
+        telefono: customerData?.phone || "",
       },
     });
 
     logStep("Stripe session metadata", { 
       metadata: {
         order_id: orderId,
-        customer_name: customerData?.name || "",
-        customer_phone: customerData?.phone || "",
-        customer_email: customerData?.email || "",
+        estado: quizData?.state || "",
+        arreglo_productos: JSON.stringify(productIds),
+        nombre: customerData?.name || "",
+        email: customerData?.email || "",
+        telefono: customerData?.phone || "",
       }
     });
 
