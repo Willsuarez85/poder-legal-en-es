@@ -57,6 +57,18 @@ export const PhoneInput = React.forwardRef<HTMLInputElement, PhoneInputProps>(
       }
     }, [value]);
 
+    const handleCountryChange = (newCountryCode: string) => {
+      setCountryCode(newCountryCode);
+      
+      // Get current digits without formatting
+      const currentDigits = displayValue.replace(/\D/g, '');
+      
+      // Update the value with new country code if there are digits
+      if (currentDigits.length > 0) {
+        onChange(newCountryCode + currentDigits);
+      }
+    };
+
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const input = e.target.value;
       const digits = input.replace(/\D/g, '');
@@ -79,7 +91,7 @@ export const PhoneInput = React.forwardRef<HTMLInputElement, PhoneInputProps>(
 
     return (
       <div className={cn("flex", className)}>
-        <Select value={countryCode} onValueChange={setCountryCode}>
+        <Select value={countryCode} onValueChange={handleCountryChange}>
           <SelectTrigger className="w-24 rounded-r-none border-r-0">
             <SelectValue />
           </SelectTrigger>
