@@ -142,22 +142,22 @@ serve(async (req) => {
       customer_email: customerData?.email || undefined,
       metadata: {
         order_id: orderId,
-        estado: quizData?.state || "",
-        arreglo_productos: JSON.stringify(productIds),
-        nombre: customerData?.name || "",
+        name: customerData?.name || "",
         email: customerData?.email || "",
-        telefono: customerData?.phone || "",
+        phone: customerData?.phone || "",
+        state: quizData?.state || "",
+        products: JSON.stringify(productIds),
       },
     });
 
     logStep("Stripe session metadata", { 
       metadata: {
         order_id: orderId,
-        estado: quizData?.state || "",
-        arreglo_productos: JSON.stringify(productIds),
-        nombre: customerData?.name || "",
+        name: customerData?.name || "",
         email: customerData?.email || "",
-        telefono: customerData?.phone || "",
+        phone: customerData?.phone || "",
+        state: quizData?.state || "",
+        products: JSON.stringify(productIds),
       }
     });
 
