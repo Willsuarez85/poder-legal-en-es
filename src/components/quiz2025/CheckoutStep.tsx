@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
+import { PhoneInput } from "@/components/ui/phone-input";
 import { QuizAnswers } from "@/pages/Quiz2025";
 import { supabase } from "@/integrations/supabase/client";
 import { useCart } from "@/context/CartContext";
@@ -225,12 +226,11 @@ export const CheckoutStep = ({ answers, onPrev }: CheckoutStepProps) => {
 
               <div className="space-y-2">
                 <Label htmlFor="customer-phone">Teléfono *</Label>
-                <Input
+                <PhoneInput
                   id="customer-phone"
-                  type="tel"
                   value={customerData.phone}
-                  onChange={(e) => handleInputChange("phone", e.target.value)}
-                  placeholder="+1 (555) 123-4567"
+                  onChange={(value) => handleInputChange("phone", value)}
+                  placeholder="(555)123-4567"
                   required
                 />
               </div>
