@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
 import { QuizAnswers } from "@/pages/Quiz2025";
 import { supabase } from "@/integrations/supabase/client";
 import { useCart } from "@/context/CartContext";
@@ -18,10 +21,21 @@ interface Product {
   price: number;
 }
 
+interface CustomerData {
+  name: string;
+  email: string;
+  phone: string;
+}
+
 export const CheckoutStep = ({ answers, onPrev }: CheckoutStepProps) => {
   const [selectedProductsData, setSelectedProductsData] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [processing, setProcessing] = useState(false);
+  const [customerData, setCustomerData] = useState<CustomerData>({
+    name: "",
+    email: "",
+    phone: ""
+  });
   const { addItem, clear } = useCart();
   const { toast } = useToast();
 
@@ -48,7 +62,43 @@ export const CheckoutStep = ({ answers, onPrev }: CheckoutStepProps) => {
 
   const totalAmount = selectedProductsData.reduce((sum, product) => sum + product.price, 0);
 
+  const validateForm = () => {
+    if (!customerData.name.trim()) {
+      toast({
+        title: "Campo requerido",
+        description: "Por favor ingresa tu nombre completo",
+        variant: "destructive",
+      });
+      return false;
+    }
+    
+    if (!customerData.email.trim() || !customerData.email.includes("@")) {
+      toast({
+        title: "Email inválido",
+        description: "Por favor ingresa un email válido",
+        variant: "destructive",
+      });
+      return false;
+    }
+
+    if (!customerData.phone.trim()) {
+      toast({
+        title: "Campo requerido",
+        description: "Por favor ingresa tu número de teléfono",
+        variant: "destructive",
+      });
+      return false;
+    }
+
+    return true;
+  };
+
+  const handleInputChange = (field: keyof CustomerData, value: string) => {
+    setCustomerData(prev => ({ ...prev, [field]: value }));
+  };
+
   const handleCheckout = async () => {
+    if (!validateForm()) return;
     setProcessing(true);
     
     try {
@@ -73,9 +123,9 @@ export const CheckoutStep = ({ answers, onPrev }: CheckoutStepProps) => {
             quantity: 1
           })),
           customerData: {
-            name: 'Quiz Customer',
-            phone: '',
-            email: 'quiz@poderlegal.com'
+            name: customerData.name,
+            phone: customerData.phone,
+            email: customerData.email
           }
         }
       });
@@ -144,6 +194,50 @@ export const CheckoutStep = ({ answers, onPrev }: CheckoutStepProps) => {
               <span>${totalAmount.toFixed(2)}</span>
             </div>
           </div>
+
+          <Separator />
+
+          <div className="space-y-4">
+            <h3 className="font-semibold">Información del Cliente:</h3>
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="customer-name">Nombre Completo *</Label>
+                <Input
+                  id="customer-name"
+                  value={customerData.name}
+                  onChange={(e) => handleInputChange("name", e.target.value)}
+                  placeholder="Tu nombre completo"
+                  required
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="customer-email">Email *</Label>
+                <Input
+                  id="customer-email"
+                  type="email"
+                  value={customerData.email}
+                  onChange={(e) => handleInputChange("email", e.target.value)}
+                  placeholder="tu@email.com"
+                  required
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="customer-phone">Teléfono *</Label>
+                <Input
+                  id="customer-phone"
+                  type="tel"
+                  value={customerData.phone}
+                  onChange={(e) => handleInputChange("phone", e.target.value)}
+                  placeholder="+1 (555) 123-4567"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+
+          <Separator />
 
           <div className="space-y-4">
             <h3 className="font-semibold">Resumen de tu selección:</h3>
