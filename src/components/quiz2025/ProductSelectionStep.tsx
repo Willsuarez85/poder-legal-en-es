@@ -40,6 +40,17 @@ const getProductDescription = (description: any): string => {
   try {
     if (typeof description === 'string') return description;
     if (typeof description === 'object' && description !== null) {
+      // Handle the nested structure: {es: {not_for, purpose}, en: {not_for, purpose}}
+      if (description.es && typeof description.es === 'object') {
+        return description.es.purpose || description.es.not_for || 'Documento legal válido para tu estado';
+      }
+      if (description.en && typeof description.en === 'object') {
+        return description.en.purpose || description.en.not_for || 'Documento legal válido para tu estado';
+      }
+      // Handle direct structure: {not_for, purpose}
+      if (description.purpose) return description.purpose;
+      if (description.not_for) return description.not_for;
+      // Fallback for other object structures
       if (description.es) return description.es;
       if (description.en) return description.en;
     }
