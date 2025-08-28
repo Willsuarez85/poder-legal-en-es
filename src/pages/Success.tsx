@@ -3,11 +3,16 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle, Mail, Download, MessageCircle } from "lucide-react";
 import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 const Success = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [orderId, setOrderId] = useState<string | null>(null);
+  const [purchasedProducts, setPurchasedProducts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const { toast } = useToast();
   
   useEffect(() => {
     // Get order ID from URL params or location state
@@ -17,7 +22,83 @@ const Success = () => {
     
     const finalOrderId = orderIdFromUrl || orderIdFromState;
     setOrderId(finalOrderId);
+    
+    // Load purchased products if we have an order ID
+    if (finalOrderId) {
+      loadPurchasedProducts(finalOrderId);
+    } else {
+      setLoading(false);
+    }
   }, [location]);
+
+  const loadPurchasedProducts = async (orderIdValue: string) => {
+    try {
+      // Get order details with product IDs
+      const { data: order, error: orderError } = await supabase
+        .from("orders")
+        .select("product_ids")
+        .eq("id", orderIdValue)
+        .single();
+
+      if (orderError || !order?.product_ids) {
+        console.error("Failed to load order:", orderError);
+        setLoading(false);
+        return;
+      }
+
+      // Get product details for all products in the order
+      const { data: products, error: productsError } = await supabase
+        .from("products")
+        .select("id, name, label, state")
+        .in("id", order.product_ids);
+
+      if (productsError) {
+        console.error("Failed to load products:", productsError);
+      } else {
+        setPurchasedProducts(products || []);
+      }
+    } catch (error) {
+      console.error("Error loading purchased products:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const downloadProduct = async (productId: string, productName: string) => {
+    try {
+      if (!orderId) return;
+
+      const { data, error } = await supabase.functions.invoke('generate-pdf-url', {
+        body: { orderId, productId }
+      });
+
+      if (error) {
+        console.error("Error generating download URL:", error);
+        toast({
+          title: "Error",
+          description: "No se pudo generar el enlace de descarga. Intenta de nuevo.",
+          variant: "destructive"
+        });
+        return;
+      }
+
+      if (data?.downloadUrl) {
+        // Open download in new tab
+        window.open(data.downloadUrl, '_blank');
+        toast({
+          title: "Descarga iniciada",
+          description: `Descargando ${productName}...`
+        });
+      }
+    } catch (error) {
+      console.error("Download error:", error);
+      toast({
+        title: "Error",
+        description: "Error al descargar el archivo. Intenta de nuevo.",
+        variant: "destructive"
+      });
+    }
+  };
 
   const productName = location.state?.productName;
 
@@ -57,6 +138,50 @@ const Success = () => {
                 Número de Orden: <span className="font-mono font-bold">#{orderId}</span>
               </p>
             </div>
+
+            {/* Downloaded Products Section */}
+            {!loading && purchasedProducts.length > 0 && (
+              <div className="bg-green-50 dark:bg-green-950 border border-green-200 dark:border-green-800 rounded-lg p-6 space-y-4">
+                <div className="flex items-center justify-center gap-3 text-green-800 dark:text-green-200">
+                  <Download className="w-5 h-5" />
+                  <span className="font-medium">Tus documentos están listos</span>
+                </div>
+                
+                <div className="space-y-3">
+                  {purchasedProducts.map((product) => (
+                    <div key={product.id} className="flex items-center justify-between bg-white dark:bg-gray-800 p-3 rounded border">
+                      <div className="flex-1">
+                        <p className="font-medium text-sm">
+                          {typeof product.name === 'object' ? product.name.es || product.name.en : product.name}
+                        </p>
+                        <p className="text-xs text-muted-foreground">
+                          Estado: {product.state?.toUpperCase()}
+                        </p>
+                      </div>
+                      <Button
+                        size="sm"
+                        onClick={() => downloadProduct(product.id, typeof product.name === 'object' ? product.name.es || product.name.en : product.name)}
+                        className="bg-green-600 hover:bg-green-700 text-white"
+                      >
+                        <Download className="w-4 h-4 mr-1" />
+                        Descargar
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+                
+                <p className="text-green-700 dark:text-green-300 text-xs text-center">
+                  Los enlaces de descarga son válidos por 1 hora. Si necesitas descargar nuevamente, 
+                  contáctanos con tu número de orden.
+                </p>
+              </div>
+            )}
+
+            {loading && (
+              <div className="bg-gray-50 dark:bg-gray-900 border rounded-lg p-6">
+                <p className="text-center text-muted-foreground">Cargando tus documentos...</p>
+              </div>
+            )}
 
             <div className="bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 rounded-lg p-6 space-y-4">
               <div className="flex items-center justify-center gap-3 text-blue-800 dark:text-blue-200">

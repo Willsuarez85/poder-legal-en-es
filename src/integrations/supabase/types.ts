@@ -90,7 +90,6 @@ export type Database = {
           price: number | null
           recommendation_criteria: Json | null
           state: string
-          template_file_url: string | null
         }
         Insert: {
           created_at?: string | null
@@ -101,7 +100,6 @@ export type Database = {
           price?: number | null
           recommendation_criteria?: Json | null
           state: string
-          template_file_url?: string | null
         }
         Update: {
           created_at?: string | null
@@ -112,7 +110,6 @@ export type Database = {
           price?: number | null
           recommendation_criteria?: Json | null
           state?: string
-          template_file_url?: string | null
         }
         Relationships: []
       }
