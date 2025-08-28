@@ -68,10 +68,10 @@ export const ProductSelectionStep = ({ selectedState, selectedProducts, onProduc
 
   // Map URL state names to database state abbreviations
   const stateMapping: Record<string, string> = {
-    california: 'ca',
-    texas: 'tx',
-    florida: 'fl',
-    new_york: 'ny'
+    'california': 'ca',
+    'texas': 'tx', 
+    'florida': 'fl',
+    'new_york': 'ny'
   };
 
   useEffect(() => {
@@ -92,7 +92,7 @@ export const ProductSelectionStep = ({ selectedState, selectedProducts, onProduc
           dbState = stateMapping[dbState];
         }
         
-        console.log('Fetching products for state:', dbState);
+        console.log('Selected state:', selectedState, '-> DB state:', dbState);
         
         const { data, error } = await supabase
           .from('products')
