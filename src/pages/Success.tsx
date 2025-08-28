@@ -20,19 +20,29 @@ const Success = () => {
     const orderIdFromUrl = urlParams.get('order_id');
     const orderIdFromState = location.state?.orderId;
     
+    console.log("DEBUG Success page:");
+    console.log("URL search params:", location.search);
+    console.log("Order ID from URL:", orderIdFromUrl);
+    console.log("Order ID from state:", orderIdFromState);
+    
     const finalOrderId = orderIdFromUrl || orderIdFromState;
+    console.log("Final Order ID:", finalOrderId);
     setOrderId(finalOrderId);
     
     // Load purchased products if we have an order ID
     if (finalOrderId) {
+      console.log("Loading products for order:", finalOrderId);
       loadPurchasedProducts(finalOrderId);
     } else {
+      console.log("No order ID found, setting loading to false");
       setLoading(false);
     }
   }, [location]);
 
   const loadPurchasedProducts = async (orderIdValue: string) => {
     try {
+      console.log("Loading products for order:", orderIdValue);
+      
       // Get order details with product IDs
       const { data: order, error: orderError } = await supabase
         .from("orders")
@@ -40,11 +50,15 @@ const Success = () => {
         .eq("id", orderIdValue)
         .single();
 
+      console.log("Order query result:", { order, error: orderError });
+
       if (orderError || !order?.product_ids) {
         console.error("Failed to load order:", orderError);
         setLoading(false);
         return;
       }
+
+      console.log("Product IDs from order:", order.product_ids);
 
       // Get product details for all products in the order
       const { data: products, error: productsError } = await supabase
@@ -52,9 +66,12 @@ const Success = () => {
         .select("id, name, label, state")
         .in("id", order.product_ids);
 
+      console.log("Products query result:", { products, error: productsError });
+
       if (productsError) {
         console.error("Failed to load products:", productsError);
       } else {
+        console.log("Setting purchased products:", products);
         setPurchasedProducts(products || []);
       }
     } catch (error) {
