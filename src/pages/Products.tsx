@@ -66,13 +66,18 @@ const Products = () => {
   const fetchProducts = async () => {
     try {
       const dbState = stateMapping[currentState] || currentState;
+      console.log('Fetching products for currentState:', currentState, 'mapped to:', dbState);
+      
       const { data, error } = await supabase
         .from("products")
         .select("id, name, description, price, state, recommendation_criteria")
         .or(`state.eq.${dbState},state.eq.all`);
 
+      console.log('Products query result:', { data, error });
+
       if (error) throw error;
       setProducts(data || []);
+      console.log('Set products count:', data?.length || 0);
     } catch (error) {
       console.error("Error fetching products:", error);
       toast({
