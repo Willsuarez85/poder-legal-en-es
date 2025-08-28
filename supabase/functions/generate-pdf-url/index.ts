@@ -89,8 +89,10 @@ serve(async (req) => {
       );
     }
 
-    // Construct file path: {state}/{label}.pdf
-    const filePath = `${product.state}/${product.label}.pdf`;
+    // Construct file path: {state}/{state-label}.pdf
+    const filePath = `${product.state}/${product.state}-${product.label}.pdf`;
+    console.log("Attempting to generate signed URL for file:", filePath);
+    console.log("Product details:", { state: product.state, label: product.label });
 
     // Generate signed URL (valid for 1 hour)
     const { data: signedUrlData, error: signedUrlError } = await supabaseAdmin
@@ -100,8 +102,24 @@ serve(async (req) => {
 
     if (signedUrlError) {
       console.error("Failed to generate signed URL:", signedUrlError);
+      console.error("File path that failed:", filePath);
+      
+      // List available files for debugging
+      const { data: files, error: listError } = await supabaseAdmin
+        .storage
+        .from("poder-legal")
+        .list(product.state, { limit: 10 });
+      
+      console.error("Available files in", product.state, ":", files);
+      console.error("List error:", listError);
+      
       return new Response(
-        JSON.stringify({ error: "Failed to generate download URL" }),
+        JSON.stringify({ 
+          error: "Failed to generate download URL",
+          details: signedUrlError.message,
+          filePath: filePath,
+          availableFiles: files
+        }),
         {
           status: 500,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
