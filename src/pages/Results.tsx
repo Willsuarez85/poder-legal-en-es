@@ -78,20 +78,20 @@ const Results = () => {
     
     if (stateResponse) {
       const stateCode = stateResponse.answer.toUpperCase();
-      // Map common state codes to full names
+      // Map common state codes to database abbreviations
       const stateMap: Record<string, string> = {
-        'CA': 'california',
-        'TX': 'texas', 
-        'FL': 'florida',
-        'NY': 'new_york',
-        'CT': 'connecticut',
-        'NV': 'nevada',
-        'AZ': 'arizona'
+        'CA': 'ca',
+        'TX': 'tx', 
+        'FL': 'fl',
+        'NY': 'ny',
+        'CT': 'ct',
+        'NV': 'nv',
+        'AZ': 'az'
       };
-      return stateMap[stateCode] || 'california';
+      return stateMap[stateCode] || 'ca';
     }
     
-    return 'california'; // Default state
+    return 'ca'; // Default state
   };
 
 const getRecommendedProducts = (products: Product[], responses: any[]) => {
@@ -109,7 +109,7 @@ const getRecommendedProducts = (products: Product[], responses: any[]) => {
   };
   
   const stateMatchedProducts = products.filter(product => 
-    product.state === userState || product.state === 'ALL'
+    product.state === userState || product.state === 'all'
   );
 
   const poaProducts = stateMatchedProducts.filter(isPoaProduct);

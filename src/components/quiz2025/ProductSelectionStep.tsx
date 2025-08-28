@@ -117,12 +117,21 @@ export const ProductSelectionStep = ({ selectedState, selectedProducts, onProduc
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
+  // Map URL state names to database state abbreviations
+  const stateMapping: Record<string, string> = {
+    california: 'ca',
+    texas: 'tx',
+    florida: 'fl',
+    new_york: 'ny'
+  };
+
   useEffect(() => {
     const fetchProducts = async () => {
+      const dbState = stateMapping[selectedState] || selectedState;
       const { data } = await supabase
         .from('products')
         .select('*')
-        .eq('state', selectedState);
+        .or(`state.eq.${dbState},state.eq.all`);
       
       if (data) {
         setProducts(data);
