@@ -97,7 +97,7 @@ export const ProductSelectionStep = ({ selectedState, selectedProducts, onProduc
         const { data, error } = await supabase
           .from('products')
           .select('id, name, description, price, state, label, recommendation_criteria')
-          .or(`state.eq.${dbState},state.eq.all`);
+          .eq('state', dbState);
         
         if (error) {
           throw error;
