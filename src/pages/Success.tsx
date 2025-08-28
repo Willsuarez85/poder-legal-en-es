@@ -43,39 +43,38 @@ const Success = () => {
     try {
       console.log("Loading products for order:", orderIdValue);
       
-      // Get order details with product IDs
-      const { data: order, error: orderError } = await supabase
-        .from("orders")
-        .select("product_ids")
-        .eq("id", orderIdValue)
-        .single();
+      // Use edge function to get order products securely
+      const { data, error } = await supabase.functions.invoke('get-order-products', {
+        body: { orderId: orderIdValue }
+      });
 
-      console.log("Order query result:", { order, error: orderError });
+      console.log("Order products result:", { data, error });
 
-      if (orderError || !order?.product_ids) {
-        console.error("Failed to load order:", orderError);
+      if (error) {
+        console.error("Failed to load order products:", error);
+        toast({
+          title: "Error",
+          description: "No se pudieron cargar los productos de la orden.",
+          variant: "destructive"
+        });
         setLoading(false);
         return;
       }
 
-      console.log("Product IDs from order:", order.product_ids);
-
-      // Get product details for all products in the order
-      const { data: products, error: productsError } = await supabase
-        .from("products")
-        .select("id, name, label, state")
-        .in("id", order.product_ids);
-
-      console.log("Products query result:", { products, error: productsError });
-
-      if (productsError) {
-        console.error("Failed to load products:", productsError);
+      if (data?.products) {
+        console.log("Setting purchased products:", data.products);
+        setPurchasedProducts(data.products);
       } else {
-        console.log("Setting purchased products:", products);
-        setPurchasedProducts(products || []);
+        console.log("No products found in order");
+        setPurchasedProducts([]);
       }
     } catch (error) {
       console.error("Error loading purchased products:", error);
+      toast({
+        title: "Error",
+        description: "Error al cargar los productos.",
+        variant: "destructive"
+      });
     } finally {
       setLoading(false);
     }
