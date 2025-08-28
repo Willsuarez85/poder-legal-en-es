@@ -127,20 +127,45 @@ export const ProductSelectionStep = ({ selectedState, selectedProducts, onProduc
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const dbState = stateMapping[selectedState] || selectedState;
-      const { data } = await supabase
-        .from('products')
-        .select('*')
-        .or(`state.eq.${dbState},state.eq.all`);
+      console.log('ProductSelectionStep - selectedState:', selectedState);
       
-      if (data) {
-        setProducts(data);
+      // If selectedState is already a database abbreviation (ca, tx, fl), use it directly
+      // If it's a full name (california, texas), map it
+      let dbState = selectedState;
+      if (stateMapping[selectedState]) {
+        dbState = stateMapping[selectedState];
       }
+      
+      console.log('ProductSelectionStep - dbState:', dbState);
+      
+      try {
+        const { data, error } = await supabase
+          .from('products')
+          .select('*')
+          .or(`state.eq.${dbState},state.eq.all`);
+        
+        console.log('ProductSelectionStep - query result:', { data, error, dbState });
+        
+        if (error) {
+          console.error('ProductSelectionStep - Supabase error:', error);
+        }
+        
+        if (data) {
+          setProducts(data);
+          console.log('ProductSelectionStep - products set:', data.length);
+        }
+      } catch (error) {
+        console.error('ProductSelectionStep - fetch error:', error);
+      }
+      
       setLoading(false);
     };
 
     if (selectedState) {
       fetchProducts();
+    } else {
+      console.log('ProductSelectionStep - no selectedState');
+      setLoading(false);
     }
   }, [selectedState]);
 
