@@ -85,6 +85,7 @@ export type Database = {
           created_at: string | null
           description: Json | null
           id: string
+          label: string | null
           name: Json
           price: number | null
           recommendation_criteria: Json | null
@@ -95,6 +96,7 @@ export type Database = {
           created_at?: string | null
           description?: Json | null
           id?: string
+          label?: string | null
           name: Json
           price?: number | null
           recommendation_criteria?: Json | null
@@ -105,6 +107,7 @@ export type Database = {
           created_at?: string | null
           description?: Json | null
           id?: string
+          label?: string | null
           name?: Json
           price?: number | null
           recommendation_criteria?: Json | null
