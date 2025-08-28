@@ -83,11 +83,15 @@ const Success = () => {
       }
 
       if (data?.downloadUrl) {
+        // Log the temporary URL for debugging
+        console.log('Generated temporary URL:', data.downloadUrl);
+        console.log('URL expires at:', data.expiresAt);
+        
         // Open download in new tab
         window.open(data.downloadUrl, '_blank');
         toast({
           title: "Descarga iniciada",
-          description: `Descargando ${productName}...`
+          description: `Descargando ${productName}... (válida por 1 hora)`
         });
       }
     } catch (error) {
