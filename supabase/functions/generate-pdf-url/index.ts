@@ -90,9 +90,11 @@ serve(async (req) => {
     }
 
     // Construct file path: {state}/{state-label}.pdf
-    const filePath = `${product.state}/${product.state}-${product.label}.pdf`;
+    // Handle special case for Texas files that use "texas" instead of "tx" in filename
+    const filePrefix = product.state === 'tx' ? 'texas' : product.state;
+    const filePath = `${product.state}/${filePrefix}-${product.label}.pdf`;
     console.log("Attempting to generate signed URL for file:", filePath);
-    console.log("Product details:", { state: product.state, label: product.label });
+    console.log("Product details:", { state: product.state, label: product.label, filePrefix });
 
     // Generate signed URL (valid for 1 hour)
     const { data: signedUrlData, error: signedUrlError } = await supabaseAdmin
