@@ -39,6 +39,14 @@ const Products = () => {
     new_york: "Nueva York"
   };
 
+  // Map URL state names to database state abbreviations
+  const stateMapping: Record<string, string> = {
+    california: 'ca',
+    texas: 'tx',
+    florida: 'fl',
+    new_york: 'ny'
+  };
+
   const quizData = location.state?.quizData;
 
   useEffect(() => {
@@ -57,10 +65,11 @@ const Products = () => {
 
   const fetchProducts = async () => {
     try {
+      const dbState = stateMapping[currentState] || currentState;
       const { data, error } = await supabase
         .from("products")
         .select("id, name, description, price, state, recommendation_criteria")
-        .or(`state.eq.${currentState},state.eq.ALL`);
+        .or(`state.eq.${dbState},state.eq.all`);
 
       if (error) throw error;
       setProducts(data || []);
