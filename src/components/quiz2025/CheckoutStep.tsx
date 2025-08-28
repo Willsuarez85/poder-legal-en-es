@@ -49,7 +49,7 @@ export const CheckoutStep = ({ answers, onPrev }: CheckoutStepProps) => {
 
       const { data } = await supabase
         .from('products')
-        .select('*')
+        .select('id, name, description, price, state, label, recommendation_criteria')
         .in('id', answers.selected_products);
       
       if (data) {
