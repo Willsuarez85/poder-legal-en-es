@@ -52,11 +52,22 @@ const Success = () => {
 
       if (error) {
         console.error("Failed to load order products:", error);
-        toast({
-          title: "Error",
-          description: "No se pudieron cargar los productos de la orden.",
-          variant: "destructive"
-        });
+        console.error("Error details:", error.message, error.stack);
+        
+        // Check if it's a connection error
+        if (error.message?.includes('ERR_CONNECTION_CLOSED') || error.message?.includes('Failed to fetch')) {
+          toast({
+            title: "Error de conexión",
+            description: "No se pudo conectar al servidor. Los productos se mostrarán cuando el servidor esté disponible.",
+            variant: "destructive"
+          });
+        } else {
+          toast({
+            title: "Error",
+            description: "No se pudieron cargar los productos de la orden.",
+            variant: "destructive"
+          });
+        }
         setLoading(false);
         return;
       }
@@ -68,13 +79,27 @@ const Success = () => {
         console.log("No products found in order");
         setPurchasedProducts([]);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error loading purchased products:", error);
-      toast({
-        title: "Error",
-        description: "Error al cargar los productos.",
-        variant: "destructive"
-      });
+      console.error("Error type:", typeof error);
+      console.error("Error message:", error?.message);
+      
+      // More specific error handling
+      if (error?.message?.includes('ERR_CONNECTION_CLOSED') || 
+          error?.message?.includes('Failed to fetch') ||
+          error?.name === 'TypeError') {
+        toast({
+          title: "Error de conexión",
+          description: "El servidor no está disponible en este momento. Intenta recargar la página.",
+          variant: "destructive"
+        });
+      } else {
+        toast({
+          title: "Error",
+          description: "Error al cargar los productos.",
+          variant: "destructive"
+        });
+      }
     } finally {
       setLoading(false);
     }
