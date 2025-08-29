@@ -90,15 +90,7 @@ serve(async (req) => {
     }
 
     // Construct file path: {state}/{state-label}.pdf
-    // Special case: Texas limitado product uses "texas-limitado.pdf" instead of "tx-limitado.pdf"
-    let fileName;
-    if (product.state === 'tx' && product.label === 'limitado') {
-      fileName = 'texas-limitado.pdf';
-    } else {
-      fileName = `${product.state}-${product.label}.pdf`;
-    }
-    
-    const filePath = `${product.state}/${fileName}`;
+    const filePath = `${product.state}/${product.state}-${product.label}.pdf`;
     console.log("Attempting to generate signed URL for file:", filePath);
     console.log("Product details:", { state: product.state, label: product.label });
 
