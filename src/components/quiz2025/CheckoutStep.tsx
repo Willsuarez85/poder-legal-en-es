@@ -160,13 +160,8 @@ export const CheckoutStep = ({ answers, onPrev }: CheckoutStepProps) => {
         // Clear quiz data from localStorage
         localStorage.removeItem('quiz2025_answers');
         
-        // Open checkout in new tab
-        window.open(data.url, '_blank');
-        
-        toast({
-          title: "¡Redirigiendo al pago!",
-          description: "Se ha abierto una nueva pestaña con el checkout de Stripe"
-        });
+        // Redirect to checkout in the same tab
+        window.location.href = data.url;
       }
     } catch (error) {
       console.error('Error during checkout:', error);
