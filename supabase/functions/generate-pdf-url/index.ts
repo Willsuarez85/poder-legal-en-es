@@ -94,11 +94,11 @@ serve(async (req) => {
     console.log("Attempting to generate signed URL for file:", filePath);
     console.log("Product details:", { state: product.state, label: product.label });
 
-    // Generate signed URL (valid for 1 hour)
+    // Generate signed URL (valid for 24 hours)
     const { data: signedUrlData, error: signedUrlError } = await supabaseAdmin
       .storage
       .from("poder-legal")
-      .createSignedUrl(filePath, 3600); // 1 hour expiry
+      .createSignedUrl(filePath, 86400); // 24 hours expiry
 
     if (signedUrlError) {
       console.error("Failed to generate signed URL:", signedUrlError);
@@ -130,7 +130,7 @@ serve(async (req) => {
     return new Response(
       JSON.stringify({ 
         downloadUrl: signedUrlData.signedUrl,
-        expiresAt: new Date(Date.now() + 3600000).toISOString() // 1 hour from now
+        expiresAt: new Date(Date.now() + 86400000).toISOString() // 24 hours from now
       }),
       {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
