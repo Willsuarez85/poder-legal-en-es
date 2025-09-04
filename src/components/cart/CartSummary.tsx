@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { useCart } from "@/context/CartContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { MetaPixel } from "@/lib/metaPixel";
 
 const formatPrice = (price: number) =>
   new Intl.NumberFormat("es-US", { style: "currency", currency: "USD" }).format(price);
@@ -17,6 +18,22 @@ const CartSummary = () => {
   const handleCheckout = async () => {
     if (!items.length) return;
     setLoading(true);
+    
+    // Track InitiateCheckout event for Meta Pixel
+    const totalValue = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const productIds = items.map(item => item.productId);
+    const productNames = items.map(item => item.name);
+    
+    MetaPixel.trackInitiateCheckout({
+      value: totalValue,
+      currency: 'USD',
+      content_ids: productIds,
+      content_type: 'product',
+      content_name: productNames.join(', '),
+      content_category: 'legal_documents',
+      num_items: items.reduce((sum, item) => sum + item.quantity, 0)
+    });
+    
     try {
       const { data, error } = await supabase.functions.invoke("create-payment", {
         body: {

@@ -5,6 +5,7 @@ import { CheckCircle, Mail, Download, MessageCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { MetaPixel } from "@/lib/metaPixel";
 
 const Success = () => {
   const location = useLocation();
@@ -75,6 +76,23 @@ const Success = () => {
       if (data?.products) {
         console.log("Setting purchased products:", data.products);
         setPurchasedProducts(data.products);
+        
+        // Track purchase event for Meta Pixel
+        const totalValue = data.products.reduce((sum: number, product: any) => sum + (product.price || 0), 0);
+        const productIds = data.products.map((product: any) => product.id);
+        const productNames = data.products.map((product: any) => 
+          typeof product.name === 'object' ? product.name.es || product.name.en : product.name
+        );
+        
+        MetaPixel.trackPurchase({
+          value: totalValue,
+          currency: 'USD',
+          content_ids: productIds,
+          content_type: 'product',
+          content_name: productNames.join(', '),
+          content_category: 'legal_documents',
+          num_items: data.products.length
+        });
       } else {
         console.log("No products found in order");
         setPurchasedProducts([]);

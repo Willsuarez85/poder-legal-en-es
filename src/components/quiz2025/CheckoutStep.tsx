@@ -9,6 +9,7 @@ import { QuizAnswers } from "@/pages/Quiz2025";
 import { supabase } from "@/integrations/supabase/client";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/hooks/use-toast";
+import { MetaPixel } from "@/lib/metaPixel";
 
 interface CheckoutStepProps {
   answers: QuizAnswers;
@@ -119,6 +120,23 @@ export const CheckoutStep = ({ answers, onPrev }: CheckoutStepProps) => {
     setProcessing(true);
     
     try {
+      // Track InitiateCheckout event for Meta Pixel
+      const totalValue = selectedProductsData.reduce((sum, product) => sum + product.price, 0);
+      const productIds = selectedProductsData.map(product => product.id);
+      const productNames = selectedProductsData.map(product => 
+        typeof product.name === 'object' ? product.name.es : product.name
+      );
+      
+      MetaPixel.trackInitiateCheckout({
+        value: totalValue,
+        currency: 'USD',
+        content_ids: productIds,
+        content_type: 'product',
+        content_name: productNames.join(', '),
+        content_category: 'legal_documents',
+        num_items: selectedProductsData.length
+      });
+      
       // Clear existing cart and add selected products
       clear();
       

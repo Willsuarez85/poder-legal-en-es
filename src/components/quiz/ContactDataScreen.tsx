@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
+import { MetaPixel } from "@/lib/metaPixel";
 
 interface ContactDataScreenProps {
   onComplete: (data: { name: string; phone: string }) => void;
@@ -34,6 +35,13 @@ export const ContactDataScreen = ({ onComplete }: ContactDataScreenProps) => {
       });
       return;
     }
+
+    // Track Lead event for Meta Pixel
+    MetaPixel.trackLead({
+      content_name: 'Quiz Lead',
+      content_category: 'legal_documents',
+      status: 'qualified'
+    });
 
     onComplete({ name: name.trim(), phone: phone.trim() });
   };

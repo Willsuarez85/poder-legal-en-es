@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { MetaPixel } from "@/lib/metaPixel";
 
 export type CartItem = {
   productId: string;
@@ -73,14 +74,25 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const addItem = (item: CartItem) => {
     setItems((prev) => {
       const existing = prev.find((i) => i.productId === item.productId);
-      if (existing) {
-        return prev.map((i) =>
-          i.productId === item.productId
-            ? { ...i, quantity: i.quantity + item.quantity }
-            : i
-        );
-      }
-      return [...prev, item];
+      const newItems = existing
+        ? prev.map((i) =>
+            i.productId === item.productId
+              ? { ...i, quantity: i.quantity + item.quantity }
+              : i
+          )
+        : [...prev, item];
+      
+      // Track AddToCart event for Meta Pixel
+      MetaPixel.trackAddToCart({
+        value: item.price * item.quantity,
+        currency: 'USD',
+        content_ids: [item.productId],
+        content_type: 'product',
+        content_name: item.name,
+        content_category: 'legal_documents'
+      });
+      
+      return newItems;
     });
   };
 

@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { safeText, getProductName, getProductDescription } from "@/lib/safeText";
+import { MetaPixel } from "@/lib/metaPixel";
 import { ObjectRenderErrorBoundary, SafeText } from "@/components/ui/ObjectRenderErrorBoundary";
 
 interface Product {
@@ -125,6 +126,13 @@ const Checkout = () => {
         .single();
 
       if (error) throw error;
+
+      // Track Lead event for Meta Pixel
+      MetaPixel.trackLead({
+        content_name: 'Checkout Lead',
+        content_category: 'legal_documents',
+        status: 'qualified'
+      });
 
       toast({
         title: "¡Orden creada exitosamente!",
