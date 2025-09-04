@@ -39,7 +39,7 @@ const Footer = () => {
               to="/terms-and-conditions" 
               className="text-sm text-muted-foreground hover:text-primary transition-colors"
             >
-              Terms and Conditions
+              Terms and Conditions. 
             </Link>
           </div>
         </div>
