@@ -271,6 +271,48 @@ export type Database = {
         Args: Record<PropertyKey, never>
         Returns: number
       }
+      generate_pdf_url_secure: {
+        Args: {
+          p_access_token: string
+          p_client_ip?: unknown
+          p_customer_email?: string
+          p_order_id: string
+          p_product_id: string
+        }
+        Returns: {
+          access_granted: boolean
+          download_url: string
+          error_message: string
+          expires_at: string
+        }[]
+      }
+      get_masked_order_info: {
+        Args: { p_order_id: string }
+        Returns: {
+          created_at: string
+          customer_email_masked: string
+          order_id: string
+        }[]
+      }
+      get_order_products_secure: {
+        Args: {
+          p_access_token: string
+          p_client_ip?: unknown
+          p_customer_email?: string
+          p_order_id: string
+        }
+        Returns: {
+          access_granted: boolean
+          customer_email_masked: string
+          error_message: string
+          product_id: string
+          product_label: string
+          product_name: Json
+          product_price: number
+          product_state: string
+          suspicious_access: boolean
+        }[]
+      }
       is_service_role_request: {
         Args: Record<PropertyKey, never>
         Returns: boolean
