@@ -14,39 +14,81 @@ export type Database = {
   }
   public: {
     Tables: {
+      order_access_attempts: {
+        Row: {
+          access_token_provided: string | null
+          attempted_at: string | null
+          failure_reason: string | null
+          id: string
+          ip_address: unknown | null
+          order_id: string | null
+          success: boolean
+          user_agent: string | null
+        }
+        Insert: {
+          access_token_provided?: string | null
+          attempted_at?: string | null
+          failure_reason?: string | null
+          id?: string
+          ip_address?: unknown | null
+          order_id?: string | null
+          success?: boolean
+          user_agent?: string | null
+        }
+        Update: {
+          access_token_provided?: string | null
+          attempted_at?: string | null
+          failure_reason?: string | null
+          id?: string
+          ip_address?: unknown | null
+          order_id?: string | null
+          success?: boolean
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
       orders: {
         Row: {
+          access_attempts: number | null
           access_token: string
+          access_token_expires_at: string | null
           created_at: string | null
           customer_email: string
           customer_name: string | null
           customer_phone: string | null
           ghl_webhook_sent: boolean | null
           id: string
+          last_access_at: string | null
           product_ids: string[] | null
           stripe_session_id: string | null
           total_amount: number | null
         }
         Insert: {
+          access_attempts?: number | null
           access_token?: string
+          access_token_expires_at?: string | null
           created_at?: string | null
           customer_email: string
           customer_name?: string | null
           customer_phone?: string | null
           ghl_webhook_sent?: boolean | null
           id?: string
+          last_access_at?: string | null
           product_ids?: string[] | null
           stripe_session_id?: string | null
           total_amount?: number | null
         }
         Update: {
+          access_attempts?: number | null
           access_token?: string
+          access_token_expires_at?: string | null
           created_at?: string | null
           customer_email?: string
           customer_name?: string | null
           customer_phone?: string | null
           ghl_webhook_sent?: boolean | null
           id?: string
+          last_access_at?: string | null
           product_ids?: string[] | null
           stripe_session_id?: string | null
           total_amount?: number | null
@@ -210,6 +252,14 @@ export type Database = {
       anonymize_test_orders: {
         Args: Record<PropertyKey, never>
         Returns: number
+      }
+      check_order_access_rate_limit: {
+        Args: {
+          p_access_token: string
+          p_ip_address?: unknown
+          p_order_id: string
+        }
+        Returns: Json
       }
       enhanced_anonymize_customer_data: {
         Args: Record<PropertyKey, never>
