@@ -161,48 +161,69 @@ const Index = () => {
       <section className="py-12 md:py-16 lg:py-20 bg-muted/20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 lg:mb-8">
-              ¿Necesitas un Poder Notarial pero no sabes por dónde empezar?
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 lg:mb-8 text-destructive">
+              Vivimos tiempos de incertidumbre... ¿Estás preparado?
             </h2>
             
-            <p className="text-base lg:text-lg text-muted-foreground mb-10 lg:mb-12 leading-relaxed">
-              Muchos latinos en EE.UU. saben que deben tener un Poder Notarial para proteger a sus hijos, su casa o su negocio...
-              <br />
-              <strong>pero no saben cómo hacerlo bien.</strong>
+            <p className="text-base lg:text-lg text-muted-foreground mb-6 leading-relaxed">
+              <strong>No sabemos si mañana seguiremos aquí.</strong> Las políticas migratorias cambian, las emergencias médicas ocurren, 
+              y la vida puede cambiar en un instante.
+            </p>
+            
+            <div className="bg-warning/10 border-2 border-warning rounded-xl p-6 mb-8">
+              <p className="text-base lg:text-lg font-medium text-warning-foreground">
+                Un <strong>Poder Notarial (Power of Attorney)</strong> es el documento legal que autoriza a personas de tu confianza para:
+                <br />✓ Acceder a tus cuentas bancarias
+                <br />✓ Vender o administrar tu casa
+                <br />✓ Tomar decisiones médicas por ti
+                <br />✓ Cuidar y viajar con tus hijos
+              </p>
+            </div>
+            
+            <p className="text-base lg:text-lg font-semibold text-primary mb-10">
+              Sin este documento, tu familia podría gastar <span className="text-destructive">miles de dólares</span> y 
+              esperar <span className="text-destructive">meses en cortes</span> solo para poder ayudarte.
             </p>
 
+            <h3 className="text-xl md:text-2xl font-bold mb-8">
+              Pero la mayoría comete estos errores costosos:
+            </h3>
+
             <div className="grid md:grid-cols-3 gap-6 lg:gap-8 mb-10 lg:mb-12">
-              <div className="bg-background/80 backdrop-blur rounded-xl p-6 lg:p-8 border shadow-sm">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <Ban className="w-6 h-6 text-primary" />
+              <div className="bg-background/80 backdrop-blur rounded-xl p-6 lg:p-8 border-2 border-destructive/20 shadow-sm">
+                <div className="w-12 h-12 bg-destructive/10 rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <Ban className="w-6 h-6 text-destructive" />
                 </div>
-                <p className="text-sm lg:text-base text-muted-foreground">
-                  🔸 Algunos piensan que solo un abogado caro puede hacerlo.
+                <p className="text-sm lg:text-base font-medium">
+                  <span className="text-destructive">ERROR #1:</span><br />
+                  Pagar $500-$2000 a un abogado por algo que puedes hacer tú mismo
                 </p>
               </div>
 
-              <div className="bg-background/80 backdrop-blur rounded-xl p-6 lg:p-8 border shadow-sm">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <XCircle className="w-6 h-6 text-primary" />
+              <div className="bg-background/80 backdrop-blur rounded-xl p-6 lg:p-8 border-2 border-destructive/20 shadow-sm">
+                <div className="w-12 h-12 bg-destructive/10 rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <XCircle className="w-6 h-6 text-destructive" />
                 </div>
-                <p className="text-sm lg:text-base text-muted-foreground">
-                  🔸 Otros descargan plantillas gratis que no son válidas en su estado.
+                <p className="text-sm lg:text-base font-medium">
+                  <span className="text-destructive">ERROR #2:</span><br />
+                  Usar plantillas gratis de internet que no son válidas en tu estado
                 </p>
               </div>
 
-              <div className="bg-background/80 backdrop-blur rounded-xl p-6 lg:p-8 border shadow-sm">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <AlertTriangle className="w-6 h-6 text-primary" />
+              <div className="bg-background/80 backdrop-blur rounded-xl p-6 lg:p-8 border-2 border-destructive/20 shadow-sm">
+                <div className="w-12 h-12 bg-destructive/10 rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <AlertTriangle className="w-6 h-6 text-destructive" />
                 </div>
-                <p className="text-sm lg:text-base text-muted-foreground">
-                  🔸 Y muchos terminan confiando en "notarios" o personas que prometen ayudar y solo entregan papeles inválidos.
+                <p className="text-sm lg:text-base font-medium">
+                  <span className="text-destructive">ERROR #3:</span><br />
+                  Confiar en "notarios" que cobran caro por documentos inválidos
                 </p>
               </div>
             </div>
 
-            <div className="bg-destructive/10 border border-destructive/20 rounded-xl p-6 lg:p-8">
-              <p className="text-base lg:text-lg font-semibold text-destructive">
-                💥 El resultado: documentos mal hechos que no sirven cuando realmente los necesitas.
+            <div className="bg-success/10 border-2 border-success rounded-xl p-6 lg:p-8">
+              <p className="text-base lg:text-lg font-bold text-success-foreground">
+                ✅ LA SOLUCIÓN: Obtén tu Poder Notarial válido en minutos por solo $19.99
               </p>
             </div>
           </div>
