@@ -248,26 +248,15 @@ const Success = () => {
               </div>
               
               <p className="text-blue-700 dark:text-blue-300 text-sm text-center">
-                Tu orden será enviada por email en unos minutos. Si no la encuentras o no tienes acceso,
+                Tu orden será enviada por email en unos minutos. Si no la encuentras o necesitas ayuda, 
+                contáctanos a <span className="font-medium">soporte@poderlegalusa.com</span> con tu número de orden.
               </p>
-              
-              <p className="text-blue-800 dark:text-blue-200 text-sm font-medium text-center">
-                ¿Deseas que te la enviemos por WhatsApp?
-              </p>
-
-              <Button 
-                className="w-full bg-green-600 hover:bg-green-700 text-white"
-                onClick={() => window.open(`https://wa.me/15558286861?text=Hola, necesito ayuda con mi orden #${orderId}`, '_blank')}
-              >
-                <MessageCircle className="w-4 h-4 mr-2" />
-                Conectar con nuestro equipo por WhatsApp
-              </Button>
             </div>
 
             <div className="bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 rounded-lg p-4">
               <p className="text-amber-800 dark:text-amber-200 text-sm text-center">
-                <strong>Importante:</strong> Proporciona tu número de orden <span className="font-mono font-bold">#{orderId}</span> a nuestro equipo 
-                y en unas horas te enviaremos todo por WhatsApp.
+                <strong>Importante:</strong> Incluye tu número de orden <span className="font-mono font-bold">#{orderId}</span> cuando nos contactes 
+                por email para obtener soporte rápido.
               </p>
             </div>
 
@@ -275,9 +264,9 @@ const Success = () => {
               <h3 className="font-semibold">⏰ Qué esperar:</h3>
               <ul className="text-sm text-muted-foreground space-y-2 text-left max-w-md mx-auto">
                 <li>• Email con documentos: 5-15 minutos</li>
-                <li>• WhatsApp alternativo: 1-3 horas</li>
                 <li>• Documentos listos para completar</li>
                 <li>• Instrucciones de llenado incluidas</li>
+                <li>• Soporte por email disponible</li>
               </ul>
             </div>
 
@@ -288,19 +277,11 @@ const Success = () => {
               >
                 Volver al Inicio
               </Button>
-              
-              <Button 
-                variant="outline" 
-                className="w-full"
-                onClick={() => navigate("/products")}
-              >
-                Ver Más Documentos
-              </Button>
             </div>
 
             <div className="pt-4 text-xs text-muted-foreground">
               <p>
-                ¿Tienes preguntas? Contáctanos y te ayudaremos con cualquier duda sobre tu documento.
+                ¿Tienes preguntas? Escríbenos a <span className="font-medium">soporte@poderlegalusa.com</span> y te ayudaremos con cualquier duda sobre tu documento.
               </p>
             </div>
           </CardContent>
