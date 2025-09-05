@@ -1,14 +1,56 @@
+# Robots.txt para PoderLegalUSA.com
+# Optimizado para SEO
+
+# Permitir bots principales
 User-agent: Googlebot
 Allow: /
+Crawl-delay: 0
 
 User-agent: Bingbot
 Allow: /
+Crawl-delay: 0
 
-User-agent: Twitterbot
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
 Allow: /
 
 User-agent: facebookexternalhit
 Allow: /
 
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+# Reglas generales
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /.git/
+Disallow: /node_modules/
+Disallow: /src/
+Disallow: *.json$
+Disallow: /*.config.js$
+
+# Sitemap
+Sitemap: https://poderlegalusa.com/sitemap.xml
+
+# Crawl-delay para bots agresivos
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+User-agent: MJ12bot
+Crawl-delay: 20
+
+User-agent: DotBot
+Crawl-delay: 20

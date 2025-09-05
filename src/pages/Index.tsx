@@ -90,7 +90,7 @@ const Index = () => {
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <Button size="lg" className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-sm sm:text-base lg:text-lg px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-6 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all touch-manipulation w-full sm:w-auto" onClick={() => navigate("/quiz-2025")}>
-                  <span className="text-center leading-tight">Encuentra la Carta que necesitas en 2 minutos</span>
+                  <span className="text-center leading-tight">Encuentra el Poder Notarial que necesitas en 2 minutos</span>
                   <ArrowRight className="ml-2 w-4 h-4 lg:w-5 lg:h-5 flex-shrink-0" />
                 </Button>
               </div>
