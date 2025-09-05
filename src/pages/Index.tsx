@@ -694,17 +694,17 @@ const Index = () => {
       </section>
 
       {/* Final CTA Section */}
-      <section className="py-12 md:py-16 lg:py-20 bg-warning text-warning-foreground">
+      <section className="py-12 md:py-16 lg:py-20 bg-background text-foreground">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 lg:mb-6">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 lg:mb-6 text-primary">
             Toma el control hoy
           </h2>
-          <p className="text-base lg:text-xl mb-8 lg:mb-10 opacity-90 max-w-3xl mx-auto">
+          <p className="text-base lg:text-xl mb-8 lg:mb-10 text-muted-foreground max-w-3xl mx-auto">
             Una sola firma puede hacer la diferencia entre proteger a tu familia 
             o dejar todo en manos del sistema.
           </p>
           
-          <Button size="lg" variant="secondary" className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-base sm:text-lg lg:text-xl px-6 sm:px-8 lg:px-12 py-4 sm:py-5 lg:py-6 shadow-lg hover:shadow-xl transition-all w-full sm:w-auto touch-manipulation" onClick={() => navigate("/quiz-2025")}>
+          <Button size="lg" variant="default" className="text-base sm:text-lg lg:text-xl px-6 sm:px-8 lg:px-12 py-4 sm:py-5 lg:py-6 shadow-lg hover:shadow-xl transition-all w-full sm:w-auto touch-manipulation" onClick={() => navigate("/quiz-2025")}>
             <span className="text-center leading-tight">Comienza el Quiz Ahora</span>
             <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 flex-shrink-0" />
           </Button>
