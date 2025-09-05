@@ -163,10 +163,10 @@ serve(async (req) => {
     }, 0) / 100; // Convert from cents to dollars
 
     // Create order record
-    const clientIP = req.headers.get("x-forwarded-for") || 
-                    req.headers.get("x-real-ip") || 
-                    req.headers.get("cf-connecting-ip") || 
-                    "127.0.0.1";
+    const clientIP = (req.headers.get("x-forwarded-for") || 
+                     req.headers.get("x-real-ip") || 
+                     req.headers.get("cf-connecting-ip") || 
+                     "127.0.0.1").split(',')[0].trim();
     
     const { data: orderData, error: orderError } = await supabaseService
       .from("orders")
