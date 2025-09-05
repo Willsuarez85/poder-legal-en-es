@@ -22,61 +22,98 @@ interface ProductSelectionStepProps {
   onPrev: () => void;
 }
 
-const getProductName = (name: any): string => {
-  try {
-    if (typeof name === 'string') return name;
-    if (typeof name === 'object' && name !== null) {
-      return name.es || name.en || 'Poder Notarial';
-    }
-    return 'Poder Notarial';
-  } catch (error) {
-    console.error('Error getting product name:', error);
-    return 'Poder Notarial';
+// Hardcoded product information based on requirements
+const PRODUCT_INFO: Record<string, {
+  title: string;
+  benefit: string;
+  summary: string;
+  sirve: string[];
+  noSirve: string[];
+  fillTime: string;
+}> = {
+  'medical': {
+    title: 'Poder Notarial Médico',
+    benefit: 'Tu salud, tus reglas. Siempre.',
+    summary: 'En caso de emergencia quién decide sobre tu salud',
+    sirve: [
+      'Autorizar tratamientos y cirugías en emergencias',
+      'Acceder/compartir tu información médica (HIPAA release)',
+      'Asegurar que se respeten tus valores personales/religiosos'
+    ],
+    noSirve: [
+      'Manejar dinero o vender bienes',
+      'Reemplazar testamento',
+      'Firmar contratos no médicos'
+    ],
+    fillTime: '5–10 min'
+  },
+  'financial': {
+    title: 'Poder Notarial Financiero',
+    benefit: 'Mantén cuentas y pagos al día si tu no estas',
+    summary: 'Acceso a bancos, pagos y trámites sin bloqueos',
+    sirve: [
+      'Manejar cuentas bancarias y pagos (servicios, deudas)',
+      'Comprar, vender o alquilar bienes si lo autorizas',
+      'Presentar impuestos y firmar trámites financieros'
+    ],
+    noSirve: [
+      'Quitar tu control si estás en capacidad de decidir',
+      'Custodia de tus hijos',
+      'Decisiones médicas'
+    ],
+    fillTime: '8–10 min'
+  },
+  'childcare': {
+    title: 'Poder Notarial Custodia de Niños (temporal)',
+    benefit: 'Autoridad legal para que un adulto cuide a tus hijos',
+    summary: 'Escuela, salud y viajes autorizados sin problemas',
+    sirve: [
+      'Inscribir en escuela y firmar permisos',
+      'Autorizar atención médica de emergencia',
+      'Viajar con los menores con permiso formal fuera del país'
+    ],
+    noSirve: [
+      'Cambiar la custodia permanente',
+      'Permitir adopciones',
+      'Quitar tus derechos de padre/madre'
+    ],
+    fillTime: '7–12 min'
+  },
+  'specific': {
+    title: 'Poder Notarial Específico (limitado)',
+    benefit: 'Delegas un trámite puntual sin estar presente',
+    summary: 'Alguien firma/gestiona ese trámite por ti',
+    sirve: [
+      'Vender tu casa: autorizar firma en el cierre, trámites de título y documentos específicos',
+      'Recibir pagos o firmar documentos concretos (indicar cuáles)',
+      'Gestionar un trámite en fechas definidas'
+    ],
+    noSirve: [
+      'Uso general sin límites ni fechas',
+      'Decisiones médicas o custodia de menores',
+      'Manejo total de tus finanzas (usa la financiera)'
+    ],
+    fillTime: '8–12 min'
   }
 };
 
-const getProductDescription = (description: any): string => {
-  try {
-    if (typeof description === 'string') return description;
-    if (typeof description === 'object' && description !== null) {
-      if (description.es && typeof description.es === 'object') {
-        return description.es.purpose || description.es.not_for || 'Documento legal válido para tu estado';
-      }
-      if (description.en && typeof description.en === 'object') {
-        return description.en.purpose || description.en.not_for || 'Documento legal válido para tu estado';
-      }
-      if (description.purpose) return description.purpose;
-      if (description.not_for) return description.not_for;
-      if (description.es) return description.es;
-      if (description.en) return description.en;
-    }
-    return 'Documento legal válido para tu estado';
-  } catch (error) {
-    console.error('Error getting product description:', error);
-    return 'Documento legal válido para tu estado';
+const getProductType = (product: Product): string => {
+  const name = typeof product.name === 'object' ? product.name.es : product.name;
+  const nameLower = name?.toLowerCase() || '';
+  
+  if (nameLower.includes('médic') || nameLower.includes('medical') || nameLower.includes('health')) {
+    return 'medical';
   }
-};
-
-const getProductDetails = (description: any): { purpose: string; notFor: string } => {
-  try {
-    if (typeof description === 'object' && description !== null) {
-      if (description.es && typeof description.es === 'object') {
-        return {
-          purpose: description.es.purpose || 'Autoriza a alguien a actuar en tu nombre',
-          notFor: description.es.not_for || 'No válido para ciertas transacciones especializadas'
-        };
-      }
-    }
-    return {
-      purpose: 'Autoriza a alguien a actuar en tu nombre en diversas situaciones legales',
-      notFor: 'No válido para ciertas transacciones especializadas'
-    };
-  } catch (error) {
-    return {
-      purpose: 'Autoriza a alguien a actuar en tu nombre',
-      notFor: 'No válido para ciertas transacciones especializadas'
-    };
+  if (nameLower.includes('financ') || nameLower.includes('financial')) {
+    return 'financial';
   }
+  if (nameLower.includes('niño') || nameLower.includes('child') || nameLower.includes('custodia')) {
+    return 'childcare';
+  }
+  if (nameLower.includes('específic') || nameLower.includes('specific') || nameLower.includes('limitado')) {
+    return 'specific';
+  }
+  return 'medical'; // default
 };
 
 export const ProductSelectionStep = ({ selectedState, selectedProducts, onProductsSelect, onNext, onPrev }: ProductSelectionStepProps) => {
@@ -85,58 +122,11 @@ export const ProductSelectionStep = ({ selectedState, selectedProducts, onProduc
   const [error, setError] = useState<string | null>(null);
   const [expandedProducts, setExpandedProducts] = useState<Set<string>>(new Set());
 
-  // Map all US states to their abbreviations
+  // Map all US states to their abbreviations (limited to 3 for now)
   const stateMapping: Record<string, string> = {
-    'alabama': 'al',
-    'alaska': 'ak',
-    'arizona': 'az',
-    'arkansas': 'ar',
     'california': 'ca',
-    'colorado': 'co',
-    'connecticut': 'ct',
-    'delaware': 'de',
     'florida': 'fl',
-    'georgia': 'ga',
-    'hawaii': 'hi',
-    'idaho': 'id',
-    'illinois': 'il',
-    'indiana': 'in',
-    'iowa': 'ia',
-    'kansas': 'ks',
-    'kentucky': 'ky',
-    'louisiana': 'la',
-    'maine': 'me',
-    'maryland': 'md',
-    'massachusetts': 'ma',
-    'michigan': 'mi',
-    'minnesota': 'mn',
-    'mississippi': 'ms',
-    'missouri': 'mo',
-    'montana': 'mt',
-    'nebraska': 'ne',
-    'nevada': 'nv',
-    'new-hampshire': 'nh',
-    'new-jersey': 'nj',
-    'new-mexico': 'nm',
-    'new-york': 'ny',
-    'north-carolina': 'nc',
-    'north-dakota': 'nd',
-    'ohio': 'oh',
-    'oklahoma': 'ok',
-    'oregon': 'or',
-    'pennsylvania': 'pa',
-    'rhode-island': 'ri',
-    'south-carolina': 'sc',
-    'south-dakota': 'sd',
-    'tennessee': 'tn',
-    'texas': 'tx',
-    'utah': 'ut',
-    'vermont': 'vt',
-    'virginia': 'va',
-    'washington': 'wa',
-    'west-virginia': 'wv',
-    'wisconsin': 'wi',
-    'wyoming': 'wy'
+    'texas': 'tx'
   };
 
   useEffect(() => {
@@ -340,8 +330,8 @@ export const ProductSelectionStep = ({ selectedState, selectedProducts, onProduc
           {products.map((product) => {
             const isSelected = selectedProducts.includes(product.id);
             const isExpanded = expandedProducts.has(product.id);
-            const productName = getProductName(product.name);
-            const details = getProductDetails(product.description);
+            const productType = getProductType(product);
+            const productInfo = PRODUCT_INFO[productType];
             
             return (
               <Card 
@@ -374,10 +364,13 @@ export const ProductSelectionStep = ({ selectedState, selectedProducts, onProduc
                       <div className="flex items-start justify-between">
                         <div className="flex-1 mr-4">
                           <h3 className="font-bold text-gray-900 mb-1">
-                            {productName.replace('Carta de Poder', 'Poder Notarial')}
+                            {productInfo.title}
                           </h3>
-                          <p className="text-sm text-gray-600 line-clamp-2">
-                            {details.purpose}
+                          <p className="text-sm font-semibold text-blue-600 mb-1">
+                            {productInfo.benefit}
+                          </p>
+                          <p className="text-xs text-gray-600 italic">
+                            {productInfo.summary}
                           </p>
                         </div>
                         <div className="text-right flex-shrink-0">
@@ -405,24 +398,57 @@ export const ProductSelectionStep = ({ selectedState, selectedProducts, onProduc
                     ) : (
                       <>
                         <ChevronDown className="w-4 h-4" />
-                        Ver más detalles
+                        Ver detalles
                       </>
                     )}
                   </button>
 
                   {isExpanded && (
-                    <div className="mt-3 pt-3 border-t border-gray-200 space-y-2 animate-slideDown">
+                    <div className="mt-3 pt-3 border-t border-gray-200 space-y-3 animate-slideDown">
                       <div>
-                        <p className="text-xs font-semibold text-gray-700 mb-1">✅ Para qué sirve:</p>
-                        <p className="text-xs text-gray-600">{details.purpose}</p>
+                        <p className="text-xs font-bold text-gray-700 mb-2">✅ Sirve para:</p>
+                        <ul className="text-xs text-gray-600 space-y-1">
+                          {productInfo.sirve.map((item, idx) => (
+                            <li key={idx} className="flex items-start">
+                              <span className="mr-2">•</span>
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
+                      
                       <div>
-                        <p className="text-xs font-semibold text-gray-700 mb-1">❌ No válido para:</p>
-                        <p className="text-xs text-gray-600">{details.notFor}</p>
+                        <p className="text-xs font-bold text-gray-700 mb-2">❌ No sirve para:</p>
+                        <ul className="text-xs text-gray-600 space-y-1">
+                          {productInfo.noSirve.map((item, idx) => (
+                            <li key={idx} className="flex items-start">
+                              <span className="mr-2">•</span>
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
-                      <div className="flex items-center gap-2 pt-2">
-                        <FileText className="w-4 h-4 text-gray-400" />
-                        <span className="text-xs text-gray-500">Documento legal certificado</span>
+
+                      <div className="pt-2 border-t border-gray-100">
+                        <p className="text-xs font-bold text-gray-700 mb-2">📦 Incluye:</p>
+                        <ul className="text-xs text-gray-600 space-y-1">
+                          <li>🧭 Instrucciones <strong>paso a paso</strong> para firmar y <strong>notarizar</strong> (en español)</li>
+                          <li>🇪🇸/🇺🇸 Plantilla en <strong>español e inglés</strong></li>
+                          <li>✅ <strong>100% legal — verificada en tu estado</strong></li>
+                          <li>⏱️ <strong>Tiempo estimado de llenado:</strong> {productInfo.fillTime}</li>
+                        </ul>
+                      </div>
+
+                      <div className="flex items-center gap-3 pt-2 text-xs text-gray-500">
+                        <span className="flex items-center gap-1">
+                          <FileText className="w-3 h-3" />
+                          PDF
+                        </span>
+                        {isSelected && (
+                          <span className="text-green-600 font-semibold">
+                            ☑️ En el carrito
+                          </span>
+                        )}
                       </div>
                     </div>
                   )}
