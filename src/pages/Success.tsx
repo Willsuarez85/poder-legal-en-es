@@ -75,7 +75,7 @@ const Success = () => {
 
   const loadPurchasedProducts = async (orderIdValue: string, accessTokenValue: string, customerEmailValue?: string) => {
     try {
-      // Loading products for order
+      console.log('Loading products with email:', customerEmailValue ? 'PROVIDED' : 'NOT PROVIDED');
       
       // Use enhanced edge function with customer email verification
       const { data, error } = await supabase.functions.invoke('get-order-products', {
@@ -86,10 +86,7 @@ const Success = () => {
         }
       });
 
-      // Order products loaded
-
       if (error) {
-        // Failed to load order products
         console.error("Error details:", error.message, error.stack);
         
         // Handle different types of security errors
@@ -136,10 +133,15 @@ const Success = () => {
       }
 
       if (data?.products) {
-        // Setting purchased products
         setPurchasedProducts(data.products);
         setCustomerInfo(data.customerInfo);
         setEmailVerified(true);
+        
+        // CRITICAL FIX: Persist the verified email in state
+        if (customerEmailValue && !customerEmail) {
+          console.log('Setting customer email from verification:', customerEmailValue);
+          setCustomerEmail(customerEmailValue);
+        }
         
         // Show security warning if suspicious IP detected
         if (data.customerInfo?.suspiciousAccess) {
@@ -167,7 +169,6 @@ const Success = () => {
           num_items: data.products.length
         });
       } else {
-        // No products found in order
         setPurchasedProducts([]);
       }
     } catch (error: any) {
@@ -212,6 +213,20 @@ const Success = () => {
     try {
       if (!orderId || !accessToken) return;
 
+      // CRITICAL FIX: Check email verification status before download
+      if (!emailVerified || !customerEmail.trim()) {
+        console.log('Email verification required for download. emailVerified:', emailVerified, 'customerEmail:', customerEmail ? 'SET' : 'EMPTY');
+        setRequiresEmailVerification(true);
+        toast({
+          title: "Verificación Requerida",
+          description: "Debe verificar su email antes de descargar documentos.",
+          variant: "destructive"
+        });
+        return;
+      }
+
+      console.log('Initiating download with verified email for product:', productId);
+
       const { data, error } = await supabase.functions.invoke('generate-pdf-url', {
         body: { 
           orderId, 
@@ -226,9 +241,12 @@ const Success = () => {
         
         // Handle different security error types  
         if (error.message?.includes('email_mismatch')) {
+          console.log('Email mismatch detected - resetting verification state');
+          setEmailVerified(false);
+          setRequiresEmailVerification(true);
           toast({
             title: "Email No Coincide",
-            description: "El email ingresado no coincide con el de la orden. Verifique su email.",
+            description: "El email no coincide con el de la orden. Por favor verifique nuevamente su email.",
             variant: "destructive"
           });
         } else if (error.message?.includes('token_expired')) {
@@ -254,9 +272,7 @@ const Success = () => {
       }
 
       if (data?.downloadUrl) {
-        // Log the temporary URL for debugging
-        console.log('Generated temporary URL:', data.downloadUrl);
-        console.log('URL expires at:', data.expiresAt);
+        console.log('Download successful - opening URL');
         
         // Open download in new tab
         window.open(data.downloadUrl, '_blank');
