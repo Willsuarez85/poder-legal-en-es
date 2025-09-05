@@ -6,7 +6,7 @@ const Footer = () => {
   const navigate = useNavigate();
   
   return (
-    <footer className="bg-destructive text-white">
+    <footer className="bg-primary text-white">
       {/* Legal Notice */}
       <div className="bg-black/20 border-b border-white/10">
         <div className="container mx-auto px-4 py-4">
