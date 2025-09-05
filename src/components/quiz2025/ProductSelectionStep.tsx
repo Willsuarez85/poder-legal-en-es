@@ -294,24 +294,6 @@ export const ProductSelectionStep = ({ selectedState, selectedProducts, onProduc
   // Main render
   return (
     <div className="min-h-[80vh] flex flex-col justify-between p-4 max-w-md mx-auto w-full">
-      {/* Tip Box */}
-      <div className="mb-6 animate-fadeIn">
-        <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-2xl p-5 shadow-sm">
-          <div className="flex items-start gap-4">
-            <div className="bg-green-400 rounded-full p-3 shadow-md">
-              <Info className="w-6 h-6 text-gray-800" />
-            </div>
-            <div className="flex-1">
-              <h3 className="font-bold text-gray-900 mb-1">Consejo útil</h3>
-              <p className="text-sm text-gray-700 leading-relaxed">
-                Cada tipo de Poder Notarial (Power of Attorney) tiene usos específicos. 
-                Selecciona solo los que necesitas según tu situación particular.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
         <div className="text-center mb-6">
@@ -473,8 +455,24 @@ export const ProductSelectionStep = ({ selectedState, selectedProducts, onProduc
         )}
       </div>
 
+      {/* Tip Box - Moved to bottom before buttons */}
+      <div className="mb-6 animate-fadeIn">
+        <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-xl p-4 shadow-sm">
+          <div className="flex items-center gap-3">
+            <div className="bg-green-400 rounded-full p-2 shadow-md flex-shrink-0">
+              <Info className="w-5 h-5 text-gray-800" />
+            </div>
+            <div className="flex-1">
+              <p className="text-sm text-gray-700 leading-relaxed">
+                <strong>Consejo:</strong> Cada Poder Notarial tiene usos específicos. Selecciona solo los que necesitas según tu situación.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Bottom Navigation */}
-      <div className="mt-8 space-y-4">
+      <div className="space-y-4">
         <div className="flex gap-3">
           <Button
             onClick={onPrev}

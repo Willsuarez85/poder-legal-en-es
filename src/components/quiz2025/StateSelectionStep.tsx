@@ -32,25 +32,6 @@ export const StateSelectionStep = ({ selectedState, onStateSelect, onNext }: Sta
 
   return (
     <div className="min-h-[80vh] flex flex-col justify-between p-4 max-w-md mx-auto w-full">
-      {/* Tip Box - Estilo moderno */}
-      <div className="mb-6 animate-fadeIn">
-        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl p-5 shadow-sm">
-          <div className="flex items-start gap-4">
-            <div className="bg-yellow-400 rounded-full p-3 shadow-md">
-              <Lightbulb className="w-6 h-6 text-gray-800" />
-            </div>
-            <div className="flex-1">
-              <h3 className="font-bold text-gray-900 mb-1">¿Sabías que?</h3>
-              <p className="text-sm text-gray-700 leading-relaxed">
-                No todos los poderes notariales son válidos en todos los estados. 
-                Cada estado tiene sus propias leyes y requisitos específicos que deben cumplirse 
-                para que el documento sea legalmente válido.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Main Content */}
       <div className="flex-1 flex flex-col justify-center">
         <Card className="border-0 shadow-xl bg-white rounded-3xl p-8">
@@ -59,14 +40,17 @@ export const StateSelectionStep = ({ selectedState, onStateSelect, onNext }: Sta
               <MapPin className="w-8 h-8 text-blue-600" />
             </div>
             <h2 className="text-2xl font-bold text-gray-900 mb-2">
-              ¿En qué estado necesitas tu Poder Notarial?
+              Comencemos con lo básico
             </h2>
-            <p className="text-gray-600 text-sm">
-              Selecciona el estado donde se usará el documento
+            <p className="text-gray-600 text-base">
+              En 4 sencillos pasos encontrarás el documento legal perfecto para tu situación
             </p>
           </div>
 
           <div className="space-y-4">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              ¿En qué estado necesitas tu Poder Notarial?
+            </label>
             <Select value={selectedState} onValueChange={handleStateSelect}>
               <SelectTrigger className="w-full h-14 text-base border-2 rounded-xl hover:border-blue-400 transition-colors">
                 <SelectValue placeholder="Selecciona tu estado" />
@@ -92,18 +76,33 @@ export const StateSelectionStep = ({ selectedState, onStateSelect, onNext }: Sta
               </div>
             )}
 
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mt-4">
-              <p className="text-sm text-blue-800 text-center">
-                🚀 <strong>Pronto en todos los Estados Unidos</strong><br/>
-                <span className="text-xs">Más estados próximamente</span>
+            <div className="bg-gray-50 rounded-xl p-3 text-center">
+              <p className="text-xs text-gray-600">
+                🚀 Más estados próximamente
               </p>
             </div>
           </div>
         </Card>
       </div>
 
+      {/* Tip Box - Moved to bottom before buttons */}
+      <div className="mb-6 animate-fadeIn">
+        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-4 shadow-sm">
+          <div className="flex items-center gap-3">
+            <div className="bg-yellow-400 rounded-full p-2 shadow-md flex-shrink-0">
+              <Lightbulb className="w-5 h-5 text-gray-800" />
+            </div>
+            <div className="flex-1">
+              <p className="text-sm text-gray-700 leading-relaxed">
+                <strong>¿Sabías que?</strong> Cada estado tiene sus propias leyes para que un Poder Notarial sea válido. Por eso necesitamos saber tu ubicación.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Bottom Navigation */}
-      <div className="mt-8">
+      <div>
         <Button
           onClick={handleNext}
           disabled={!selectedState}

@@ -43,25 +43,6 @@ export const EffectiveTimeStep = ({ selectedTime, onTimeSelect, onNext, onPrev }
 
   return (
     <div className="min-h-[80vh] flex flex-col justify-between p-4 max-w-md mx-auto w-full">
-      {/* Tip Box - Estilo moderno */}
-      <div className="mb-6 animate-fadeIn">
-        <div className="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-2xl p-5 shadow-sm">
-          <div className="flex items-start gap-4">
-            <div className="bg-amber-400 rounded-full p-3 shadow-md">
-              <AlertCircle className="w-6 h-6 text-gray-800" />
-            </div>
-            <div className="flex-1">
-              <h3 className="font-bold text-gray-900 mb-1">Importante saber</h3>
-              <p className="text-sm text-gray-700 leading-relaxed">
-                Un Poder Notarial puede activarse inmediatamente o solo cuando 
-                ocurra algo específico (como una emergencia médica o deportación). 
-                Esta decisión es clave para proteger tus intereses.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Main Content */}
       <div className="flex-1 flex flex-col justify-center">
         <Card className="border-0 shadow-xl bg-white rounded-3xl p-8">
@@ -124,8 +105,24 @@ export const EffectiveTimeStep = ({ selectedTime, onTimeSelect, onNext, onPrev }
         </Card>
       </div>
 
+      {/* Tip Box - Moved to bottom before buttons */}
+      <div className="mb-6 animate-fadeIn">
+        <div className="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-xl p-4 shadow-sm">
+          <div className="flex items-center gap-3">
+            <div className="bg-amber-400 rounded-full p-2 shadow-md flex-shrink-0">
+              <AlertCircle className="w-5 h-5 text-gray-800" />
+            </div>
+            <div className="flex-1">
+              <p className="text-sm text-gray-700 leading-relaxed">
+                <strong>Importante:</strong> Un Poder Notarial puede activarse inmediatamente o solo en emergencias (enfermedad, deportación). Esta decisión protege tus intereses.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Bottom Navigation */}
-      <div className="mt-8 space-y-4">
+      <div className="space-y-4">
         <div className="flex gap-3">
           <Button
             onClick={onPrev}

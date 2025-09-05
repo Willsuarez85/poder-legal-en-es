@@ -80,28 +80,28 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center">
             {/* Hero Content */}
-            <div className="text-center lg:text-left space-y-6 lg:space-y-8">
-              <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight">
+            <div className="text-center space-y-6 lg:space-y-8">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
                 Protege legalmente a tu familia, tu negocio y tus bienes en 
                 <span className="text-primary"> Estados Unidos</span> en minutos
               </h1>
               
-              <p className="text-base md:text-lg lg:text-xl text-muted-foreground leading-relaxed">
+              <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
                 Encuentra el poder notarial (<strong>Power of Attorney</strong>) exacto que necesitas para proteger lo que más amas. Documentos Válidos en los 50 Estados listos para descargar en PDF y llenar fácilmente con instrucciones en español.
               </p>
               
-              <p className="text-sm md:text-base text-muted-foreground">
+              <p className="text-base md:text-lg text-muted-foreground">
                 Documentos listos para Firmar y notarizar. Sin abogados caros ni trámites confusos.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <Button size="lg" className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-sm sm:text-base lg:text-lg px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-6 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all touch-manipulation w-full sm:w-auto" onClick={() => navigate("/quiz-2025")}>
-                  <span className="text-center leading-tight">Encuentra el Poder Notarial que necesitas en 2 minutos</span>
-                  <ArrowRight className="ml-2 w-4 h-4 lg:w-5 lg:h-5 flex-shrink-0" />
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button size="lg" className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-base sm:text-lg lg:text-xl px-8 sm:px-10 lg:px-12 py-4 sm:py-5 lg:py-6 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all touch-manipulation w-full sm:w-auto" onClick={() => navigate("/quiz-2025")}>
+                  <span className="text-center leading-tight">Comienza Aquí - Encuentra tu Documento</span>
+                  <ArrowRight className="ml-2 w-5 h-5 lg:w-6 lg:h-6 flex-shrink-0" />
                 </Button>
               </div>
 
-              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-6 text-xs sm:text-sm text-muted-foreground">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 text-xs sm:text-sm text-muted-foreground">
                 <div className="flex items-center gap-1">
                   <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
                   <span>Documentos Válidos en los 50 Estados 🇺🇸</span>
