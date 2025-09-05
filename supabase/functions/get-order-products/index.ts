@@ -45,10 +45,16 @@ serve(async (req) => {
     console.log("Checking enhanced access for order:", orderId);
 
     // Get client IP for enhanced security validation
-    const clientIP = req.headers.get("x-forwarded-for") || 
-                    req.headers.get("x-real-ip") || 
-                    req.headers.get("cf-connecting-ip") || 
-                    "127.0.0.1";
+    // Parse first IP from comma-separated x-forwarded-for header
+    const rawClientIP = req.headers.get("x-forwarded-for") || 
+                       req.headers.get("x-real-ip") || 
+                       req.headers.get("cf-connecting-ip") || 
+                       "127.0.0.1";
+    
+    // Extract first IP from comma-separated list and trim whitespace
+    const clientIP = rawClientIP.split(',')[0].trim();
+    console.log("Raw client IP header:", rawClientIP);
+    console.log("Parsed client IP:", clientIP);
 
     // Use enhanced security validation with customer email verification
     const { data: accessCheck, error: accessError } = await supabaseService
