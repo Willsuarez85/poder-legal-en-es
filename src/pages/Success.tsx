@@ -17,29 +17,54 @@ const Success = () => {
   const { toast } = useToast();
   
   useEffect(() => {
-    // Get order ID and access token from URL params or location state
-    const urlParams = new URLSearchParams(location.search);
-    const orderIdFromUrl = urlParams.get('order_id');
-    const accessTokenFromUrl = urlParams.get('access_token');
-    const orderIdFromState = location.state?.orderId;
-    
-    // Success page loaded
-    // Getting order ID from URL or state
-    
-    const finalOrderId = orderIdFromUrl || orderIdFromState;
-    const finalAccessToken = accessTokenFromUrl;
-    
-    setOrderId(finalOrderId);
-    setAccessToken(finalAccessToken);
-    
-    // Load purchased products if we have both order ID and access token
-    if (finalOrderId && finalAccessToken) {
-      // Loading products for order
-      loadPurchasedProducts(finalOrderId, finalAccessToken);
-    } else {
-      // No order ID or access token found
-      setLoading(false);
-    }
+    const getOrderData = async () => {
+      const urlParams = new URLSearchParams(location.search);
+      const sessionId = urlParams.get('session_id');
+      const orderIdFromUrl = urlParams.get('order_id');
+      const accessTokenFromUrl = urlParams.get('access_token');
+      const orderIdFromState = location.state?.orderId;
+      
+      // If we have session_id, use it to get order data
+      if (sessionId) {
+        try {
+          const { data, error } = await supabase.functions.invoke('get-order-by-session', {
+            body: { sessionId }
+          });
+
+          if (error) {
+            console.error("Error getting order by session:", error);
+            setLoading(false);
+            return;
+          }
+
+          if (data?.orderId && data?.accessToken) {
+            setOrderId(data.orderId);
+            setAccessToken(data.accessToken);
+            loadPurchasedProducts(data.orderId, data.accessToken);
+            return;
+          }
+        } catch (error) {
+          console.error("Error calling get-order-by-session:", error);
+          setLoading(false);
+          return;
+        }
+      }
+
+      // Fallback to URL params or state (for backward compatibility)
+      const finalOrderId = orderIdFromUrl || orderIdFromState;
+      const finalAccessToken = accessTokenFromUrl;
+      
+      setOrderId(finalOrderId);
+      setAccessToken(finalAccessToken);
+      
+      if (finalOrderId && finalAccessToken) {
+        loadPurchasedProducts(finalOrderId, finalAccessToken);
+      } else {
+        setLoading(false);
+      }
+    };
+
+    getOrderData();
   }, [location]);
 
   const loadPurchasedProducts = async (orderIdValue: string, accessTokenValue: string) => {

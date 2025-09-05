@@ -187,7 +187,7 @@ serve(async (req) => {
     const session = await stripe.checkout.sessions.create({
       line_items,
       mode: "payment",
-      success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}&order_id=${orderId}&access_token=${orderData.access_token}`,
+      success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${baseUrl}/results`,
       customer_email: customerData?.email || undefined,
       metadata: {
