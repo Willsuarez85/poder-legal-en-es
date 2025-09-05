@@ -24,12 +24,62 @@ serve(async (req) => {
     const { origin, items, customerData, quizData } = await req.json();
     logStep("Request received", { origin, itemsCount: items?.length, customerData, quizData });
 
+    // Enhanced server-side validation
     if (!Array.isArray(items) || items.length === 0) {
       logStep("ERROR: No items in cart");
       return new Response(JSON.stringify({ error: "No hay items en el carrito" }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
         status: 400,
       });
+    }
+
+    // Validate customer data
+    if (!customerData?.name || customerData.name.trim().length < 2) {
+      logStep("ERROR: Invalid customer name");
+      return new Response(JSON.stringify({ error: "Nombre de cliente inválido" }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 400,
+      });
+    }
+
+    // Enhanced email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!customerData?.email || !emailRegex.test(customerData.email)) {
+      logStep("ERROR: Invalid customer email");
+      return new Response(JSON.stringify({ error: "Email de cliente inválido" }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 400,
+      });
+    }
+
+    // Enhanced phone validation
+    const phoneDigits = customerData?.phone?.replace(/\D/g, '') || '';
+    if (!phoneDigits || phoneDigits.length < 8 || phoneDigits.length > 15) {
+      logStep("ERROR: Invalid customer phone");
+      return new Response(JSON.stringify({ error: "Teléfono de cliente inválido" }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 400,
+      });
+    }
+
+    // Validate items structure
+    for (const item of items) {
+      if (!item.productId || typeof item.productId !== 'string') {
+        logStep("ERROR: Invalid product ID in items");
+        return new Response(JSON.stringify({ error: "ID de producto inválido" }), {
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+          status: 400,
+        });
+      }
+      
+      const quantity = Number(item.quantity);
+      if (!quantity || quantity < 1 || quantity > 10) {
+        logStep("ERROR: Invalid quantity in items");
+        return new Response(JSON.stringify({ error: "Cantidad de producto inválida" }), {
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+          status: 400,
+        });
+      }
     }
 
     const supabaseUrl = Deno.env.get("SUPABASE_URL") ?? "";

@@ -64,16 +64,60 @@ export const CheckoutStep = ({ answers, onPrev }: CheckoutStepProps) => {
 
   const totalAmount = selectedProductsData.reduce((sum, product) => sum + product.price, 0);
 
+  const validateEmail = (email: string) => {
+    if (!email.trim()) return false;
+    
+    // Basic email format validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) return false;
+    
+    // Prevent obviously fake domains
+    const suspiciousDomains = ['test.com', 'example.com', 'fake.com', 'spam.com', 'temp.com'];
+    const domain = email.split('@')[1]?.toLowerCase();
+    if (suspiciousDomains.includes(domain)) return false;
+    
+    return true;
+  };
+
+  const validateName = (name: string) => {
+    if (!name.trim()) return false;
+    
+    // Must be at least 2 characters and contain letters
+    if (name.trim().length < 2) return false;
+    
+    // Must contain at least one letter
+    if (!/[a-zA-ZÀ-ÿ]/.test(name)) return false;
+    
+    // Prevent obviously fake names
+    const suspiciousNames = ['test', 'fake', 'sample', 'example', 'asdf', 'qwerty'];
+    if (suspiciousNames.some(suspicious => name.toLowerCase().includes(suspicious))) return false;
+    
+    return true;
+  };
+
   const validatePhone = (phone: string) => {
     if (!phone.trim()) return false;
     
-    // Check for USA phone number (1 + 10 digits)
-    if (phone.startsWith("1") && phone.length === 11) {
+    // Remove all non-digits
+    const digits = phone.replace(/\D/g, '');
+    
+    // Check for USA phone number (1 + 10 digits or just 10 digits)
+    if ((digits.startsWith("1") && digits.length === 11) || digits.length === 10) {
       return true;
     }
     
     // Check for Colombia phone number (57 + 10 digits)
-    if (phone.startsWith("57") && phone.length === 12) {
+    if (digits.startsWith("57") && digits.length === 12) {
+      return true;
+    }
+    
+    // Check for Mexico phone number (52 + 10 digits)
+    if (digits.startsWith("52") && digits.length === 12) {
+      return true;
+    }
+    
+    // Check for other common international formats (8-15 digits)
+    if (digits.length >= 8 && digits.length <= 15) {
       return true;
     }
     
@@ -81,19 +125,19 @@ export const CheckoutStep = ({ answers, onPrev }: CheckoutStepProps) => {
   };
 
   const validateForm = () => {
-    if (!customerData.name.trim()) {
+    if (!validateName(customerData.name)) {
       toast({
-        title: "Campo requerido",
-        description: "Por favor ingresa tu nombre completo",
+        title: "Nombre inválido",
+        description: "Por favor ingresa tu nombre completo válido (mínimo 2 caracteres)",
         variant: "destructive",
       });
       return false;
     }
     
-    if (!customerData.email.trim() || !customerData.email.includes("@")) {
+    if (!validateEmail(customerData.email)) {
       toast({
         title: "Email inválido",
-        description: "Por favor ingresa un email válido",
+        description: "Por favor ingresa un email válido con dominio real",
         variant: "destructive",
       });
       return false;
@@ -102,7 +146,7 @@ export const CheckoutStep = ({ answers, onPrev }: CheckoutStepProps) => {
     if (!validatePhone(customerData.phone)) {
       toast({
         title: "Teléfono inválido",
-        description: "Por favor ingresa un número de teléfono válido (USA o Colombia)",
+        description: "Por favor ingresa un número de teléfono válido",
         variant: "destructive",
       });
       return false;
