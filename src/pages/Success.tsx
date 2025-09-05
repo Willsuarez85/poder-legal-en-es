@@ -21,38 +21,35 @@ const Success = () => {
     const orderIdFromUrl = urlParams.get('order_id');
     const orderIdFromState = location.state?.orderId;
     
-    console.log("DEBUG Success page:");
-    console.log("URL search params:", location.search);
-    console.log("Order ID from URL:", orderIdFromUrl);
-    console.log("Order ID from state:", orderIdFromState);
+    // Success page loaded
+    // Getting order ID from URL or state
     
     const finalOrderId = orderIdFromUrl || orderIdFromState;
-    console.log("Final Order ID:", finalOrderId);
     setOrderId(finalOrderId);
     
     // Load purchased products if we have an order ID
     if (finalOrderId) {
-      console.log("Loading products for order:", finalOrderId);
+      // Loading products for order
       loadPurchasedProducts(finalOrderId);
     } else {
-      console.log("No order ID found, setting loading to false");
+      // No order ID found
       setLoading(false);
     }
   }, [location]);
 
   const loadPurchasedProducts = async (orderIdValue: string) => {
     try {
-      console.log("Loading products for order:", orderIdValue);
+      // Loading products for order
       
       // Use edge function to get order products securely
       const { data, error } = await supabase.functions.invoke('get-order-products', {
         body: { orderId: orderIdValue }
       });
 
-      console.log("Order products result:", { data, error });
+      // Order products loaded
 
       if (error) {
-        console.error("Failed to load order products:", error);
+        // Failed to load order products
         console.error("Error details:", error.message, error.stack);
         
         // Check if it's a connection error
@@ -74,7 +71,7 @@ const Success = () => {
       }
 
       if (data?.products) {
-        console.log("Setting purchased products:", data.products);
+        // Setting purchased products
         setPurchasedProducts(data.products);
         
         // Track purchase event for Meta Pixel
@@ -94,13 +91,11 @@ const Success = () => {
           num_items: data.products.length
         });
       } else {
-        console.log("No products found in order");
+        // No products found in order
         setPurchasedProducts([]);
       }
     } catch (error: any) {
-      console.error("Error loading purchased products:", error);
-      console.error("Error type:", typeof error);
-      console.error("Error message:", error?.message);
+      // Error loading purchased products
       
       // More specific error handling
       if (error?.message?.includes('ERR_CONNECTION_CLOSED') || 

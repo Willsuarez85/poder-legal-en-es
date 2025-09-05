@@ -11,6 +11,7 @@ import Products from "./pages/Products";
 import Checkout from "./pages/Checkout";
 import Success from "./pages/Success";
 import TermsAndConditions from "./pages/TermsAndConditions";
+import TermsOfUse from "./pages/TermsOfUse";
 import NotFound from "./pages/NotFound";
 import { CartProvider } from "./context/CartContext";
 
@@ -33,6 +34,7 @@ const App = () => (
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/success" element={<Success />} />
             <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+            <Route path="/terms-of-use" element={<TermsOfUse />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

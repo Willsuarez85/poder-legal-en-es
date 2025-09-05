@@ -388,8 +388,8 @@ export const ProductSelectionStep = ({ selectedState, selectedProducts, onProduc
                   {isExpanded && (
                     <div className="mt-3 pt-3 border-t border-gray-200 space-y-3 animate-slideDown">
                       <div>
-                        <p className="text-xs font-bold text-gray-700 mb-2">✅ Sirve para:</p>
-                        <ul className="text-xs text-gray-600 space-y-1">
+                        <p className="text-sm font-bold text-gray-700 mb-2">✅ Sirve para:</p>
+                        <ul className="text-sm text-gray-600 space-y-1">
                           {productInfo.sirve.map((item, idx) => (
                             <li key={idx} className="flex items-start">
                               <span className="mr-2">•</span>
@@ -400,8 +400,8 @@ export const ProductSelectionStep = ({ selectedState, selectedProducts, onProduc
                       </div>
                       
                       <div>
-                        <p className="text-xs font-bold text-gray-700 mb-2">❌ No sirve para:</p>
-                        <ul className="text-xs text-gray-600 space-y-1">
+                        <p className="text-sm font-bold text-gray-700 mb-2">❌ No sirve para:</p>
+                        <ul className="text-sm text-gray-600 space-y-1">
                           {productInfo.noSirve.map((item, idx) => (
                             <li key={idx} className="flex items-start">
                               <span className="mr-2">•</span>
@@ -412,8 +412,8 @@ export const ProductSelectionStep = ({ selectedState, selectedProducts, onProduc
                       </div>
 
                       <div className="pt-2 border-t border-gray-100">
-                        <p className="text-xs font-bold text-gray-700 mb-2">📦 Incluye:</p>
-                        <ul className="text-xs text-gray-600 space-y-1">
+                        <p className="text-sm font-bold text-gray-700 mb-2">📦 Incluye:</p>
+                        <ul className="text-sm text-gray-600 space-y-1">
                           <li>🧭 Instrucciones <strong>paso a paso</strong> para firmar y <strong>notarizar</strong> (en español)</li>
                           <li>🇪🇸/🇺🇸 Plantilla en <strong>español e inglés</strong></li>
                           <li>✅ <strong>100% legal — verificada en tu estado</strong></li>
@@ -421,7 +421,7 @@ export const ProductSelectionStep = ({ selectedState, selectedProducts, onProduc
                         </ul>
                       </div>
 
-                      <div className="flex items-center gap-3 pt-2 text-xs text-gray-500">
+                      <div className="flex items-center gap-3 pt-2 text-sm text-gray-500">
                         <span className="flex items-center gap-1">
                           <FileText className="w-3 h-3" />
                           PDF

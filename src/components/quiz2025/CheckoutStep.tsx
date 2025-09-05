@@ -294,18 +294,24 @@ export const CheckoutStep = ({ answers, onPrev }: CheckoutStepProps) => {
             </ul>
           </div>
 
-          <div className="flex justify-between pt-6">
-            <Button variant="outline" onClick={onPrev}>
-              ⬅️ Anterior
-            </Button>
+          <div className="pt-6 space-y-4">
             <Button
               onClick={handleCheckout}
               disabled={processing || selectedProductsData.length === 0}
-              className="px-8"
+              className="w-full h-14 text-lg font-bold shadow-lg hover:shadow-xl transition-all transform hover:scale-[1.02]"
               style={{ backgroundColor: '#de1f27' }}
             >
-              {processing ? 'Procesando...' : 'Completar Compra y Descargar'}
+              {processing ? 'Procesando...' : 'Pagar y Descargar'}
             </Button>
+            
+            <div className="text-center">
+              <button
+                onClick={onPrev}
+                className="text-sm text-gray-500 hover:text-gray-700 underline transition-colors"
+              >
+                ← Regresar
+              </button>
+            </div>
           </div>
         </CardContent>
       </Card>

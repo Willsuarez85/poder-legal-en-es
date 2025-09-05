@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Shield, FileText, Clock, CheckCircle, Star, Users, Heart, Lock, Phone, Download, Edit, ArrowRight, Quote, MessageCircle, AlertTriangle, XCircle, Ban } from "lucide-react";
+import { Shield, FileText, Clock, CheckCircle, Star, Users, Heart, Lock, Phone, Download, Edit, ArrowRight, Quote, MessageCircle, AlertTriangle, XCircle, Ban, ClipboardCheck, MapPin } from "lucide-react";
 import testimonialMartha from "@/assets/testimonial-martha.jpg";
 import testimonialCarlos from "@/assets/testimonial-carlos.jpg";
 import testimonialLuis from "@/assets/testimonial-luis.jpg";
@@ -209,12 +209,12 @@ const Index = () => {
             </div>
             
             <p className="text-base lg:text-lg font-semibold text-primary mb-10">
-              Sin este documento, tu familia podría gastar <span className="text-destructive">miles de dólares</span> y 
+              Sin un Poder Notarial, tu familia podría gastar <span className="text-destructive">miles de dólares</span> y 
               esperar <span className="text-destructive">meses en cortes</span> solo para poder ayudarte.
             </p>
 
             <h3 className="text-xl md:text-2xl font-bold mb-8">
-              Pero la mayoría comete estos errores costosos:
+              La mayoría de latinos en Estados Unidos cometen estos errores costosos:
             </h3>
 
             <div className="grid md:grid-cols-3 gap-6 lg:gap-8 mb-10 lg:mb-12">
@@ -224,7 +224,7 @@ const Index = () => {
                 </div>
                 <p className="text-sm lg:text-base font-medium text-gray-800">
                   <span className="text-red-600 font-bold">ERROR #1:</span><br />
-                  Pagar $500-$2000 a un abogado por algo que puedes hacer tú mismo
+                  Pagar miles de dólares a abogados y notarios por algo que puedes hacer tú mismo
                 </p>
               </div>
 
@@ -234,7 +234,7 @@ const Index = () => {
                 </div>
                 <p className="text-sm lg:text-base font-medium text-gray-800">
                   <span className="text-red-600 font-bold">ERROR #2:</span><br />
-                  Usar plantillas gratis de internet que no son válidas en tu estado
+                  Usar plantillas viejas o desactualizadas no válidas de internet
                 </p>
               </div>
 
@@ -426,7 +426,7 @@ const Index = () => {
                 </p>
 
                 <Button size="lg" className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-base lg:text-lg px-6 lg:px-8 py-4 lg:py-6 shadow-lg hover:shadow-xl transition-all w-full sm:w-auto touch-manipulation" onClick={() => navigate("/quiz-2025")}>
-                  Comienza el Quiz ahora
+                  Comenzar Ahora
                   <ArrowRight className="ml-2 w-4 h-4 lg:w-5 lg:h-5 flex-shrink-0" />
                 </Button>
               </div>
@@ -664,8 +664,8 @@ const Index = () => {
               <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-2">
                 <CheckCircle className="w-6 h-6 text-blue-600" />
               </div>
-              <p className="text-xs md:text-sm font-semibold text-gray-800">✅ Verificado</p>
-              <p className="text-xs text-gray-600">por Abogados</p>
+              <p className="text-xs md:text-sm font-semibold text-gray-800">✅ Documentos</p>
+              <p className="text-xs text-gray-600">100% Legales</p>
             </div>
             
             <div className="flex flex-col items-center text-center">
@@ -712,7 +712,7 @@ const Index = () => {
           <div className="mt-8 lg:mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-xs sm:text-sm opacity-80">
             <div className="flex items-center gap-2">
               <Star className="w-4 h-4 fill-current" />
-              <span>Más de 5,000 familias protegidas</span>
+              <span>Más de 1,000 familias protegidas</span>
             </div>
             <div className="flex items-center gap-2">
               <Shield className="w-4 h-4" />

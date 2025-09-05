@@ -66,20 +66,20 @@ const Products = () => {
   const fetchProducts = async () => {
     try {
       const dbState = stateMapping[currentState] || currentState;
-      console.log('Fetching products for currentState:', currentState, 'mapped to:', dbState);
+      // Fetching products for state
       
       const { data, error } = await supabase
         .from("products")
         .select("id, name, description, price, state, recommendation_criteria")
         .or(`state.eq.${dbState},state.eq.all`);
 
-      console.log('Products query result:', { data, error });
+      // Products query completed
 
       if (error) throw error;
       setProducts(data || []);
-      console.log('Set products count:', data?.length || 0);
+      // Products loaded
     } catch (error) {
-      console.error("Error fetching products:", error);
+      // Error fetching products
       toast({
         title: "Error", 
         description: "No se pudieron cargar los productos",
@@ -161,7 +161,7 @@ const Products = () => {
         window.location.href = data.url;
       }
     } catch (error) {
-      console.error('Error creating payment:', error);
+      // Error creating payment
       toast({
         title: "Error",
         description: "No se pudo procesar el pago. Intenta de nuevo.",
