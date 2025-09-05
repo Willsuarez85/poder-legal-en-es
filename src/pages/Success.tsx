@@ -82,8 +82,26 @@ const Success = () => {
         // Failed to load order products
         console.error("Error details:", error.message, error.stack);
         
-        // Check if it's a connection error
-        if (error.message?.includes('ERR_CONNECTION_CLOSED') || error.message?.includes('Failed to fetch')) {
+        // Handle different types of security errors
+        if (error.message?.includes('token_expired')) {
+          toast({
+            title: "Acceso Expirado",
+            description: "Su enlace de acceso ha expirado. Por favor contacte a soporte con su número de orden para obtener un nuevo enlace.",
+            variant: "destructive"
+          });
+        } else if (error.message?.includes('rate_limit_exceeded')) {
+          toast({
+            title: "Demasiados Intentos",
+            description: "Ha excedido el límite de intentos. Por favor espere 15 minutos antes de intentar nuevamente.",
+            variant: "destructive"
+          });
+        } else if (error.message?.includes('invalid_token')) {
+          toast({
+            title: "Acceso No Válido",
+            description: "El enlace de acceso no es válido. Por favor contacte a soporte con su número de orden.",
+            variant: "destructive"
+          });
+        } else if (error.message?.includes('ERR_CONNECTION_CLOSED') || error.message?.includes('Failed to fetch')) {
           toast({
             title: "Error de conexión",
             description: "No se pudo conectar al servidor. Los productos se mostrarán cuando el servidor esté disponible.",
@@ -157,12 +175,28 @@ const Success = () => {
       });
 
       if (error) {
-        console.error("Error generating download URL:", error);
-        toast({
-          title: "Error",
-          description: "No se pudo generar el enlace de descarga. Intenta de nuevo.",
-          variant: "destructive"
-        });
+        console.error("Download error:", error);
+        
+        // Handle different security error types
+        if (error.message?.includes('token_expired')) {
+          toast({
+            title: "Acceso Expirado",
+            description: "Su acceso a los documentos ha expirado. Contacte a soporte con su número de orden.",
+            variant: "destructive"
+          });
+        } else if (error.message?.includes('rate_limit_exceeded')) {
+          toast({
+            title: "Demasiados Intentos",
+            description: "Ha excedido el límite de descargas. Espere 15 minutos antes de intentar nuevamente.",
+            variant: "destructive"
+          });
+        } else {
+          toast({
+            title: "Error",
+            description: "No se pudo generar el enlace de descarga. Intenta de nuevo.",
+            variant: "destructive"
+          });
+        }
         return;
       }
 
@@ -175,7 +209,7 @@ const Success = () => {
         window.open(data.downloadUrl, '_blank');
         toast({
           title: "Descarga iniciada",
-          description: `Descargando ${productName}... (válida por 1 hora)`
+          description: `Descargando ${productName}... (válida por 1 hora por seguridad)`
         });
       }
     } catch (error) {
@@ -259,8 +293,8 @@ const Success = () => {
                 </div>
                 
                 <p className="text-green-700 dark:text-green-300 text-xs text-center">
-                  Los enlaces de descarga son válidos por 1 hora. Si necesitas descargar nuevamente, 
-                  contáctanos con tu número de orden.
+                  Los enlaces de descarga son válidos por 1 hora por seguridad. Si necesitas descargar nuevamente 
+                  después de este tiempo, contáctanos con tu número de orden.
                 </p>
               </div>
             )}

@@ -13,10 +13,10 @@ serve(async (req) => {
   }
 
   try {
-    // Create Supabase client
-    const supabaseAdmin = createClient(
+    // Create Supabase service client for security functions
+    const supabaseService = createClient(
       Deno.env.get("SUPABASE_URL") ?? "",
-      Deno.env.get("SUPABASE_ANON_KEY") ?? "", // Use anon key with token-based auth
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
       { auth: { persistSession: false } }
     );
 
@@ -42,14 +42,53 @@ serve(async (req) => {
       );
     }
 
-    console.log("Getting products for order:", orderId);
+    console.log("Checking access for order:", orderId);
 
-    // Get order details using token-based authentication
-    const { data: order, error: orderError } = await supabaseAdmin
+    // Get client IP for rate limiting
+    const clientIP = req.headers.get("x-forwarded-for") || 
+                    req.headers.get("x-real-ip") || 
+                    "127.0.0.1";
+
+    // Use enhanced security check with rate limiting
+    const { data: accessCheck, error: accessError } = await supabaseService
+      .rpc('check_order_access_rate_limit', {
+        p_order_id: orderId,
+        p_access_token: accessToken,
+        p_ip_address: clientIP
+      });
+
+    if (accessError) {
+      console.error("Access check failed:", accessError);
+      return new Response(
+        JSON.stringify({ error: "Security check failed" }),
+        {
+          status: 500,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
+
+    if (!accessCheck?.allowed) {
+      console.warn("Access denied:", accessCheck?.reason, "for order:", orderId);
+      return new Response(
+        JSON.stringify({ 
+          error: accessCheck?.message || "Access denied",
+          reason: accessCheck?.reason 
+        }),
+        {
+          status: accessCheck?.reason === 'rate_limit_exceeded' ? 429 : 403,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
+
+    console.log("Access granted for order:", orderId);
+
+    // Get order details
+    const { data: order, error: orderError } = await supabaseService
       .from("orders")
       .select("product_ids, customer_email")
       .eq("id", orderId)
-      .eq("access_token", accessToken)
       .single();
 
     if (orderError || !order) {
@@ -75,9 +114,9 @@ serve(async (req) => {
     console.log("Found product IDs:", order.product_ids);
 
     // Get product details for all products in the order
-    const { data: products, error: productsError } = await supabaseAdmin
+    const { data: products, error: productsError } = await supabaseService
       .from("products")
-      .select("id, name, label, state")
+      .select("id, name, label, state, price")
       .in("id", order.product_ids);
 
     if (productsError) {

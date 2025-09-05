@@ -35,25 +35,66 @@ serve(async (req) => {
       );
     }
 
-    // Create client for token-based authentication
-    const supabaseClient = createClient(
+    // Create Supabase service client for security functions
+    const supabaseService = createClient(
       Deno.env.get("SUPABASE_URL") ?? "",
-      Deno.env.get("SUPABASE_ANON_KEY") ?? "",
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
       { auth: { persistSession: false } }
     );
 
-    // Verify the order exists and user has access using access token
-    const { data: order, error: orderError } = await supabaseClient
+    console.log("Checking access for download...");
+
+    // Get client IP for rate limiting
+    const clientIP = req.headers.get("x-forwarded-for") || 
+                    req.headers.get("x-real-ip") || 
+                    "127.0.0.1";
+
+    // Use enhanced security check with rate limiting
+    const { data: accessCheck, error: accessError } = await supabaseService
+      .rpc('check_order_access_rate_limit', {
+        p_order_id: orderId,
+        p_access_token: accessToken,
+        p_ip_address: clientIP
+      });
+
+    if (accessError) {
+      console.error("Access check failed:", accessError);
+      return new Response(
+        JSON.stringify({ error: "Security check failed" }),
+        {
+          status: 500,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
+
+    if (!accessCheck?.allowed) {
+      console.warn("Download access denied:", accessCheck?.reason, "for order:", orderId);
+      return new Response(
+        JSON.stringify({ 
+          error: accessCheck?.message || "Access denied",
+          reason: accessCheck?.reason 
+        }),
+        {
+          status: accessCheck?.reason === 'rate_limit_exceeded' ? 429 : 403,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
+
+    console.log("Download access granted for order:", orderId);
+
+    // Verify order exists and get product details
+    const { data: order, error: orderError } = await supabaseService
       .from("orders")
       .select("product_ids, stripe_session_id")
       .eq("id", orderId)
-      .eq("access_token", accessToken)
       .single();
 
     if (orderError || !order) {
       console.error("Order verification failed:", orderError);
       return new Response(
-        JSON.stringify({ error: "Order not found or access denied" }),
+        JSON.stringify({ error: "Order not found" }),
         {
           status: 404,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -72,8 +113,8 @@ serve(async (req) => {
       );
     }
 
-    // Get product details to construct file path (using public access)
-    const { data: product, error: productError } = await supabaseClient
+    // Get product details to construct file path
+    const { data: product, error: productError } = await supabaseService
       .from("products")
       .select("state, label")
       .eq("id", productId)
@@ -105,25 +146,18 @@ serve(async (req) => {
     console.log("Attempting to generate signed URL for file:", filePath);
     console.log("Product details:", { state: product.state, label: product.label });
 
-    // Create service role client for storage operations (storage needs admin access)
-    const supabaseStorage = createClient(
-      Deno.env.get("SUPABASE_URL") ?? "",
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
-      { auth: { persistSession: false } }
-    );
-
-    // Generate signed URL (valid for 24 hours)
-    const { data: signedUrlData, error: signedUrlError } = await supabaseStorage
+    // Generate signed URL (valid for 1 hour for security)
+    const { data: signedUrlData, error: signedUrlError } = await supabaseService
       .storage
       .from("poder-legal")
-      .createSignedUrl(filePath, 86400); // 24 hours expiry
+      .createSignedUrl(filePath, 3600); // 1 hour expiry for better security
 
     if (signedUrlError) {
       console.error("Failed to generate signed URL:", signedUrlError);
       console.error("File path that failed:", filePath);
       
       // List available files for debugging
-      const { data: files, error: listError } = await supabaseStorage
+      const { data: files, error: listError } = await supabaseService
         .storage
         .from("poder-legal")
         .list(product.state, { limit: 10 });
@@ -148,7 +182,7 @@ serve(async (req) => {
     return new Response(
       JSON.stringify({ 
         downloadUrl: signedUrlData.signedUrl,
-        expiresAt: new Date(Date.now() + 86400000).toISOString() // 24 hours from now
+        expiresAt: new Date(Date.now() + 3600000).toISOString() // 1 hour from now for security
       }),
       {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
