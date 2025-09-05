@@ -213,26 +213,14 @@ const Success = () => {
     try {
       if (!orderId || !accessToken) return;
 
-      // CRITICAL FIX: Check email verification status before download
-      if (!emailVerified || !customerEmail.trim()) {
-        console.log('Email verification required for download. emailVerified:', emailVerified, 'customerEmail:', customerEmail ? 'SET' : 'EMPTY');
-        setRequiresEmailVerification(true);
-        toast({
-          title: "Verificación Requerida",
-          description: "Debe verificar su email antes de descargar documentos.",
-          variant: "destructive"
-        });
-        return;
-      }
-
-      console.log('Initiating download with verified email for product:', productId);
+      console.log('Initiating download for product:', productId);
 
       const { data, error } = await supabase.functions.invoke('generate-pdf-url', {
         body: { 
           orderId, 
           productId, 
           accessToken,
-          customerEmail: customerEmail.trim() // Enhanced security validation
+          customerEmail: customerEmail.trim() || undefined // Optional email for validation
         }
       });
 
@@ -240,14 +228,14 @@ const Success = () => {
         console.error("Download error:", error);
         
         // Handle different security error types  
-        if (error.message?.includes('email_mismatch')) {
-          console.log('Email mismatch detected - resetting verification state');
-          setEmailVerified(false);
+        if (error.message?.includes('email_mismatch') && !emailVerified) {
+          // If email mismatch and not verified, prompt for email verification
+          console.log('Email verification needed - prompting user');
           setRequiresEmailVerification(true);
           toast({
-            title: "Email No Coincide",
-            description: "El email no coincide con el de la orden. Por favor verifique nuevamente su email.",
-            variant: "destructive"
+            title: "Verificación de Email",
+            description: "Para mayor seguridad, ingrese el email que utilizó para la compra.",
+            variant: "default"
           });
         } else if (error.message?.includes('token_expired')) {
           toast({
