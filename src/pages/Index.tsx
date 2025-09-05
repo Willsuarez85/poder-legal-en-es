@@ -170,14 +170,30 @@ const Index = () => {
               y la vida puede cambiar en un instante.
             </p>
             
-            <div className="bg-warning/10 border-2 border-warning rounded-xl p-6 mb-8">
-              <p className="text-base lg:text-lg font-medium text-warning-foreground">
-                Un <strong>Poder Notarial (Power of Attorney)</strong> es el documento legal que autoriza a personas de tu confianza para:
-                <br />✓ Acceder a tus cuentas bancarias
-                <br />✓ Vender o administrar tu casa
-                <br />✓ Tomar decisiones médicas por ti
-                <br />✓ Cuidar y viajar con tus hijos
+            <div className="bg-blue-900 border-2 border-blue-700 rounded-xl p-6 mb-8 shadow-lg">
+              <p className="text-base lg:text-lg font-medium text-white leading-relaxed">
+                Un <strong className="text-yellow-300">Poder Notarial (Power of Attorney)</strong> es un documento legal 
+                <strong className="text-yellow-300"> válido en todos los Estados Unidos</strong> que autoriza a personas de tu confianza 
+                para que puedan representarte legalmente en distintas circunstancias como por ejemplo:
               </p>
+              <div className="mt-4 space-y-2 text-white">
+                <div className="flex items-start gap-2">
+                  <span className="text-green-400 font-bold mt-1">✓</span>
+                  <span>Acceder a tus cuentas bancarias para retirar dinero o hacer pagos.</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-green-400 font-bold mt-1">✓</span>
+                  <span>Vender o administrar tu casa o negocio en caso de que no te encuentres en el país.</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-green-400 font-bold mt-1">✓</span>
+                  <span>Tomar decisiones médicas por ti, si te encuentras inconsciente o incapacitado.</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-green-400 font-bold mt-1">✓</span>
+                  <span>Tener custodia, cuidar y viajar con tus hijos en caso de que no estés en el país.</span>
+                </div>
+              </div>
             </div>
             
             <p className="text-base lg:text-lg font-semibold text-primary mb-10">
@@ -190,39 +206,39 @@ const Index = () => {
             </h3>
 
             <div className="grid md:grid-cols-3 gap-6 lg:gap-8 mb-10 lg:mb-12">
-              <div className="bg-background/80 backdrop-blur rounded-xl p-6 lg:p-8 border-2 border-destructive/20 shadow-sm">
-                <div className="w-12 h-12 bg-destructive/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <Ban className="w-6 h-6 text-destructive" />
+              <div className="bg-red-50 border-2 border-red-300 rounded-xl p-6 lg:p-8 shadow-md hover:shadow-lg transition-shadow">
+                <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <Ban className="w-6 h-6 text-red-600" />
                 </div>
-                <p className="text-sm lg:text-base font-medium">
-                  <span className="text-destructive">ERROR #1:</span><br />
+                <p className="text-sm lg:text-base font-medium text-gray-800">
+                  <span className="text-red-600 font-bold">ERROR #1:</span><br />
                   Pagar $500-$2000 a un abogado por algo que puedes hacer tú mismo
                 </p>
               </div>
 
-              <div className="bg-background/80 backdrop-blur rounded-xl p-6 lg:p-8 border-2 border-destructive/20 shadow-sm">
-                <div className="w-12 h-12 bg-destructive/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <XCircle className="w-6 h-6 text-destructive" />
+              <div className="bg-red-50 border-2 border-red-300 rounded-xl p-6 lg:p-8 shadow-md hover:shadow-lg transition-shadow">
+                <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <XCircle className="w-6 h-6 text-red-600" />
                 </div>
-                <p className="text-sm lg:text-base font-medium">
-                  <span className="text-destructive">ERROR #2:</span><br />
+                <p className="text-sm lg:text-base font-medium text-gray-800">
+                  <span className="text-red-600 font-bold">ERROR #2:</span><br />
                   Usar plantillas gratis de internet que no son válidas en tu estado
                 </p>
               </div>
 
-              <div className="bg-background/80 backdrop-blur rounded-xl p-6 lg:p-8 border-2 border-destructive/20 shadow-sm">
-                <div className="w-12 h-12 bg-destructive/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <AlertTriangle className="w-6 h-6 text-destructive" />
+              <div className="bg-red-50 border-2 border-red-300 rounded-xl p-6 lg:p-8 shadow-md hover:shadow-lg transition-shadow">
+                <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <AlertTriangle className="w-6 h-6 text-red-600" />
                 </div>
-                <p className="text-sm lg:text-base font-medium">
-                  <span className="text-destructive">ERROR #3:</span><br />
+                <p className="text-sm lg:text-base font-medium text-gray-800">
+                  <span className="text-red-600 font-bold">ERROR #3:</span><br />
                   Confiar en "notarios" que cobran caro por documentos inválidos
                 </p>
               </div>
             </div>
 
-            <div className="bg-success/10 border-2 border-success rounded-xl p-6 lg:p-8">
-              <p className="text-base lg:text-lg font-bold text-success-foreground">
+            <div className="bg-green-600 border-2 border-green-700 rounded-xl p-6 lg:p-8 shadow-lg">
+              <p className="text-base lg:text-lg font-bold text-white text-center">
                 ✅ LA SOLUCIÓN: Obtén tu Poder Notarial válido en minutos por solo $19.99
               </p>
             </div>
