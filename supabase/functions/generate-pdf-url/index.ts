@@ -13,7 +13,7 @@ serve(async (req) => {
   }
 
   try {
-    const { orderId, productId, accessToken } = await req.json();
+    const { orderId, productId, accessToken, customerEmail } = await req.json();
 
     if (!orderId || !productId) {
       return new Response(
@@ -42,25 +42,27 @@ serve(async (req) => {
       { auth: { persistSession: false } }
     );
 
-    console.log("Checking access for download...");
+    console.log("Checking enhanced access for download...");
 
-    // Get client IP for rate limiting
+    // Get client IP for enhanced security validation
     const clientIP = req.headers.get("x-forwarded-for") || 
                     req.headers.get("x-real-ip") || 
+                    req.headers.get("cf-connecting-ip") || 
                     "127.0.0.1";
 
-    // Use enhanced security check with rate limiting
+    // Use enhanced security validation with customer email verification
     const { data: accessCheck, error: accessError } = await supabaseService
-      .rpc('check_order_access_rate_limit', {
+      .rpc('validate_customer_access', {
         p_order_id: orderId,
         p_access_token: accessToken,
-        p_ip_address: clientIP
+        p_customer_email: customerEmail, // Enhanced security: require email match
+        p_client_ip: clientIP
       });
 
     if (accessError) {
-      console.error("Access check failed:", accessError);
+      console.error("Enhanced download access check failed:", accessError);
       return new Response(
-        JSON.stringify({ error: "Security check failed" }),
+        JSON.stringify({ error: "Security validation failed" }),
         {
           status: 500,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -69,30 +71,49 @@ serve(async (req) => {
     }
 
     if (!accessCheck?.allowed) {
-      console.warn("Download access denied:", accessCheck?.reason, "for order:", orderId);
+      console.warn("Enhanced download access denied:", accessCheck?.reason, "for order:", orderId);
+      const statusCode = accessCheck?.reason === 'rate_limit_exceeded' ? 429 : 
+                        accessCheck?.reason === 'email_mismatch' ? 403 : 403;
+      
       return new Response(
         JSON.stringify({ 
           error: accessCheck?.message || "Access denied",
-          reason: accessCheck?.reason 
+          reason: accessCheck?.reason,
+          requiresEmail: accessCheck?.reason === 'email_mismatch'
         }),
         {
-          status: accessCheck?.reason === 'rate_limit_exceeded' ? 429 : 403,
+          status: statusCode,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
         }
       );
     }
 
-    console.log("Download access granted for order:", orderId);
+    // Log security warnings for monitoring
+    if (accessCheck?.suspicious_ip) {
+      console.warn("Suspicious IP download attempt for order:", orderId, "from IP:", clientIP);
+    }
+
+    console.log("Enhanced download access granted for order:", orderId);
 
     // Verify order exists and get product details
     const { data: order, error: orderError } = await supabaseService
       .from("orders")
       .select("product_ids, stripe_session_id")
       .eq("id", orderId)
-      .single();
+      .maybeSingle(); // Use maybeSingle to handle missing orders gracefully
 
-    if (orderError || !order) {
-      console.error("Order verification failed:", orderError);
+    if (orderError) {
+      console.error("Order fetch error:", orderError);
+      return new Response(
+        JSON.stringify({ error: "Failed to load order details" }),
+        {
+          status: 500,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
+
+    if (!order) {
       return new Response(
         JSON.stringify({ error: "Order not found" }),
         {

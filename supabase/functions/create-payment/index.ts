@@ -163,6 +163,11 @@ serve(async (req) => {
     }, 0) / 100; // Convert from cents to dollars
 
     // Create order record
+    const clientIP = req.headers.get("x-forwarded-for") || 
+                    req.headers.get("x-real-ip") || 
+                    req.headers.get("cf-connecting-ip") || 
+                    "127.0.0.1";
+    
     const { data: orderData, error: orderError } = await supabaseService
       .from("orders")
       .insert({
@@ -172,6 +177,7 @@ serve(async (req) => {
         product_ids: productIds,
         total_amount: totalAmount,
         stripe_session_id: null, // Will be updated after session creation
+        created_ip_address: clientIP, // Store IP for security validation
       })
       .select('id, access_token')
       .single();

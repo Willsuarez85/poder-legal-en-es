@@ -1,7 +1,9 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { CheckCircle, Mail, Download, MessageCircle } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { CheckCircle, Mail, Download, MessageCircle, Shield, AlertTriangle } from "lucide-react";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -14,6 +16,10 @@ const Success = () => {
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const [purchasedProducts, setPurchasedProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [customerEmail, setCustomerEmail] = useState<string>("");
+  const [emailVerified, setEmailVerified] = useState<boolean>(false);
+  const [requiresEmailVerification, setRequiresEmailVerification] = useState<boolean>(false);
+  const [customerInfo, setCustomerInfo] = useState<any>(null);
   const { toast } = useToast();
   
   useEffect(() => {
@@ -67,13 +73,17 @@ const Success = () => {
     getOrderData();
   }, [location]);
 
-  const loadPurchasedProducts = async (orderIdValue: string, accessTokenValue: string) => {
+  const loadPurchasedProducts = async (orderIdValue: string, accessTokenValue: string, customerEmailValue?: string) => {
     try {
       // Loading products for order
       
-      // Use edge function to get order products securely
+      // Use enhanced edge function with customer email verification
       const { data, error } = await supabase.functions.invoke('get-order-products', {
-        body: { orderId: orderIdValue, accessToken: accessTokenValue }
+        body: { 
+          orderId: orderIdValue, 
+          accessToken: accessTokenValue,
+          customerEmail: customerEmailValue // Enhanced security validation
+        }
       });
 
       // Order products loaded
@@ -83,22 +93,29 @@ const Success = () => {
         console.error("Error details:", error.message, error.stack);
         
         // Handle different types of security errors
-        if (error.message?.includes('token_expired')) {
+        if (error.message?.includes('email_mismatch')) {
+          setRequiresEmailVerification(true);
+          toast({
+            title: "Verificación de Email Requerida",
+            description: "Para acceder a su orden, por favor ingrese el email que utilizó para la compra.",
+            variant: "default"
+          });
+        } else if (error.message?.includes('token_expired')) {
           toast({
             title: "Acceso Expirado",
-            description: "Su enlace de acceso ha expirado. Por favor contacte a soporte con su número de orden para obtener un nuevo enlace.",
+            description: "Su enlace de acceso ha expirado (válido por 24 horas). Contacte a soporte con su número de orden.",
             variant: "destructive"
           });
         } else if (error.message?.includes('rate_limit_exceeded')) {
           toast({
             title: "Demasiados Intentos",
-            description: "Ha excedido el límite de intentos. Por favor espere 15 minutos antes de intentar nuevamente.",
+            description: "Ha excedido el límite de intentos. Espere 15 minutos antes de intentar nuevamente.",
             variant: "destructive"
           });
         } else if (error.message?.includes('invalid_token')) {
           toast({
             title: "Acceso No Válido",
-            description: "El enlace de acceso no es válido. Por favor contacte a soporte con su número de orden.",
+            description: "El enlace de acceso no es válido. Contacte a soporte con su número de orden.",
             variant: "destructive"
           });
         } else if (error.message?.includes('ERR_CONNECTION_CLOSED') || error.message?.includes('Failed to fetch')) {
@@ -121,6 +138,17 @@ const Success = () => {
       if (data?.products) {
         // Setting purchased products
         setPurchasedProducts(data.products);
+        setCustomerInfo(data.customerInfo);
+        setEmailVerified(true);
+        
+        // Show security warning if suspicious IP detected
+        if (data.customerInfo?.suspiciousAccess) {
+          toast({
+            title: "⚠️ Acceso desde Nueva Ubicación",
+            description: "Se detectó acceso desde una nueva ubicación. Si no fue usted, contacte a soporte inmediatamente.",
+            variant: "destructive"
+          });
+        }
         
         // Track purchase event for Meta Pixel
         const totalValue = data.products.reduce((sum: number, product: any) => sum + (product.price || 0), 0);
@@ -166,22 +194,47 @@ const Success = () => {
     }
   };
 
+  const verifyEmailAndLoadProducts = async () => {
+    if (!orderId || !accessToken || !customerEmail.trim()) {
+      toast({
+        title: "Email Requerido",
+        description: "Por favor ingrese su dirección de email para verificar su identidad.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setLoading(true);
+    await loadPurchasedProducts(orderId, accessToken, customerEmail.trim());
+  };
+
   const downloadProduct = async (productId: string, productName: string) => {
     try {
       if (!orderId || !accessToken) return;
 
       const { data, error } = await supabase.functions.invoke('generate-pdf-url', {
-        body: { orderId, productId, accessToken }
+        body: { 
+          orderId, 
+          productId, 
+          accessToken,
+          customerEmail: customerEmail.trim() // Enhanced security validation
+        }
       });
 
       if (error) {
         console.error("Download error:", error);
         
-        // Handle different security error types
-        if (error.message?.includes('token_expired')) {
+        // Handle different security error types  
+        if (error.message?.includes('email_mismatch')) {
+          toast({
+            title: "Email No Coincide",
+            description: "El email ingresado no coincide con el de la orden. Verifique su email.",
+            variant: "destructive"
+          });
+        } else if (error.message?.includes('token_expired')) {
           toast({
             title: "Acceso Expirado",
-            description: "Su acceso a los documentos ha expirado. Contacte a soporte con su número de orden.",
+            description: "Su acceso a los documentos ha expirado (24 horas). Contacte a soporte con su número de orden.",
             variant: "destructive"
           });
         } else if (error.message?.includes('rate_limit_exceeded')) {
@@ -239,6 +292,60 @@ const Success = () => {
     );
   }
 
+  // Show email verification form if required
+  if (requiresEmailVerification && !emailVerified) {
+    return (
+      <div className="min-h-screen bg-background py-8 px-4">
+        <div className="max-w-md mx-auto">
+          <Card>
+            <CardHeader className="pb-4 text-center">
+              <div className="mx-auto w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                <Shield className="w-8 h-8 text-blue-600" />
+              </div>
+              <CardTitle className="text-xl text-blue-700">
+                Verificación de Seguridad
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                <p className="text-blue-700 dark:text-blue-300 text-sm">
+                  Para proteger su información personal, necesitamos verificar su identidad.
+                  Ingrese el email que utilizó para realizar la compra.
+                </p>
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="customerEmail">Email de la Orden</Label>
+                <Input
+                  id="customerEmail"
+                  type="email"
+                  value={customerEmail}
+                  onChange={(e) => setCustomerEmail(e.target.value)}
+                  placeholder="ejemplo@email.com"
+                  disabled={loading}
+                />
+              </div>
+              
+              <Button 
+                onClick={verifyEmailAndLoadProducts}
+                disabled={loading || !customerEmail.trim()}
+                className="w-full"
+              >
+                {loading ? "Verificando..." : "Verificar y Acceder"}
+              </Button>
+              
+              <div className="text-center">
+                <p className="text-xs text-muted-foreground">
+                  Número de Orden: <span className="font-mono font-bold">#{orderId}</span>
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background py-8 px-4">
       <div className="max-w-2xl mx-auto">
@@ -259,6 +366,18 @@ const Success = () => {
               <p className="text-sm text-muted-foreground">
                 Número de Orden: <span className="font-mono font-bold">#{orderId}</span>
               </p>
+              {customerInfo?.emailMasked && (
+                <p className="text-xs text-muted-foreground flex items-center gap-2">
+                  <Mail className="w-3 h-3" />
+                  Email: <span className="font-mono">{customerInfo.emailMasked}</span>
+                </p>
+              )}
+              {customerInfo?.suspiciousAccess && (
+                <div className="flex items-center gap-2 text-amber-600 text-xs">
+                  <AlertTriangle className="w-3 h-3" />
+                  Acceso desde nueva ubicación detectado
+                </div>
+              )}
             </div>
 
             {/* Downloaded Products Section */}
@@ -293,8 +412,8 @@ const Success = () => {
                 </div>
                 
                 <p className="text-green-700 dark:text-green-300 text-xs text-center">
-                  Los enlaces de descarga son válidos por 1 hora por seguridad. Si necesitas descargar nuevamente 
-                  después de este tiempo, contáctanos con tu número de orden.
+                  Los enlaces de descarga son válidos por 1 hora por seguridad. El acceso a su orden expira en 24 horas. 
+                  Si necesita descargar nuevamente después de este tiempo, contáctanos con su número de orden.
                 </p>
               </div>
             )}

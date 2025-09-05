@@ -53,7 +53,9 @@ export type Database = {
           access_token: string
           access_token_expires_at: string | null
           created_at: string | null
+          created_ip_address: unknown | null
           customer_email: string
+          customer_email_hash: string | null
           customer_name: string | null
           customer_phone: string | null
           ghl_webhook_sent: boolean | null
@@ -68,7 +70,9 @@ export type Database = {
           access_token?: string
           access_token_expires_at?: string | null
           created_at?: string | null
+          created_ip_address?: unknown | null
           customer_email: string
+          customer_email_hash?: string | null
           customer_name?: string | null
           customer_phone?: string | null
           ghl_webhook_sent?: boolean | null
@@ -83,7 +87,9 @@ export type Database = {
           access_token?: string
           access_token_expires_at?: string | null
           created_at?: string | null
+          created_ip_address?: unknown | null
           customer_email?: string
+          customer_email_hash?: string | null
           customer_name?: string | null
           customer_phone?: string | null
           ghl_webhook_sent?: boolean | null
@@ -272,6 +278,15 @@ export type Database = {
       save_quiz_session: {
         Args: { p_answers: Json; p_contact_data?: Json; p_session_id: string }
         Returns: string
+      }
+      validate_customer_access: {
+        Args: {
+          p_access_token: string
+          p_client_ip?: unknown
+          p_customer_email?: string
+          p_order_id: string
+        }
+        Returns: Json
       }
     }
     Enums: {

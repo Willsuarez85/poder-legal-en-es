@@ -20,7 +20,7 @@ serve(async (req) => {
       { auth: { persistSession: false } }
     );
 
-    const { orderId, accessToken } = await req.json();
+    const { orderId, accessToken, customerEmail } = await req.json();
 
     if (!orderId) {
       return new Response(
@@ -42,25 +42,27 @@ serve(async (req) => {
       );
     }
 
-    console.log("Checking access for order:", orderId);
+    console.log("Checking enhanced access for order:", orderId);
 
-    // Get client IP for rate limiting
+    // Get client IP for enhanced security validation
     const clientIP = req.headers.get("x-forwarded-for") || 
                     req.headers.get("x-real-ip") || 
+                    req.headers.get("cf-connecting-ip") || 
                     "127.0.0.1";
 
-    // Use enhanced security check with rate limiting
+    // Use enhanced security validation with customer email verification
     const { data: accessCheck, error: accessError } = await supabaseService
-      .rpc('check_order_access_rate_limit', {
+      .rpc('validate_customer_access', {
         p_order_id: orderId,
         p_access_token: accessToken,
-        p_ip_address: clientIP
+        p_customer_email: customerEmail, // Enhanced security: require email match
+        p_client_ip: clientIP
       });
 
     if (accessError) {
-      console.error("Access check failed:", accessError);
+      console.error("Enhanced access check failed:", accessError);
       return new Response(
-        JSON.stringify({ error: "Security check failed" }),
+        JSON.stringify({ error: "Security validation failed" }),
         {
           status: 500,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -69,30 +71,49 @@ serve(async (req) => {
     }
 
     if (!accessCheck?.allowed) {
-      console.warn("Access denied:", accessCheck?.reason, "for order:", orderId);
+      console.warn("Enhanced access denied:", accessCheck?.reason, "for order:", orderId);
+      const statusCode = accessCheck?.reason === 'rate_limit_exceeded' ? 429 : 
+                        accessCheck?.reason === 'email_mismatch' ? 403 : 403;
+      
       return new Response(
         JSON.stringify({ 
           error: accessCheck?.message || "Access denied",
-          reason: accessCheck?.reason 
+          reason: accessCheck?.reason,
+          requiresEmail: accessCheck?.reason === 'email_mismatch'
         }),
         {
-          status: accessCheck?.reason === 'rate_limit_exceeded' ? 429 : 403,
+          status: statusCode,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
         }
       );
     }
 
-    console.log("Access granted for order:", orderId);
+    // Log security warnings for monitoring
+    if (accessCheck?.suspicious_ip) {
+      console.warn("Suspicious IP access detected for order:", orderId, "from IP:", clientIP);
+    }
 
-    // Get order details
+    console.log("Enhanced access granted for order:", orderId);
+
+    // Get order details (no longer need to validate token as it's done above)
     const { data: order, error: orderError } = await supabaseService
       .from("orders")
-      .select("product_ids, customer_email")
+      .select("product_ids")
       .eq("id", orderId)
-      .single();
+      .maybeSingle(); // Use maybeSingle to handle missing orders gracefully
 
-    if (orderError || !order) {
-      console.error("Order not found:", orderError);
+    if (orderError) {
+      console.error("Order fetch error:", orderError);
+      return new Response(
+        JSON.stringify({ error: "Failed to load order details" }),
+        {
+          status: 500,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
+
+    if (!order) {
       return new Response(
         JSON.stringify({ error: "Order not found" }),
         {
@@ -133,7 +154,13 @@ serve(async (req) => {
     console.log("Retrieved products:", products);
 
     return new Response(
-      JSON.stringify({ products: products || [] }),
+      JSON.stringify({ 
+        products: products || [],
+        customerInfo: {
+          emailMasked: accessCheck?.customer_email_masked,
+          suspiciousAccess: accessCheck?.suspicious_ip || false
+        }
+      }),
       {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       }
