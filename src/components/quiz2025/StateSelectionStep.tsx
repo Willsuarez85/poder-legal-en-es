@@ -36,7 +36,7 @@ export const StateSelectionStep = ({ selectedState, onStateSelect, onNext }: Sta
       <Card className="text-center">
         <CardHeader className="space-y-6">
           <CardTitle className="text-3xl font-bold">
-            Encuentra el formato de carta de poder específico que necesitas
+            Encuentra el formato de poder notarial específico que necesitas
           </CardTitle>
           <h2 className="text-xl font-semibold text-muted-foreground">
             100% legal
@@ -79,7 +79,7 @@ export const StateSelectionStep = ({ selectedState, onStateSelect, onNext }: Sta
       </Card>
 
       <TipBox>
-        No todas las cartas de poder son iguales ni sirven en todos los estados
+        No todos los poderes notariales son iguales ni sirven en todos los estados
       </TipBox>
     </div>
   );

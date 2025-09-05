@@ -262,7 +262,7 @@ const Success = () => {
 
               <Button 
                 className="w-full bg-green-600 hover:bg-green-700 text-white"
-                onClick={() => window.open(`https://wa.me/1234567890?text=Hola, necesito ayuda con mi orden #${orderId}`, '_blank')}
+                onClick={() => window.open(`https://wa.me/15558286861?text=Hola, necesito ayuda con mi orden #${orderId}`, '_blank')}
               >
                 <MessageCircle className="w-4 h-4 mr-2" />
                 Conectar con nuestro equipo por WhatsApp

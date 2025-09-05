@@ -31,7 +31,7 @@ const QUIZ_QUESTIONS = [
   {
     id: "state",
     emoji: "🗺️",
-    title: "¿En qué estado de EE.UU. vas a usar tu Carta de Poder?",
+    title: "¿En qué estado de EE.UU. vas a usar tu Poder Notarial?",
     subtitle: "📌 Las leyes son diferentes en cada estado.\nElegir el estado correcto asegura que tu documento sea 100% válido y legal donde lo necesitas.",
     type: "dropdown" as const,
     options: US_STATES.map(state => ({ value: state.value, label: state.label, icon: "🏛️" })),
@@ -49,7 +49,7 @@ const QUIZ_QUESTIONS = [
       { value: "medical", label: "Mis decisiones médicas", icon: "⚕️" },
       { value: "children", label: "El cuidado legal de mis hijos", icon: "👶" }
     ],
-    tooltip: "Estas son las áreas donde una Carta de Poder puede darte tranquilidad legal. No necesitas saber los términos legales, solo elige lo que quieres proteger."
+    tooltip: "Estas son las áreas donde un Poder Notarial puede darte tranquilidad legal. No necesitas saber los términos legales, solo elige lo que quieres proteger."
   },
   {
     id: "authorization_type",
@@ -65,7 +65,7 @@ const QUIZ_QUESTIONS = [
   {
     id: "activation",
     emoji: "🕒",
-    title: "¿Cuándo debería empezar a usarse esta Carta de Poder?",
+    title: "¿Cuándo debería empezar a usarse este Poder Notarial?",
     type: "single" as const,
     options: [
       { value: "immediate", label: "Desde el momento en que la firmo", icon: "⚡" },

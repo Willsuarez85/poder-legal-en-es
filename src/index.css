@@ -119,6 +119,10 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 
+  html {
+    font-size: 120%; /* Aumenta todas las fuentes en 20% */
+  }
+
   html, body {
     @apply overflow-x-hidden;
   }

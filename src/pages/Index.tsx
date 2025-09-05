@@ -14,7 +14,7 @@ const Index = () => {
   const steps = [{
     number: "1",
     title: "Responde el Quiz Rápido",
-    description: "Encuentra la Carta de Poder que necesitas en 2 minutos",
+    description: "Encuentra el Poder Notarial que necesitas en 2 minutos",
     icon: Phone
   }, {
     number: "2",
@@ -30,10 +30,10 @@ const Index = () => {
   const benefits = [{
     icon: Shield,
     title: "📄 PDF 100% Legal y Válido en tu Estado",
-    description: "Cartas de poder listas para firmar y notarizar, aceptadas por instituciones."
+    description: "Poderes notariales listos para firmar y notarizar, aceptados por instituciones."
   }, {
     icon: Clock,
-    title: "⚡ Encuentra la Carta de Poder que Necesitas en Minutos",
+    title: "⚡ Encuentra el Poder Notarial que Necesitas en Minutos",
     description: "Sin citas, sin esperas y sin pagar cientos de dólares a abogados. Descárgala hoy mismo."
   }, {
     icon: Phone,
@@ -46,7 +46,7 @@ const Index = () => {
   }];
   const protections = ["Cuidar a tus hijos", "Acceder a tus cuentas", "Vender tu casa", "Tomar decisiones médicas", "Representarte legalmente en emergencias"];
   const testimonials = [{
-    text: "Cuando deportaron a mi esposo, no tenía acceso a nuestras cuentas. Si hubiéramos tenido una carta de poder, todo habría sido diferente.",
+    text: "Cuando deportaron a mi esposo, no tenía acceso a nuestras cuentas. Si hubiéramos tenido un poder notarial, todo habría sido diferente.",
     author: "Martha R.",
     location: "Charlotte, NC"
   }, {
@@ -60,7 +60,7 @@ const Index = () => {
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
             <img src="/lovable-uploads/1e870570-7e2a-436f-95b4-d50755c085a0.png" alt="Poder LegalUSA.com" className="h-16 md:h-20 lg:h-32 xl:h-36 w-auto" decoding="async" loading="lazy" sizes="(max-width: 768px) 180px, (max-width: 1024px) 240px, (max-width: 1280px) 320px, 360px" />
-            <a href="https://wa.me/17042645084" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-success hover:bg-success/90 text-success-foreground px-3 md:px-4 py-2 rounded-lg transition-colors text-sm font-medium shadow-md">
+            <a href="https://wa.me/15558286861" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-success hover:bg-success/90 text-success-foreground px-3 md:px-4 py-2 rounded-lg transition-colors text-sm font-medium shadow-md">
               <MessageCircle className="w-4 h-4" />
               <span className="hidden sm:inline">Atención al cliente 🇪🇸</span>
               <span className="sm:hidden">Soporte 🇪🇸</span>
@@ -81,7 +81,7 @@ const Index = () => {
               </h1>
               
               <p className="text-base md:text-lg lg:text-xl text-muted-foreground leading-relaxed">
-                Encuentra la carta de poder (<strong>Power of Attorney</strong>) exacta que necesitas para proteger lo que más amas. Documentos Válidos en los 50 Estados listos para descargar en PDF y llenar fácilmente con instrucciones en español.
+                Encuentra el poder notarial (<strong>Power of Attorney</strong>) exacto que necesitas para proteger lo que más amas. Documentos Válidos en los 50 Estados listos para descargar en PDF y llenar fácilmente con instrucciones en español.
               </p>
               
               <p className="text-sm md:text-base text-muted-foreground">
@@ -120,7 +120,7 @@ const Index = () => {
                   <FileText className="w-8 h-8 xl:w-10 xl:h-10 text-primary flex-shrink-0" />
                   <div>
                     <div className="font-bold text-lg xl:text-xl">+120</div>
-                    <div className="text-xs xl:text-sm text-muted-foreground">Tipos de carta de poder legales</div>
+                    <div className="text-xs xl:text-sm text-muted-foreground">Tipos de poder notarial legales</div>
                   </div>
                 </div>
               </div>
@@ -139,7 +139,7 @@ const Index = () => {
                     <FileText className="w-6 h-6 text-primary" />
                   </div>
                   <div className="font-bold text-lg">+120</div>
-                  <div className="text-xs text-muted-foreground">Tipos de Carta de poder legales</div>
+                  <div className="text-xs text-muted-foreground">Tipos de Poder Notarial legales</div>
                 </div>
                 <div className="bg-destructive text-destructive-foreground rounded-lg shadow-md p-4 text-center">
                   <div className="font-bold text-lg">PDF Válidos 🇺🇸</div>
@@ -156,11 +156,11 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 lg:mb-8">
-              ¿Necesitas una Carta Poder pero no sabes por dónde empezar?
+              ¿Necesitas un Poder Notarial pero no sabes por dónde empezar?
             </h2>
             
             <p className="text-base lg:text-lg text-muted-foreground mb-10 lg:mb-12 leading-relaxed">
-              Muchos latinos en EE.UU. saben que deben tener una Carta Poder para proteger a sus hijos, su casa o su negocio...
+              Muchos latinos en EE.UU. saben que deben tener un Poder Notarial para proteger a sus hijos, su casa o su negocio...
               <br />
               <strong>pero no saben cómo hacerlo bien.</strong>
             </p>
@@ -207,7 +207,7 @@ const Index = () => {
       <section className="py-12 md:py-16 lg:py-20 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12 lg:mb-16">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 lg:mb-6">Con Poder Legal USA, hacer tu Carta Poder es fácil, rápido y Seguro</h2>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 lg:mb-6">Con Poder Legal USA, hacer tu Poder Notarial es fácil, rápido y Seguro</h2>
             <p className="text-base lg:text-lg text-muted-foreground max-w-3xl mx-auto">Contesta un quiz en español, fácil y rápido, y descarga el formato legal correcto válido en tu estado. 📄 Viene con instrucciones claras en español, listo para firmar y notarizar. Sin abogados, sin estrés.</p>
           </div>
 
@@ -245,11 +245,11 @@ const Index = () => {
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center text-gray-800">
             <div>
               <h2 className="md:text-3xl lg:text-4xl font-bold mb-6 lg:mb-8 text-red-600 text-lg">
-                ¿Qué es una Carta de Poder?
+                ¿Qué es un Poder Notarial?
               </h2>
               
               <p className="text-base lg:text-lg text-muted-foreground mb-6">
-                Una <strong>carta de poder</strong> (también llamada poder notarial) es un 
+                Un <strong>poder notarial</strong> (también llamado Power of Attorney) es un 
                <strong> documento legal</strong> que te protege si tú no puedes actuar por ti mismo.
               </p>
 
@@ -267,7 +267,7 @@ const Index = () => {
 
               <p className="text-muted-foreground text-sm lg:text-base">
                 Ya sea por un viaje, una enfermedad, un accidente o una deportación, 
-                tener una carta de poder garantiza que alguien de tu confianza pueda 
+                tener un poder notarial garantiza que alguien de tu confianza pueda 
                 ayudarte sin trabas legales.
               </p>
             </div>
@@ -300,7 +300,7 @@ const Index = () => {
               <p className="text-base lg:text-lg mb-8 opacity-90">Si sufres una deportación, accidente o enfermedad y no dejaste un Power of Attorney legal, firmado y notarizado para tu estado, tu familia y tus bienes personales podrían quedar completamente desprotegidos.</p>
 
               <div className="bg-white/10 backdrop-blur border border-white/20 rounded-lg p-4 lg:p-6 mb-8">
-                <h3 className="text-xl lg:text-2xl font-bold mb-2">Sin una Carta de Poder Legal:</h3>
+                <h3 className="text-xl lg:text-2xl font-bold mb-2">Sin un Poder Notarial Legal:</h3>
               </div>
 
               <div className="space-y-4 mb-8">
@@ -338,7 +338,7 @@ const Index = () => {
             {/* Content Column - Left */}
             <div>
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 lg:mb-8">
-                Encuentra las Carta de poder que necesitas, sin complicaciones
+                Encuentra el Poder Notarial que necesitas, sin complicaciones
               </h2>
               <p className="text-base lg:text-lg text-muted-foreground mb-8">
                 Accede al <strong>template que necesitas</strong>, legalmente válido en tu estado
@@ -363,7 +363,7 @@ const Index = () => {
                 <p className="text-base lg:text-lg mb-6">
                   Por solo <span className="text-2xl lg:text-3xl font-bold text-destructive">$19.99</span>, 
                   toma el quiz y en 2 minutos sabrás cuáles son las 
-                  <strong> cartas de poder exactas y legales</strong> que necesitas para proteger 
+                  <strong> poderes notariales exactos y legales</strong> que necesitas para proteger 
                   <strong> todo lo que amas</strong>.
                 </p>
 
@@ -392,7 +392,7 @@ const Index = () => {
               Confianza de Nuestra Comunidad nos Respalda
             </h2>
             <p className="text-base lg:text-lg text-muted-foreground max-w-3xl mx-auto">
-              Historias reales de familias hispanas que usan nuestras Cartas de Poder para cuidar su futuro.
+              Historias reales de familias hispanas que usan nuestros Poderes Notariales para cuidar su futuro.
             </p>
           </div>
 
@@ -407,7 +407,7 @@ const Index = () => {
                       {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-yellow fill-yellow" />)}
                     </div>
                     <p className="text-muted-foreground mb-4 leading-relaxed text-sm lg:text-base">
-                      "Siempre pensé que solo un abogado podía redactar esto y que sería costoso. En pocos minutos tuve mi Carta de Poder lista, 100% legal, y la notaricé aquí en Charlotte sin ningún problema."
+                      "Siempre pensé que solo un abogado podía redactar esto y que sería costoso. En pocos minutos tuve mi Poder Notarial listo, 100% legal, y lo notaricé aquí en Charlotte sin ningún problema."
                     </p>
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 rounded-full overflow-hidden">
