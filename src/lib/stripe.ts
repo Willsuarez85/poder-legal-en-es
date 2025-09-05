@@ -6,10 +6,10 @@ const getStripePublishableKey = () => {
                       !window.location.hostname.includes('preview.lovable.app');
 
   // Return production key if available and in production, otherwise test key
-  const productionKey = "pk_live_YOUR_PRODUCTION_KEY_HERE"; // Replace with actual production key
+  const productionKey = "pk_live_51QsUtdRC0tkfGTyne3I9OVeufeYi9etGrPdt6gJQfWzzrHH4Xwo6ULKlfAnJq0tg0j8aGqesQRnmqLo4qLre21Ap0000btOiOa";
   const testKey = "pk_test_51RxqFiIBQw7kgyciyR040S9yhwdzeoYE3aUwc9xTjyBaTrBn6UtViiExe7jmqpj5RNsgc7tTvqzzkYV6vOiNl6tN00GPFCGtnT";
 
-  if (isProduction && productionKey !== "pk_live_YOUR_PRODUCTION_KEY_HERE") {
+  if (isProduction) {
     return productionKey;
   }
   
