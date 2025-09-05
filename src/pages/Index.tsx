@@ -13,19 +13,19 @@ const Index = () => {
   const navigate = useNavigate();
   const steps = [{
     number: "1",
-    title: "Responde el Quiz Rápido",
-    description: "Encuentra el Poder Notarial que necesitas en 2 minutos",
-    icon: Phone
+    title: "Responde 4 preguntas",
+    description: "30 segundos para identificar el documento exacto que necesitas",
+    icon: ClipboardCheck
   }, {
     number: "2",
-    title: "Descarga tu documento PDF",
-    description: "A tu teléfono o email en minutos",
+    title: "Descarga tu documento personalizado",
+    description: "Recibe tu poder notarial válido en tu estado al instante",
     icon: Download
   }, {
     number: "3",
-    title: "Recibe instrucciones en español",
-    description: "Paso a paso para llenar y firmar con confianza",
-    icon: Edit
+    title: "Llena, firma y notariza",
+    description: "Sigue nuestras instrucciones paso a paso en español",
+    icon: FileText
   }];
   const benefits = [{
     icon: Shield,
@@ -158,6 +158,17 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Urgency Bar */}
+      <section className="bg-yellow-500 py-3 px-4">
+        <div className="container mx-auto">
+          <p className="text-center text-black font-semibold text-sm md:text-base flex items-center justify-center gap-2">
+            <span className="animate-pulse">⚠️</span>
+            <span>Cada día sin protección es un riesgo innecesario para tu familia</span>
+            <span className="animate-pulse">⚠️</span>
+          </p>
+        </div>
+      </section>
+
       {/* Problem Agitation Section */}
       <section className="py-12 md:py-16 lg:py-20 bg-muted/20">
         <div className="container mx-auto px-4">
@@ -253,6 +264,9 @@ const Index = () => {
           <div className="text-center mb-12 lg:mb-16">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 lg:mb-6">Con Poder Legal USA, hacer tu Poder Notarial es fácil, rápido y Seguro</h2>
             <p className="text-base lg:text-lg text-muted-foreground max-w-3xl mx-auto">Contesta un quiz en español, fácil y rápido, y descarga el formato legal correcto válido en tu estado. 📄 Viene con instrucciones claras en español, listo para firmar y notarizar. Sin abogados, sin estrés.</p>
+            <div className="mt-4 inline-block bg-green-100 border-2 border-green-500 rounded-full px-6 py-2">
+              <p className="text-green-800 font-bold">⏱️ Todo el proceso: menos de 10 minutos</p>
+            </div>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto">
@@ -451,15 +465,15 @@ const Index = () => {
                       {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-yellow fill-yellow" />)}
                     </div>
                     <p className="text-muted-foreground mb-4 leading-relaxed text-sm lg:text-base">
-                      "Siempre pensé que solo un abogado podía redactar esto y que sería costoso. En pocos minutos tuve mi Poder Notarial listo, 100% legal, y lo notaricé aquí en Charlotte sin ningún problema."
+                      "Mi esposo fue detenido por ICE y necesitaba urgentemente un poder para manejar nuestras cuentas. En 10 minutos descargué el documento, lo llené y lo notaricé en el banco. Me salvó de perder nuestra casa."
                     </p>
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 rounded-full overflow-hidden">
                         <img src={testimonialMartha} alt="Martha R." className="w-full h-full object-cover" />
                       </div>
                       <div>
-                        <p className="font-semibold text-sm lg:text-base">{testimonials[0].author}</p>
-                        <p className="text-xs lg:text-sm text-muted-foreground">{testimonials[0].location}</p>
+                        <p className="font-semibold text-sm lg:text-base">Martha Gonzalez</p>
+                        <p className="text-xs lg:text-sm text-muted-foreground">Houston, TX</p>
                       </div>
                     </div>
                   </CardContent>
@@ -471,15 +485,15 @@ const Index = () => {
                       {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-yellow fill-yellow" />)}
                     </div>
                     <p className="text-muted-foreground mb-4 leading-relaxed text-sm lg:text-base">
-                      "No confiaba en documentos online, pero después de 3 años sin documentos encontré esta opción. La notaricé en mi banco y la aceptaron sin problema."
+                      "Tuve un accidente y estuve hospitalizado 3 semanas. Gracias al poder médico que hice aquí, mi hermana pudo autorizar mi cirugía y tratamiento. Sin esto, hubiera esperado días para las decisiones médicas."
                     </p>
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 rounded-full overflow-hidden">
                         <img src={testimonialLuis} alt="Luis M." className="w-full h-full object-cover" />
                       </div>
                       <div>
-                        <p className="font-semibold text-sm lg:text-base">Luis M.</p>
-                        <p className="text-xs lg:text-sm text-muted-foreground">Phoenix, AZ</p>
+                        <p className="font-semibold text-sm lg:text-base">Luis Martinez</p>
+                        <p className="text-xs lg:text-sm text-muted-foreground">Los Angeles, CA</p>
                       </div>
                     </div>
                   </CardContent>
@@ -494,15 +508,15 @@ const Index = () => {
                       {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-yellow fill-yellow" />)}
                     </div>
                     <p className="text-muted-foreground mb-4 leading-relaxed text-sm lg:text-base">
-                      "Descargué mi documento PDF en el celular y ese mismo día lo firmé con mi esposa. Las instrucciones fueron rápidas, claras y fáciles de seguir."
+                      "Necesitaba viajar a México por la enfermedad de mi madre. El poder para custodia temporal me permitió dejar a mis hijos con mi hermana sin problemas en la escuela. Todo legal y rápido."
                     </p>
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 rounded-full overflow-hidden">
                         <img src={testimonialCarlos} alt="Carlos H." className="w-full h-full object-cover" />
                       </div>
                       <div>
-                        <p className="font-semibold text-sm lg:text-base">{testimonials[1].author}</p>
-                        <p className="text-xs lg:text-sm text-muted-foreground">{testimonials[1].location}</p>
+                        <p className="font-semibold text-sm lg:text-base">Carlos Hernandez</p>
+                        <p className="text-xs lg:text-sm text-muted-foreground">Dallas, TX</p>
                       </div>
                     </div>
                   </CardContent>
@@ -514,14 +528,14 @@ const Index = () => {
                       {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-yellow fill-yellow" />)}
                     </div>
                     <p className="text-muted-foreground mb-4 leading-relaxed text-sm lg:text-base">
-                      "No sabíamos llenarlo porque estaba en inglés. Lo compramos y, con ayuda por WhatsApp, nos lo enviaron listo. Ese mismo día lo firmamos y todo fue rápido y claro."
+                      "Mi papá tuvo que regresar a Colombia de emergencia. Con el poder financiero pudo vender su carro y cerrar cuentas desde allá. El banco lo aceptó sin problemas porque estaba bien hecho."
                     </p>
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 rounded-full overflow-hidden">
                         <img src={testimonialAna} alt="Ana R." className="w-full h-full object-cover" />
                       </div>
                       <div>
-                        <p className="font-semibold text-sm lg:text-base">Ana R.</p>
+                        <p className="font-semibold text-sm lg:text-base">Ana Rodriguez</p>
                         <p className="text-xs lg:text-sm text-muted-foreground">Miami, FL</p>
                       </div>
                     </div>
@@ -564,59 +578,117 @@ const Index = () => {
             <Accordion type="single" collapsible className="space-y-4">
               <AccordionItem value="item-1" className="border border-border rounded-lg">
                 <AccordionTrigger className="px-6 py-4 text-left hover:no-underline">
-                  <span className="text-lg lg:text-xl font-bold">¿Esto es legal?</span>
+                  <span className="text-lg lg:text-xl font-bold">¿Qué es un Poder Notarial?</span>
                 </AccordionTrigger>
                 <AccordionContent className="px-6 pb-4">
                   <p className="text-muted-foreground leading-relaxed text-sm lg:text-base">
-                    Sí. Todos los documentos están actualizados y cumplen con las leyes del estado correspondiente.
+                    Un Poder Notarial (Power of Attorney) es un documento legal que autoriza a otra persona a actuar en tu nombre para tomar decisiones médicas, financieras o sobre tus hijos cuando tú no puedas hacerlo. Es válido en todos los Estados Unidos cuando está correctamente firmado y notarizado.
                   </p>
                 </AccordionContent>
               </AccordionItem>
 
               <AccordionItem value="item-2" className="border border-border rounded-lg">
                 <AccordionTrigger className="px-6 py-4 text-left hover:no-underline">
-                  <span className="text-lg lg:text-xl font-bold">¿Reemplaza a un abogado?</span>
+                  <span className="text-lg lg:text-xl font-bold">¿Cuál es la diferencia entre Poder Notarial, Carta de Poder y Testamento?</span>
                 </AccordionTrigger>
                 <AccordionContent className="px-6 pb-4">
                   <p className="text-muted-foreground leading-relaxed text-sm lg:text-base">
-                    No. Es un recurso válido, útil y económico, pero no sustituye asesoría legal personalizada.
+                    <strong>Poder Notarial:</strong> Documento legal válido mientras estés vivo para que alguien actúe por ti.<br/>
+                    <strong>Carta de Poder:</strong> Término informal, generalmente no válido legalmente en USA.<br/>
+                    <strong>Testamento:</strong> Solo tiene efecto después de tu fallecimiento para distribuir tus bienes.
                   </p>
                 </AccordionContent>
               </AccordionItem>
 
               <AccordionItem value="item-3" className="border border-border rounded-lg">
                 <AccordionTrigger className="px-6 py-4 text-left hover:no-underline">
-                  <span className="text-lg lg:text-xl font-bold">¿Incluye notarización?</span>
+                  <span className="text-lg lg:text-xl font-bold">¿Cuánto cuesta?</span>
                 </AccordionTrigger>
                 <AccordionContent className="px-6 pb-4">
                   <p className="text-muted-foreground leading-relaxed text-sm lg:text-base">
-                    No. Debes llevar el documento a notarizar. Estamos trabajando en ofrecer este servicio próximamente.
+                    Solo $19.99 por documento. Incluye la plantilla legal personalizada para tu estado, instrucciones paso a paso en español y soporte por email. Si necesitas ayuda para llenarlo, ofrecemos ese servicio por $59 adicionales.
                   </p>
                 </AccordionContent>
               </AccordionItem>
 
               <AccordionItem value="item-4" className="border border-border rounded-lg">
                 <AccordionTrigger className="px-6 py-4 text-left hover:no-underline">
-                  <span className="text-lg lg:text-xl font-bold">¿Me pueden ayudar a llenarlo?</span>
+                  <span className="text-lg lg:text-xl font-bold">¿Hay garantía de devolución?</span>
                 </AccordionTrigger>
                 <AccordionContent className="px-6 pb-4">
                   <p className="text-muted-foreground leading-relaxed text-sm lg:text-base">
-                    Sí. Por $59 extra, podemos llenarlo por ti y enviártelo por WhatsApp.
+                    Sí. Si no estás satisfecho con tu documento dentro de los primeros 30 días, te devolvemos el 100% de tu dinero. Tu satisfacción está garantizada.
                   </p>
                 </AccordionContent>
               </AccordionItem>
 
               <AccordionItem value="item-5" className="border border-border rounded-lg">
                 <AccordionTrigger className="px-6 py-4 text-left hover:no-underline">
-                  <span className="text-lg lg:text-xl font-bold">¿El proceso es en español?</span>
+                  <span className="text-lg lg:text-xl font-bold">¿Puedo usarlo el mismo día?</span>
                 </AccordionTrigger>
                 <AccordionContent className="px-6 pb-4">
                   <p className="text-muted-foreground leading-relaxed text-sm lg:text-base">
-                    Sí. Todo está en español, desde el quiz hasta las instrucciones.
+                    Sí. Recibes tu documento inmediatamente después del pago. Puedes llenarlo, firmarlo y notarizarlo el mismo día. Muchos bancos y UPS stores ofrecen servicios de notarización.
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="item-6" className="border border-border rounded-lg">
+                <AccordionTrigger className="px-6 py-4 text-left hover:no-underline">
+                  <span className="text-lg lg:text-xl font-bold">¿Es legal y válido?</span>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-4">
+                  <p className="text-muted-foreground leading-relaxed text-sm lg:text-base">
+                    Sí. Todos nuestros documentos cumplen con las leyes estatales y federales. Han sido revisados por abogados y son aceptados por bancos, hospitales y agencias gubernamentales.
                   </p>
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
+          </div>
+        </div>
+      </section>
+
+      {/* Trust Badges Section */}
+      <section className="py-8 md:py-12 bg-gray-50 border-t">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 max-w-4xl mx-auto">
+            <div className="flex flex-col items-center text-center">
+              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-2">
+                <Shield className="w-6 h-6 text-green-600" />
+              </div>
+              <p className="text-xs md:text-sm font-semibold text-gray-800">🔒 Pago 100% Seguro</p>
+              <p className="text-xs text-gray-600">con Stripe</p>
+            </div>
+            
+            <div className="flex flex-col items-center text-center">
+              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-2">
+                <CheckCircle className="w-6 h-6 text-blue-600" />
+              </div>
+              <p className="text-xs md:text-sm font-semibold text-gray-800">✅ Verificado</p>
+              <p className="text-xs text-gray-600">por Abogados</p>
+            </div>
+            
+            <div className="flex flex-col items-center text-center">
+              <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-2">
+                <MapPin className="w-6 h-6 text-red-600" />
+              </div>
+              <p className="text-xs md:text-sm font-semibold text-gray-800">🇺🇸 Válido en</p>
+              <p className="text-xs text-gray-600">los 50 Estados</p>
+            </div>
+            
+            <div className="flex flex-col items-center text-center">
+              <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mb-2">
+                <Star className="w-6 h-6 text-yellow-600" />
+              </div>
+              <p className="text-xs md:text-sm font-semibold text-gray-800">💯 Satisfacción</p>
+              <p className="text-xs text-gray-600">Garantizada</p>
+            </div>
+          </div>
+          
+          <div className="text-center mt-8">
+            <p className="text-sm text-gray-600">
+              <strong>Más de 1,000 familias</strong> ya protegieron su futuro con nosotros
+            </p>
           </div>
         </div>
       </section>
