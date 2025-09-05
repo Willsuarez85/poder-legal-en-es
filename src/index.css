@@ -120,7 +120,7 @@ All colors MUST be HSL.
   }
 
   html {
-    font-size: 120%; /* Aumenta todas las fuentes en 20% */
+    font-size: 100%; /* Tamaño de fuente normal */
   }
 
   html, body {

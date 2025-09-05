@@ -55,19 +55,25 @@ const Index = () => {
     location: "Houston, TX"
   }];
   return <div className="min-h-screen bg-background">
-      {/* Logo Header */}
-      <div className="bg-white">
-        <div className="container mx-auto px-4 py-6">
+      {/* Sticky Header */}
+      <div className="fixed top-0 left-0 right-0 bg-white border-b shadow-md z-50">
+        <div className="container mx-auto px-4 py-3 md:py-4">
           <div className="flex items-center justify-between">
-            <img src="/lovable-uploads/1e870570-7e2a-436f-95b4-d50755c085a0.png" alt="Poder LegalUSA.com" className="h-16 md:h-20 lg:h-32 xl:h-36 w-auto" decoding="async" loading="lazy" sizes="(max-width: 768px) 180px, (max-width: 1024px) 240px, (max-width: 1280px) 320px, 360px" />
-            <a href="https://wa.me/15558286861" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-success hover:bg-success/90 text-success-foreground px-3 md:px-4 py-2 rounded-lg transition-colors text-sm font-medium shadow-md">
-              <MessageCircle className="w-4 h-4" />
-              <span className="hidden sm:inline">Atención al cliente 🇪🇸</span>
-              <span className="sm:hidden">Soporte 🇪🇸</span>
-            </a>
+            <img src="/lovable-uploads/1e870570-7e2a-436f-95b4-d50755c085a0.png" alt="Poder LegalUSA.com" className="h-20 md:h-24 lg:h-28 xl:h-32 w-auto" decoding="async" loading="lazy" sizes="(max-width: 768px) 200px, (max-width: 1024px) 260px, (max-width: 1280px) 320px, 360px" />
+            <Button 
+              onClick={() => navigate("/quiz-2025")}
+              className="bg-destructive hover:bg-destructive/90 text-destructive-foreground px-4 md:px-6 py-2 md:py-3 rounded-lg transition-colors text-sm md:text-base font-semibold shadow-md"
+            >
+              <span className="hidden sm:inline">Comenzar Ahora</span>
+              <span className="sm:hidden">Comenzar</span>
+              <ArrowRight className="ml-2 w-4 h-4" />
+            </Button>
           </div>
         </div>
       </div>
+      
+      {/* Spacer for fixed header */}
+      <div className="h-20 md:h-24 lg:h-28 xl:h-32"></div>
 
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-primary/5 via-background to-muted/30 py-12 md:py-16 lg:py-20 xl:py-24 overflow-hidden">
@@ -607,6 +613,30 @@ const Index = () => {
       </section>
 
       <Footer />
+      
+      {/* WhatsApp Floating Button */}
+      <div className="fixed bottom-6 right-6 z-40">
+        <a 
+          href="https://wa.me/15558286861?text=Hola,%20necesito%20ayuda%20con%20el%20poder%20notarial" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="block group"
+        >
+          <div className="bg-green-500 hover:bg-green-600 rounded-full p-4 shadow-lg transition-all transform hover:scale-110">
+            <MessageCircle className="w-7 h-7 text-white" />
+          </div>
+          {/* Notification badge */}
+          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center animate-pulse">
+            1
+          </span>
+          {/* Tooltip on hover */}
+          <div className="absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+            <div className="bg-gray-900 text-white text-sm rounded-lg py-2 px-3 whitespace-nowrap">
+              ¿Necesitas ayuda? Escríbenos
+            </div>
+          </div>
+        </a>
+      </div>
     </div>;
 };
 export default Index;
