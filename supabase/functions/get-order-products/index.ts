@@ -13,14 +13,14 @@ serve(async (req) => {
   }
 
   try {
-    // Create Supabase client with service role key for admin access
+    // Create Supabase client
     const supabaseAdmin = createClient(
       Deno.env.get("SUPABASE_URL") ?? "",
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
+      Deno.env.get("SUPABASE_ANON_KEY") ?? "", // Use anon key with token-based auth
       { auth: { persistSession: false } }
     );
 
-    const { orderId } = await req.json();
+    const { orderId, accessToken } = await req.json();
 
     if (!orderId) {
       return new Response(
@@ -32,13 +32,24 @@ serve(async (req) => {
       );
     }
 
+    if (!accessToken) {
+      return new Response(
+        JSON.stringify({ error: "Access token is required" }),
+        {
+          status: 400,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
+
     console.log("Getting products for order:", orderId);
 
-    // Get order details with product IDs (using service role access)
+    // Get order details using token-based authentication
     const { data: order, error: orderError } = await supabaseAdmin
       .from("orders")
       .select("product_ids, customer_email")
       .eq("id", orderId)
+      .eq("access_token", accessToken)
       .single();
 
     if (orderError || !order) {

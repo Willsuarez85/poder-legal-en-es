@@ -11,39 +11,44 @@ const Success = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [orderId, setOrderId] = useState<string | null>(null);
+  const [accessToken, setAccessToken] = useState<string | null>(null);
   const [purchasedProducts, setPurchasedProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
   
   useEffect(() => {
-    // Get order ID from URL params or location state
+    // Get order ID and access token from URL params or location state
     const urlParams = new URLSearchParams(location.search);
     const orderIdFromUrl = urlParams.get('order_id');
+    const accessTokenFromUrl = urlParams.get('access_token');
     const orderIdFromState = location.state?.orderId;
     
     // Success page loaded
     // Getting order ID from URL or state
     
     const finalOrderId = orderIdFromUrl || orderIdFromState;
-    setOrderId(finalOrderId);
+    const finalAccessToken = accessTokenFromUrl;
     
-    // Load purchased products if we have an order ID
-    if (finalOrderId) {
+    setOrderId(finalOrderId);
+    setAccessToken(finalAccessToken);
+    
+    // Load purchased products if we have both order ID and access token
+    if (finalOrderId && finalAccessToken) {
       // Loading products for order
-      loadPurchasedProducts(finalOrderId);
+      loadPurchasedProducts(finalOrderId, finalAccessToken);
     } else {
-      // No order ID found
+      // No order ID or access token found
       setLoading(false);
     }
   }, [location]);
 
-  const loadPurchasedProducts = async (orderIdValue: string) => {
+  const loadPurchasedProducts = async (orderIdValue: string, accessTokenValue: string) => {
     try {
       // Loading products for order
       
       // Use edge function to get order products securely
       const { data, error } = await supabase.functions.invoke('get-order-products', {
-        body: { orderId: orderIdValue }
+        body: { orderId: orderIdValue, accessToken: accessTokenValue }
       });
 
       // Order products loaded
@@ -120,10 +125,10 @@ const Success = () => {
 
   const downloadProduct = async (productId: string, productName: string) => {
     try {
-      if (!orderId) return;
+      if (!orderId || !accessToken) return;
 
       const { data, error } = await supabase.functions.invoke('generate-pdf-url', {
-        body: { orderId, productId }
+        body: { orderId, productId, accessToken }
       });
 
       if (error) {
@@ -160,12 +165,12 @@ const Success = () => {
 
   const productName = location.state?.productName;
 
-  if (!orderId) {
+  if (!orderId || !accessToken) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <Card className="w-full max-w-md">
           <CardContent className="text-center p-6">
-            <p className="text-muted-foreground">Información de orden no encontrada.</p>
+            <p className="text-muted-foreground">Información de orden no encontrada o acceso no autorizado.</p>
             <Button onClick={() => navigate("/")} className="mt-4">
               Volver al Inicio
             </Button>

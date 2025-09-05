@@ -16,6 +16,7 @@ export type Database = {
     Tables: {
       orders: {
         Row: {
+          access_token: string
           created_at: string | null
           customer_email: string
           customer_name: string | null
@@ -27,6 +28,7 @@ export type Database = {
           total_amount: number | null
         }
         Insert: {
+          access_token?: string
           created_at?: string | null
           customer_email: string
           customer_name?: string | null
@@ -38,6 +40,7 @@ export type Database = {
           total_amount?: number | null
         }
         Update: {
+          access_token?: string
           created_at?: string | null
           customer_email?: string
           customer_name?: string | null

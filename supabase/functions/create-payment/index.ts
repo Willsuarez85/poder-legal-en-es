@@ -173,7 +173,7 @@ serve(async (req) => {
         total_amount: totalAmount,
         stripe_session_id: null, // Will be updated after session creation
       })
-      .select('id')
+      .select('id, access_token')
       .single();
 
     if (orderError) {
@@ -187,7 +187,7 @@ serve(async (req) => {
     const session = await stripe.checkout.sessions.create({
       line_items,
       mode: "payment",
-      success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}&order_id=${orderId}`,
+      success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}&order_id=${orderId}&access_token=${orderData.access_token}`,
       cancel_url: `${baseUrl}/results`,
       customer_email: customerData?.email || undefined,
       metadata: {
