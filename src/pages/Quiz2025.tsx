@@ -10,6 +10,8 @@ export type QuizAnswers = {
   state: string;
   effective_time: string;
   selected_products: string[];
+  grantor_id?: string;
+  grantee_id?: string;
 };
 
 const Quiz2025 = () => {

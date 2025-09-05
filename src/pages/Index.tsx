@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Shield, FileText, Clock, CheckCircle, Star, Users, Heart, Lock, Phone, Download, Edit, ArrowRight, Quote, MessageCircle, AlertTriangle, XCircle, Ban, ClipboardCheck, MapPin } from "lucide-react";
+import { Shield, FileText, Clock, CheckCircle, Star, Users, Heart, Lock, Phone, Download, Edit, ArrowRight, Quote, MessageCircle, AlertTriangle, XCircle, Ban, Clipboard, MapPin } from "lucide-react";
 import testimonialMartha from "@/assets/testimonial-martha.jpg";
 import testimonialCarlos from "@/assets/testimonial-carlos.jpg";
 import testimonialLuis from "@/assets/testimonial-luis.jpg";
@@ -15,7 +15,7 @@ const Index = () => {
     number: "1",
     title: "Responde 4 preguntas",
     description: "30 segundos para identificar el documento exacto que necesitas",
-    icon: ClipboardCheck
+    icon: Clipboard
   }, {
     number: "2",
     title: "Descarga tu documento personalizado",
