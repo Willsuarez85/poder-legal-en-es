@@ -724,8 +724,8 @@ const Index = () => {
 
       <Footer />
       
-      {/* WhatsApp Floating Button */}
-      <div className="fixed bottom-6 right-6 z-40">
+      {/* WhatsApp Floating Button - Hidden for now */}
+      {/* <div className="fixed bottom-6 right-6 z-40">
         <a 
           href="https://wa.me/15558286861?text=Hola,%20necesito%20ayuda%20con%20el%20poder%20notarial" 
           target="_blank" 
@@ -735,18 +735,16 @@ const Index = () => {
           <div className="bg-green-500 hover:bg-green-600 rounded-full p-4 shadow-lg transition-all transform hover:scale-110">
             <MessageCircle className="w-7 h-7 text-white" />
           </div>
-          {/* Notification badge */}
           <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center animate-pulse">
             1
           </span>
-          {/* Tooltip on hover */}
           <div className="absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
             <div className="bg-gray-900 text-white text-sm rounded-lg py-2 px-3 whitespace-nowrap">
               ¿Necesitas ayuda? Escríbenos
             </div>
           </div>
         </a>
-      </div>
+      </div> */}
     </div>;
 };
 export default Index;
