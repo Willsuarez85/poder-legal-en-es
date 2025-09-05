@@ -82,16 +82,17 @@ const Index = () => {
             {/* Hero Content */}
             <div className="text-center space-y-6 lg:space-y-8">
               <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
-                Protege legalmente a tu familia, tu negocio y tus bienes en 
-                <span className="text-primary"> Estados Unidos</span> en minutos
+                Protege legalmente tu familia, negocio o propiedades en
+                <span className="text-primary"> Estados Unidos</span> con un poder notarial legal en minutos
               </h1>
               
               <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-                Encuentra el poder notarial (<strong>Power of Attorney</strong>) exacto que necesitas para proteger lo que más amas. Documentos Válidos en los 50 Estados listos para descargar en PDF y llenar fácilmente con instrucciones en español.
+                Descarga plantillas de <strong>Poder Notarial (Power of Attorney)</strong> 100% legales y válidas en tu estado. 
+                Incluyen instrucciones paso a paso en español para llenar, firmar y notarizar sin necesidad de abogado.
               </p>
               
               <p className="text-base md:text-lg text-muted-foreground">
-                Documentos listos para Firmar y notarizar. Sin abogados caros ni trámites confusos.
+                ✓ Descarga inmediata en PDF • ✓ Instrucciones en español • ✓ Válido en los 50 estados
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">

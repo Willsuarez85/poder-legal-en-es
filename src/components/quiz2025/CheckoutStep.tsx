@@ -202,10 +202,20 @@ export const CheckoutStep = ({ answers, onPrev }: CheckoutStepProps) => {
           <CardTitle className="text-2xl font-bold text-center">
             Confirma tu orden
           </CardTitle>
+          <p className="text-center text-muted-foreground mt-2">
+            Recibirás plantillas PDF autollenables con instrucciones paso a paso en español
+          </p>
         </CardHeader>
         <CardContent className="space-y-6">
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+            <p className="text-sm text-blue-800">
+              <strong>📱 Descarga inmediata:</strong> Recibirás tus documentos en tu email en menos de 2 minutos. 
+              Incluyen plantillas autollenables e instrucciones detalladas para llenar, firmar y notarizar en cualquier estado de USA.
+            </p>
+          </div>
+
           <div className="space-y-4">
-            <h3 className="font-semibold">Productos seleccionados:</h3>
+            <h3 className="font-semibold">Documentos que recibirás:</h3>
             {selectedProductsData.map((product) => (
               <div key={product.id} className="flex justify-between items-center p-4 border rounded-lg">
                 <div>
@@ -213,7 +223,7 @@ export const CheckoutStep = ({ answers, onPrev }: CheckoutStepProps) => {
                     {typeof product.name === 'object' ? product.name.es : product.name}
                   </h4>
                   <p className="text-sm text-muted-foreground">
-                    Estado: {answers.state.charAt(0).toUpperCase() + answers.state.slice(1)}
+                    Plantilla PDF autollenable • Válido en {answers.state.charAt(0).toUpperCase() + answers.state.slice(1)}
                   </p>
                 </div>
                 <div className="text-right">
@@ -233,7 +243,7 @@ export const CheckoutStep = ({ answers, onPrev }: CheckoutStepProps) => {
           <Separator />
 
           <div className="space-y-4">
-            <h3 className="font-semibold">Información del Cliente:</h3>
+            <h3 className="font-semibold">Tu información (para enviarte los documentos):</h3>
             <div className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="customer-name">Nombre Completo *</Label>
@@ -253,7 +263,7 @@ export const CheckoutStep = ({ answers, onPrev }: CheckoutStepProps) => {
                   type="email"
                   value={customerData.email}
                   onChange={(e) => handleInputChange("email", e.target.value)}
-                  placeholder="tu@email.com"
+                  placeholder="tu@email.com (aquí recibirás tus documentos)"
                   required
                 />
               </div>
@@ -273,13 +283,15 @@ export const CheckoutStep = ({ answers, onPrev }: CheckoutStepProps) => {
 
           <Separator />
 
-          <div className="space-y-4">
-            <h3 className="font-semibold">Resumen de tu selección:</h3>
-            <div className="text-sm space-y-2">
-              <p><strong>Estado:</strong> {answers.state.charAt(0).toUpperCase() + answers.state.slice(1).replace('-', ' ')}</p>
-              <p><strong>Vigencia:</strong> {answers.effective_time === 'immediate' ? 'Inmediatamente' : 'Circunstancia específica'}</p>
-              <p><strong>Documentos:</strong> {answers.selected_products.length} Poder{answers.selected_products.length > 1 ? 'es' : ''} Notarial{answers.selected_products.length > 1 ? 'es' : ''}</p>
-            </div>
+          <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+            <h3 className="font-semibold mb-2">Lo que incluye tu compra:</h3>
+            <ul className="text-sm space-y-1">
+              <li>✅ {answers.selected_products.length} Plantilla{answers.selected_products.length > 1 ? 's' : ''} PDF autollenable{answers.selected_products.length > 1 ? 's' : ''}</li>
+              <li>✅ Instrucciones paso a paso en español</li>
+              <li>✅ Guía para notarizar en {answers.state.charAt(0).toUpperCase() + answers.state.slice(1).replace('-', ' ')}</li>
+              <li>✅ Válido legalmente en todos los estados de USA</li>
+              <li>✅ Soporte por email si tienes dudas</li>
+            </ul>
           </div>
 
           <div className="flex justify-between pt-6">
@@ -292,7 +304,7 @@ export const CheckoutStep = ({ answers, onPrev }: CheckoutStepProps) => {
               className="px-8"
               style={{ backgroundColor: '#de1f27' }}
             >
-              {processing ? 'Procesando...' : 'Pagar y Descargar'}
+              {processing ? 'Procesando...' : 'Completar Compra y Descargar'}
             </Button>
           </div>
         </CardContent>
