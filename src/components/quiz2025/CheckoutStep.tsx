@@ -165,8 +165,6 @@ export const CheckoutStep = ({ answers, onPrev }: CheckoutStepProps) => {
           quizData: {
             state: answers.state,
             selected_products: answers.selected_products,
-            grantor_id: answers.grantor_id,
-            grantee_id: answers.grantee_id,
             effective_time: answers.effective_time
           }
         }
@@ -278,10 +276,9 @@ export const CheckoutStep = ({ answers, onPrev }: CheckoutStepProps) => {
           <div className="space-y-4">
             <h3 className="font-semibold">Resumen de tu selección:</h3>
             <div className="text-sm space-y-2">
-              <p><strong>Estado:</strong> {answers.state.charAt(0).toUpperCase() + answers.state.slice(1)}</p>
-              <p><strong>ID Otorgante:</strong> {answers.grantor_id}</p>
-              <p><strong>ID Apoderado:</strong> {answers.grantee_id}</p>
+              <p><strong>Estado:</strong> {answers.state.charAt(0).toUpperCase() + answers.state.slice(1).replace('-', ' ')}</p>
               <p><strong>Vigencia:</strong> {answers.effective_time === 'immediate' ? 'Inmediatamente' : 'Circunstancia específica'}</p>
+              <p><strong>Documentos:</strong> {answers.selected_products.length} Poder{answers.selected_products.length > 1 ? 'es' : ''} Notarial{answers.selected_products.length > 1 ? 'es' : ''}</p>
             </div>
           </div>
 

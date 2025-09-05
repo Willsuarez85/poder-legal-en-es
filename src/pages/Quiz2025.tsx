@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { StateSelectionStep } from "@/components/quiz2025/StateSelectionStep";
-import { IdentificationStep } from "@/components/quiz2025/IdentificationStep";
 import { EffectiveTimeStep } from "@/components/quiz2025/EffectiveTimeStep";
 import { ProductSelectionStep } from "@/components/quiz2025/ProductSelectionStep";
 import { CheckoutStep } from "@/components/quiz2025/CheckoutStep";
@@ -9,9 +8,6 @@ import { ProgressBar } from "@/components/quiz2025/ProgressBar";
 
 export type QuizAnswers = {
   state: string;
-  grantor_id: string;
-  grantee_id: string;
-  same_id: boolean;
   effective_time: string;
   selected_products: string[];
 };
@@ -20,9 +16,6 @@ const Quiz2025 = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [answers, setAnswers] = useState<QuizAnswers>({
     state: "",
-    grantor_id: "",
-    grantee_id: "",
-    same_id: false,
     effective_time: "",
     selected_products: [],
   });
@@ -34,7 +27,7 @@ const Quiz2025 = () => {
   };
 
   const nextStep = () => {
-    if (currentStep < 5) {
+    if (currentStep < 4) {
       setCurrentStep(currentStep + 1);
     }
   };
@@ -57,15 +50,6 @@ const Quiz2025 = () => {
         );
       case 2:
         return (
-          <IdentificationStep
-            answers={answers}
-            onAnswersUpdate={updateAnswers}
-            onNext={nextStep}
-            onPrev={prevStep}
-          />
-        );
-      case 3:
-        return (
           <EffectiveTimeStep
             selectedTime={answers.effective_time}
             onTimeSelect={(effective_time) => updateAnswers({ effective_time })}
@@ -73,7 +57,7 @@ const Quiz2025 = () => {
             onPrev={prevStep}
           />
         );
-      case 4:
+      case 3:
         return (
           <ProductSelectionStep
             selectedState={answers.state}
@@ -83,7 +67,7 @@ const Quiz2025 = () => {
             onPrev={prevStep}
           />
         );
-      case 5:
+      case 4:
         return (
           <CheckoutStep
             answers={answers}
@@ -98,7 +82,7 @@ const Quiz2025 = () => {
   return (
     <div className="min-h-screen bg-background">
       <Quiz2025Navbar />
-      <ProgressBar currentStep={currentStep} totalSteps={5} />
+      <ProgressBar currentStep={currentStep} totalSteps={4} />
       <div className="container mx-auto px-4 py-8">
         {renderStep()}
       </div>
