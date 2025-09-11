@@ -10,6 +10,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/hooks/use-toast";
 import { MetaPixel } from "@/lib/metaPixel";
+import { GTM } from "@/lib/gtm";
 
 interface CheckoutStepProps {
   answers: QuizAnswers;
@@ -179,6 +180,13 @@ export const CheckoutStep = ({ answers, onPrev }: CheckoutStepProps) => {
         content_name: productNames.join(', '),
         content_category: 'legal_documents',
         num_items: selectedProductsData.length
+      });
+
+      // Track signup success event for GTM (user completed form with contact info)
+      GTM.trackSignup({
+        method: 'quiz_form',
+        value: totalValue,
+        currency: 'USD'
       });
       
       // Clear existing cart and add selected products

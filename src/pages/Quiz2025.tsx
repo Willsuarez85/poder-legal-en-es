@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { StateSelectionStep } from "@/components/quiz2025/StateSelectionStep";
 import { EffectiveTimeStep } from "@/components/quiz2025/EffectiveTimeStep";
 import { ProductSelectionStep } from "@/components/quiz2025/ProductSelectionStep";
 import { CheckoutStep } from "@/components/quiz2025/CheckoutStep";
 import { Quiz2025Navbar } from "@/components/quiz2025/Quiz2025Navbar";
 import { ProgressBar } from "@/components/quiz2025/ProgressBar";
+import { GTM } from "@/lib/gtm";
 
 export type QuizAnswers = {
   state: string;
@@ -21,6 +22,11 @@ const Quiz2025 = () => {
     effective_time: "",
     selected_products: [],
   });
+
+  // Track page view on component mount
+  useEffect(() => {
+    GTM.trackPageView('/quiz-2025');
+  }, []);
 
   const updateAnswers = (newAnswers: Partial<QuizAnswers>) => {
     setAnswers(prev => ({ ...prev, ...newAnswers }));

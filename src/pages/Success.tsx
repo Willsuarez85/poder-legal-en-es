@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { MetaPixel } from "@/lib/metaPixel";
+import { GTM } from "@/lib/gtm";
 
 const Success = () => {
   const location = useLocation();
@@ -21,6 +22,11 @@ const Success = () => {
   const [requiresEmailVerification, setRequiresEmailVerification] = useState<boolean>(false);
   const [customerInfo, setCustomerInfo] = useState<any>(null);
   const { toast } = useToast();
+  
+  // Track page view on component mount
+  useEffect(() => {
+    GTM.trackPageView('/success');
+  }, []);
   
   useEffect(() => {
     const getOrderData = async () => {
@@ -167,6 +173,19 @@ const Success = () => {
           content_name: productNames.join(', '),
           content_category: 'legal_documents',
           num_items: data.products.length
+        });
+
+        // Track purchase event for GTM
+        GTM.trackPurchase({
+          value: totalValue,
+          currency: 'USD',
+          transaction_id: orderId,
+          items: data.products.map((product: any) => ({
+            item_id: product.id,
+            item_name: typeof product.name === 'object' ? product.name.es || product.name.en : product.name,
+            price: product.price || 0,
+            quantity: 1
+          }))
         });
       } else {
         setPurchasedProducts([]);

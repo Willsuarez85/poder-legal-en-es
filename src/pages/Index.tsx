@@ -9,8 +9,15 @@ import testimonialMartha from "@/assets/testimonial-martha.jpg";
 import testimonialCarlos from "@/assets/testimonial-carlos.jpg";
 import testimonialLuis from "@/assets/testimonial-luis.jpg";
 import testimonialAna from "@/assets/testimonial-ana.jpg";
+import { useEffect } from "react";
+import { GTM } from "@/lib/gtm";
 const Index = () => {
   const navigate = useNavigate();
+  
+  // Track page view on component mount
+  useEffect(() => {
+    GTM.trackPageView('/');
+  }, []);
   const steps = [{
     number: "1",
     title: "Responde 4 preguntas",

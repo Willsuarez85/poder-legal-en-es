@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { MetaPixel } from "@/lib/metaPixel";
+import { GTM } from "@/lib/gtm";
 
 export type CartItem = {
   productId: string;
@@ -90,6 +91,14 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         content_type: 'product',
         content_name: item.name,
         content_category: 'legal_documents'
+      });
+
+      // Track AddToCart event for GTM with fixed $19.99 value as requested
+      GTM.trackAddToCart({
+        value: 19.99,
+        currency: 'USD',
+        item_name: item.name,
+        item_id: item.productId
       });
       
       return newItems;
