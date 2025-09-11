@@ -6,6 +6,7 @@ import { CheckoutStep } from "@/components/quiz2025/CheckoutStep";
 import { Quiz2025Navbar } from "@/components/quiz2025/Quiz2025Navbar";
 import { ProgressBar } from "@/components/quiz2025/ProgressBar";
 import { GTM } from "@/lib/gtm";
+import { URLParams } from "@/lib/urlParams";
 
 export type QuizAnswers = {
   state: string;
@@ -23,9 +24,18 @@ const Quiz2025 = () => {
     selected_products: [],
   });
 
-  // Track page view on component mount
+  // Track page view and capture URL parameters on component mount
   useEffect(() => {
+    // Capture URL parameters (GCLID, UTM, etc.) first
+    URLParams.captureParams();
+    
+    // Then track page view (will include captured parameters)
     GTM.trackPageView('/quiz-2025');
+    
+    // Debug in development
+    if (process.env.NODE_ENV === 'development') {
+      URLParams.debugParams();
+    }
   }, []);
 
   const updateAnswers = (newAnswers: Partial<QuizAnswers>) => {

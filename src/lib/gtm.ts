@@ -1,4 +1,6 @@
 // Google Tag Manager event tracking utility
+import { URLParams } from './urlParams';
+
 declare global {
   interface Window {
     dataLayer: any[];
@@ -17,11 +19,34 @@ export class GTM {
     }
 
     try {
+      // Add URL parameters (GCLID, UTM, etc.) to all events
+      const urlParams = URLParams.getStoredParams();
+      const enhancedEventData = { ...eventData };
+      
+      // Add GCLID if available
+      const gclid = URLParams.getGCLID();
+      if (gclid) {
+        enhancedEventData.gclid = gclid;
+      }
+      
+      // Add FBCLID if available
+      const fbclid = URLParams.getFBCLID();
+      if (fbclid) {
+        enhancedEventData.fbclid = fbclid;
+      }
+      
+      // Add UTM parameters if available
+      const utmParams = URLParams.getUTMParams();
+      Object.keys(utmParams).forEach(key => {
+        enhancedEventData[key] = utmParams[key];
+      });
+
       window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push(eventData);
+      window.dataLayer.push(enhancedEventData);
       
       if (process.env.NODE_ENV === 'development') {
-        console.log('GTM Event:', eventData);
+        console.log('GTM Event:', enhancedEventData);
+        if (gclid) console.log('GCLID included:', gclid);
       }
     } catch (error) {
       console.error('GTM tracking error:', error);

@@ -9,6 +9,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { MetaPixel } from "@/lib/metaPixel";
 import { GTM } from "@/lib/gtm";
+import { URLParams } from "@/lib/urlParams";
 
 const Success = () => {
   const location = useLocation();
@@ -23,9 +24,18 @@ const Success = () => {
   const [customerInfo, setCustomerInfo] = useState<any>(null);
   const { toast } = useToast();
   
-  // Track page view on component mount
+  // Track page view and capture URL parameters on component mount
   useEffect(() => {
+    // Capture URL parameters (GCLID, UTM, etc.) first
+    URLParams.captureParams();
+    
+    // Then track page view (will include captured parameters)
     GTM.trackPageView('/success');
+    
+    // Debug in development
+    if (process.env.NODE_ENV === 'development') {
+      URLParams.debugParams();
+    }
   }, []);
   
   useEffect(() => {

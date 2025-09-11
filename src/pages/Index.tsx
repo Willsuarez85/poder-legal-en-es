@@ -11,12 +11,22 @@ import testimonialLuis from "@/assets/testimonial-luis.jpg";
 import testimonialAna from "@/assets/testimonial-ana.jpg";
 import { useEffect } from "react";
 import { GTM } from "@/lib/gtm";
+import { URLParams } from "@/lib/urlParams";
 const Index = () => {
   const navigate = useNavigate();
   
-  // Track page view on component mount
+  // Track page view and capture URL parameters on component mount
   useEffect(() => {
+    // Capture URL parameters (GCLID, UTM, etc.) first
+    URLParams.captureParams();
+    
+    // Then track page view (will include captured parameters)
     GTM.trackPageView('/');
+    
+    // Debug in development
+    if (process.env.NODE_ENV === 'development') {
+      URLParams.debugParams();
+    }
   }, []);
   const steps = [{
     number: "1",
