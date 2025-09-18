@@ -93,8 +93,8 @@ const Index = () => {
       <div className="h-20 md:h-24 lg:h-28 xl:h-32"></div>
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-primary/5 via-background to-muted/30 py-12 md:py-16 lg:py-20 xl:py-24 overflow-hidden">
-        <div className="container mx-auto px-4">
+      <section className="relative bg-gradient-to-br from-primary/5 via-background to-muted/30 py-12 md:py-16 lg:py-20 xl:py-24">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center">
             {/* Hero Content */}
             <div className="text-center space-y-6 lg:space-y-8">
