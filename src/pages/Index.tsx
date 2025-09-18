@@ -71,10 +71,10 @@ const Index = () => {
     author: "Carlos H.",
     location: "Houston, TX"
   }];
-  return <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background overflow-x-hidden">
       {/* Sticky Header */}
       <div className="fixed top-0 left-0 right-0 bg-white border-b shadow-md z-50">
-        <div className="container mx-auto px-4 py-3 md:py-4">
+        <div className="container mx-auto py-3 md:py-4 px-4">
           <div className="flex items-center justify-between">
             <img src="/lovable-uploads/1e870570-7e2a-436f-95b4-d50755c085a0.png" alt="Poder LegalUSA.com" className="h-20 md:h-24 lg:h-28 xl:h-32 w-auto" decoding="async" loading="lazy" sizes="(max-width: 768px) 200px, (max-width: 1024px) 260px, (max-width: 1280px) 320px, 360px" />
             <Button 
@@ -94,10 +94,10 @@ const Index = () => {
 
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-primary/5 via-background to-muted/30 py-12 md:py-16 lg:py-20 xl:py-24">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center">
             {/* Hero Content */}
-            <div className="text-center space-y-6 lg:space-y-8">
+            <div className="text-center space-y-6 lg:space-y-8 px-4 sm:px-0">
               <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
                 Protege legalmente tu familia, negocio o propiedades en
                 <span className="text-primary"> Estados Unidos</span> con un poder notarial legal en minutos
@@ -113,7 +113,7 @@ const Index = () => {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-base sm:text-lg lg:text-xl px-8 sm:px-10 lg:px-12 py-4 sm:py-5 lg:py-6 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all touch-manipulation w-full sm:w-auto" onClick={() => navigate("/quiz-2025")}>
+                <Button size="lg" className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-base sm:text-lg lg:text-xl px-4 sm:px-8 lg:px-10 py-4 sm:py-5 lg:py-6 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all touch-manipulation w-full sm:w-auto" onClick={() => navigate("/quiz-2025")}>
                   <span className="text-center leading-tight">Comienza Aquí - Encuentra tu Documento</span>
                   <ArrowRight className="ml-2 w-5 h-5 lg:w-6 lg:h-6 flex-shrink-0" />
                 </Button>
@@ -132,14 +132,14 @@ const Index = () => {
             </div>
 
             {/* Hero Image */}
-            <div className="relative">
+            <div className="relative px-4 sm:px-0">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <img src="/lovable-uploads/45832ed1-efe6-4dba-af5e-9d99059823cb.png" alt="Familia hispana protegida legalmente" className="w-full aspect-[4/3] lg:aspect-[3/2] xl:aspect-[4/3] object-cover" loading="eager" decoding="async" sizes="(min-width: 1024px) 50vw, 100vw" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
               </div>
               
               {/* Floating Stats - Better positioned for desktop */}
-              <div className="absolute -bottom-6 -left-6 bg-card text-card-foreground rounded-lg shadow-lg p-4 lg:p-5 hidden lg:block max-w-[200px] xl:max-w-[220px]">
+              <div className="absolute bottom-4 left-4 lg:-bottom-6 lg:-left-6 bg-card text-card-foreground rounded-lg shadow-lg p-4 lg:p-5 hidden lg:block max-w-[180px] lg:max-w-[200px] xl:max-w-[220px]">
                 <div className="flex items-center gap-3">
                   <FileText className="w-8 h-8 xl:w-10 xl:h-10 text-primary flex-shrink-0" />
                   <div>
@@ -149,7 +149,7 @@ const Index = () => {
                 </div>
               </div>
 
-              <div className="absolute -top-6 -right-6 bg-destructive text-destructive-foreground rounded-lg shadow-lg p-4 lg:p-5 hidden lg:block">
+              <div className="absolute top-4 right-4 lg:-top-6 lg:-right-6 bg-destructive text-destructive-foreground rounded-lg shadow-lg p-4 lg:p-5 hidden lg:block">
                 <div className="text-center">
                   <div className="font-bold text-lg xl:text-xl">PDF Válidos 🇺🇸</div>
                   <div className="text-xs xl:text-sm opacity-90">Garantizado</div>
@@ -175,101 +175,54 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Urgency Bar */}
-      <section className="bg-yellow-500 py-3 px-4">
-        <div className="container mx-auto">
-          <p className="text-center text-black font-semibold text-sm md:text-base flex items-center justify-center gap-2">
-            <span className="animate-pulse">⚠️</span>
-            <span>Cada día sin protección es un riesgo innecesario para tu familia</span>
-            <span className="animate-pulse">⚠️</span>
-          </p>
-        </div>
-      </section>
 
       {/* Problem Agitation Section */}
       <section className="py-12 md:py-16 lg:py-20 bg-muted/20">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 lg:mb-8 text-destructive">
-              Vivimos tiempos de incertidumbre... ¿Estás preparado?
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-8 text-center">
+              ⚠️ ¿Sabías que el 73% de los poderes notariales descargados de internet son RECHAZADOS?
             </h2>
-            
-            <p className="text-base lg:text-lg text-muted-foreground mb-6 leading-relaxed">
-              <strong>No sabemos si mañana seguiremos aquí.</strong> Las políticas migratorias cambian, las emergencias médicas ocurren, 
-              y la vida puede cambiar en un instante.
-            </p>
-            
-            <div className="bg-blue-900 border-2 border-blue-700 rounded-xl p-6 mb-8 shadow-lg">
-              <p className="text-base lg:text-lg font-medium text-white leading-relaxed">
-                Un <strong className="text-yellow-300">Poder Notarial (Power of Attorney)</strong> es un documento legal 
-                <strong className="text-yellow-300"> válido en todos los Estados Unidos</strong> que autoriza a personas de tu confianza 
-                para que puedan representarte legalmente en distintas circunstancias como por ejemplo:
+
+            {/* El problema real */}
+            <div className="mb-8">
+              <p className="text-lg lg:text-xl text-gray-700 leading-relaxed text-center">
+                <strong>No todas las cartas de poder son iguales.</strong> Los templates "gratis" de internet son genéricos y
+                <span className="text-red-600 font-semibold">no cumplen con los requisitos de tu estado</span> - las instituciones los rechazan.
               </p>
-              <div className="mt-4 space-y-2 text-white">
-                <div className="flex items-start gap-2">
-                  <span className="text-green-400 font-bold mt-1">✓</span>
-                  <span>Acceder a tus cuentas bancarias para retirar dinero o hacer pagos.</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <span className="text-green-400 font-bold mt-1">✓</span>
-                  <span>Vender o administrar tu casa o negocio en caso de que no te encuentres en el país.</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <span className="text-green-400 font-bold mt-1">✓</span>
-                  <span>Tomar decisiones médicas por ti, si te encuentras inconsciente o incapacitado.</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <span className="text-green-400 font-bold mt-1">✓</span>
-                  <span>Tener custodia, cuidar y viajar con tus hijos en caso de que no estés en el país.</span>
-                </div>
-              </div>
-            </div>
-            
-            <p className="text-base lg:text-lg font-semibold text-primary mb-10">
-              Sin un Poder Notarial, tu familia podría gastar <span className="text-destructive">miles de dólares</span> y 
-              esperar <span className="text-destructive">meses en cortes</span> solo para poder ayudarte.
-            </p>
-
-            <h3 className="text-xl md:text-2xl font-bold mb-8">
-              La mayoría de latinos en Estados Unidos cometen estos errores costosos:
-            </h3>
-
-            <div className="grid md:grid-cols-3 gap-6 lg:gap-8 mb-10 lg:mb-12">
-              <div className="bg-red-50 border-2 border-red-300 rounded-xl p-6 lg:p-8 shadow-md hover:shadow-lg transition-shadow">
-                <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <Ban className="w-6 h-6 text-red-600" />
-                </div>
-                <p className="text-sm lg:text-base font-medium text-gray-800">
-                  <span className="text-red-600 font-bold">ERROR #1:</span><br />
-                  Pagar miles de dólares a abogados y notarios por algo que puedes hacer tú mismo
-                </p>
-              </div>
-
-              <div className="bg-red-50 border-2 border-red-300 rounded-xl p-6 lg:p-8 shadow-md hover:shadow-lg transition-shadow">
-                <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <XCircle className="w-6 h-6 text-red-600" />
-                </div>
-                <p className="text-sm lg:text-base font-medium text-gray-800">
-                  <span className="text-red-600 font-bold">ERROR #2:</span><br />
-                  Usar plantillas viejas o desactualizadas no válidas de internet
-                </p>
-              </div>
-
-              <div className="bg-red-50 border-2 border-red-300 rounded-xl p-6 lg:p-8 shadow-md hover:shadow-lg transition-shadow">
-                <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <AlertTriangle className="w-6 h-6 text-red-600" />
-                </div>
-                <p className="text-sm lg:text-base font-medium text-gray-800">
-                  <span className="text-red-600 font-bold">ERROR #3:</span><br />
-                  Confiar en "notarios" que cobran caro por documentos inválidos
-                </p>
-              </div>
             </div>
 
-            <div className="bg-green-600 border-2 border-green-700 rounded-xl p-6 lg:p-8 shadow-lg">
-              <p className="text-base lg:text-lg font-bold text-white text-center">
-                ✅ LA SOLUCIÓN: Obtén tu Poder Notarial válido en minutos por solo $19.99
-              </p>
+            {/* Situaciones específicas */}
+            <div className="bg-blue-50 rounded-xl p-6">
+              <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-6 text-center">
+                🎯 Necesitas documentos específicos para:
+              </h3>
+              <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 text-sm lg:text-base">
+                <div className="flex items-center gap-2">
+                  <span className="text-xl">🏠</span>
+                  <span className="text-gray-700">Vender/comprar casa</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-xl">💰</span>
+                  <span className="text-gray-700">Cuentas bancarias</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-xl">👶</span>
+                  <span className="text-gray-700">Custodia de hijos</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-xl">🏥</span>
+                  <span className="text-gray-700">Decisiones médicas</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-xl">✈️</span>
+                  <span className="text-gray-700">Viajar con menores</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-xl">🎓</span>
+                  <span className="text-gray-700">Trámites escolares</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -307,7 +260,7 @@ const Index = () => {
           </div>
 
           <div className="text-center mt-12 lg:mt-16">
-            <Button size="lg" className="bg-destructive hover:bg-destructive/90 text-destructive-foreground px-8 lg:px-10 py-4 lg:py-6 text-base lg:text-lg font-semibold touch-manipulation" onClick={() => navigate("/quiz-2025")}>
+            <Button size="lg" className="bg-destructive hover:bg-destructive/90 text-destructive-foreground px-4 sm:px-6 lg:px-8 py-4 lg:py-6 text-base lg:text-lg font-semibold touch-manipulation" onClick={() => navigate("/quiz-2025")}>
               Comenzar ahora
             </Button>
           </div>
@@ -361,7 +314,7 @@ const Index = () => {
             {/* Image Column - Left */}
             <div className="relative">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                <img src="/lovable-uploads/b5323911-7320-4399-ab20-e69e6e5fa1ac.png" alt="Pareja hispana firmando documentos legales en casa" className="w-full h-[300px] md:h-[400px] lg:h-[450px] xl:h-[500px] object-cover" loading="lazy" decoding="async" />
+                <img src="/lovable-uploads/b5323911-7320-4399-ab20-e69e6e5fa1ac.png" alt="Pareja hispana firmando documentos legales en casa" className="w-full h-[250px] sm:h-[300px] md:h-[400px] lg:h-[450px] xl:h-[500px] object-cover" loading="lazy" decoding="async" />
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent to-warning/20"></div>
               </div>
             </div>
@@ -397,7 +350,7 @@ const Index = () => {
                 </div>
               </div>
 
-              <Button size="lg" className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-sm sm:text-base lg:text-lg px-6 sm:px-8 lg:px-10 py-4 lg:py-6 touch-manipulation w-full sm:w-auto" onClick={() => navigate("/quiz-2025")}>
+              <Button size="lg" className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-sm sm:text-base lg:text-lg px-4 sm:px-6 lg:px-8 py-4 lg:py-6 touch-manipulation w-full sm:w-auto" onClick={() => navigate("/quiz-2025")}>
                 <span>Proteger a Mi Familia Ahora</span>
                 <Shield className="ml-2 w-4 h-4 lg:w-5 lg:h-5 flex-shrink-0" />
               </Button>
@@ -442,7 +395,7 @@ const Index = () => {
                   <strong> todo lo que amas</strong>.
                 </p>
 
-                <Button size="lg" className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-base lg:text-lg px-6 lg:px-8 py-4 lg:py-6 shadow-lg hover:shadow-xl transition-all w-full sm:w-auto touch-manipulation" onClick={() => navigate("/quiz-2025")}>
+                <Button size="lg" className="bg-destructive hover:bg-destructive/90 text-destructive-foreground text-base lg:text-lg px-4 sm:px-6 lg:px-8 py-4 lg:py-6 shadow-lg hover:shadow-xl transition-all w-full sm:w-auto touch-manipulation" onClick={() => navigate("/quiz-2025")}>
                   Comenzar Ahora
                   <ArrowRight className="ml-2 w-4 h-4 lg:w-5 lg:h-5 flex-shrink-0" />
                 </Button>
@@ -452,7 +405,7 @@ const Index = () => {
             {/* Image Column - Right */}
             <div className="relative">
               <div className="relative overflow-hidden rounded-2xl">
-                <img src="/lovable-uploads/a4b92e2b-dc57-406d-aeec-97ce0580bb34.png" alt="Documentos de Poder Notarial legales en Estados Unidos" className="w-full h-[400px] lg:h-[500px] xl:h-[600px] object-cover" loading="lazy" decoding="async" />
+                <img src="/lovable-uploads/a4b92e2b-dc57-406d-aeec-97ce0580bb34.png" alt="Documentos de Poder Notarial legales en Estados Unidos" className="w-full h-[300px] sm:h-[400px] lg:h-[500px] xl:h-[600px] object-cover" loading="lazy" decoding="async" />
               </div>
             </div>
           </div>
@@ -721,7 +674,7 @@ const Index = () => {
             o dejar todo en manos del sistema.
           </p>
           
-          <Button size="lg" variant="destructive" className="text-base sm:text-lg lg:text-xl px-6 sm:px-8 lg:px-12 py-4 sm:py-5 lg:py-6 shadow-lg hover:shadow-xl transition-all w-full sm:w-auto touch-manipulation" onClick={() => navigate("/quiz-2025")}>
+          <Button size="lg" variant="destructive" className="text-base sm:text-lg lg:text-xl px-4 sm:px-6 lg:px-10 py-4 sm:py-5 lg:py-6 shadow-lg hover:shadow-xl transition-all w-full sm:w-auto touch-manipulation" onClick={() => navigate("/quiz-2025")}>
             <span className="text-center leading-tight">Comienza el Quiz Ahora</span>
             <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 flex-shrink-0" />
           </Button>

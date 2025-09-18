@@ -235,7 +235,7 @@ export const ProductSelectionStep = ({ selectedState, selectedProducts, onProduc
   // Loading state
   if (loading) {
     return (
-      <div className="min-h-[80vh] flex items-center justify-center">
+      <div className="min-h-[70vh] sm:min-h-[80vh] flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
           <p className="text-gray-600">Cargando documentos disponibles...</p>
@@ -247,7 +247,7 @@ export const ProductSelectionStep = ({ selectedState, selectedProducts, onProduc
   // Error state
   if (error) {
     return (
-      <div className="min-h-[80vh] flex items-center justify-center p-4">
+      <div className="min-h-[70vh] sm:min-h-[80vh] flex items-center justify-center p-4">
         <div className="text-center">
           <div className="text-red-600 mb-4">
             <p className="text-lg font-semibold mb-2">⚠️ Hubo un problema</p>
@@ -274,7 +274,7 @@ export const ProductSelectionStep = ({ selectedState, selectedProducts, onProduc
   // No products state
   if (products.length === 0) {
     return (
-      <div className="min-h-[80vh] flex items-center justify-center p-4">
+      <div className="min-h-[70vh] sm:min-h-[80vh] flex items-center justify-center p-4">
         <div className="text-center">
           <div className="mb-6">
             <p className="text-lg font-semibold mb-2">📄 No hay documentos disponibles</p>
@@ -293,7 +293,7 @@ export const ProductSelectionStep = ({ selectedState, selectedProducts, onProduc
 
   // Main render
   return (
-    <div className="min-h-[80vh] flex flex-col justify-between p-4 max-w-md mx-auto w-full">
+    <div className="min-h-[70vh] sm:min-h-[80vh] flex flex-col justify-between p-4 max-w-md mx-auto w-full">
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
         <div className="text-center mb-6">

@@ -312,7 +312,7 @@ const Products = () => {
                     <Button 
                       onClick={handleCheckout}
                       size="lg"
-                      className="min-w-[200px]"
+                      className="w-full sm:min-w-[200px]"
                     >
                       Proceder al Pago
                     </Button>

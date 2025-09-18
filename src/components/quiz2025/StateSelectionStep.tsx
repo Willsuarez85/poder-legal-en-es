@@ -31,7 +31,7 @@ export const StateSelectionStep = ({ selectedState, onStateSelect, onNext }: Sta
   };
 
   return (
-    <div className="min-h-[80vh] flex flex-col justify-between p-4 max-w-md mx-auto w-full">
+    <div className="min-h-[70vh] sm:min-h-[80vh] flex flex-col justify-between p-4 max-w-md mx-auto w-full">
       {/* Main Content */}
       <div className="flex-1 flex flex-col justify-center">
         <Card className="border-0 shadow-xl bg-white rounded-3xl p-8">
