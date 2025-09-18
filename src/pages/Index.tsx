@@ -75,11 +75,11 @@ const Index = () => {
       {/* Sticky Header */}
       <div className="fixed top-0 left-0 right-0 bg-white border-b shadow-md z-50">
         <div className="container mx-auto px-4 py-3 md:py-4">
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <img src="/lovable-uploads/1e870570-7e2a-436f-95b4-d50755c085a0.png" alt="Poder LegalUSA.com" className="h-12 sm:h-16 md:h-20 lg:h-24 xl:h-28 w-auto max-w-full" decoding="async" loading="lazy" sizes="(max-width: 768px) 200px, (max-width: 1024px) 260px, (max-width: 1280px) 320px, 360px" />
+          <div className="flex items-center justify-between">
+            <img src="/lovable-uploads/1e870570-7e2a-436f-95b4-d50755c085a0.png" alt="Poder LegalUSA.com" className="h-20 md:h-24 lg:h-28 xl:h-32 w-auto" decoding="async" loading="lazy" sizes="(max-width: 768px) 200px, (max-width: 1024px) 260px, (max-width: 1280px) 320px, 360px" />
             <Button 
               onClick={() => navigate("/quiz-2025")}
-              className="bg-destructive hover:bg-destructive/90 text-destructive-foreground px-4 md:px-6 py-2 md:py-3 rounded-lg transition-colors text-sm md:text-base font-semibold shadow-md w-full sm:w-auto mt-2 sm:mt-0"
+              className="bg-destructive hover:bg-destructive/90 text-destructive-foreground px-4 md:px-6 py-2 md:py-3 rounded-lg transition-colors text-sm md:text-base font-semibold shadow-md"
             >
               <span className="hidden sm:inline">Comenzar Ahora</span>
               <span className="sm:hidden">Comenzar</span>
